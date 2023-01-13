@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 5569e973dfa293141b940f82d40f60ee
+  m_SerializeEntries:
+  - m_GUID: f835a0d50ac2a604399c042e191ce300
+    m_Address: Assets/Automation/Output/Tables
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c0a8ddfbd067b2c4cb46958f14403eca
+    m_Address: Assets/Automation/ExportXmlData/Tables
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f9fd39c3406b73b448242070a7d90020
+    m_Address: Assets/Res/Data/ComTableAsset.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: ec75dbe5bcd55ec49b5c8acea52ce85c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 9512ccecb57025149b31a180c0404146, type: 2}
+    - {fileID: 11400000, guid: 5b466c39e2b4b2e4095cc166a725dd86, type: 2}

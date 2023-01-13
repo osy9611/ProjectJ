@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<user_character2 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<verify ColumnName="char_Id" Type="Int32" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1012"/>
+	<verify ColumnName="char_classId" Type="Int32" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="2001" IdRule="-" StringHashIds="1011" List="-" TableId="1012"/>
+	<verify ColumnName="char_Gender" Type="Int8" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="2002" IdRule="-" StringHashIds="-" List="-" TableId="1012"/>
+	<verify ColumnName="char_modelID" Type="Int8" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1012"/>
+</user_character2>
