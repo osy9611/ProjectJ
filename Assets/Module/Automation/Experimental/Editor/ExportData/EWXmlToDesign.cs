@@ -32,7 +32,7 @@ public class EWXmlToDesign : EditorWindow
         TableGenerator tableGenerator = new TableGenerator();
         tableGenerator.Load(TABLE_PATH + address + ".xml", TABLE_OUTPUT_PATH, DATAMGR_OUTPUT_PATH, TABLE_PATH, settingData.comTableAssetPath);
 
-        ExportDllDesignMessages(DLL_OUTPUT_PTAH, DATAMESSAGES_DLLFILE_NAME, settingData.gmsPath, Application.dataPath + TABLE_OUTPUT_PATH);
+        //ExportDllDesignMessages(DLL_OUTPUT_PTAH, DATAMESSAGES_DLLFILE_NAME, settingData.gmsPath, Application.dataPath + TABLE_OUTPUT_PATH);
         ExportDllDesignMessages(DLL_OUTPUT_PTAH, DATAMGR_DLLFILE_NAME, settingData.gmsPath, Application.dataPath + DATAMGR_OUTPUT_PATH);
     }
 
@@ -40,7 +40,7 @@ public class EWXmlToDesign : EditorWindow
     {
         TableGenerator tableGenerator = new TableGenerator();
         tableGenerator.LoadAll(TABLE_PATH, TABLE_OUTPUT_PATH, DATAMGR_OUTPUT_PATH, settingData.comTableAssetPath);
-        ExportDllDesignMessages(DLL_OUTPUT_PTAH, DATAMESSAGES_DLLFILE_NAME, settingData.gmsPath, Application.dataPath + TABLE_OUTPUT_PATH);
+        //ExportDllDesignMessages(DLL_OUTPUT_PTAH, DATAMESSAGES_DLLFILE_NAME, settingData.gmsPath, Application.dataPath + TABLE_OUTPUT_PATH);
         ExportDllDesignMessages(DLL_OUTPUT_PTAH, DATAMGR_DLLFILE_NAME, settingData.gmsPath, Application.dataPath + DATAMGR_OUTPUT_PATH);
     }
 
@@ -52,6 +52,7 @@ public class EWXmlToDesign : EditorWindow
 
         sb.AppendFormat(" -target:library -unsafe+ ");
         sb.AppendFormat(" -out:{0}/{1}.dll", outPath, dllFileName);
+        sb.AppendFormat(" /r:{0}/protobuf-net.dll", readPath);
         sb.AppendFormat(" {0}/*.cs", readPath);
 
         Debug.Log(sb.ToString());

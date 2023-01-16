@@ -224,20 +224,22 @@ namespace Module.Automation.Generator
             string tableInfoClassVariablesData = "";
             string tableInfoClassConstructParamsData = "";
             string tableInfoClassConstructData = "";
-
+            int protoNum = 1;
 
             foreach (TableVarData data in info.VarData)
             {
                 tableInfoClassVariablesData += string.Format(AutomationFormat.designTalbeInfoClassVariablesFormat,
-                    data.Type, data.ColumName);
+                    data.Type, data.ColumName, protoNum.ToString());
                 tableInfoClassConstructParamsData += data.Type + " " + data.ColumName + (info.VarData[info.VarData.Count - 1] == data ? "" : ",");
                 tableInfoClassConstructData += string.Format(AutomationFormat.designTalbeInfoClassContructParamsFormat, data.ColumName);
 
                 if (data.RefTable != "")
                 {
-                    tableInfoClassVariablesData += string.Format(AutomationFormat.designTalbeInfoClassVariablesFormat,
+                    tableInfoClassVariablesData += string.Format(AutomationFormat.designTalbeInfoClassRefTableVariablesFormat,
                     tableInfoData[int.Parse(data.RefTable)].TableName + "Info", data.ColumName + "_ref");
                 }
+
+                protoNum++;
             }
 
             talbeInfoClassData += string.Format(AutomationFormat.designTalbeInfoClassFormat,

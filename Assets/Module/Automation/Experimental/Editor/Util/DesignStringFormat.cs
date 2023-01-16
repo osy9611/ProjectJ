@@ -37,8 +37,10 @@ namespace Module.Automation.Generator
 @"using System;
 using System.Collections;
 using System.Collections.Generic;
+using ProtoBuf;
 namespace DesignTable
 {{
+    [ProtoContract]
     {0}
 }}
 ";
@@ -62,9 +64,18 @@ namespace DesignTable
 ";
         //{0} : table class variable type
         //{1} : table class variable name
+        //{2} : protoNumber
         public static string designTalbeInfoClassVariablesFormat =
-@"        public {0} {1};
+@"        [ProtoMember({2})] 
+        public {0} {1};
 ";
+        //{0} : table class variable type
+        //{1} : table class variable name
+        //{2} : protoNumber
+        public static string designTalbeInfoClassRefTableVariablesFormat =
+@"          public {0} {1};        
+";
+
         //{0} : table class variable name
         public static string designTalbeInfoClassContructParamsFormat =
 @"            this.{0} = {0};
@@ -77,10 +88,12 @@ namespace DesignTable
         //{4} : table pk variable type & name
         //{5} : designTableInfosGetIdRullFuctionCountFormat
         public static string designTalbeInfosClassFormat =
-@"  
+@"      [ProtoContract]
     public class {0}Infos
     {{
-        public Dictionary<ArraySegment<byte>, {0}Info> datas;
+        [ProtoMember(1)]
+        public List<{0}Info> m_data = new List<{0}Info>();
+        public Dictionary<ArraySegment<byte>, {0}Info> datas = new Dictionary<ArraySegment<byte>, {0}Info>();
       
         public bool Insert({1})
         {{
@@ -89,6 +102,7 @@ namespace DesignTable
                 return false;
 
             datas.Add(bytes,new {0}Info({3}));
+            m_data.Add(new {0}Info({3}));
             return true;
         }}
 

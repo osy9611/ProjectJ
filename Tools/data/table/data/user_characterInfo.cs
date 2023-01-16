@@ -1,20 +1,33 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ProtoBuf;
 namespace DesignTable
 {
+    [ProtoContract]
     public class user_characterInfo
     {
+        [ProtoMember(1)] 
         public int char_Id;
+        [ProtoMember(2)] 
         public sbyte char_classId;
+        [ProtoMember(3)] 
         public sbyte char_Gender;
+        [ProtoMember(4)] 
         public sbyte char_model_id;
+        [ProtoMember(5)] 
         public float char_Common_Attack_Cooltime;
+        [ProtoMember(6)] 
         public float char_SizeX;
+        [ProtoMember(7)] 
         public float char_SizeY;
+        [ProtoMember(8)] 
         public float char_SizeZ;
+        [ProtoMember(9)] 
         public float char_Move_Speed;
+        [ProtoMember(10)] 
         public string char_Prefab;
+        [ProtoMember(11)] 
         public string char_Selection_Prefab;
 
         public user_characterInfo()
@@ -37,10 +50,12 @@ namespace DesignTable
 
         }
     }
-  
+      [ProtoContract]
     public class user_characterInfos
     {
-        public Dictionary<ArraySegment<byte>, user_characterInfo> datas;
+        [ProtoMember(1)]
+        public List<user_characterInfo> m_data = new List<user_characterInfo>();
+        public Dictionary<ArraySegment<byte>, user_characterInfo> datas = new Dictionary<ArraySegment<byte>, user_characterInfo>();
       
         public bool Insert(int char_Id,sbyte char_classId,sbyte char_Gender,sbyte char_model_id,float char_Common_Attack_Cooltime,float char_SizeX,float char_SizeY,float char_SizeZ,float char_Move_Speed,string char_Prefab,string char_Selection_Prefab)
         {
@@ -49,6 +64,7 @@ namespace DesignTable
                 return false;
 
             datas.Add(bytes,new user_characterInfo(char_Id,char_classId,char_Gender,char_model_id,char_Common_Attack_Cooltime,char_SizeX,char_SizeY,char_SizeZ,char_Move_Speed,char_Prefab,char_Selection_Prefab));
+            m_data.Add(new user_characterInfo(char_Id,char_classId,char_Gender,char_model_id,char_Common_Attack_Cooltime,char_SizeX,char_SizeY,char_SizeZ,char_Move_Speed,char_Prefab,char_Selection_Prefab));
             return true;
         }
 

@@ -147,7 +147,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682968623}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f85fa04547dab6d40be2df50ac966a12, type: 3}
   m_Name: 
@@ -157,6 +157,8 @@ MonoBehaviour:
     m_AssetGUID: a7a73888327cbbf43aa49e64f672686b
     m_SubObjectName: 
     m_SubObjectType: 
+    m_CachedAsset: {fileID: 0}
+    m_CachedGUID: 
     m_EditorAssetChanged: 0
 --- !u!4 &682968625
 Transform:

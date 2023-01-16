@@ -1,15 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ProtoBuf;
 namespace DesignTable
 {
+    [ProtoContract]
     public class skillInfo
     {
+        [ProtoMember(1)] 
         public int skill_Id;
+        [ProtoMember(2)] 
         public int char_classId;
-        public user_characterInfo char_classId_ref;
+          public user_characterInfo char_classId_ref;        
+        [ProtoMember(3)] 
         public sbyte char_Gender;
-        public user_character2Info char_Gender_ref;
+          public user_character2Info char_Gender_ref;        
+        [ProtoMember(4)] 
         public sbyte char_modelID;
 
         public skillInfo()
@@ -25,10 +31,12 @@ namespace DesignTable
 
         }
     }
-  
+      [ProtoContract]
     public class skillInfos
     {
-        public Dictionary<ArraySegment<byte>, skillInfo> datas;
+        [ProtoMember(1)]
+        public List<skillInfo> m_data = new List<skillInfo>();
+        public Dictionary<ArraySegment<byte>, skillInfo> datas = new Dictionary<ArraySegment<byte>, skillInfo>();
       
         public bool Insert(int skill_Id,int char_classId,sbyte char_Gender,sbyte char_modelID)
         {
@@ -37,6 +45,7 @@ namespace DesignTable
                 return false;
 
             datas.Add(bytes,new skillInfo(skill_Id,char_classId,char_Gender,char_modelID));
+            m_data.Add(new skillInfo(skill_Id,char_classId,char_Gender,char_modelID));
             return true;
         }
 
