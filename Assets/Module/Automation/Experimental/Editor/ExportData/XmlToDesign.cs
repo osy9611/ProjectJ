@@ -135,7 +135,9 @@ namespace Module.Automation.Generator
 
         Dictionary<int, TableDataInfo> tableInfoData = new Dictionary<int, TableDataInfo>();
         DataMgrStringData dataMgrData;
-        public void Load(string address, string outputPath, string dataMgrOutputPath, string readAllDataPath,string comAssetPath)
+        DataMessageSerializerStringData dataMessageserializerData;
+        public void Load(string address, string outputPath, string dataMgrOutputPath,
+                        string readAllDataPath, string comAssetPath, string dataMessageSerializerOutputPath)
         {
             XmlDocument xml = XmlManager.LoadXML(address);
             List<XmlDocument> xmlDatas = XmlManager.LoadAllXML(readAllDataPath);
@@ -151,11 +153,14 @@ namespace Module.Automation.Generator
             foreach (TableDataInfo data in tableInfoData.Values)
             {
                 SaveDataMgrData(data);
+                SaveDataMessageSerializer(data);
             }
             ExportDataMgr(dataMgrOutputPath);
+            ExportDataMessageserializer(dataMessageSerializerOutputPath);
         }
 
-        public void LoadAll(string address, string outputPath, string dataMgrOutputPath, string comAssetPath)
+        public void LoadAll(string address, string outputPath, string dataMgrOutputPath, string comAssetPath,
+            string dataMessageSerializerOutputPath)
         {
             List<XmlDocument> xmlDatas = XmlManager.LoadAllXML(address);
 
@@ -168,12 +173,12 @@ namespace Module.Automation.Generator
             {
                 SaveInfoData(data, outputPath);
                 SaveDataMgrData(data);
+                SaveDataMessageSerializer(data);
                 AddTableAsset(data, comAssetPath);
             }
 
-            Debug.Log(dataMgrOutputPath);
-
             ExportDataMgr(dataMgrOutputPath);
+            ExportDataMessageserializer(dataMessageSerializerOutputPath);
         }
 
 
@@ -182,11 +187,12 @@ namespace Module.Automation.Generator
             if (xml == null)
                 return;
             TableDataInfo info = new TableDataInfo();
-            XmlNodeList nodes = xml.SelectNodes(xml.DocumentElement.Name + "/verify");
+            XmlNodeList recordNodes = xml.SelectNodes(xml.DocumentElement.Name + "/record");
+            XmlNodeList verifyNodes = xml.SelectNodes(xml.DocumentElement.Name + "/verify");
 
             info.TableName = xml.DocumentElement.Name;
-            info.TableID = int.Parse(nodes[0].Attributes["TableId"].Value);
-            foreach (XmlNode node in nodes)
+            info.TableID = int.Parse(verifyNodes[0].Attributes["TableId"].Value);
+            foreach (XmlNode node in verifyNodes)
             {
                 if (node.Attributes["PK"].Value == "Y")
                 {
@@ -206,10 +212,21 @@ namespace Module.Automation.Generator
                 }
             }
 
-
-            if (!tableInfoData.ContainsKey((int.Parse(nodes[0].Attributes["TableId"].Value))))
+            foreach (XmlNode node in recordNodes)
             {
-                tableInfoData.Add(int.Parse(nodes[0].Attributes["TableId"].Value), info);
+                object[] val = new object[info.VarData.Count];
+                for (int i = 0, range = info.VarData.Count; i < range; ++i)
+                {
+                    string columName = info.VarData[i].ColumName;
+                    string type = info.VarData[i].Type;
+                    val[i] = CheckDataType(type, node[columName].InnerText);
+                }
+                info.VarObjectData.Add(val);
+            }
+
+            if (!tableInfoData.ContainsKey((int.Parse(verifyNodes[0].Attributes["TableId"].Value))))
+            {
+                tableInfoData.Add(int.Parse(verifyNodes[0].Attributes["TableId"].Value), info);
             }
         }
 
@@ -269,12 +286,13 @@ namespace Module.Automation.Generator
             string tablePKVarTypeName = "";
             string tableGetIdRullFuctionCount = "";
             string tableSetUpRefFuction = "";
-
+            string tableInfosIfParams = "";
+            string dataInfoTableClassVarName = "";
             foreach (TableVarData data in info.VarData)
             {
                 tableClassVarTypeName += data.Type + " " + data.ColumName + (info.VarData[info.VarData.Count - 1] == data ? "" : ",");
                 tableClassVarName += data.ColumName + (info.VarData[info.VarData.Count - 1] == data ? "" : ",");
-
+                dataInfoTableClassVarName += "data." + data.ColumName + (info.VarData[info.VarData.Count - 1] == data ? "" : ",");
                 if (data.RefTable != "")
                 {
                     tableSetUpRefFuction += string.Format(AutomationFormat.designTableInfosSetupItemIdFuctionFormat, tableInfoData[int.Parse(data.RefTable)].TableName,
@@ -286,15 +304,16 @@ namespace Module.Automation.Generator
             {
                 tablePKVarTypeName += data.Type + " " + data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
                 tablePKVarName += data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
+                tableInfosIfParams += string.Format(AutomationFormat.designTableInfosInsertIfParamFormat, data.ColumName, (info.PkData[info.PkData.Count - 1] == data ? "" : "&&"));
 
                 tableGetIdRullFuctionCount += string.Format(AutomationFormat.designTableInfosGetIdRullFuctionCountFormat,
                     data.Type);
             }
 
-
+            Debug.Log(tableInfosIfParams);
             string result = string.Format(AutomationFormat.designTalbeInfosClassFormat,
                 tableClassName, tableClassVarTypeName, tablePKVarName, tableClassVarName,
-                tablePKVarTypeName, tableGetIdRullFuctionCount, tableSetUpRefFuction);
+                tablePKVarTypeName, tableGetIdRullFuctionCount, tableSetUpRefFuction, tableInfosIfParams, dataInfoTableClassVarName);
 
             return result;
         }
@@ -320,21 +339,93 @@ namespace Module.Automation.Generator
             dataMgrData.SetData(tableId, tableClassName, refTable);
         }
 
+        public void SaveDataMessageSerializer(TableDataInfo info)
+        {
+            string tableId = info.TableID.ToString();
+            string tableClassName = info.TableName;
+
+            if (dataMessageserializerData == null)
+            {
+                dataMessageserializerData = new DataMessageSerializerStringData();
+            }
+
+            dataMessageserializerData.SetData(tableId, tableClassName);
+        }
+
         public void ExportDataMgr(string outputPath)
         {
             dataMgrData.ExportDataMgr(outputPath);
         }
+
+        public void ExportDataMessageserializer(string outputPath)
+        {
+            dataMessageserializerData.ExportDataMessageSerializer(outputPath);
+        }
+
+        public void ExportDataByteFile(string outputPath)
+        {
+            DataMessageSerializer serializer = new DataMessageSerializer();
+            foreach (var data in tableInfoData.Values)
+            {
+                string typeName = "DesignTable." + data.TableName + "Infos";
+                System.Type sType = System.Type.GetType(typeName);
+                System.Reflection.Assembly dll = System.Reflection.Assembly.LoadFile(Application.dataPath + "/Automation/Output/Dll/DataMgr.dll");
+                sType = dll.GetType(typeName);
+                System.Reflection.MethodInfo addMethod = sType.GetMethod("Insert");
+                object inst = System.Activator.CreateInstance(sType);
+
+                foreach (var val in data.VarObjectData)
+                {
+                    addMethod.Invoke(inst, val);
+                }
+
+                File.WriteAllBytes(Application.dataPath+outputPath + data.TableName + ".bytes", serializer.Serialize(inst));
+            }
+        }
+
+        public void ExportDataByteOneFile(string tableName,string outputPath)
+        {
+            DataMessageSerializer serializer = new DataMessageSerializer();
+            TableDataInfo data = new TableDataInfo();
+            foreach (var val in tableInfoData.Values)
+            {
+                if (val.TableName == tableName)
+                {
+                    data = val;
+                    break;
+                }
+            }
+
+            if (data == null)
+                return;
+
+            string typeName = "DesignTable." + data.TableName + "Infos";
+            System.Type sType = System.Type.GetType(typeName);
+            System.Reflection.Assembly dll = System.Reflection.Assembly.LoadFile(Application.dataPath + "/Automation/Output/Dll/DataMgr.dll");
+            sType = dll.GetType(typeName);
+            System.Reflection.MethodInfo addMethod = sType.GetMethod("Insert");
+            object inst = System.Activator.CreateInstance(sType);
+
+            foreach (var val in data.VarObjectData)
+            {
+                addMethod.Invoke(inst, val);
+            }
+
+            File.WriteAllBytes(Application.dataPath + outputPath + data.TableName + ".bytes", serializer.Serialize(inst));
+
+        }
+
         public void AddTableAsset(TableDataInfo info, string path)
         {
-            GameObject go = AssetDatabase.LoadAssetAtPath(path,typeof(UnityEngine.Object)) as GameObject;
+            GameObject go = AssetDatabase.LoadAssetAtPath(path, typeof(UnityEngine.Object)) as GameObject;
             if (go == null)
                 return;
 
             ComTableAsset comTableAsset = go.GetComponent<ComTableAsset>();
-            if(comTableAsset == null) 
+            if (comTableAsset == null)
                 return;
 
-            TableAssetInfo data = new TableAssetInfo(info.TableID, "_data_" + info.TableName);
+            TableAssetInfo data = new TableAssetInfo(info.TableID, info.TableName+".bytes");
             comTableAsset.Add(data);
         }
 
@@ -367,6 +458,41 @@ namespace Module.Automation.Generator
 
             return "";
         }
+
+        public object CheckDataType(string type, string data)
+        {
+            switch (type)
+            {
+                case "sbyte":
+                    return sbyte.Parse(data);
+                case "short":
+                    return short.Parse(data);
+                case "int":
+                    return int.Parse(data);
+                case "long":
+                    return long.Parse(data);
+                case "byte":
+                    return byte.Parse(data);
+                case "ushort":
+                    return ushort.Parse(data);
+                case "uint":
+                    return uint.Parse(data);
+                case "ulong":
+                    return ulong.Parse(data);
+                case "string":
+                    return data;
+                case "bool":
+                    return bool.Parse(data);
+                case "float":
+                    return float.Parse(data);
+                case "double":
+                    return double.Parse(data);
+            }
+
+            return null;
+        }
+
+
     }
 
 }

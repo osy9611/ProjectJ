@@ -30,18 +30,20 @@ public class EWXmlToDesign : EditorWindow
     void LoadTable(string address)
     {
         TableGenerator tableGenerator = new TableGenerator();
-        tableGenerator.Load(TABLE_PATH + address + ".xml", TABLE_OUTPUT_PATH, DATAMGR_OUTPUT_PATH, TABLE_PATH, settingData.comTableAssetPath);
+        tableGenerator.Load(TABLE_PATH + address + ".xml", TABLE_OUTPUT_PATH, DATAMGR_OUTPUT_PATH, TABLE_PATH, settingData.comTableAssetPath, DATAMESSAGESERIALIZER_OUTPUT_PATH);
 
         //ExportDllDesignMessages(DLL_OUTPUT_PTAH, DATAMESSAGES_DLLFILE_NAME, settingData.gmsPath, Application.dataPath + TABLE_OUTPUT_PATH);
         ExportDllDesignMessages(DLL_OUTPUT_PTAH, DATAMGR_DLLFILE_NAME, settingData.gmsPath, Application.dataPath + DATAMGR_OUTPUT_PATH);
+        tableGenerator.ExportDataByteOneFile(address.Replace("_data_",""), DESIGNBYTEFILE_OUTPUT_PATH);
     }
 
     void LoadAllTable()
     {
         TableGenerator tableGenerator = new TableGenerator();
-        tableGenerator.LoadAll(TABLE_PATH, TABLE_OUTPUT_PATH, DATAMGR_OUTPUT_PATH, settingData.comTableAssetPath);
+        tableGenerator.LoadAll(TABLE_PATH, TABLE_OUTPUT_PATH, DATAMGR_OUTPUT_PATH, settingData.comTableAssetPath, DATAMESSAGESERIALIZER_OUTPUT_PATH);
         //ExportDllDesignMessages(DLL_OUTPUT_PTAH, DATAMESSAGES_DLLFILE_NAME, settingData.gmsPath, Application.dataPath + TABLE_OUTPUT_PATH);
         ExportDllDesignMessages(DLL_OUTPUT_PTAH, DATAMGR_DLLFILE_NAME, settingData.gmsPath, Application.dataPath + DATAMGR_OUTPUT_PATH);
+        tableGenerator.ExportDataByteFile(DESIGNBYTEFILE_OUTPUT_PATH);
     }
 
 

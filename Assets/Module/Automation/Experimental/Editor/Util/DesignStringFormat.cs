@@ -87,23 +87,40 @@ namespace DesignTable
         //{3} : table class variable name
         //{4} : table pk variable type & name
         //{5} : designTableInfosGetIdRullFuctionCountFormat
+        //{6} : designTableInfosSetupItemIdFuctionFormat
+        //{7} : designTableInfosInsertIfParamFormat
+        //{8} : dataInfo table class variable name
         public static string designTalbeInfosClassFormat =
 @"      [ProtoContract]
     public class {0}Infos
     {{
         [ProtoMember(1)]
-        public List<{0}Info> m_data = new List<{0}Info>();
+        private List<{0}Info> dataInfo = new List<{0}Info>();
         public Dictionary<ArraySegment<byte>, {0}Info> datas = new Dictionary<ArraySegment<byte>, {0}Info>();
       
         public bool Insert({1})
-        {{
-            ArraySegment<byte> bytes = GetIdRule({2});
-            if (datas.ContainsKey(bytes))
-                return false;
+        {{ 
+            foreach({0}Info info in dataInfo)
+            {{
+                if({7})
+                {{
+                    return false;
+                }}
+            }}
 
-            datas.Add(bytes,new {0}Info({3}));
-            m_data.Add(new {0}Info({3}));
+            dataInfo.Add(new {0}Info({3}));
             return true;
+        }}
+
+        public void Initialize() 
+        {{
+            foreach(var data in dataInfo)
+            {{
+                ArraySegment<byte> bytes = GetIdRule(data.{2});
+                if (datas.ContainsKey(bytes))
+                    continue;
+                datas.Add(bytes,new {0}Info({8}));
+            }}
         }}
 
         public {0}Info Get({4})
@@ -154,6 +171,10 @@ namespace DesignTable
             }}
         }}
 ";
+        //{0} : table pk variable name
+        //{1} : AND
+        public static string designTableInfosInsertIfParamFormat =
+@"info.{0} == {0} {1}";
 
         //{0} : designMgrEnumVariableFormat
         //{1} : designMgrVariableFormat & designMgrPublicVariableFormat
@@ -174,12 +195,14 @@ namespace DesignTable
     
     public class DataMgr
     {{
-        private delegate void LoadHandler();
+        private delegate void LoadHandler(byte[] data);
         private delegate void ClearHandler();
 
         private Dictionary<int, DataMgr.LoadHandler> loadHandlerList = new Dictionary<int, LoadHandler>();
         private Dictionary<int, DataMgr.ClearHandler> clearHandlerList = new Dictionary<int, ClearHandler>();
         private bool isCallInit = false;
+        DataMessageSerializer serializer = new DataMessageSerializer();
+
         {1}
         
         public void Init()
@@ -192,9 +215,9 @@ namespace DesignTable
             isCallInit = true;
         }}
 
-        public void LoadData(TableId dataType)
+        public void LoadData(TableId dataType,byte[] data)
         {{
-            loadHandlerList[(int)dataType]();
+            loadHandlerList[(int)dataType](data);
         }}
 
         public void ClearData(TableId[] dataTypes)
@@ -249,7 +272,7 @@ namespace DesignTable
         //{0} : talbe name
         public static string designMgrPrivateVariableFormat =
 @"private {0}Infos {0}Infos;
-"; 
+";
 
         //{0} : table name
         //{1} : table name(앞자리는 대문자)
@@ -269,10 +292,15 @@ namespace DesignTable
 @"clearHandlerList.Add({0}, ClearData{1}Infos);
 ";
         //{0} : table name
+        //{1} : talbe id
         public static string designMgrLoadClassFuctionFormat =
-@"private void Load{0}Infos()
+@"private void Load{0}Infos(byte[] data)
 {{
-    {0}Infos = new {0}Infos();
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {{
+        {0}Infos = serializer.Deserialize({1},data) as {0}Infos;
+        {0}Infos.Initialize();
+    }}
 }}
 ";
         //{0} : table name
@@ -290,8 +318,43 @@ namespace DesignTable
 @"{0}Infos.SetupRef_item_Id({1}Infos);
 ";
 
+        //{0} : dataMessageSerializerDeserializeFuctionFormat
+        public static string dataMessageSerializerClassFormat =
+@"using DesignTable;
+using ProtoBuf;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 
+public sealed class DataMessageSerializer
+{{
+    public byte[] Serialize(object tableInfos)
+    {{
+        System.IO.MemoryStream stream = new System.IO.MemoryStream();
+        Serializer.Serialize(stream, tableInfos);
+        byte[] buffer = stream.ToArray();
 
+        return buffer;
+    }}
+
+    public object Deserialize(int tableId, byte[] buffer)
+    {{
+        System.IO.MemoryStream stream = new System.IO.MemoryStream(buffer);
+        switch (tableId)
+        {{
+            {0}
+        }}
+
+        return null;
+    }}
+}}
+";
+        //{0} : table id
+        //{1} : table name
+        public static string dataMessageSerializerDeserializeFuctionFormat =
+@"case {0}:
+    return ProtoBuf.Serializer.Deserialize<{1}Infos>(stream);";
     }
 
 }

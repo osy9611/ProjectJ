@@ -35,18 +35,32 @@ namespace DesignTable
     public class skillInfos
     {
         [ProtoMember(1)]
-        public List<skillInfo> m_data = new List<skillInfo>();
+        private List<skillInfo> dataInfo = new List<skillInfo>();
         public Dictionary<ArraySegment<byte>, skillInfo> datas = new Dictionary<ArraySegment<byte>, skillInfo>();
       
         public bool Insert(int skill_Id,int char_classId,sbyte char_Gender,sbyte char_modelID)
-        {
-            ArraySegment<byte> bytes = GetIdRule(skill_Id);
-            if (datas.ContainsKey(bytes))
-                return false;
+        { 
+            foreach(skillInfo info in dataInfo)
+            {
+                if(info.skill_Id == skill_Id )
+                {
+                    return false;
+                }
+            }
 
-            datas.Add(bytes,new skillInfo(skill_Id,char_classId,char_Gender,char_modelID));
-            m_data.Add(new skillInfo(skill_Id,char_classId,char_Gender,char_modelID));
+            dataInfo.Add(new skillInfo(skill_Id,char_classId,char_Gender,char_modelID));
             return true;
+        }
+
+        public void Initialize() 
+        {
+            foreach(var data in dataInfo)
+            {
+                ArraySegment<byte> bytes = GetIdRule(data.skill_Id);
+                if (datas.ContainsKey(bytes))
+                    continue;
+                datas.Add(bytes,new skillInfo(data.skill_Id,data.char_classId,data.char_Gender,data.char_modelID));
+            }
         }
 
         public skillInfo Get(int skill_Id)

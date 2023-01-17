@@ -34,18 +34,32 @@ namespace DesignTable
     public class user_character2Infos
     {
         [ProtoMember(1)]
-        public List<user_character2Info> m_data = new List<user_character2Info>();
+        private List<user_character2Info> dataInfo = new List<user_character2Info>();
         public Dictionary<ArraySegment<byte>, user_character2Info> datas = new Dictionary<ArraySegment<byte>, user_character2Info>();
       
         public bool Insert(int char_Id,int char_classId,sbyte char_Gender,sbyte char_modelID)
-        {
-            ArraySegment<byte> bytes = GetIdRule(char_Id);
-            if (datas.ContainsKey(bytes))
-                return false;
+        { 
+            foreach(user_character2Info info in dataInfo)
+            {
+                if(info.char_Id == char_Id )
+                {
+                    return false;
+                }
+            }
 
-            datas.Add(bytes,new user_character2Info(char_Id,char_classId,char_Gender,char_modelID));
-            m_data.Add(new user_character2Info(char_Id,char_classId,char_Gender,char_modelID));
+            dataInfo.Add(new user_character2Info(char_Id,char_classId,char_Gender,char_modelID));
             return true;
+        }
+
+        public void Initialize() 
+        {
+            foreach(var data in dataInfo)
+            {
+                ArraySegment<byte> bytes = GetIdRule(data.char_Id);
+                if (datas.ContainsKey(bytes))
+                    continue;
+                datas.Add(bytes,new user_character2Info(data.char_Id,data.char_classId,data.char_Gender,data.char_modelID));
+            }
         }
 
         public user_character2Info Get(int char_Id)

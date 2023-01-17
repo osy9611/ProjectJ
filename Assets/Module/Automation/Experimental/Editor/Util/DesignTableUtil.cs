@@ -36,19 +36,19 @@ namespace Module.Automation.Generator
             registerClearHandlerFunc += string.Format(AutomationFormat.designMgrRegisterClearHandlerFuctionFormat,
                tableId, tableName);
             loadClassFunc += string.Format(AutomationFormat.designMgrLoadClassFuctionFormat,
-                tableName);
+                tableName, tableId);
             clearClassFunc += string.Format(AutomationFormat.designMgrClearClassFructionFormat,
                 tableName);
 
             if (refTable == null)
                 return;
 
-            for(int i=0,range = refTable.Count;i<range ;++i)
+            for (int i = 0, range = refTable.Count; i < range; ++i)
             {
                 setUpRefFunc += string.Format(AutomationFormat.designMgrSetUpRefFuctionFormat,
                     tableName, refTable[i]);
             }
-                
+
         }
 
         public void ResetData()
@@ -81,6 +81,33 @@ namespace Module.Automation.Generator
             StreamWriter sw;
             sw = new StreamWriter(Application.dataPath + outputPath + "DataMgr.cs");
             byte[] bytes = Encoding.Default.GetBytes(GetDataMgrData());
+            sw.Write(Encoding.UTF8.GetString(bytes));
+            sw.Flush();
+            sw.Close();
+        }
+    }
+
+    public class DataMessageSerializerStringData
+    {
+        public string deserializeFuction;
+
+        public void SetData(string tableId, string tableName)
+        {
+            deserializeFuction += string.Format(AutomationFormat.dataMessageSerializerDeserializeFuctionFormat,
+                tableId, tableName);
+        }
+
+        public string GetDataMessageSerializerData()
+        {
+            return string.Format(AutomationFormat.dataMessageSerializerClassFormat,
+                deserializeFuction);
+        }
+
+        public void ExportDataMessageSerializer(string outputPath)
+        {
+            StreamWriter sw;
+            sw = new StreamWriter(Application.dataPath + outputPath + "DataMessageSerializer.cs");
+            byte[] bytes = Encoding.Default.GetBytes(GetDataMessageSerializerData());
             sw.Write(Encoding.UTF8.GetString(bytes));
             sw.Flush();
             sw.Close();
@@ -125,6 +152,12 @@ namespace Module.Automation.Generator
             get => varData;
         }
 
+        List<object[]> varObjectData = new List<object[]>();
+        public List<object[]> VarObjectData
+        {
+            get => varObjectData;
+        }
+
         int tableID = 0;
         public int TableID
         {
@@ -164,8 +197,11 @@ namespace Module.Automation.Generator
         public const string DATAMGR_DLLFILE_NAME = "DataMgr";
         public const string DATAMGR_OUTPUT_PATH = "/../Tools/data/table/data/";
 
+        public const string DATAMESSAGESERIALIZER_OUTPUT_PATH = "/../Tools/data/table/data/";
+
         public const string TABLE_DATA_PATH = "/Module/Automation/Experimental/Editor/savedata.json";
-    
+
+        public const string DESIGNBYTEFILE_OUTPUT_PATH = "/Automation/Output/Tables/";
     }
 
     public class TalbeSettingData
@@ -173,7 +209,7 @@ namespace Module.Automation.Generator
         public string gmsPath;
         public string comTableAssetPath;
 
-        public static void SaveData(string path,string gmsPath, string comTableAsset)
+        public static void SaveData(string path, string gmsPath, string comTableAsset)
         {
             TalbeSettingData data = new TalbeSettingData();
             data.comTableAssetPath = comTableAsset;
@@ -182,7 +218,7 @@ namespace Module.Automation.Generator
             System.IO.File.WriteAllText(path, result);
         }
 
-        public static void LoadData(string path,out string gmsPath,out UnityEngine.Object assetData)
+        public static void LoadData(string path, out string gmsPath, out UnityEngine.Object assetData)
         {
             TalbeSettingData data = new TalbeSettingData();
             string jsonData = System.IO.File.ReadAllText(path);

@@ -12,12 +12,14 @@ user_character2 = 1012,
     
     public class DataMgr
     {
-        private delegate void LoadHandler();
+        private delegate void LoadHandler(byte[] data);
         private delegate void ClearHandler();
 
         private Dictionary<int, DataMgr.LoadHandler> loadHandlerList = new Dictionary<int, LoadHandler>();
         private Dictionary<int, DataMgr.ClearHandler> clearHandlerList = new Dictionary<int, ClearHandler>();
         private bool isCallInit = false;
+        DataMessageSerializer serializer = new DataMessageSerializer();
+
         private skillInfos skillInfos;
 private user_characterInfos user_characterInfos;
 private user_character2Infos user_character2Infos;
@@ -36,9 +38,9 @@ public user_character2Infos User_character2Infos => user_character2Infos;
             isCallInit = true;
         }
 
-        public void LoadData(TableId dataType)
+        public void LoadData(TableId dataType,byte[] data)
         {
-            loadHandlerList[(int)dataType]();
+            loadHandlerList[(int)dataType](data);
         }
 
         public void ClearData(TableId[] dataTypes)
@@ -78,17 +80,29 @@ clearHandlerList.Add(1012, ClearDatauser_character2Infos);
 
         }
         
-        private void LoadskillInfos()
+        private void LoadskillInfos(byte[] data)
 {
-    skillInfos = new skillInfos();
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        skillInfos = serializer.Deserialize(1013,data) as skillInfos;
+        skillInfos.Initialize();
+    }
 }
-private void Loaduser_characterInfos()
+private void Loaduser_characterInfos(byte[] data)
 {
-    user_characterInfos = new user_characterInfos();
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        user_characterInfos = serializer.Deserialize(1011,data) as user_characterInfos;
+        user_characterInfos.Initialize();
+    }
 }
-private void Loaduser_character2Infos()
+private void Loaduser_character2Infos(byte[] data)
 {
-    user_character2Infos = new user_character2Infos();
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        user_character2Infos = serializer.Deserialize(1012,data) as user_character2Infos;
+        user_character2Infos.Initialize();
+    }
 }
 
         
