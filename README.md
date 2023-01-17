@@ -4,5 +4,6 @@
  + 사용기술
     + Unity3D
     + C#
+    + protobuf-net
  + 작업 내용
-    + 기획 Table, Enum 자동화(진행중)
+    + 기획 Table, Enum Generator 구현
