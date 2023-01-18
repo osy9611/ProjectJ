@@ -4,27 +4,27 @@ namespace Module.Core.Systems
 {
     public struct Guid128
     {
-        private long m_Id1;
-        private long m_Id2;
-        private string m_StringId;
+        private long id1;
+        private long id2;
+        private string stringId;
 
         public long Id1
         {
-            get => m_Id1;
+            get => id1;
             set
             {
-                m_Id1 = value;
-                m_StringId = null;
+                id1 = value;
+                stringId = null;
             }
         }
 
         public long Id2
         {
-            get => m_Id2;
+            get => id2;
             set
             {
-                m_Id2 = value;
-                m_StringId = null;
+                id2 = value;
+                stringId = null;
             }
         }
 
@@ -32,39 +32,39 @@ namespace Module.Core.Systems
         {
             get
             {
-                if(m_StringId == null)
+                if(stringId == null)
                 {
                     CreateStringId();
                 }
 
-                return m_StringId;
+                return stringId;
             }
         }
 
         public Guid128(long id1, long id2)
         {
-            m_Id1 = id1;
-            m_Id2 = id2;
+            this.id1 = id1;
+            this.id2 = id2;
 
-            m_StringId = null;
+            stringId = null;
         }
 
         private void CreateStringId()
         {
-            byte[] byteId1 = BitConverter.GetBytes(m_Id1);
-            byte[] byteId2 = BitConverter.GetBytes(m_Id2);
+            byte[] byteId1 = BitConverter.GetBytes(id1);
+            byte[] byteId2 = BitConverter.GetBytes(id2);
 
-            m_StringId = ToString(byteId1, 0, byteId1.Length) + ToString(byteId2, 0, byteId2.Length);
+            stringId = ToString(byteId1, 0, byteId1.Length) + ToString(byteId2, 0, byteId2.Length);
         }
 
         public override string ToString()
         {
-            return m_StringId;
+            return stringId;
         }
 
         public override bool Equals(object o)
         {
-            if (((Guid128)o).m_Id1 == m_Id1 && ((Guid128)o).Id2 == Id2)
+            if (((Guid128)o).id1 == id1 && ((Guid128)o).Id2 == Id2)
                 return true;
             else
                 return false;
@@ -87,8 +87,8 @@ namespace Module.Core.Systems
 
             var bytes = guid.ToByteArray();
 
-            value.m_Id1 = BitConverter.ToInt64(bytes, 0);
-            value.m_Id2 = BitConverter.ToInt64(bytes, 0);
+            value.id1 = BitConverter.ToInt64(bytes, 0);
+            value.id2 = BitConverter.ToInt64(bytes, 0);
 
             return value;
         }

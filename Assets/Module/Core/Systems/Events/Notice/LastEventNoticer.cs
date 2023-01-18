@@ -7,32 +7,32 @@ namespace Module.Core.Systems.Events
 {
     public class LastEventNoticer<T>
     {
-        private Dictionary<T, LastEventListeners> m_Values;
-        private int m_ListenerCapacity;
+        private Dictionary<T, LastEventListeners> values;
+        private int listenerCapacity;
 
         internal LastEventNoticer(int listenerCapacity = 50)
         {
-            m_Values = new Dictionary<T, LastEventListeners>();
-            m_ListenerCapacity = listenerCapacity;
+            values = new Dictionary<T, LastEventListeners>();
+            this.listenerCapacity = listenerCapacity;
         }
 
         public void AddListener(T id, IEventNoticeListener listener, ListenerDelegate listenerAction)
         {
-            if(m_Values.TryGetValue(id, out LastEventListeners listeners))
+            if(values.TryGetValue(id, out LastEventListeners listeners))
             {
                 listeners.Add(new LastEventListenerData(listener, listenerAction));
             }
             else
             {
-                listeners = new LastEventListeners(m_ListenerCapacity);
+                listeners = new LastEventListeners(listenerCapacity);
                 listeners.Add(new LastEventListenerData(listener, listenerAction));
-                m_Values.Add(id, listeners);
+                values.Add(id, listeners);
             }
         }
 
         public void RemoveAllListeners(T id)
         {
-            if(m_Values.TryGetValue(id, out LastEventListeners listeners))
+            if(values.TryGetValue(id, out LastEventListeners listeners))
             {
                 listeners.Clear();
             }
@@ -40,7 +40,7 @@ namespace Module.Core.Systems.Events
 
         public void RemoveListener(T id, IEventNoticeListener listener)
         {
-            if(m_Values.TryGetValue(id,out LastEventListeners listeners))
+            if(values.TryGetValue(id,out LastEventListeners listeners))
             {
                 var idx = listeners.FindIndex(elem => elem.Listener == listener);
                 if(idx > 0)
@@ -52,12 +52,12 @@ namespace Module.Core.Systems.Events
 
         public void Clear()
         {
-            m_Values.Clear();
+            values.Clear();
         }
 
         public void Notify(T id, IEventArgs args)
         {
-            if(m_Values.TryGetValue(id, out LastEventListeners listeners))
+            if(values.TryGetValue(id, out LastEventListeners listeners))
             {
                 for(int i=0,range = listeners.Count;i<range;++i)
                 {
@@ -76,15 +76,15 @@ namespace Module.Core.Systems.Events
             }
             else
             {
-                listeners = new LastEventListeners(m_ListenerCapacity);
+                listeners = new LastEventListeners(listenerCapacity);
                 listeners.LastEventArgs = args;
-                m_Values.Add(id, listeners);
+                values.Add(id, listeners);
             }
         }
 
         public bool Verify(T id, IEventNoticeListener listener)
         {
-            if(m_Values.TryGetValue(id, out LastEventListeners listeners))
+            if(values.TryGetValue(id, out LastEventListeners listeners))
             {
                 int idx = listeners.FindIndex(elem => elem.Listener == listener);
 

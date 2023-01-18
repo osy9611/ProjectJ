@@ -2,9 +2,9 @@ namespace Module.Unity.Core
 {
     using UnityEngine;
 
-    public class ComLojr : MonoBehaviour
+    public class ComLoader : MonoBehaviour
     {
-        static public ComLojr s_Root;
+        static public ComLoader s_Root;
 
         private void Awake()
         {
@@ -16,13 +16,13 @@ namespace Module.Unity.Core
             s_Root = null;
         }
 
-        static public ComLojr Create()
+        static public ComLoader Create()
         {
-            if (ComLojr.s_Root) return ComLojr.s_Root;
+            if (ComLoader.s_Root) return ComLoader.s_Root;
 
             GameObject go = new GameObject("[Lojr]");
             DontDestroyOnLoad(go);
-            return go.AddComponent<ComLojr>();
+            return go.AddComponent<ComLoader>();
         }
     }
 }

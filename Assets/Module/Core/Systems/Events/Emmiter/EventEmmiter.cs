@@ -7,32 +7,32 @@ namespace Module.Core.Systems.Events
 {
     public class EventEmmiter<T>
     {
-        private Dictionary<T, UnorderedList<ListenerDelegate>> m_Values;
-        private int m_ListenerCapacity;
+        private Dictionary<T, UnorderedList<ListenerDelegate>> values;
+        private int listenerCapacity;
 
         public EventEmmiter(int listenerCapacity = 50)
         {
-            m_Values = new Dictionary<T, UnorderedList<ListenerDelegate>>();
-            m_ListenerCapacity = listenerCapacity;
+            values = new Dictionary<T, UnorderedList<ListenerDelegate>>();
+            this.listenerCapacity = listenerCapacity;
         }
 
         public void AddListener(T id, ListenerDelegate listener)
         {
-            if (m_Values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
+            if (values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
             {
                 listeners.Add(listener);
             }
             else
             {
-                listeners = new UnorderedList<ListenerDelegate>(m_ListenerCapacity);
+                listeners = new UnorderedList<ListenerDelegate>(listenerCapacity);
                 listeners.Add(listener);
-                m_Values.Add(id, listeners);
+                values.Add(id, listeners);
             }
         }
 
         public void RemoveAllListeners(T id)
         {
-            if (m_Values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
+            if (values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
             {
                 listeners.Clear();
             }
@@ -40,7 +40,7 @@ namespace Module.Core.Systems.Events
 
         public void RemoveListener(T id, ListenerDelegate listener)
         {
-            if (m_Values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
+            if (values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
             {
                 listeners.Remove(listener);
             }
@@ -48,7 +48,7 @@ namespace Module.Core.Systems.Events
 
         public void Emit(T id, IEventArgs args)
         {
-            if (m_Values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
+            if (values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
             {
                 for (int i = 0, range = listeners.Count; i < range; ++i)
                 {

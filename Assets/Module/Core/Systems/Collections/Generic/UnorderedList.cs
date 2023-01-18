@@ -19,16 +19,11 @@ namespace Module.Core.Systems.Collections.Generic
 
         static readonly T[] m_EmptyArray = new T[0];
 
-        //List를 생성한다 List는 처음에 비어있고 Capacity는 0 이다.
-        //List에 첫 번째 요소를 추가하면 용량이 16으로 증가하고 필요에 따라 2배수로 증가한다.
         public UnorderedList()
         {
             m_Items = m_EmptyArray;
         }
 
-        //지정된 초기 Capcity로 List를 구성한다.
-        //List는 처음에는 비어있지만 할당이 필요하기 전에 지정된
-        //수의 List를 저장할 공간이 있다.
         public UnorderedList(int capacity)
         {
             if (capacity < 0) ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
@@ -40,8 +35,6 @@ namespace Module.Core.Systems.Collections.Generic
         }
 
 
-        //지정된 Collection의 내용을 복사해 List를 구성한다.
-        //새 List 의 Capacity와 Size는 모두 지정된 Collection 크기와 같다.
         public UnorderedList(IEnumerable<T> collection)
         {
             if (collection == null)
@@ -77,9 +70,6 @@ namespace Module.Core.Systems.Collections.Generic
             }
         }
 
-        //List의 Capacity를 가져와 설정한다.
-        //Capacity는 List를 보관하는데 사용되는 내부 배열의 크기이다.
-        //List를 재할당하면 내부 array의 Capacity가 다시 할당된다.
         public int Capacity
         {
             get => m_Items.Length;
