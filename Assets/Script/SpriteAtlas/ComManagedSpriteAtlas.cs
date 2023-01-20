@@ -12,7 +12,7 @@ public class ComManagedSpriteAtlas : MonoBehaviour
     {
         for (int i = 0, range = values.Count; i < range; i++)
         {
-            ModuleManagers.Atlas.Add(values[i]);
+            Managers.Atlas.Add(values[i]);
         }
     }
 
@@ -20,7 +20,7 @@ public class ComManagedSpriteAtlas : MonoBehaviour
     {
         for (int i = 0, range = values.Count; i < range; i++)
         {
-            ModuleManagers.Atlas.Remove(values[i]);
+            Managers.Atlas.Remove(values[i]);
         }
     }
 

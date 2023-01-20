@@ -21,18 +21,17 @@ public class Test : MonoBehaviour
 {
     private void Start()
     {
-        ModuleManagers.Resource.Inisiate("Assets/Prefab/Cube.prefab", null, true);
+        Managers.Resource.Inisiate("Assets/Prefab/Cube.prefab", null,true);
 
-        ModuleManagers.Resource.Initialize();
-        ModuleManagers.Resource.LoadAsset<TextAsset>("Assets/Automation/Output/Tables/user_character.bytes",
+        Managers.Resource.LoadAsset<TextAsset>("Assets/Automation/Output/Tables/user_character.bytes",
             (resAsset) =>
             {
                 bool success = resAsset != null;
 
             });
-        ModuleManagers.Resource.ReleaseAll();
+        Managers.Resource.ReleaseAll();
 
-        ModuleManagers.Atlas.Register();
+        Managers.Atlas.Register();
 
     }
 }

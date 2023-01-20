@@ -29,6 +29,10 @@ MonoBehaviour:
     m_Address: Assets/Res/Data/ComTableAsset.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 1c8e55804084ffd41a7db3ff45ddaaed
+    m_Address: Assets/Blink/Art/Icons/Classes/Assassin/Brawler
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ec75dbe5bcd55ec49b5c8acea52ce85c, type: 2}
   m_SchemaSet:

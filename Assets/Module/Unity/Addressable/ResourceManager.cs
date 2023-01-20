@@ -1,7 +1,7 @@
 namespace Module.Unity.Addressables
 {
     using Module.Unity.Core;
-    using Module.Unity.Managers;
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -11,14 +11,18 @@ namespace Module.Unity.Addressables
     public class ResourceManager
     {
         private Dictionary<string, AsyncOperationHandle> datas = new Dictionary<string, AsyncOperationHandle>();
+        private Func<GameObject, Transform, Poolable> popFunc = null;
+        private Func<Poolable,bool> pushFunc = null;
         private bool initCalled;
 
-        public void Initialize()
+        public void Initialize(PoolManager pool)
         {
             if (!initCalled)
             {
                 initCalled = true;
                 ComLoader.Create();
+                popFunc = pool.Pop;
+                pushFunc = pool.Push;
             }
         }
 
@@ -31,12 +35,18 @@ namespace Module.Unity.Addressables
                 return null;
             }
 
-            if (original.GetComponent<Poolable>() != null)
-                return ModuleManagers.Pool.Pop(original, parent).gameObject;
-            else if(original.GetComponent<Poolable>() == null && isPooling)
-                return ModuleManagers.Pool.Pop(original, parent).gameObject;
+            Poolable poolable = original.GetComponent<Poolable>();
 
-            GameObject go = Object.Instantiate(original, parent);
+            if (popFunc != null && poolable != null)
+            {
+                return popFunc(original, parent).gameObject;
+            }
+            else if(popFunc != null && poolable==null && isPooling)
+            {
+                return popFunc(original, parent).gameObject;
+            }
+
+            GameObject go = UnityEngine.Object.Instantiate(original, parent);
             go.name = original.name;
             return go;
         }
@@ -47,13 +57,13 @@ namespace Module.Unity.Addressables
                 return;
 
             Poolable poolable = go.GetComponent<Poolable>();
-            if (poolable != null)
+            if (poolable != null && pushFunc != null)
             {
-                ModuleManagers.Pool.Push(poolable);
+                pushFunc(poolable);
                 return;
             }
 
-            Object.Destroy(go);
+            UnityEngine.Object.Destroy(go);
         }
 
         public void LoadScene(string key, UnityEngine.SceneManagement.LoadSceneMode loadMode, System.Action<bool> resultCallback)

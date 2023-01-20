@@ -7,10 +7,10 @@ using UnityEngine;
 
 namespace Module.Unity.Managers
 {
-    public class ModuleManagers : MonoBehaviour
+    public class Managers : MonoBehaviour
     {
-        static ModuleManagers s_instance = null;
-        static ModuleManagers Instance { get { Init(); return s_instance; } }
+        static Managers s_instance = null;
+        static Managers Instance { get { Init(); return s_instance; } }
         PoolManager pool = new PoolManager();
         ResourceManager resource = new ResourceManager();
         SpriteAtlasManager atlas = new SpriteAtlasManager();
@@ -33,12 +33,14 @@ namespace Module.Unity.Managers
                 if (go == null)
                 {
                     go = new GameObject { name = "@Managers" };
-                    go.AddComponent<ModuleManagers>();
+                    go.AddComponent<Managers>();
                 }
 
                 DontDestroyOnLoad(go);
-                s_instance = go.GetComponent<ModuleManagers>();
+                s_instance = go.GetComponent<Managers>();
                 s_instance.pool.Init();
+
+                Resource.Initialize(Pool);
             }
         }
 

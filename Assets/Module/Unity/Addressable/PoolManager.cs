@@ -85,16 +85,17 @@ namespace Module.Unity.Addressables
             pools.Add(original.name, pool);
         }
 
-        public void Push(Poolable poolable)
+        public bool Push(Poolable poolable)
         {
             string name = poolable.gameObject.name;
             if(!pools.ContainsKey(name))
             {
                 GameObject.Destroy(poolable.gameObject);
-                return;
+                return false;
             }
 
             pools[name].Push(poolable);
+            return true;
         }
 
         public Poolable Pop(GameObject original, Transform parent = null)
