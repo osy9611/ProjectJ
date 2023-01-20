@@ -1,6 +1,7 @@
 namespace Module.Unity.Addressables
 {
     using Module.Unity.Core;
+    using Module.Unity.Managers;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -9,6 +10,7 @@ namespace Module.Unity.Addressables
 
     public class ResourceManager
     {
+        private Dictionary<string, AsyncOperationHandle> datas = new Dictionary<string, AsyncOperationHandle>();
         private bool initCalled;
 
         public void Initialize()
@@ -54,9 +56,6 @@ namespace Module.Unity.Addressables
             Object.Destroy(go);
         }
 
-
-
-
         public void LoadScene(string key, UnityEngine.SceneManagement.LoadSceneMode loadMode, System.Action<bool> resultCallback)
         {
             ComLoader.s_Root.StartCoroutine(CoLoadSceneAsync(key, loadMode, resultCallback));
@@ -76,6 +75,9 @@ namespace Module.Unity.Addressables
 
         public T LoadAndGet<T>(string addressable)
         {
+            if (datas.ContainsKey(addressable))
+                return (T)datas[addressable].Result;
+
             var handle = Addressables.LoadAssetAsync<T>(addressable);
 
             handle.WaitForCompletion();
@@ -83,10 +85,9 @@ namespace Module.Unity.Addressables
             if (handle.Status != AsyncOperationStatus.Succeeded)
                 return default(T);
 
-
+            datas.Add(addressable, handle); 
             return handle.Result;
         }
-
 
         public void LoadAsset<T>(AssetReference assetRef, System.Action<T> callback, bool autoReleaseOnFail = true)
         {
@@ -95,22 +96,31 @@ namespace Module.Unity.Addressables
 
         public IEnumerator CoLoadAsset<T>(AssetReference assetRef, System.Action<T> callback, bool autoReleaseOnFail = true)
         {
-            var handle = assetRef.LoadAssetAsync<T>();
-
-            yield return handle;
-
-            if (handle.Status == AsyncOperationStatus.Succeeded)
+            AsyncOperationHandle handle;
+            if(datas.ContainsKey(assetRef.AssetGUID))
             {
-                callback?.Invoke(handle.Result);
+                handle = datas[assetRef.AssetGUID];
+                callback?.Invoke((T)handle.Result);
             }
             else
             {
-                if (autoReleaseOnFail)
-                {
-                    assetRef.ReleaseAsset();
-                }
+                handle = assetRef.LoadAssetAsync<T>();
 
-                callback?.Invoke(default(T));
+                yield return handle;
+
+                if (handle.Status == AsyncOperationStatus.Succeeded)
+                {
+                    callback?.Invoke((T)handle.Result);
+                }
+                else
+                {
+                    if (autoReleaseOnFail)
+                    {
+                        assetRef.ReleaseAsset();
+                    }
+
+                    callback?.Invoke(default(T));
+                }
             }
         }
 
@@ -121,29 +131,55 @@ namespace Module.Unity.Addressables
 
         public IEnumerator CoLoadAsset<T>(string addessable, System.Action<T> callback, bool autoRelease = true)
         {
-            var handle = Addressables.LoadAssetAsync<T>(addessable);
-
-            yield return handle;
-
-            if (handle.Status == AsyncOperationStatus.Succeeded)
+            if (datas.ContainsKey(addessable))
             {
-                callback?.Invoke(handle.Result);
+                var handle = datas[addessable];
+                callback?.Invoke((T)handle.Result);
             }
             else
             {
-                callback?.Invoke(default(T));
-            }
+                var handle = Addressables.LoadAssetAsync<T>(addessable);
 
-            if (autoRelease)
-            {
-                if (handle.IsValid())
-                    Addressables.Release(handle);
+                yield return handle;
+
+                if (handle.Status == AsyncOperationStatus.Succeeded)
+                {
+                    callback?.Invoke(handle.Result);
+                }
+                else
+                {
+                    callback?.Invoke(default(T));
+                }
+
+                if (autoRelease)
+                {
+                    if (handle.IsValid())
+                        Addressables.Release(handle);
+                }
+                else
+                {
+                    datas.Add(addessable, handle);
+                }
             }
         }
 
         public void Release(AsyncOperationHandle handle)
         {
             Addressables.Release(handle);
+        }
+
+        public void Release(string addressable)
+        {
+            Addressables.Release(datas[addressable]);
+        }
+
+        public void ReleaseAll()
+        {
+            foreach(var data in datas.Values)
+            {
+                Release(data);
+            }
+            datas.Clear();
         }
     }
 }
