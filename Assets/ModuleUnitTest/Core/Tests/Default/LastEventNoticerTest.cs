@@ -66,8 +66,8 @@ public class LastEventNoticerTest
 
         eventNoticer.Notify(1, new EventArgs<int>(5));
 
-        //È°¼ºÈ­ µÆÀ» ¶§ ¾Ë¸²ÀÌ ÀÖ´ÂÁö È®ÀÎÇÑ´Ù.
-        //SetActive(true); ¿¡ µû¸¥ OnEnable È£ÃâÀº Editor¿¡¼­ ºÒ°¡´É ±×·¡¼­ Á÷Á¢ VerifyNotice·Î È®ÀÎ
+        //È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ñ´ï¿½.
+        //SetActive(true); ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ OnEnable È£ï¿½ï¿½ï¿½ï¿½ Editorï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ VerifyNoticeï¿½ï¿½ È®ï¿½ï¿½
         gl1.VerifyNotice();
         gl2.VerifyNotice();
         gl2.VerifyNotice();
