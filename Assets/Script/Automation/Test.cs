@@ -21,7 +21,14 @@ public class Test : MonoBehaviour
     public SceneManager sceneManager;
     private void Start()
     {
-        Managers.Resource.LoadAndInisiate("Assets/Prefab/Cube.prefab", null,true,false);
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject go = Managers.Resource.LoadAndInisiate("Assets/Prefab/Cube.prefab", null, true, false);
+
+            float x = UnityEngine.Random.Range(-5.0f, 5.0f);
+            float y = UnityEngine.Random.Range(-5.0f, 5.0f);
+            go.transform.position = new Vector3(x, y, 0);
+        }
 
         Managers.Resource.LoadAsset<TextAsset>("Assets/Automation/Output/Tables/user_character.bytes",
             (resAsset) =>
@@ -29,7 +36,6 @@ public class Test : MonoBehaviour
                 bool success = resAsset != null;
 
             });
-        Managers.Resource.ReleaseAll();
 
         Managers.Atlas.Register();
 

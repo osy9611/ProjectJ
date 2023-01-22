@@ -25,7 +25,7 @@ public class SceneManager
         switch(type)
         {
             case Define.SceneType.Game:
-                ComLoader.s_Root.StartCoroutine(CoLoadGameScene());
+                //ComLoader.s_Root.StartCoroutine(CoLoadGameScene());
                 break;
         }    
     }
@@ -39,13 +39,17 @@ public class SceneManager
         });
 
 
+
         if (!success)
         {
             Debug.Log("씬로드 실패");
             yield break;
         }
 
+        yield return new WaitForSeconds(3);
+
         Init();
+        ComLoader.s_Root.StartCoroutine(CoLoadGameScene());
     }
 
     IEnumerator CoLoadGameScene()
@@ -55,7 +59,7 @@ public class SceneManager
         yield return Managers.Resource.CoLoadSceneAsync("Environment_Free", LoadSceneMode.Single, (result) =>
         {
             success = result;
-        });
+        }, loadingBar);
 
       
         if (!success)

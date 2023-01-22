@@ -98,7 +98,7 @@ namespace Module.Unity.Addressables
         {
             float timer = 0.0f;
             var handle = Addressables.LoadSceneAsync(key, loadMode);
-
+            
             while (!handle.IsDone)
             {
                 yield return null;
