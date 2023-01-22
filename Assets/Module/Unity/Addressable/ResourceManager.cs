@@ -7,6 +7,7 @@ namespace Module.Unity.Addressables
     using UnityEngine;
     using UnityEngine.AddressableAssets;
     using UnityEngine.ResourceManagement.AsyncOperations;
+    using UnityEngine.UI;
 
     public class ResourceManager
     {
@@ -15,20 +16,19 @@ namespace Module.Unity.Addressables
         private Func<Poolable,bool> pushFunc = null;
         private bool initCalled;
 
-        public void Initialize(PoolManager pool)
+        public void Init(PoolManager pool)
         {
             if (!initCalled)
             {
                 initCalled = true;
-                ComLoader.Create();
                 popFunc = pool.Pop;
                 pushFunc = pool.Push;
             }
         }
 
-        public GameObject Inisiate(string path, Transform parent = null, bool isPooling = false)
+        public GameObject LoadAndInisiate(string path, Transform parent = null, bool isPooling = false,bool autoRelease = true)
         {
-            GameObject original = LoadAndGet<GameObject>(path);
+            GameObject original = LoadAndGet<GameObject>(path,autoRelease);
             if (original == null)
             {
                 Debug.Log($"Fail to load prefab : {path} ");
@@ -71,9 +71,20 @@ namespace Module.Unity.Addressables
             ComLoader.s_Root.StartCoroutine(CoLoadSceneAsync(key, loadMode, resultCallback));
         }
 
+        public void LoadSceneUI(string key, UnityEngine.SceneManagement.LoadSceneMode loadMode, System.Action<bool> resultCallback, Image progressbar)
+        {
+            ComLoader.s_Root.StartCoroutine(CoLoadSceneAsync(key, loadMode, resultCallback, progressbar));
+        }
+
         public IEnumerator CoLoadSceneAsync(string key, UnityEngine.SceneManagement.LoadSceneMode loadMode, System.Action<bool> resultCallback)
         {
             var handle = Addressables.LoadSceneAsync(key, loadMode);
+            while(!handle.IsDone)
+            {
+                yield return null;
+                Debug.Log(handle.GetDownloadStatus().Percent);
+            }
+           
 
             yield return handle;
 
@@ -83,7 +94,45 @@ namespace Module.Unity.Addressables
                 resultCallback(false);
         }
 
-        public T LoadAndGet<T>(string addressable)
+        public IEnumerator CoLoadSceneAsync(string key, UnityEngine.SceneManagement.LoadSceneMode loadMode, System.Action<bool> resultCallback, Image progressbar)
+        {
+            float timer = 0.0f;
+            var handle = Addressables.LoadSceneAsync(key, loadMode);
+
+            while (!handle.IsDone)
+            {
+                yield return null;
+                timer += Time.deltaTime;
+
+                if (progressbar != null)
+                {
+                    if (handle.GetDownloadStatus().Percent < 0.9f)
+                    {
+                        progressbar.fillAmount = Mathf.Lerp(progressbar.fillAmount, handle.GetDownloadStatus().Percent, timer);
+                        if (progressbar.fillAmount >= handle.GetDownloadStatus().Percent)
+                        {
+                            timer = 0;
+                        }
+                    }
+                    else
+                    {
+                        progressbar.fillAmount = Mathf.Lerp(progressbar.fillAmount, 1.0f, timer);
+                        if (progressbar.fillAmount == 1.0f)
+                            yield break;
+                    }
+                }
+            }
+            yield return new WaitForSeconds(10.0f);
+
+            yield return handle;
+
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+                resultCallback(true);
+            else
+                resultCallback(false);
+        }
+
+        public T LoadAndGet<T>(string addressable, bool autoRelease=true)
         {
             if (datas.ContainsKey(addressable))
                 return (T)datas[addressable].Result;
@@ -95,7 +144,11 @@ namespace Module.Unity.Addressables
             if (handle.Status != AsyncOperationStatus.Succeeded)
                 return default(T);
 
-            datas.Add(addressable, handle); 
+            if(!autoRelease)
+            {
+                datas.Add(addressable, handle);
+            }
+
             return handle.Result;
         }
 
@@ -149,7 +202,7 @@ namespace Module.Unity.Addressables
             else
             {
                 var handle = Addressables.LoadAssetAsync<T>(addessable);
-
+               
                 yield return handle;
 
                 if (handle.Status == AsyncOperationStatus.Succeeded)

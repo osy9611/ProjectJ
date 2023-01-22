@@ -2,7 +2,6 @@ using Module.Unity.Addressables;
 using Module.Unity.Core;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.EditorTools;
 using UnityEngine;
 
 namespace Module.Unity.Managers
@@ -14,11 +13,11 @@ namespace Module.Unity.Managers
         PoolManager pool = new PoolManager();
         ResourceManager resource = new ResourceManager();
         SpriteAtlasManager atlas = new SpriteAtlasManager();
-
+        SceneManager scene = new SceneManager();
         public static PoolManager Pool { get => Instance.pool; }
         public static ResourceManager Resource { get => Instance.resource; }
         public static SpriteAtlasManager Atlas { get => Instance.atlas; }
-
+        public static SceneManager Scene { get => Instance.scene; }
 
         private void Start()
         {
@@ -40,7 +39,8 @@ namespace Module.Unity.Managers
                 s_instance = go.GetComponent<Managers>();
                 s_instance.pool.Init();
 
-                Resource.Initialize(Pool);
+                ComLoader.Create();
+                Resource.Init(Pool);
             }
         }
 

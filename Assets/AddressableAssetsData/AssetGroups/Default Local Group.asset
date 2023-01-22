@@ -17,18 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 5569e973dfa293141b940f82d40f60ee
   m_SerializeEntries:
-  - m_GUID: f835a0d50ac2a604399c042e191ce300
-    m_Address: Assets/Automation/Output/Tables
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: c0a8ddfbd067b2c4cb46958f14403eca
-    m_Address: Assets/Automation/ExportXmlData/Tables
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: f9fd39c3406b73b448242070a7d90020
-    m_Address: Assets/Res/Data/ComTableAsset.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 1c8e55804084ffd41a7db3ff45ddaaed
     m_Address: Assets/Blink/Art/Icons/Classes/Assassin/Brawler
     m_ReadOnly: 0

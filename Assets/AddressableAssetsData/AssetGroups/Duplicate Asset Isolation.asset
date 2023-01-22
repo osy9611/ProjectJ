@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Duplicate Asset Isolation
+  m_EditorClassIdentifier: 
+  m_GroupName: Duplicate Asset Isolation
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c5b8c75c21949af4e94b424d0fe7a9b5
+  m_SerializeEntries:
+  - m_GUID: 5cdbb5effeab4db45a17845dd1d1289d
+    m_Address: Assets/Test/Weapons/Sword/Model/Sword_MD.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 530fec31288b3514183ea010b38b36e1
+    m_Address: Assets/Test/Weapons/Sword/Textures/Sword_N.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a269cfc47281f3749a982c9a0ea65117
+    m_Address: Assets/Test/Weapons/Sword/Textures/Sword_D.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ab3b772d9719bea4ca0228c4a76a4f3b
+    m_Address: Assets/Test/Weapons/MyStandardShader.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: ec75dbe5bcd55ec49b5c8acea52ce85c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0901fdc1497a83441b258ae73442821f, type: 2}
+    - {fileID: 11400000, guid: 2ec487c5ef9bae8428b0d091be55ce71, type: 2}

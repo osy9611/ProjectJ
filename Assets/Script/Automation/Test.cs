@@ -5,7 +5,6 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Xml;
 using JetBrains.Annotations;
-using Module.Automation.Generator;
 using System.Text;
 using UnityEngine.Networking.Match;
 using DesignTable;
@@ -19,9 +18,10 @@ using Module.Unity.Managers;
 
 public class Test : MonoBehaviour
 {
+    public SceneManager sceneManager;
     private void Start()
     {
-        Managers.Resource.Inisiate("Assets/Prefab/Cube.prefab", null,true);
+        Managers.Resource.LoadAndInisiate("Assets/Prefab/Cube.prefab", null,true,false);
 
         Managers.Resource.LoadAsset<TextAsset>("Assets/Automation/Output/Tables/user_character.bytes",
             (resAsset) =>
@@ -33,6 +33,11 @@ public class Test : MonoBehaviour
 
         Managers.Atlas.Register();
 
+    }
+
+    public void StartScene()
+    {
+        Managers.Scene.LoadScene(Define.SceneType.Game);
     }
 }
 

@@ -17,8 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: b8c4941d31feafd4285daa5748ed2ff7
   m_SerializeEntries:
-  - m_GUID: 9cf6276533d60a645bb00ab5a0c4de3b
-    m_Address: Assets/Automation/ExportXmlData/Enum/_data_enum.xml
+  - m_GUID: f835a0d50ac2a604399c042e191ce300
+    m_Address: Assets/Automation/Output/Tables
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f9fd39c3406b73b448242070a7d90020
+    m_Address: Assets/Res/Data/ComTableAsset.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
