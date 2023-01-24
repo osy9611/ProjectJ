@@ -12,38 +12,25 @@ namespace Module.Unity.Addressables
     public class ResourceManager
     {
         private Dictionary<string, AsyncOperationHandle> datas = new Dictionary<string, AsyncOperationHandle>();
-        private Func<GameObject, Transform, Poolable> popFunc = null;
-        private Func<Poolable,bool> pushFunc = null;
         private bool initCalled;
+        PoolManager poolManager;
 
         public void Init(PoolManager pool)
         {
             if (!initCalled)
             {
                 initCalled = true;
-                popFunc = pool.Pop;
-                pushFunc = pool.Push;
+                poolManager = pool;
             }
         }
 
-        public GameObject LoadAndInisiate(string path, Transform parent = null, bool isPooling = false,bool autoRelease = true)
+        public GameObject LoadAndInisiate(string path,Transform parent = null)
         {
-            GameObject original = LoadAndGet<GameObject>(path,autoRelease);
+            GameObject original = LoadAndGet<GameObject>(path);
             if (original == null)
             {
                 Debug.Log($"Fail to load prefab : {path} ");
                 return null;
-            }
-
-            Poolable poolable = original.GetComponent<Poolable>();
-
-            if (popFunc != null && poolable != null)
-            {
-                return popFunc(original, parent).gameObject;
-            }
-            else if(popFunc != null && poolable==null && isPooling)
-            {
-                return popFunc(original, parent).gameObject;
             }
 
             GameObject go = UnityEngine.Object.Instantiate(original, parent);
@@ -51,18 +38,43 @@ namespace Module.Unity.Addressables
             return go;
         }
 
-        public void Destory(GameObject go)
+        public GameObject LoadAndPool(string path,Transform parent = null,int poolCount = 1)
         {
-            if (go == null)
-                return;
-
-            Poolable poolable = go.GetComponent<Poolable>();
-            if (poolable != null && pushFunc != null)
+            GameObject original = LoadAndGet<GameObject>(path);
+            if(original == null)
             {
-                pushFunc(poolable);
-                return;
+                Debug.Log($"Fail to load prefab : {path} ");
+                return null;
             }
 
+            poolManager.CreatePool(original, poolCount);
+
+            return null;
+        }
+
+        public void Destory(GameObject go,bool destoryPool = false)
+        {
+            Poolable poolable = go.GetComponent<Poolable>();
+            if (poolable != null)
+            {
+                poolManager.Push(poolable);
+                return;
+            }
+            else
+            {                
+                foreach(var handle in datas.Keys)
+                {
+                    if(handle.Contains(go.gameObject.name))
+                    {
+                        if (datas[handle].IsValid())
+                        {
+                            Release(handle);
+                            datas.Remove(handle);
+                        }
+                        break;
+                    }
+                }
+            }
             UnityEngine.Object.Destroy(go);
         }
 
@@ -132,7 +144,7 @@ namespace Module.Unity.Addressables
                 resultCallback(false);
         }
 
-        public T LoadAndGet<T>(string addressable, bool autoRelease=true)
+        public T LoadAndGet<T>(string addressable)
         {
             if (datas.ContainsKey(addressable))
                 return (T)datas[addressable].Result;
@@ -144,10 +156,7 @@ namespace Module.Unity.Addressables
             if (handle.Status != AsyncOperationStatus.Succeeded)
                 return default(T);
 
-            if(!autoRelease)
-            {
-                datas.Add(addressable, handle);
-            }
+            datas.Add(addressable, handle);
 
             return handle.Result;
         }
@@ -192,21 +201,22 @@ namespace Module.Unity.Addressables
             ComLoader.s_Root.StartCoroutine(CoLoadAsset<T>(addessable, callback, autoRelease));
         }
 
-        public IEnumerator CoLoadAsset<T>(string addessable, System.Action<T> callback, bool autoRelease = true)
+        public IEnumerator CoLoadAsset<T>(string addressable, System.Action<T> callback, bool autoRelease = true)
         {
-            if (datas.ContainsKey(addessable))
+            if (datas.ContainsKey(addressable))
             {
-                var handle = datas[addessable];
+                var handle = datas[addressable];
                 callback?.Invoke((T)handle.Result);
             }
             else
             {
-                var handle = Addressables.LoadAssetAsync<T>(addessable);
+                var handle = Addressables.LoadAssetAsync<T>(addressable);
                
                 yield return handle;
 
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
+                    datas.Add(addressable, handle);
                     callback?.Invoke(handle.Result);
                 }
                 else
@@ -218,10 +228,6 @@ namespace Module.Unity.Addressables
                 {
                     if (handle.IsValid())
                         Addressables.Release(handle);
-                }
-                else
-                {
-                    datas.Add(addessable, handle);
                 }
             }
         }

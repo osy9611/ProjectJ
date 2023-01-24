@@ -42,7 +42,7 @@ public class SceneManager
 
         if (!success)
         {
-            Debug.Log("씬로드 실패");
+            Debug.Log("?�로???�패");
             yield break;
         }
 
@@ -64,10 +64,10 @@ public class SceneManager
       
         if (!success)
         {
-            Debug.Log("씬로드 실패");
+            Debug.Log("?�로???�패");
             yield break;
         }
 
-        //TODO : 추후에 로딩할 리소스 구현
+        //TODO : 추후??로딩??리소??구현
     }
 }

@@ -18,26 +18,29 @@ using Module.Unity.Managers;
 
 public class Test : MonoBehaviour
 {
-    public SceneManager sceneManager;
     private void Start()
     {
         for (int i = 0; i < 5; i++)
         {
-            GameObject go = Managers.Resource.LoadAndInisiate("Assets/Prefab/Cube.prefab", null, true, false);
+            GameObject go = Managers.Resource.LoadAndInisiate("Assets/Prefab/Cube.prefab", null);
 
             float x = UnityEngine.Random.Range(-5.0f, 5.0f);
             float y = UnityEngine.Random.Range(-5.0f, 5.0f);
             go.transform.position = new Vector3(x, y, 0);
         }
 
-        Managers.Resource.LoadAsset<TextAsset>("Assets/Automation/Output/Tables/user_character.bytes",
-            (resAsset) =>
-            {
-                bool success = resAsset != null;
+        //byte[] text;
+        //Managers.Resource.LoadAsset<TextAsset>("Assets/Automation/Output/Tables/user_character.bytes",
+        //    (resAsset) =>
+        //    {
+        //        text = resAsset.bytes;
 
-            });
+        //    },false);
 
         Managers.Atlas.Register();
+
+
+        //var handle = Addressables.LoadAssetAsync<GameObject>("Assets/Prefab/Cube.prefab");
 
     }
 
