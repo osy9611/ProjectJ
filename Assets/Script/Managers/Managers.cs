@@ -46,7 +46,8 @@ namespace Module.Unity.Managers
 
         public static void Clear()
         {
-            Pool.Clear();
+            Pool.ClearAll();
+            Resource.ReleaseAll();
         }
     }
 

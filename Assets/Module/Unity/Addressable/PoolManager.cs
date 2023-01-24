@@ -116,11 +116,17 @@ namespace Module.Unity.Addressables
 
         public void Clear()
         {
+
+        }
+
+        public void ClearAll()
+        {
             foreach (Transform child in root)
                 GameObject.Destroy(child.gameObject);
 
             pools.Clear();
         }
+
     }
 
 }

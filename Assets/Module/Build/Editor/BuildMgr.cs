@@ -6,6 +6,8 @@ using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets;
+using System;
+using Codice.Utils;
 
 public class BuildMgr
 {
