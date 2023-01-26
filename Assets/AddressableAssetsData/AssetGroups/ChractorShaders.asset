@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ChractorShaders
+  m_EditorClassIdentifier: 
+  m_GroupName: ChractorShaders
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 42cb2d7190ebe544f89552eea594a9d1
+  m_SerializeEntries:
+  - m_GUID: 1666fb81395f51e4293b01cca8f58481
+    m_Address: Assets/SciFiWarriorPBRHPPolyart/Materials/PBR.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 78660c09ff101ea4cb77de408a9527da
+    m_Address: Assets/SciFiWarriorPBRHPPolyart/Materials/Polyart.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9d4df993be894774282a0b17d51a0723
+    m_Address: Assets/SciFiWarriorPBRHPPolyart/Materials/HP.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: ec75dbe5bcd55ec49b5c8acea52ce85c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 3345a3e56d27e84488f3887609e977ad, type: 2}
+    - {fileID: 11400000, guid: 4430cbe259c2bd74eb0513ba74bc1776, type: 2}

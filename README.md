@@ -5,8 +5,11 @@
     + Unity3D(Addressable,SpriteAtlas)
     + C#
     + protobuf-net
+    + Docker
+       +Jenkins
  + 작업 내용
     + 기획 Table, Enum Generator 구현
     + Addressable을 이용한 ResourceManager 구현
        + Adderssable로 로딩한 데이터를 PoolManager를 이용한 풀링기능 구현
     + SpriteAtlas에 들어있는 Sprite를 관리하는 SpriteAtlasManager 구현 
+    + Jenkins Unity3d 플러그인을 위한 빌드 배포 구축
