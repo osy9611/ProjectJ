@@ -19,8 +19,6 @@ using Module.Unity.Custermization;
 
 public class Test2 : MonoBehaviour
 {
-    public ComCostumeAgent obj;
-
     private void Start()
     {
         for (int i = 0; i < 5; i++)
@@ -42,15 +40,6 @@ public class Test2 : MonoBehaviour
 
         Managers.Atlas.Register();
         //var handle = Addressables.LoadAssetAsync<GameObject>("Assets/Prefab/Cube.prefab");
-
-        PartAssetData partAsset;
-        Material mat = null;
-        Managers.Resource.LoadAsset<Material>("Assets/SciFiWarriorPBRHPPolyart/Materials/Polyart.mat",
-            (result) =>
-            {
-                mat = result;
-                obj.ChangeOrAttach(PartAssetData.Create(0, mat));
-            });
     }
 
     public void StartScene()
