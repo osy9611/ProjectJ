@@ -14,8 +14,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/testTod.unity
     guid: bff5b1a114b093245a8fc9490028aaf9
-  - enabled: 1
-    path: Assets/Polytope Studio/Lowpoly Medieval Demos/Environment_Free/Environment_Free.unity
-    guid: c732593fe76e5a84197f9cd13963f706
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: b5a61bfe29e8c574b8d6cb8db3ea8d05, type: 2}

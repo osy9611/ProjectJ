@@ -55,7 +55,7 @@ public class SceneManager
     {
         bool success = false;
 
-        yield return Managers.Resource.CoLoadSceneAsync("Environment_Free", LoadSceneMode.Single, (result) =>
+        yield return Managers.Resource.CoLoadSceneAsync("testTod", LoadSceneMode.Single, (result) =>
         {
             success = result;
         }, loadingBar);

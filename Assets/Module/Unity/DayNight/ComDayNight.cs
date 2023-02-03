@@ -13,7 +13,7 @@ namespace Module.Unity.DayNight
         {
             base.Execute();
         }
-
+#if UNITY_EDITOR
         private void OnValidate()
         {
             if (!isStop)
@@ -21,6 +21,8 @@ namespace Module.Unity.DayNight
                 base.Execute();
             }
         }
+
+#endif
     }
 }
 

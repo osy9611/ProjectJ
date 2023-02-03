@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08387857, g: 0.090283185, b: 0.08754605, a: 1}
+  m_Sun: {fileID: 866849026}
+  m_IndirectSpecularColor: {r: 0.19087568, g: 0.27095205, b: 0.2905722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,305 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &125180850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5281354488822983047, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
+  m_PrefabInstance: {fileID: 1340118460}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &125180853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125180850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfa59414b003a6428861831729a9530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeOfDay: 8.009385
+  OrbitSpeed: 0.5
+  Sun: {fileID: 866849026}
+  sunColor:
+    serializedVersion: 2
+    key0: {r: 0.6320754, g: 0.3088687, b: 0.032796368, a: 1}
+    key1: {r: 0.9176471, g: 0.85098046, b: 0.6313726, a: 1}
+    key2: {r: 0.9176471, g: 0.85098046, b: 0.6313726, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  Moon: {fileID: 1879800528}
+  moonColor:
+    serializedVersion: 2
+    key0: {r: 0.1254902, g: 0.1254902, b: 0.1254902, a: 1}
+    key1: {r: 0.3803922, g: 0.5372549, b: 0.6627451, a: 1}
+    key2: {r: 0.75686276, g: 0.8901961, b: 0.99607843, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 6707
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  skyColor:
+    serializedVersion: 2
+    key0: {r: 0.1254902, g: 0.1254902, b: 0.1254902, a: 1}
+    key1: {r: 0.24705882, g: 0.38039216, b: 0.5058824, a: 1}
+    key2: {r: 0.59607846, g: 0.9333334, b: 0.9960785, a: 0}
+    key3: {r: 0.2503712, g: 0.38563985, b: 0.5105346, a: 0}
+    key4: {r: 0.13534734, g: 0.14615838, b: 0.15633349, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 6564
+    ctime2: 32750
+    ctime3: 58971
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 2
+  middleColor:
+    serializedVersion: 2
+    key0: {r: 0.023529414, g: 0.019607844, b: 0.023529414, a: 1}
+    key1: {r: 0.5176471, g: 0.3254902, b: 0.16862746, a: 1}
+    key2: {r: 0.9176471, g: 0.85098046, b: 0.6313726, a: 0}
+    key3: {r: 0.34301606, g: 0.49561647, b: 0.6011288, a: 0}
+    key4: {r: 0.908232, g: 0.8451579, b: 0.630877, a: 0}
+    key5: {r: 0.54541117, g: 0.36196458, b: 0.20074669, a: 0}
+    key6: {r: 0.044365667, g: 0.032506473, b: 0.029647995, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 5890
+    ctime2: 19692
+    ctime3: 32785
+    ctime4: 45878
+    ctime5: 59610
+    ctime6: 65535
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 7
+    m_NumAlphaKeys: 2
+  groundColor:
+    serializedVersion: 2
+    key0: {r: 0.42352942, g: 0.43529412, b: 0.42352942, a: 1}
+    key1: {r: 0.4392157, g: 0.44313726, b: 0.4392157, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  SunBrightness:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.01
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15
+      value: 0.01
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.35
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.65
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.85
+      value: 0.01
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.01
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MoonBrightness:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.35
+      value: 0.01
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.65
+      value: 0.01
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.85
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  OnMorning:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNoon:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNight:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMidnight:
+    m_PersistentCalls:
+      m_Calls: []
+  isStop: 0
 --- !u!1 &542426686
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +520,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &866849026 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
+  m_PrefabInstance: {fileID: 1340118460}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1340118460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -230,31 +534,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.b
-      value: 0.66355693
+      value: 0.1254902
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.g
-      value: 0.5381145
+      value: 0.1254902
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.r
-      value: 0.38130906
+      value: 0.1254902
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Intensity
-      value: 0.01
+      value: 0.028601468
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979769, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9986295
+      value: 0.26000547
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979769, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.05233596
+      value: -0.96560717
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979769, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalRotation.y
@@ -262,31 +566,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.b
-      value: 0.17055517
+      value: 0.32009625
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.g
-      value: 0.3276793
+      value: 0.56906724
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.r
-      value: 0.5193134
+      value: 0.7691419
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Intensity
-      value: 0.38239598
+      value: 0.9813985
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928343, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.05233594
+      value: 0.96560717
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928343, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.9986295
+      value: 0.26000553
       objectReference: {fileID: 0}
     - target: {fileID: 5281354488822983041, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_RootOrder
@@ -331,38 +635,6 @@ PrefabInstance:
     - target: {fileID: 5281354488822983041, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354488822983042, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: timeOfDay
-      value: 18.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354488822983042, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: OrbitSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354488822983042, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: Brightness2.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354488822983042, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: Brightness2.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354488822983042, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: Brightness2.m_Curve.Array.data[2].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354488822983042, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: Brightness2.m_Curve.Array.data[3].value
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354488822983042, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: Brightness2.m_Curve.Array.data[4].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354488822983042, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: Brightness2.m_Curve.Array.data[5].value
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5281354488822983047, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Name
@@ -622,7 +894,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: fe0ab5ea342ce1945850eee166b3f554, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 2bc6e4c537d4c854aab20ee6e5eee1df, type: 2}
 --- !u!4 &1827470691
 Transform:
   m_ObjectHideFlags: 0
@@ -638,3 +910,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &1879800528 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
+  m_PrefabInstance: {fileID: 1340118460}
+  m_PrefabAsset: {fileID: 0}

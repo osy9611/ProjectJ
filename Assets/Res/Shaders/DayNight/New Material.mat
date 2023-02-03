@@ -155,7 +155,7 @@ Material:
     - _Height: 1
     - _Metallic: 0
     - _MoonPower: 10
-    - _MoonRadius: 0.05
+    - _MoonRadius: 0.04
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -176,7 +176,7 @@ Material:
     - _StarPower: 2.5
     - _SunDisk: 2
     - _SunPower: 2.86
-    - _SunRadius: 0.05
+    - _SunRadius: 0.04
     - _SunSize: 0.05
     - _SunSizeConvergence: 10
     - _Surface: 0
@@ -188,9 +188,9 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GroundColor: {r: 0.36899996, g: 0.34899998, b: 0.34099993, a: 1}
-    - _SkyColor1: {r: 0.1254902, g: 0.1254902, b: 0.1254902, a: 1}
-    - _SkyColor2: {r: 0.023529414, g: 0.019607844, b: 0.023529414, a: 1}
-    - _SkyColor3: {r: 0.42352942, g: 0.43529412, b: 0.42352942, a: 1}
+    - _SkyColor1: {r: 0.45107293, g: 0.70360553, b: 0.7924191, a: 1}
+    - _SkyColor2: {r: 0.8220306, g: 0.7918492, b: 0.62634015, a: 1}
+    - _SkyColor3: {r: 0.4287643, g: 0.43791157, b: 0.4287643, a: 1}
     - _SkyTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _StarOffset: {r: 0, g: 0, b: 0, a: 0}
