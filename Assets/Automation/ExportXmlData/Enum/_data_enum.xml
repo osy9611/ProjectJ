@@ -44,30 +44,37 @@
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>AttributeId2</ENUM_NAME>
+		<ENUM_NAME>TimeType</ENUM_NAME>
 		<ENUM_VALUE>-</ENUM_VALUE>
 		<GROUP_ID>1002</GROUP_ID>
 		<COMMENT>속성 ID</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>Str2</ENUM_NAME>
+		<ENUM_NAME>Morning</ENUM_NAME>
 		<ENUM_VALUE>0</ENUM_VALUE>
 		<GROUP_ID>1002</GROUP_ID>
-		<COMMENT>-</COMMENT>
+		<COMMENT>Morning</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>Vital2</ENUM_NAME>
+		<ENUM_NAME>Noon</ENUM_NAME>
 		<ENUM_VALUE>1</ENUM_VALUE>
 		<GROUP_ID>1002</GROUP_ID>
-		<COMMENT>-</COMMENT>
+		<COMMENT>Noon</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>Int2</ENUM_NAME>
+		<ENUM_NAME>Night</ENUM_NAME>
 		<ENUM_VALUE>2</ENUM_VALUE>
 		<GROUP_ID>1002</GROUP_ID>
-		<COMMENT>-</COMMENT>
+		<COMMENT>Night</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Midnight</ENUM_NAME>
+		<ENUM_VALUE>3</ENUM_VALUE>
+		<GROUP_ID>1002</GROUP_ID>
+		<COMMENT>Midnight</COMMENT>
 	</record>
 </Enum>

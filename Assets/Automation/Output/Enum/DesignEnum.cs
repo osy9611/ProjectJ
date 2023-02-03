@@ -16,10 +16,11 @@ namespace DesignEnum
     /// ID : 1002
     /// 속성 ID
     /// </summary> 
-    public enum AttributeId2
+    public enum TimeType
     {
-        Str2 = 0, 
-        Vital2 = 1, 
-        Int2 = 2, 
+        Morning = 0, //Morning
+        Noon = 1, //Noon
+        Night = 2, //Night
+        Midnight = 3, //Midnight
     }
 }
