@@ -5,80 +5,38 @@ using Module.Core.Systems.Collections.Generic;
 
 namespace Module.Core.Systems.Events
 {
-    public class EventEmmiter<T>
+    public class EventEmmiter
     {
-        private Dictionary<T, UnorderedList<ListenerDelegate>> values;
-        private int listenerCapacity;
+        private UnorderedList<ListenerDelegate> values;
+        private int listenerCapapcity;
 
-        public EventEmmiter(int listenerCapacity = 50)
+        public EventEmmiter(int listenrCapacity = 50)
         {
-            values = new Dictionary<T, UnorderedList<ListenerDelegate>>();
-            this.listenerCapacity = listenerCapacity;
+            values = new UnorderedList<ListenerDelegate>();
+            this.listenerCapapcity = listenrCapacity;
         }
 
-        public void AddListener(T id, ListenerDelegate listener)
+        public void AddListener(ListenerDelegate listener) 
         {
-            if (values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
-            {
-                listeners.Add(listener);
-            }
-            else
-            {
-                listeners = new UnorderedList<ListenerDelegate>(listenerCapacity);
-                listeners.Add(listener);
-                values.Add(id, listeners);
-            }
+            values.Add(listener);
+        }
+        public void RemoveAllListener()
+        {
+            values.Clear();
         }
 
-        public void RemoveAllListeners(T id)
+        public void RemoveListener(ListenerDelegate listener)
         {
-            if (values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
-            {
-                listeners.Clear();
-            }
+            values.Remove(listener);
         }
 
-        public void RemoveListener(T id, ListenerDelegate listener)
+        public void Invoke()
         {
-            if (values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
+            for(int i=0,range= values.Count;i<range;++i)
             {
-                listeners.Remove(listener);
+                values[i].Invoke();
             }
-        }
-
-        public void Emit(T id, IEventArgs args)
-        {
-            if (values.TryGetValue(id, out UnorderedList<ListenerDelegate> listeners))
-            {
-                for (int i = 0, range = listeners.Count; i < range; ++i)
-                {
-                    listeners[i].Invoke(args);
-                }
-            }
-        }
-
-        static public EventEmmiter<T> Create(int listenerCapacity = 50)
-        {
-            if (typeof(T) == typeof(string))
-            {
-                return new StringEventEmmiter(listenerCapacity) as EventEmmiter<T>;
-            }
-            else if (typeof(T) == typeof(int))
-            {
-                return new IntEventEmmiter(listenerCapacity) as EventEmmiter<T>;
-            }
-
-            throw new System.InvalidOperationException("Type not supported");
-        }
-
-
-        internal class StringEventEmmiter : EventEmmiter<string>
-        {
-            internal StringEventEmmiter(int listenerCapacity = 50) : base(listenerCapacity) { }
-        }
-        internal class IntEventEmmiter : EventEmmiter<int>
-        {
-            internal IntEventEmmiter(int listenerCapacity = 50) : base(listenerCapacity) { }
         }
     }
 }
+

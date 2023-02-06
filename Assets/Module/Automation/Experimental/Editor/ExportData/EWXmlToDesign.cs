@@ -86,7 +86,7 @@ public class EWXmlToDesign : EditorWindow
             {
                 if (tableName == null)
                 {
-                    EditorUtility.DisplayDialog("Error", "í…Œì´ë¸” ì´ë¦„ì„ ì ì–´ì£¼ì„¸ìš”", "OK");
+                    EditorUtility.DisplayDialog("Error", "Å×ÀÌºí ÀÌ¸§ÀÌ ¾ø½À´Ï´Ù ","OK");
                 }
                 else
                 {

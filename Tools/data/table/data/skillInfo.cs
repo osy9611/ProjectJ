@@ -8,26 +8,28 @@ namespace DesignTable
     public class skillInfo
     {
         [ProtoMember(1)] 
-        public int skill_Id;
+        public int unit_Class;
         [ProtoMember(2)] 
-        public int char_classId;
-          public user_characterInfo char_classId_ref;        
+        public int skill_Id;
         [ProtoMember(3)] 
-        public sbyte char_Gender;
-          public user_character2Info char_Gender_ref;        
+        public float skill_coolTime;
         [ProtoMember(4)] 
-        public sbyte char_modelID;
+        public float skill_range;
+        [ProtoMember(5)] 
+        public int skill_buffId;
+          public buffInfo skill_buffId_ref;        
 
         public skillInfo()
         {
         }
 
-        public skillInfo(int skill_Id,int char_classId,sbyte char_Gender,sbyte char_modelID)
+        public skillInfo(int unit_Class,int skill_Id,float skill_coolTime,float skill_range,int skill_buffId)
         {
+            this.unit_Class = unit_Class;
             this.skill_Id = skill_Id;
-            this.char_classId = char_classId;
-            this.char_Gender = char_Gender;
-            this.char_modelID = char_modelID;
+            this.skill_coolTime = skill_coolTime;
+            this.skill_range = skill_range;
+            this.skill_buffId = skill_buffId;
 
         }
     }
@@ -38,17 +40,17 @@ namespace DesignTable
         private List<skillInfo> dataInfo = new List<skillInfo>();
         public Dictionary<ArraySegment<byte>, skillInfo> datas = new Dictionary<ArraySegment<byte>, skillInfo>();
       
-        public bool Insert(int skill_Id,int char_classId,sbyte char_Gender,sbyte char_modelID)
+        public bool Insert(int unit_Class,int skill_Id,float skill_coolTime,float skill_range,int skill_buffId)
         { 
             foreach(skillInfo info in dataInfo)
             {
-                if(info.skill_Id == skill_Id )
+                if(info.unit_Class == unit_Class )
                 {
                     return false;
                 }
             }
 
-            dataInfo.Add(new skillInfo(skill_Id,char_classId,char_Gender,char_modelID));
+            dataInfo.Add(new skillInfo(unit_Class,skill_Id,skill_coolTime,skill_range,skill_buffId));
             return true;
         }
 
@@ -56,24 +58,24 @@ namespace DesignTable
         {
             foreach(var data in dataInfo)
             {
-                ArraySegment<byte> bytes = GetIdRule(data.skill_Id);
+                ArraySegment<byte> bytes = GetIdRule(data.unit_Class);
                 if (datas.ContainsKey(bytes))
                     continue;
-                datas.Add(bytes,new skillInfo(data.skill_Id,data.char_classId,data.char_Gender,data.char_modelID));
+                datas.Add(bytes,new skillInfo(data.unit_Class,data.skill_Id,data.skill_coolTime,data.skill_range,data.skill_buffId));
             }
         }
 
-        public skillInfo Get(int skill_Id)
+        public skillInfo Get(int unit_Class)
         {
             skillInfo value = null;
             
-            if(datas.TryGetValue(GetIdRule(skill_Id),out value))
+            if(datas.TryGetValue(GetIdRule(unit_Class),out value))
                 return value;
             
             return null;
         }
 
-        public ArraySegment<byte> GetIdRule(int skill_Id)
+        public ArraySegment<byte> GetIdRule(int unit_Class)
         {
             ushort count = 0;
                       count += sizeof(int);
@@ -86,23 +88,13 @@ namespace DesignTable
             return bytes;
         }
 
-        public void SetupRef_item_Id(user_characterInfos infos)
+        public void SetupRef_item_Id(buffInfos infos)
         {
             foreach(skillInfo data in datas.Values)
             {
-                if(data.char_classId != -1)
+                if(data.skill_buffId != -1)
                 {
-                    data.char_classId_ref = infos.Get((int)data.char_classId);
-                }
-            }
-        }
-public void SetupRef_item_Id(user_character2Infos infos)
-        {
-            foreach(skillInfo data in datas.Values)
-            {
-                if(data.char_Gender != -1)
-                {
-                    data.char_Gender_ref = infos.Get((sbyte)data.char_Gender);
+                    data.skill_buffId_ref = infos.Get((int)data.skill_buffId);
                 }
             }
         }

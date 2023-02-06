@@ -47,7 +47,7 @@
 		<ENUM_NAME>TimeType</ENUM_NAME>
 		<ENUM_VALUE>-</ENUM_VALUE>
 		<GROUP_ID>1002</GROUP_ID>
-		<COMMENT>속성 ID</COMMENT>
+		<COMMENT>시간 타입</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>

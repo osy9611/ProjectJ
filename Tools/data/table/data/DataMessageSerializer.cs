@@ -21,7 +21,8 @@ public sealed class DataMessageSerializer
         System.IO.MemoryStream stream = new System.IO.MemoryStream(buffer);
         switch (tableId)
         {
-            case 1013:
+            case 1014:
+    return ProtoBuf.Serializer.Deserialize<buffInfos>(stream);case 1013:
     return ProtoBuf.Serializer.Deserialize<skillInfos>(stream);case 1011:
     return ProtoBuf.Serializer.Deserialize<user_characterInfos>(stream);case 1012:
     return ProtoBuf.Serializer.Deserialize<user_character2Infos>(stream);

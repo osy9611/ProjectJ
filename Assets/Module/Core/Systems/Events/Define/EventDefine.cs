@@ -1,4 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace Module.Core.Systems.Events
 {
-    public delegate void ListenerDelegate(IEventArgs args);
+    public delegate void ListenerDelegate();
 }

@@ -14,7 +14,7 @@ namespace DesignEnum
     }
     /// <summary> 
     /// ID : 1002
-    /// 속성 ID
+    /// 시간 타입
     /// </summary> 
     public enum TimeType
     {

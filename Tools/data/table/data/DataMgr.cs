@@ -4,7 +4,8 @@ namespace DesignTable
 {
     public enum TableId
     {
-        skill = 1013,
+        buff = 1014,
+skill = 1013,
 user_character = 1011,
 user_character2 = 1012,
 
@@ -20,9 +21,11 @@ user_character2 = 1012,
         private bool isCallInit = false;
         DataMessageSerializer serializer = new DataMessageSerializer();
 
-        private skillInfos skillInfos;
+        private buffInfos buffInfos;
+private skillInfos skillInfos;
 private user_characterInfos user_characterInfos;
 private user_character2Infos user_character2Infos;
+public buffInfos BuffInfos => buffInfos;
 public skillInfos SkillInfos => skillInfos;
 public user_characterInfos User_characterInfos => user_characterInfos;
 public user_character2Infos User_character2Infos => user_character2Infos;
@@ -66,7 +69,8 @@ public user_character2Infos User_character2Infos => user_character2Infos;
 
         private void RegisterLoadHandler()
         {
-            loadHandlerList.Add(1013, new DataMgr.LoadHandler(LoadskillInfos));
+            loadHandlerList.Add(1014, new DataMgr.LoadHandler(LoadbuffInfos));
+loadHandlerList.Add(1013, new DataMgr.LoadHandler(LoadskillInfos));
 loadHandlerList.Add(1011, new DataMgr.LoadHandler(Loaduser_characterInfos));
 loadHandlerList.Add(1012, new DataMgr.LoadHandler(Loaduser_character2Infos));
 
@@ -74,13 +78,22 @@ loadHandlerList.Add(1012, new DataMgr.LoadHandler(Loaduser_character2Infos));
 
         private void RegisterClearHandler()
         {
-            clearHandlerList.Add(1013, ClearDataskillInfos);
+            clearHandlerList.Add(1014, ClearDatabuffInfos);
+clearHandlerList.Add(1013, ClearDataskillInfos);
 clearHandlerList.Add(1011, ClearDatauser_characterInfos);
 clearHandlerList.Add(1012, ClearDatauser_character2Infos);
 
         }
         
-        private void LoadskillInfos(byte[] data)
+        private void LoadbuffInfos(byte[] data)
+{
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        buffInfos = serializer.Deserialize(1014,data) as buffInfos;
+        buffInfos.Initialize();
+    }
+}
+private void LoadskillInfos(byte[] data)
 {
     using (MemoryStream memoryStream = new MemoryStream(data))
     {
@@ -106,7 +119,12 @@ private void Loaduser_character2Infos(byte[] data)
 }
 
         
-        private void ClearDataskillInfos()
+        private void ClearDatabuffInfos()
+{
+    if(buffInfos != null)
+        buffInfos=null;
+}
+private void ClearDataskillInfos()
 {
     if(skillInfos != null)
         skillInfos=null;
@@ -125,8 +143,7 @@ private void ClearDatauser_character2Infos()
 
         public void SetUpRef()
         {
-            skillInfos.SetupRef_item_Id(user_characterInfos);
-skillInfos.SetupRef_item_Id(user_character2Infos);
+            skillInfos.SetupRef_item_Id(buffInfos);
 user_character2Infos.SetupRef_item_Id(user_characterInfos);
 
         }
