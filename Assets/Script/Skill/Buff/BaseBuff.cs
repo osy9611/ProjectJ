@@ -74,6 +74,5 @@ abstract public class BaseBuff
 
     protected virtual void DeActive()
     {
-        buffManager.Remove(this);
     }
 }

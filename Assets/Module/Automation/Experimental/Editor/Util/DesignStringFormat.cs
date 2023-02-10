@@ -6,7 +6,7 @@ namespace Module.Automation.Generator
 {
     class AutomationFormat
     {
-        //{0} enum ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        //{0} enum ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿?
         public static string designEnumFormat =
 @"namespace DesignEnum
 {{
@@ -90,14 +90,22 @@ namespace DesignTable
         //{6} : designTableInfosSetupItemIdFuctionFormat
         //{7} : designTableInfosInsertIfParamFormat
         //{8} : dataInfo table class variable name
+        //{9} : designTableInfoCalcArraySegmentFormat
+        //{10} : designTableInfosListDataFormat
+        //{11} : designTableInfosInitializeListDataPartFormat
+        //{12} : designTableInfosGetListByIDFuctionFormat
+        //{13} : designTableInfosGetListIdRuleFuctionFormat
+        //{14} : table pk variable type & name({4}¿Í ´Ù¸£°Ô data. ¾øÀ½)
+
         public static string designTalbeInfosClassFormat =
 @"      [ProtoContract]
     public class {0}Infos
     {{
         [ProtoMember(1)]
         private List<{0}Info> dataInfo = new List<{0}Info>();
-        public Dictionary<ArraySegment<byte>, {0}Info> datas = new Dictionary<ArraySegment<byte>, {0}Info>();
-      
+        public Dictionary<ArraySegment<byte>, {0}Info> datas = new Dictionary<ArraySegment<byte>, {0}Info>(new DataComparer());
+        {10}
+
         public bool Insert({1})
         {{ 
             foreach({0}Info info in dataInfo)
@@ -116,10 +124,12 @@ namespace DesignTable
         {{
             foreach(var data in dataInfo)
             {{
-                ArraySegment<byte> bytes = GetIdRule(data.{2});
+                ArraySegment<byte> bytes = GetIdRule({2});
                 if (datas.ContainsKey(bytes))
                     continue;
                 datas.Add(bytes,new {0}Info({8}));
+
+                {11}
             }}
         }}
 
@@ -127,23 +137,30 @@ namespace DesignTable
         {{
             {0}Info value = null;
             
-            if(datas.TryGetValue(GetIdRule({2}),out value))
+            if(datas.TryGetValue(GetIdRule({14}),out value))
                 return value;
             
             return null;
         }}
 
+        {12}
+
         public ArraySegment<byte> GetIdRule({4})
         {{
+            ushort total = 0;
             ushort count = 0;
             {5}
 
-            if (count == 0)
+            if (total == 0)
                return null;
 
-            byte[] bytes = new byte[count];
+            byte[] bytes = new byte[total];
+            {9}
+            
             return bytes;
         }}
+        
+        {13}
 
         {6}
 
@@ -152,7 +169,13 @@ namespace DesignTable
 
         //{0} : table variable type
         public static string designTableInfosGetIdRullFuctionCountFormat =
-@"          count += sizeof({0});
+@"          total += sizeof({0});
+";
+        //{0} : pk Name
+        //{1] : pk type
+        public static string designTableInfoCalcArraySegmentFormat =
+@"          Array.Copy(BitConverter.GetBytes({0}), 0, bytes, count, sizeof({1}));
+            count += sizeof({1});            
 ";
 
         //{0} : TableVarData class RefTable
@@ -171,10 +194,62 @@ namespace DesignTable
             }}
         }}
 ";
+        //{0} : tableName
+        public static string designTableInfosListDataFormat =
+@"public Dictionary<ArraySegment<byte>,List<{0}Info>> listData = new Dictionary<ArraySegment<byte>, List<{0}Info>>(new DataComparer());";
         //{0} : table pk variable name
         //{1} : AND
         public static string designTableInfosInsertIfParamFormat =
 @"info.{0} == {0} {1}";
+
+        //{0} : table Fine List PK variable name
+        //{1} : talbeName
+        public static string designTableInfosInitializeListDataPartFormat =
+@"
+bytes = GetListIdRule({0});
+if(listData.ContainsKey(bytes))
+{{
+    listData[bytes].Add(data);
+}}
+else 
+{{
+                    
+    listData.Add(bytes,new List<{1}Info>());
+    listData[bytes].Add(data);
+}}
+";
+        //{0} : talbe name;
+        //{1} : parameter & type
+        //{2} : table column Name
+        public static string designTableInfosGetListByIDFuctionFormat =
+@"
+public List<{0}Info> GetListById({1})
+{{
+    List<{0}Info> value = null;
+    ArraySegment<byte> bytes = GetListIdRule({2});
+    if(listData.TryGetValue(bytes,out value))
+        return value;
+    return null;
+}}
+";
+        //{0} : table find list pk
+        //{1} : designTableInfosGetIdRullFuctionCountFormat
+        //{2} : designTableInfoCalcArraySegmentFormat
+        public static string designTableInfosGetListIdRuleFuctionFormat =
+@"
+public ArraySegment<byte> GetListIdRule({0})
+{{
+    ushort total = 0;
+    ushort count = 0;
+    {1}
+    if (total == 0)
+        return null;
+            
+    byte[] bytes = new byte[total];
+    {2}
+    return bytes;
+}}
+";
 
         //{0} : designMgrEnumVariableFormat
         //{1} : designMgrVariableFormat & designMgrPublicVariableFormat
@@ -186,8 +261,25 @@ namespace DesignTable
         public static string designMgrFormat =
 @"using System.Collections.Generic;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System;
 namespace DesignTable
 {{
+    public class DataComparer :  IEqualityComparer<ArraySegment<byte>>
+    {{
+        public bool Equals([AllowNull] ArraySegment<byte> x, [AllowNull] ArraySegment<byte> y)
+        {{
+            return x.SequenceEqual(y);
+        }}
+
+        public int GetHashCode([DisallowNull] ArraySegment<byte> obj)
+        {{
+            if(obj == null) throw new ArgumentNullException(""obj"");
+            return obj.Sum(y => y);
+        }}
+    }}
+
     public enum TableId
     {{
         {0}
@@ -205,7 +297,7 @@ namespace DesignTable
 
         {1}
         
-        public void Init()
+        public virtual void Init()
         {{
             if (isCallInit)
                 return;
@@ -275,7 +367,7 @@ namespace DesignTable
 ";
 
         //{0} : table name
-        //{1} : table name(ì•žìžë¦¬ëŠ” ëŒ€ë¬¸ìž)
+        //{1} : table name(?žìžë¦¬ëŠ” ?€ë¬¸ìž)
         public static string designMgrPublicVariableFormat =
 @"public {0}Infos {1}Infos => {0}Infos;
 ";

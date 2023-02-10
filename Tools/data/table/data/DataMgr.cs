@@ -1,7 +1,24 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System;
 namespace DesignTable
 {
+    public class DataComparer :  IEqualityComparer<ArraySegment<byte>>
+    {
+        public bool Equals([AllowNull] ArraySegment<byte> x, [AllowNull] ArraySegment<byte> y)
+        {
+            return x.SequenceEqual(y);
+        }
+
+        public int GetHashCode([DisallowNull] ArraySegment<byte> obj)
+        {
+            if(obj == null) throw new ArgumentNullException("obj");
+            return obj.Sum(y => y);
+        }
+    }
+
     public enum TableId
     {
         buff = 1014,
@@ -31,7 +48,7 @@ public user_characterInfos User_characterInfos => user_characterInfos;
 public user_character2Infos User_character2Infos => user_character2Infos;
 
         
-        public void Init()
+        public virtual void Init()
         {
             if (isCallInit)
                 return;

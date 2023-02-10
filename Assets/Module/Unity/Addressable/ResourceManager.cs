@@ -222,13 +222,14 @@ namespace Module.Unity.Addressables
                 else
                 {
                     callback?.Invoke(default(T));
+
+                    if (autoRelease)
+                    {
+                        if (handle.IsValid())
+                            Addressables.Release(handle);
+                    }
                 }
 
-                if (autoRelease)
-                {
-                    if (handle.IsValid())
-                        Addressables.Release(handle);
-                }
             }
         }
 

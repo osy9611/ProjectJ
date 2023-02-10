@@ -35,8 +35,9 @@ namespace DesignTable
     {
         [ProtoMember(1)]
         private List<user_character2Info> dataInfo = new List<user_character2Info>();
-        public Dictionary<ArraySegment<byte>, user_character2Info> datas = new Dictionary<ArraySegment<byte>, user_character2Info>();
-      
+        public Dictionary<ArraySegment<byte>, user_character2Info> datas = new Dictionary<ArraySegment<byte>, user_character2Info>(new DataComparer());
+        
+
         public bool Insert(int char_Id,int char_classId,sbyte char_Gender,sbyte char_modelID)
         { 
             foreach(user_character2Info info in dataInfo)
@@ -59,6 +60,8 @@ namespace DesignTable
                 if (datas.ContainsKey(bytes))
                     continue;
                 datas.Add(bytes,new user_character2Info(data.char_Id,data.char_classId,data.char_Gender,data.char_modelID));
+
+                
             }
         }
 
@@ -72,18 +75,27 @@ namespace DesignTable
             return null;
         }
 
+        
+
         public ArraySegment<byte> GetIdRule(int char_Id)
         {
+            ushort total = 0;
             ushort count = 0;
-                      count += sizeof(int);
+                      total += sizeof(int);
 
 
-            if (count == 0)
+            if (total == 0)
                return null;
 
-            byte[] bytes = new byte[count];
+            byte[] bytes = new byte[total];
+                      Array.Copy(BitConverter.GetBytes(char_Id), 0, bytes, count, sizeof(int));
+            count += sizeof(int);            
+
+            
             return bytes;
         }
+        
+        
 
         public void SetupRef_item_Id(user_characterInfos infos)
         {

@@ -23,4 +23,34 @@ namespace DesignEnum
         Night = 2, //Night
         Midnight = 3, //Midnight
     }
+    /// <summary> 
+    /// ID : 1003
+    /// 유닛 타입
+    /// </summary> 
+    public enum UnityType
+    {
+        Monster = 0, //Monster
+        Character = 1, //Character
+    }
+    /// <summary> 
+    /// ID : 1004
+    /// 클래스 타입
+    /// </summary> 
+    public enum ClassType
+    {
+        Monk = 0, //Monk
+    }
+    /// <summary> 
+    /// ID : 1005
+    /// 버프 타입
+    /// </summary> 
+    public enum BuffType
+    {
+        AddATK = 0, //공격력 증가
+        AddDEF = 1, //방어력 증가
+        LowATK = 2, //공격력 감소
+        LowDEF = 3, //방어력 감소
+        Strun = 4, //스턴
+        Dot = 5, //도트
+    }
 }

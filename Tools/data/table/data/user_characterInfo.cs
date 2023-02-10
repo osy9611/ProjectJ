@@ -55,8 +55,9 @@ namespace DesignTable
     {
         [ProtoMember(1)]
         private List<user_characterInfo> dataInfo = new List<user_characterInfo>();
-        public Dictionary<ArraySegment<byte>, user_characterInfo> datas = new Dictionary<ArraySegment<byte>, user_characterInfo>();
-      
+        public Dictionary<ArraySegment<byte>, user_characterInfo> datas = new Dictionary<ArraySegment<byte>, user_characterInfo>(new DataComparer());
+        
+
         public bool Insert(int char_Id,sbyte char_classId,sbyte char_Gender,sbyte char_model_id,float char_Common_Attack_Cooltime,float char_SizeX,float char_SizeY,float char_SizeZ,float char_Move_Speed,string char_Prefab,string char_Selection_Prefab)
         { 
             foreach(user_characterInfo info in dataInfo)
@@ -79,6 +80,8 @@ namespace DesignTable
                 if (datas.ContainsKey(bytes))
                     continue;
                 datas.Add(bytes,new user_characterInfo(data.char_Id,data.char_classId,data.char_Gender,data.char_model_id,data.char_Common_Attack_Cooltime,data.char_SizeX,data.char_SizeY,data.char_SizeZ,data.char_Move_Speed,data.char_Prefab,data.char_Selection_Prefab));
+
+                
             }
         }
 
@@ -92,18 +95,27 @@ namespace DesignTable
             return null;
         }
 
+        
+
         public ArraySegment<byte> GetIdRule(int char_Id)
         {
+            ushort total = 0;
             ushort count = 0;
-                      count += sizeof(int);
+                      total += sizeof(int);
 
 
-            if (count == 0)
+            if (total == 0)
                return null;
 
-            byte[] bytes = new byte[count];
+            byte[] bytes = new byte[total];
+                      Array.Copy(BitConverter.GetBytes(char_Id), 0, bytes, count, sizeof(int));
+            count += sizeof(int);            
+
+            
             return bytes;
         }
+        
+        
 
         
 

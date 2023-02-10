@@ -46,8 +46,9 @@ namespace DesignTable
     {
         [ProtoMember(1)]
         private List<buffInfo> dataInfo = new List<buffInfo>();
-        public Dictionary<ArraySegment<byte>, buffInfo> datas = new Dictionary<ArraySegment<byte>, buffInfo>();
-      
+        public Dictionary<ArraySegment<byte>, buffInfo> datas = new Dictionary<ArraySegment<byte>, buffInfo>(new DataComparer());
+        
+
         public bool Insert(int buff_Id,int buff_type,float buff_duration,float buff_interval,float buff_arg1,float buff_arg2,float buff_arg3,string buff_arg4)
         { 
             foreach(buffInfo info in dataInfo)
@@ -70,6 +71,8 @@ namespace DesignTable
                 if (datas.ContainsKey(bytes))
                     continue;
                 datas.Add(bytes,new buffInfo(data.buff_Id,data.buff_type,data.buff_duration,data.buff_interval,data.buff_arg1,data.buff_arg2,data.buff_arg3,data.buff_arg4));
+
+                
             }
         }
 
@@ -83,18 +86,27 @@ namespace DesignTable
             return null;
         }
 
+        
+
         public ArraySegment<byte> GetIdRule(int buff_Id)
         {
+            ushort total = 0;
             ushort count = 0;
-                      count += sizeof(int);
+                      total += sizeof(int);
 
 
-            if (count == 0)
+            if (total == 0)
                return null;
 
-            byte[] bytes = new byte[count];
+            byte[] bytes = new byte[total];
+                      Array.Copy(BitConverter.GetBytes(buff_Id), 0, bytes, count, sizeof(int));
+            count += sizeof(int);            
+
+            
             return bytes;
         }
+        
+        
 
         
 

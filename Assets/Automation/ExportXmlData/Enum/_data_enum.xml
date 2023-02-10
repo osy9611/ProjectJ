@@ -77,4 +77,88 @@
 		<GROUP_ID>1002</GROUP_ID>
 		<COMMENT>Midnight</COMMENT>
 	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>UnityType</ENUM_NAME>
+		<ENUM_VALUE>-</ENUM_VALUE>
+		<GROUP_ID>1003</GROUP_ID>
+		<COMMENT>유닛 타입</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Monster</ENUM_NAME>
+		<ENUM_VALUE>0</ENUM_VALUE>
+		<GROUP_ID>1003</GROUP_ID>
+		<COMMENT>Monster</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Character</ENUM_NAME>
+		<ENUM_VALUE>1</ENUM_VALUE>
+		<GROUP_ID>1003</GROUP_ID>
+		<COMMENT>Character</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>ClassType</ENUM_NAME>
+		<ENUM_VALUE>-</ENUM_VALUE>
+		<GROUP_ID>1004</GROUP_ID>
+		<COMMENT>클래스 타입</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Monk</ENUM_NAME>
+		<ENUM_VALUE>0</ENUM_VALUE>
+		<GROUP_ID>1004</GROUP_ID>
+		<COMMENT>Monk</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>BuffType</ENUM_NAME>
+		<ENUM_VALUE>-</ENUM_VALUE>
+		<GROUP_ID>1005</GROUP_ID>
+		<COMMENT>버프 타입</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>AddATK</ENUM_NAME>
+		<ENUM_VALUE>0</ENUM_VALUE>
+		<GROUP_ID>1005</GROUP_ID>
+		<COMMENT>공격력 증가</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>AddDEF</ENUM_NAME>
+		<ENUM_VALUE>1</ENUM_VALUE>
+		<GROUP_ID>1005</GROUP_ID>
+		<COMMENT>방어력 증가</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>LowATK</ENUM_NAME>
+		<ENUM_VALUE>2</ENUM_VALUE>
+		<GROUP_ID>1005</GROUP_ID>
+		<COMMENT>공격력 감소</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>LowDEF</ENUM_NAME>
+		<ENUM_VALUE>3</ENUM_VALUE>
+		<GROUP_ID>1005</GROUP_ID>
+		<COMMENT>방어력 감소</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Strun</ENUM_NAME>
+		<ENUM_VALUE>4</ENUM_VALUE>
+		<GROUP_ID>1005</GROUP_ID>
+		<COMMENT>스턴</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Dot</ENUM_NAME>
+		<ENUM_VALUE>5</ENUM_VALUE>
+		<GROUP_ID>1005</GROUP_ID>
+		<COMMENT>도트</COMMENT>
+	</record>
 </Enum>

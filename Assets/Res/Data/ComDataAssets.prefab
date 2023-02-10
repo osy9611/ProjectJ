@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &176916429799790695
+--- !u!1 &6386527923797909149
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 176916429799790693}
-  - component: {fileID: 176916429799790694}
+  - component: {fileID: 4722745468424217014}
+  - component: {fileID: 7997746704186863028}
   m_Layer: 0
-  m_Name: ComTableAsset
+  m_Name: ComDataAssets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &176916429799790693
+--- !u!4 &4722745468424217014
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176916429799790695}
+  m_GameObject: {fileID: 6386527923797909149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 634.746, y: 144.90732, z: 402.2642}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &176916429799790694
+--- !u!114 &7997746704186863028
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176916429799790695}
+  m_GameObject: {fileID: 6386527923797909149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257fac5334030734691c6ded7c9eeae9, type: 3}
+  m_Script: {fileID: 11500000, guid: 97afa364ab5aa5146ba57bb1db4763cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  datas:
-  - tableId: 1014
-    addressable: buff.bytes
-  - tableId: 1013
-    addressable: skill.bytes
-  - tableId: 1011
-    addressable: user_character.bytes
-  - tableId: 1012
-    addressable: user_character2.bytes
+  clientVariable: {fileID: 5016132399693778713, guid: a46e9ac75d114804696da7c1e29ce071, type: 3}
+  tableAsset: {fileID: 176916429799790694, guid: f9fd39c3406b73b448242070a7d90020, type: 3}

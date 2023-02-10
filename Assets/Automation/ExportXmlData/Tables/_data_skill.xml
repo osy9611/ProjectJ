@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <skill xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<verify ColumnName="unit_Class" Type="Int32" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="1004" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
-	<verify ColumnName="skill_Id" Type="Int32" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
+	<verify ColumnName="unit_Class" Type="Int32" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="1004" IdRule="{&quot;UseListRule&quot;:true,&quot;FindPKId&quot; : [&quot;unit_Class&quot;],&quot;PKIds&quot;:[&quot;unit_Class&quot;,&quot;skill_Id&quot;]}" StringHashIds="-" List="-" TableId="1013"/>
+	<verify ColumnName="skill_Id" Type="Int32" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="skill_coolTime" Type="float" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="skill_range" Type="float" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="skill_buffId" Type="Int32" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="1014" List="-" TableId="1013"/>

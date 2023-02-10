@@ -10,13 +10,15 @@ public class Managers : MonoBehaviour
     PoolManager pool = new PoolManager();
     ResourceManager resource = new ResourceManager();
     SpriteAtlasManager atlas = new SpriteAtlasManager();
+    DataManager data = new DataManager();
     SceneManager scene = new SceneManager();
     public static PoolManager Pool { get => Instance.pool; }
     public static ResourceManager Resource { get => Instance.resource; }
     public static SpriteAtlasManager Atlas { get => Instance.atlas; }
+    public static DataManager Data { get => Instance.data; }
     public static SceneManager Scene { get => Instance.scene; }
 
-    private void Start()
+    private void Awake()
     {
         Init();
     }
@@ -38,6 +40,7 @@ public class Managers : MonoBehaviour
 
             ComLoader.Create();
             Resource.Init(Pool);
+            Data.Init();
         }
     }
 

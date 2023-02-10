@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DesignTable;
 public class BuffManager
 {
     UnorderedList<BaseBuff> buffs;
@@ -15,6 +15,9 @@ public class BuffManager
     {
         this.agent = agent;
         buffs =new UnorderedList<BaseBuff>();
+
+        List<skillInfo> skillInfo = Managers.Data.SkillInfos.GetListById((int)DesignEnum.ClassType.Monk);
+
     }
 
     public void Excute() 
@@ -38,13 +41,25 @@ public class BuffManager
     public void Add(int buffId)
     {
         BaseBuff buff = null;
-        switch(buffId)
+        switch((DesignEnum.BuffType)buffId)
         {
-            case 0:
+            case DesignEnum.BuffType.AddATK:
                 buff = new AddATK();
                 break;
-            case 1:
+            case DesignEnum.BuffType.AddDEF:
                 buff = new AddDEF();
+                break;
+            case DesignEnum.BuffType.LowATK:
+                buff = new LowATK();
+                break;
+            case DesignEnum.BuffType.LowDEF:
+                buff = new LowDEF();
+                break;
+            case DesignEnum.BuffType.Strun:
+                buff = new Strun();
+                break;
+            case DesignEnum.BuffType.Dot:
+                buff= new Dot();
                 break;
         }
 

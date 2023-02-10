@@ -118,6 +118,8 @@ namespace Module.Automation.Generator
     {
         public string ColumName;
         public string Type;
+        public bool IsListRule;
+        public bool IsListRuleFindPK;
         public TablePKData(string col, string type)
         {
             ColumName = col;
@@ -138,6 +140,11 @@ namespace Module.Automation.Generator
         }
     }
 
+    public class TableListIDRule
+    {
+
+    }
+
     public class TableDataInfo
     {
         List<TablePKData> pkData = new List<TablePKData>();
@@ -145,6 +152,9 @@ namespace Module.Automation.Generator
         {
             get => pkData;
         }
+
+        private bool useListRule = false;
+        public bool UseListRule { get => useListRule; set => useListRule = value; }
 
         List<TableVarData> varData = new List<TableVarData>();
         public List<TableVarData> VarData
@@ -179,8 +189,21 @@ namespace Module.Automation.Generator
 
         public void AddVarData(string ColumName, string Type, string refTable = "")
         {
-
             varData.Add(new TableVarData(ColumName, Type, refTable));
+        }
+
+        public void AddIsListRule(string ColumnName)
+        {
+            var data = pkData.Find(x => x.ColumName == ColumnName);
+            if (data != null)
+                data.IsListRule = true;
+        }
+
+        public void AddFindPKListRule(string ColumnName)
+        {
+            var data = pkData.Find(x => x.ColumName == ColumnName);
+            if (data != null)
+                data.IsListRuleFindPK = true;
         }
 
     }

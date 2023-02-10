@@ -10,6 +10,9 @@ using System;
 using System.Xml.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor;
+using GluonGui.Dialog;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Module.Automation.Generator
 {
@@ -210,6 +213,29 @@ namespace Module.Automation.Generator
                     info.AddVarData(node.Attributes["ColumnName"].Value
                         , CheckDataType(node.Attributes["Type"].Value));
                 }
+
+                if (node.Attributes["IdRule"].Value != "-")
+                {
+                    JObject data = JObject.Parse(node.Attributes["IdRule"].Value);
+                    if (bool.Parse(data["UseListRule"].ToString()))
+                    {
+                        info.UseListRule = true;
+                        JArray array = JArray.Parse(data["PKIds"].ToString());
+                        for (int i = 0, range = array.Count; i < range; ++i)
+                        {
+                            info.AddIsListRule(array[i].ToString());
+                            Debug.Log(array[i].ToString());
+                        }
+
+                        array = JArray.Parse(data["FindPKId"].ToString());
+                        for (int i = 0, range = array.Count; i < range; ++i)
+                        {
+                            info.AddFindPKListRule(array[i].ToString());
+                            Debug.Log(array[i].ToString());
+                        }
+                    }
+
+                }
             }
 
             foreach (XmlNode node in recordNodes)
@@ -288,6 +314,13 @@ namespace Module.Automation.Generator
             string tableSetUpRefFuction = "";
             string tableInfosIfParams = "";
             string dataInfoTableClassVarName = "";
+            //1: Get 함수 전용, 2: GetListById 전용
+            string calcArraySegment1 = "", calcArraySegment2="";
+            string listData = "";
+            string listDataPart = "", listDataPartParam = "";
+            string getListByIDFuction = "", getListByIDFuctionParam = "", getListByIDFuctionParmColumnName= "";
+            string GetListIdRuleFuction = "", tableGetListIdRuleFuctionCount = "";
+
             foreach (TableVarData data in info.VarData)
             {
                 tableClassVarTypeName += data.Type + " " + data.ColumName + (info.VarData[info.VarData.Count - 1] == data ? "" : ",");
@@ -303,17 +336,45 @@ namespace Module.Automation.Generator
             foreach (TablePKData data in info.PkData)
             {
                 tablePKVarTypeName += data.Type + " " + data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
-                tablePKVarName += data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
+                tablePKVarName += "data."+data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
+                
                 tableInfosIfParams += string.Format(AutomationFormat.designTableInfosInsertIfParamFormat, data.ColumName, (info.PkData[info.PkData.Count - 1] == data ? "" : "&&"));
 
                 tableGetIdRullFuctionCount += string.Format(AutomationFormat.designTableInfosGetIdRullFuctionCountFormat,
                     data.Type);
+
+                calcArraySegment1 += string.Format(AutomationFormat.designTableInfoCalcArraySegmentFormat, data.ColumName, data.Type);
+                
+                if(data.IsListRuleFindPK)
+                {
+                    tableGetListIdRuleFuctionCount += string.Format(AutomationFormat.designTableInfosGetIdRullFuctionCountFormat,
+                    data.Type);
+                    getListByIDFuctionParam = data.Type + " " + data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
+                    getListByIDFuctionParmColumnName = data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
+                    listDataPartParam += "data." + data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
+                    calcArraySegment2 += string.Format(AutomationFormat.designTableInfoCalcArraySegmentFormat, data.ColumName, data.Type);
+                }
+            }
+
+
+            getListByIDFuctionParmColumnName=getListByIDFuctionParmColumnName.TrimEnd(',');
+            listDataPartParam=listDataPartParam.TrimEnd(',');
+            getListByIDFuctionParam = getListByIDFuctionParam.TrimEnd(',');
+
+            if (info.UseListRule)
+            {
+                listData += string.Format(AutomationFormat.designTableInfosListDataFormat, tableClassName);
+                listDataPart += string.Format(AutomationFormat.designTableInfosInitializeListDataPartFormat, listDataPartParam, tableClassName);
+                getListByIDFuction += string.Format(AutomationFormat.designTableInfosGetListByIDFuctionFormat, tableClassName, getListByIDFuctionParam, getListByIDFuctionParmColumnName);
+                GetListIdRuleFuction += string.Format(AutomationFormat.designTableInfosGetListIdRuleFuctionFormat, getListByIDFuctionParam, tableGetListIdRuleFuctionCount, calcArraySegment2);
             }
 
             Debug.Log(tableInfosIfParams);
             string result = string.Format(AutomationFormat.designTalbeInfosClassFormat,
                 tableClassName, tableClassVarTypeName, tablePKVarName, tableClassVarName,
-                tablePKVarTypeName, tableGetIdRullFuctionCount, tableSetUpRefFuction, tableInfosIfParams, dataInfoTableClassVarName);
+                tablePKVarTypeName, tableGetIdRullFuctionCount, tableSetUpRefFuction, tableInfosIfParams, dataInfoTableClassVarName
+                , calcArraySegment1, listData, listDataPart, getListByIDFuction, GetListIdRuleFuction
+                , tablePKVarName.Replace("data.",""));
 
             return result;
         }
@@ -427,6 +488,7 @@ namespace Module.Automation.Generator
 
             TableAssetInfo data = new TableAssetInfo(info.TableID, info.TableName+".bytes");
             comTableAsset.Add(data);
+            PrefabUtility.SavePrefabAsset(comTableAsset.gameObject);
         }
 
         public string CheckDataType(string type)
