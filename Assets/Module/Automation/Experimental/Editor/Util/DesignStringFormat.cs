@@ -185,7 +185,7 @@ namespace DesignTable
         public static string designTableInfosSetupItemIdFuctionFormat =
 @"public void SetupRef_item_Id({0}Infos infos)
         {{
-            foreach({1}Info data in datas.Values)
+            foreach({1}Info data in dataInfo)
             {{
                 if(data.{2} != -1)
                 {{

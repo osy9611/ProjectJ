@@ -15,9 +15,8 @@ abstract public class BaseBuff
 
     private bool isEnd = false;
     public bool IsEnd { get => isEnd; }
-    BuffManager buffManager = null;
 
-    public virtual void Init(IEventArgs arg,BuffManager buffManager)
+    public virtual void Init(IEventArgs arg)
     {
         //duration, interval
         EventArgs<float,float>? val = arg as EventArgs<float, float>?;
@@ -66,6 +65,7 @@ abstract public class BaseBuff
         }
         else
         {
+            Active();
             nowInterval = 0;
         }
     }

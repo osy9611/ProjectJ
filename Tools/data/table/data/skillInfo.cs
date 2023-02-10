@@ -142,7 +142,7 @@ public ArraySegment<byte> GetListIdRule(int unit_Class)
 
         public void SetupRef_item_Id(buffInfos infos)
         {
-            foreach(skillInfo data in datas.Values)
+            foreach(skillInfo data in dataInfo)
             {
                 if(data.skill_buffId != -1)
                 {

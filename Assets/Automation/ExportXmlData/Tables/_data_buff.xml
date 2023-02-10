@@ -8,4 +8,14 @@
 	<verify ColumnName="buff_arg2" Type="float" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1014"/>
 	<verify ColumnName="buff_arg3" Type="float" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1014"/>
 	<verify ColumnName="buff_arg4" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1014"/>
+	<record>
+		<buff_Id>1</buff_Id>
+		<buff_type>0</buff_type>
+		<buff_duration>3</buff_duration>
+		<buff_interval>1</buff_interval>
+		<buff_arg1>0</buff_arg1>
+		<buff_arg2>0</buff_arg2>
+		<buff_arg3>0</buff_arg3>
+		<buff_arg4>0</buff_arg4>
+	</record>
 </buff>

@@ -99,7 +99,7 @@ namespace DesignTable
 
         public void SetupRef_item_Id(user_characterInfos infos)
         {
-            foreach(user_character2Info data in datas.Values)
+            foreach(user_character2Info data in dataInfo)
             {
                 if(data.char_classId != -1)
                 {

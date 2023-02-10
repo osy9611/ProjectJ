@@ -14,10 +14,7 @@ public class BuffManager
     public void Init(SkillAgent agent)
     {
         this.agent = agent;
-        buffs =new UnorderedList<BaseBuff>();
-
-        List<skillInfo> skillInfo = Managers.Data.SkillInfos.GetListById((int)DesignEnum.ClassType.Monk);
-
+        buffs = new UnorderedList<BaseBuff>();
     }
 
     public void Excute() 
@@ -41,7 +38,9 @@ public class BuffManager
     public void Add(int buffId)
     {
         BaseBuff buff = null;
-        switch((DesignEnum.BuffType)buffId)
+        buffInfo info =  Managers.Data.BuffInfos.Get(buffId);
+
+        switch ((DesignEnum.BuffType)info.buff_type)
         {
             case DesignEnum.BuffType.AddATK:
                 buff = new AddATK();
@@ -66,7 +65,7 @@ public class BuffManager
         if (buff == null)
             return;
 
-        buff.Init(new EventArgs<float, float>(3, 0),this);
+        buff.Init(new EventArgs<float, float>(info.buff_duration, info.buff_interval));
 
         buffs.Add(buff);
     }

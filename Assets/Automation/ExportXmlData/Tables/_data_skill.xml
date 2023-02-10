@@ -10,7 +10,7 @@
 		<skill_Id>1001</skill_Id>
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>5</skill_range>
-		<skill_buffId>-1</skill_buffId>
+		<skill_buffId>1</skill_buffId>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
