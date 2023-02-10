@@ -15,10 +15,18 @@ using System.IO;
 using System;
 using Module.Unity.Custermization;
 using ProjectJ;
+using Module.Unity.Core;
+using Module.Unity.Utils;
+using Module.Automation;
 
+[DefaultExecutionOrder(-1000)]
 public class Test2 : MonoBehaviour
 {
-    private void Awake()
+    public ComDataAssets tableAsset;
+    public bool UseAddressable = false;
+    public GameObject Player;
+
+    private void Start()
     {
         //for (int i = 0; i < 5; i++)
         //{
@@ -37,13 +45,28 @@ public class Test2 : MonoBehaviour
 
         //    }, false);
 
-        Managers.Atlas.Register();
+        //Managers.Atlas.Register();
         //var handle = Addressables.LoadAssetAsync<GameObject>("Assets/Prefab/Cube.prefab");
+       
+        if (!UseAddressable)
+        {
+            Player.SetActive(false);
+            Managers.Data.OnLoadData((result) =>
+            {
+                Debug.Log(result);
+                Player.SetActive(true);
+            });
+        }
     }
 
     public void StartScene()
     {
         Managers.Scene.LoadScene(Define.SceneType.Game);
+    }
+
+    private void DoMainProcess()
+    {
+        Module.Unity.Utils.Util.Wait(this, 1, null);
     }
 }
 

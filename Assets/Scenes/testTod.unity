@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 1879800528}
-  m_IndirectSpecularColor: {r: 0.10331981, g: 0.12014814, b: 0.12845716, a: 1}
+  m_Sun: {fileID: 866849026}
+  m_IndirectSpecularColor: {r: 0.17243132, g: 0.22428949, b: 0.23844048, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cfa59414b003a6428861831729a9530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeOfDay: 0
+  TimeOfDay: 6.423381
   OrbitSpeed: 0.5
   Sun: {fileID: 866849026}
   sunColor:
@@ -422,50 +422,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isStop: 1
---- !u!1 &233690301
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 233690303}
-  - component: {fileID: 233690302}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &233690302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 233690301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f85fa04547dab6d40be2df50ac966a12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &233690303
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 233690301}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.614315, y: 11.390427, z: -3.4082565}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &542426686
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,13 +518,60 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &866849026 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
   m_PrefabInstance: {fileID: 1340118460}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &935381617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935381618}
+  - component: {fileID: 935381619}
+  m_Layer: 0
+  m_Name: test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &935381618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935381617}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.998634, y: 13.499445, z: 1.9804907}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &935381619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935381617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85fa04547dab6d40be2df50ac966a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tableAsset: {fileID: 7997746704186863028, guid: e2ebdc34393f10547970249297d2dec3, type: 3}
+  UseAddressable: 0
+  Player: {fileID: 1682716370}
 --- !u!1001 &1340118460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -578,67 +581,67 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.b
-      value: 0.912487
+      value: 0.1254902
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.g
-      value: 0.8016875
+      value: 0.1254902
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.r
-      value: 0.6624536
+      value: 0.1254902
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Intensity
-      value: 1
+      value: 0.37537533
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979769, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.4288965
+      value: 0.05539199
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979769, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.90335363
+      value: -0.9984647
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487370979769, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.b
-      value: 0.032796368
+      value: 0.099051595
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.g
-      value: 0.3088687
+      value: 0.36887398
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Color.r
-      value: 0.6320754
+      value: 0.6636848
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Intensity
-      value: 0.01
+      value: 0.63462466
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928343, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9033537
+      value: 0.9984647
       objectReference: {fileID: 0}
     - target: {fileID: 5281354487821928343, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.4288964
+      value: 0.055392027
       objectReference: {fileID: 0}
     - target: {fileID: 5281354488822983041, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5281354488822983041, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_LocalPosition.x
@@ -773,7 +776,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1539163333
 MonoBehaviour:
@@ -903,7 +906,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1682716370
 GameObject:
@@ -996,7 +999,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &1879800528 stripped
 Light:

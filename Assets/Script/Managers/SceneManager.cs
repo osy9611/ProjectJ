@@ -41,17 +41,17 @@ public class SceneManager
 
         if (!success)
         {
-            Debug.Log("?�로???�패");
             yield break;
         }
 
-        yield return new WaitForSeconds(3);
 
         Init();
-        ComLoader.s_Root.StartCoroutine(CoLoadGameScene());
+
+        yield return Managers.Data.CoLoadData();
+        yield return CoLoadGameScene();
     }
 
-    IEnumerator CoLoadGameScene()
+    public IEnumerator CoLoadGameScene()
     {
         bool success = false;
 
@@ -63,10 +63,8 @@ public class SceneManager
       
         if (!success)
         {
-            Debug.Log("?�로???�패");
             yield break;
         }
 
-        //TODO : 추후??로딩??리소??구현
     }
 }

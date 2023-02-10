@@ -40,7 +40,7 @@ public class Managers : MonoBehaviour
 
             ComLoader.Create();
             Resource.Init(Pool);
-            Data.Init();
+            Data.Init(); 
         }
     }
 

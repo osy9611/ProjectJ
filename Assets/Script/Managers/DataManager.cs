@@ -18,11 +18,14 @@ public class DataManager : DesignTable.DataMgr
     public override void Init()
     {
         base.Init();
-        ComLoader.s_Root.StartCoroutine(LoadData());
-        
     }
 
-    IEnumerator LoadData()
+    public void OnLoadData(System.Action<bool> callback = null)
+    {
+        ComLoader.s_Root.StartCoroutine(CoLoadData(callback));
+    }
+
+    public IEnumerator CoLoadData(System.Action<bool> callback = null)
     {
         ComTableAsset tableAsset = null;
         yield return Managers.Resource.CoLoadAsset<GameObject>(Define.tableDataAssetPath,
@@ -33,38 +36,33 @@ public class DataManager : DesignTable.DataMgr
                tableAsset = dataAssets.TableAsset;
            });
 
-        if (tableAsset != null)
-        {
-            yield return ComLoader.s_Root.StartCoroutine(LoadTablesData(tableAsset));
-            base.SetUpRef();
-        }
 
-        Managers.Resource.Release(Define.tableDataAssetPath);
-    }
-
-
-    IEnumerator LoadTablesData(ComTableAsset tableAsset)
-    {
         foreach (var asset in tableAsset.Datas)
         {
             string talbeName = TextDefine.GetTalbePath(asset.Addressable);
             TableId id = (TableId)asset.TableId;
+            TextAsset textAsset = null;
+
             yield return Managers.Resource.CoLoadAsset<TextAsset>(talbeName,
-                (resAsset)=>
+                (resAsset) =>
                 {
-                    if(resAsset== null)
+                    if (resAsset == null)
                     {
                         Debug.Log(talbeName);
                         return;
                     }
-                    base.LoadData(id, resAsset.bytes);
+
+                    textAsset = resAsset;
                 });
 
+            base.LoadData(id, textAsset.bytes);
             Managers.Resource.Release(talbeName);
         }
-
-
+        base.SetUpRef();
+        Managers.Resource.Release(Define.tableDataAssetPath);
+        callback?.Invoke(true);
     }
+
 
     
 }

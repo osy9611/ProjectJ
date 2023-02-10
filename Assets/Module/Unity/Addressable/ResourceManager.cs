@@ -216,7 +216,8 @@ namespace Module.Unity.Addressables
 
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
-                    datas.Add(addressable, handle);
+                    if(!datas.ContainsKey(addressable))
+                        datas.Add(addressable, handle);
                     callback?.Invoke(handle.Result);
                 }
                 else
