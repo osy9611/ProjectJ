@@ -53,6 +53,7 @@ namespace Module.Unity.Utils
             return null;
         }
 
+
         static public void Wait(MonoBehaviour mono, float time, System.Action action)
         {
             mono.StartCoroutine(WaitCorutine(time, action));

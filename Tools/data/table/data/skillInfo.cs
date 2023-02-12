@@ -18,18 +18,21 @@ namespace DesignTable
         [ProtoMember(5)] 
         public int skill_buffId;
           public buffInfo skill_buffId_ref;        
+        [ProtoMember(6)] 
+        public int skill_type;
 
         public skillInfo()
         {
         }
 
-        public skillInfo(int unit_Class,int skill_Id,float skill_coolTime,float skill_range,int skill_buffId)
+        public skillInfo(int unit_Class,int skill_Id,float skill_coolTime,float skill_range,int skill_buffId,int skill_type)
         {
             this.unit_Class = unit_Class;
             this.skill_Id = skill_Id;
             this.skill_coolTime = skill_coolTime;
             this.skill_range = skill_range;
             this.skill_buffId = skill_buffId;
+            this.skill_type = skill_type;
 
         }
     }
@@ -41,7 +44,7 @@ namespace DesignTable
         public Dictionary<ArraySegment<byte>, skillInfo> datas = new Dictionary<ArraySegment<byte>, skillInfo>(new DataComparer());
         public Dictionary<ArraySegment<byte>,List<skillInfo>> listData = new Dictionary<ArraySegment<byte>, List<skillInfo>>(new DataComparer());
 
-        public bool Insert(int unit_Class,int skill_Id,float skill_coolTime,float skill_range,int skill_buffId)
+        public bool Insert(int unit_Class,int skill_Id,float skill_coolTime,float skill_range,int skill_buffId,int skill_type)
         { 
             foreach(skillInfo info in dataInfo)
             {
@@ -51,7 +54,7 @@ namespace DesignTable
                 }
             }
 
-            dataInfo.Add(new skillInfo(unit_Class,skill_Id,skill_coolTime,skill_range,skill_buffId));
+            dataInfo.Add(new skillInfo(unit_Class,skill_Id,skill_coolTime,skill_range,skill_buffId,skill_type));
             return true;
         }
 
@@ -62,7 +65,7 @@ namespace DesignTable
                 ArraySegment<byte> bytes = GetIdRule(data.unit_Class,data.skill_Id);
                 if (datas.ContainsKey(bytes))
                     continue;
-                datas.Add(bytes,new skillInfo(data.unit_Class,data.skill_Id,data.skill_coolTime,data.skill_range,data.skill_buffId));
+                datas.Add(bytes,new skillInfo(data.unit_Class,data.skill_Id,data.skill_coolTime,data.skill_range,data.skill_buffId,data.skill_type));
 
                 
 bytes = GetListIdRule(data.unit_Class);

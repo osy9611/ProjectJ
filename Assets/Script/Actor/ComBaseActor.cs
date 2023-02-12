@@ -10,7 +10,6 @@ public class ComBaseActor : MonoBehaviour
     {
         skillAgent = new SkillAgent();
         skillAgent.Init();
-        skillAgent.AddBuff(1);   
     }
 
     // Update is called once per frame

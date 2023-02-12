@@ -161,4 +161,32 @@
 		<GROUP_ID>1005</GROUP_ID>
 		<COMMENT>도트</COMMENT>
 	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>SkillType</ENUM_NAME>
+		<ENUM_VALUE>-</ENUM_VALUE>
+		<GROUP_ID>1005</GROUP_ID>
+		<COMMENT>스킬 타입</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Normal</ENUM_NAME>
+		<ENUM_VALUE>0</ENUM_VALUE>
+		<GROUP_ID>1006</GROUP_ID>
+		<COMMENT>일반 공격</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Melee</ENUM_NAME>
+		<ENUM_VALUE>1</ENUM_VALUE>
+		<GROUP_ID>1006</GROUP_ID>
+		<COMMENT>근접 공격</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Range</ENUM_NAME>
+		<ENUM_VALUE>2</ENUM_VALUE>
+		<GROUP_ID>1006</GROUP_ID>
+		<COMMENT>범위 공격</COMMENT>
+	</record>
 </Enum>

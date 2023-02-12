@@ -53,4 +53,14 @@ namespace DesignEnum
         Strun = 4, //스턴
         Dot = 5, //도트
     }
+    /// <summary> 
+    /// ID : 1005
+    /// 스킬 타입
+    /// </summary> 
+    public enum SkillType
+    {
+        Normal = 0, //일반 공격
+        Melee = 1, //근접 공격
+        Range = 2, //범위 공격
+    }
 }

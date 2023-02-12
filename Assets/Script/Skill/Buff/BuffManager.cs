@@ -8,37 +8,19 @@ using DesignTable;
 public class BuffManager
 {
     UnorderedList<BaseBuff> buffs;
-    private BuffManager buffManager;
-    private SkillAgent agent;
+    public UnorderedList<BaseBuff> Buffs { get => buffs; }
+    private EventEmmiter buffEvent;
 
-    public void Init(SkillAgent agent)
+    public void Init(EventEmmiter buffEvent)
     {
-        this.agent = agent;
+        this.buffEvent = buffEvent;
         buffs = new UnorderedList<BaseBuff>();
     }
 
-    public void Excute() 
-    {
-        if (buffs.Count == 0)
-            return;
-
-        for(int i=0,range=buffs.Count; i<range; ++i)
-        {
-            if (buffs[i].IsEnd)
-            {
-                buffs.Remove(buffs[i]);
-            }
-            else
-            {
-                buffs[i].Execute();
-            }
-        }
-    }
-
-    public void Add(int buffId)
+    public void Register(int buffId)
     {
         BaseBuff buff = null;
-        buffInfo info =  Managers.Data.BuffInfos.Get(buffId);
+        buffInfo info = Managers.Data.BuffInfos.Get(buffId);
 
         switch ((DesignEnum.BuffType)info.buff_type)
         {
@@ -58,21 +40,22 @@ public class BuffManager
                 buff = new Strun();
                 break;
             case DesignEnum.BuffType.Dot:
-                buff= new Dot();
+                buff = new Dot();
                 break;
         }
 
         if (buff == null)
             return;
 
-        buff.Init(new EventArgs<float, float>(info.buff_duration, info.buff_interval));
-
+        buff.Init(this, new EventArgs<float, float>(info.buff_duration, info.buff_interval));
         buffs.Add(buff);
+        buffEvent.AddListener(buff.Execute);
     }
 
 
-    public void Remove(BaseBuff baseBuff)
+    public void UnRegister(BaseBuff baseBuff)
     {
+        buffEvent.RemoveListener(baseBuff.Execute);
         buffs.Remove(baseBuff);
     }
 }

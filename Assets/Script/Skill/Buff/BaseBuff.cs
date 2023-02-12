@@ -6,6 +6,7 @@ using UnityEngine;
 
 abstract public class BaseBuff
 {
+    private BuffManager buffManager;
     private float nowDurationTime = 0;
     private float nowInterval = 0;
     private float durationTime = 0;
@@ -16,8 +17,9 @@ abstract public class BaseBuff
     private bool isEnd = false;
     public bool IsEnd { get => isEnd; }
 
-    public virtual void Init(IEventArgs arg)
+    public virtual void Init(BuffManager buffMangaer,IEventArgs arg)
     {
+        this.buffManager = buffMangaer;
         //duration, interval
         EventArgs<float,float>? val = arg as EventArgs<float, float>?;
         if (!val.HasValue)
@@ -74,5 +76,6 @@ abstract public class BaseBuff
 
     protected virtual void DeActive()
     {
+        this.buffManager.UnRegister(this);
     }
 }

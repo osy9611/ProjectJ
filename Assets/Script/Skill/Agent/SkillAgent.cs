@@ -5,16 +5,20 @@ using UnityEngine;
 
 public class SkillAgent
 {
-    EventEmmiter skillEvent;
-    BuffManager buffManager;
+    private EventEmmiter skillEvent;
+    public EventEmmiter SkillEvent { get => skillEvent; }
+    private BuffManager buffManager;
+    private ActionManager actionManager;
 
     public virtual void Init()
     {
-        buffManager = new BuffManager();
-        buffManager.Init(this);
         skillEvent = new EventEmmiter();
-        skillEvent.AddListener(buffManager.Excute);
+        buffManager = new BuffManager();
+        buffManager.Init(skillEvent);
+        actionManager = new ActionManager();
+        actionManager.Init(skillEvent);
     }
+
 
     public virtual void Execute() 
     {
@@ -25,13 +29,16 @@ public class SkillAgent
 
     public virtual void CheckAttackRange() { }
 
-    public virtual void OnAttack(int skillId) { }
+    public virtual void OnSkill(int skillId) 
+    {
+        actionManager.RegisterSkill(skillId);
+    }
 
     public virtual float GetSkillAttackRange(int skillId) { return 0; }
 
-    public virtual void AddBuff(int buffId) 
+    public virtual void OnBuff(int buffId) 
     {
-        buffManager.Add(buffId);
+        buffManager.Register(buffId);
     }
 
     public virtual void RemoveBuff(int buffId) 

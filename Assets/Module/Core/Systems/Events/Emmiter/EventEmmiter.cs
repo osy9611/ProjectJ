@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Module.Core.Systems.Collections.Generic;
+using UnityEngine;
 
 namespace Module.Core.Systems.Events
 {
@@ -34,6 +35,7 @@ namespace Module.Core.Systems.Events
         {
             for(int i=0,range= values.Count;i<range;++i)
             {
+                if (i >= values.Count) break;
                 values[i].Invoke();
             }
         }

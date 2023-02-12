@@ -5,12 +5,14 @@
 	<verify ColumnName="skill_coolTime" Type="float" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="skill_range" Type="float" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="skill_buffId" Type="Int32" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="1014" List="-" TableId="1013"/>
+	<verify ColumnName="skill_type" Type="Int32" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="1006" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<record>
 		<unit_Class>0</unit_Class>
 		<skill_Id>1001</skill_Id>
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>5</skill_range>
 		<skill_buffId>1</skill_buffId>
+		<skill_type>0</skill_type>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -18,6 +20,7 @@
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>5</skill_range>
 		<skill_buffId>-1</skill_buffId>
+		<skill_type>1</skill_type>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -25,6 +28,7 @@
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>5</skill_range>
 		<skill_buffId>-1</skill_buffId>
+		<skill_type>1</skill_type>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -32,6 +36,7 @@
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>5</skill_range>
 		<skill_buffId>-1</skill_buffId>
+		<skill_type>1</skill_type>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -39,5 +44,6 @@
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>5</skill_range>
 		<skill_buffId>-1</skill_buffId>
+		<skill_type>1</skill_type>
 	</record>
 </skill>

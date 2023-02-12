@@ -1,4 +1,5 @@
 using DesignTable;
+using Module.Core.Systems.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,27 +8,69 @@ public class ActionManager
 {
     int nowSkillId;
     Dictionary<int,BaseAction> actions;
-    private SkillAgent agent;
+    private EventEmmiter skillEvent;
 
-    public void Init(SkillAgent agent)
+    public void Init(EventEmmiter skillEvent)
     {
-        this.agent = agent;
+        this.skillEvent = skillEvent;
         actions = new Dictionary<int, BaseAction>();
 
-        List<skillInfo> skillInfo = Managers.Data.SkillInfos.GetListById((int)DesignEnum.ClassType.Monk);
+        List<skillInfo> data = Managers.Data.SkillInfos.GetListById((int)DesignEnum.ClassType.Monk);
+        
+        foreach (skillInfo info in data) 
+        {
+            BaseAction baseAction = SetSkill(info);
+            if (baseAction == null)
+                continue;
+
+            actions.Add(info.skill_Id,baseAction);
+        }
     }
 
-    public void Execte()
+
+    public void RegisterSkill(int skillId)
     {
-        if (nowSkillId == -1)
+        if (!actions.ContainsKey(skillId) || nowSkillId == skillId)
             return;
 
-        actions[nowSkillId].Execute();
+        nowSkillId= skillId;
+        skillEvent.AddListener(actions[nowSkillId].Execute);
+        RegisterCoolTime(skillId);
     }
 
-    public void Register(int skillId)
+    public void RegisterCoolTime(int skillid)
     {
-        
+        skillEvent.AddListener(actions[skillid].CalcCoolTime);
+    }
+
+    public void UnRegister(int skillId)
+    {
+        skillEvent.RemoveListener(actions[skillId].Execute);
+    }
+
+    public void UnRegisterCoolTime(int skillId)
+    {
+        skillEvent.RemoveListener(actions[skillId].CalcCoolTime);
+    }
+   
+    private BaseAction SetSkill(skillInfo skillInfo)
+    {
+        BaseAction baseAction = null;
+        switch((DesignEnum.SkillType)skillInfo.skill_type)
+        {
+            case DesignEnum.SkillType.Normal:
+                baseAction = new Action_Normal();
+                break;
+            case DesignEnum.SkillType.Melee:
+                baseAction = new Action_Melee();
+                break;
+            case DesignEnum.SkillType.Range:
+                baseAction = new Action_Range();
+                break;
+        }
+
+        baseAction.Init(this,skillInfo);
+        return baseAction;
     }
 
 }
