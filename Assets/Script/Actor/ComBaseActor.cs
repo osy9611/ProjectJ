@@ -2,19 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ComBaseActor : MonoBehaviour
+public abstract class ComBaseActor : MonoBehaviour
 {
-    SkillAgent skillAgent;
-    // Start is called before the first frame update
-    void Start()
+    protected BaseActor actor;
+    public BaseActor Actor { get => actor; set=>actor=value; }
+
+    private void Start()
     {
-        skillAgent = new SkillAgent();
-        skillAgent.Init();
+        Init();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        skillAgent.Execute();
+        UpdateComActor();
     }
+
+    private void LateUpdate()
+    {
+        LateUpdateComActor();
+    }
+
+    public abstract void Init();
+
+    protected abstract void UpdateComActor();
+
+    protected abstract void LateUpdateComActor();
 }

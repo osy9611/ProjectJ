@@ -6,7 +6,6 @@ using UnityEngine;
 public class SkillAgent
 {
     private EventEmmiter skillEvent;
-    public EventEmmiter SkillEvent { get => skillEvent; }
     private BuffManager buffManager;
     private ActionManager actionManager;
 

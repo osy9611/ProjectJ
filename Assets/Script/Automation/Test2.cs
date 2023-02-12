@@ -53,7 +53,6 @@ public class Test2 : MonoBehaviour
             Player.SetActive(false);
             Managers.Data.OnLoadData((result) =>
             {
-                Debug.Log(result);
                 Player.SetActive(true);
             });
         }
