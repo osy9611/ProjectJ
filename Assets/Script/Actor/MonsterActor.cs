@@ -7,7 +7,7 @@ public class MonsterActor : BaseActor
     public override void Init()
     {
         skillAgent = new SkillAgent();
-        skillAgent.Init();
+        skillAgent.Init(this);
 
     }
     public override void UpdateActor()

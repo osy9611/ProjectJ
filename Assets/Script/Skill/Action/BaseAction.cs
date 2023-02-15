@@ -8,6 +8,7 @@ public abstract class BaseAction
     ActionManager actionManager;
 
     protected skillInfo skillInfo;
+    public skillInfo SkillInfo { get => skillInfo; }
 
     private float nowCoolTime = 0;
 
@@ -32,11 +33,9 @@ public abstract class BaseAction
         {
             nowCoolTime += Time.deltaTime;
             IsCool = true;
-            Debug.Log("스킬 쿨타임 온");
         }
         else
         {
-            Debug.Log("스킬 쿨타임 끝");
             nowCoolTime = 0;
             IsCool = false;
             actionManager.UnRegisterCoolTime(skillInfo.skill_Id);

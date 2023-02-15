@@ -74,8 +74,8 @@ namespace Module.Unity.DayNight
             sunRotation = Mathf.Lerp(-90, 270, alpha);
             moonRotation = sunRotation - 180;
 
-            Sun.transform.rotation = Quaternion.Euler(sunRotation, 0, 0);
-            Moon.transform.rotation = Quaternion.Euler(moonRotation, 0, 0);
+            Sun.transform.rotation = Quaternion.Euler(sunRotation, 150, 0);
+            Moon.transform.rotation = Quaternion.Euler(moonRotation, 150, 0);
         }
 
         protected virtual void UpdateIntensity()

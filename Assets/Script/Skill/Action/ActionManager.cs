@@ -45,7 +45,17 @@ public class ActionManager
 
     public void UnRegister(int skillId)
     {
+        if (nowSkillId != skillId)
+            return;
+        nowSkillId = -1;
         skillEvent.RemoveListener(actions[skillId].Execute);
+    }
+
+    public void UnRegister()
+    {
+        if (nowSkillId == -1)
+            return;
+        skillEvent.RemoveListener(actions[nowSkillId].Execute);
     }
 
     public void UnRegisterCoolTime(int skillId)
@@ -73,4 +83,18 @@ public class ActionManager
         return baseAction;
     }
 
+    public DesignEnum.SkillType? CheckSkillType(int skillId)
+    {
+        if (!actions.ContainsKey(skillId))
+            return null;
+
+        return (DesignEnum.SkillType)actions[skillId].SkillInfo.skill_type;
+    }
+
+    public DesignEnum.SkillAttackType? GetSKillId()
+    {
+        if (nowSkillId == -1)
+            return null;
+        return (DesignEnum.SkillAttackType)actions[nowSkillId].SkillInfo.skill_Id;
+    }
 }

@@ -54,6 +54,7 @@ public class Test2 : MonoBehaviour
             Managers.Data.OnLoadData((result) =>
             {
                 Player.SetActive(true);
+                
             });
         }
     }

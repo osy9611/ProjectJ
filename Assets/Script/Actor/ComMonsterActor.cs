@@ -8,7 +8,6 @@ public class ComMonsterActor : ComBaseActor
     {
         actor = new MonsterActor();
         actor.Init();
-
     }
     protected override void UpdateComActor()
     {

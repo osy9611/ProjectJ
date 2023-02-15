@@ -63,4 +63,27 @@ namespace DesignEnum
         Melee = 1, //근접 공격
         Range = 2, //범위 공격
     }
+    /// <summary> 
+    /// ID : 1007
+    /// 성별
+    /// </summary> 
+    public enum Gender
+    {
+        Male = 0, //남자
+        Female = 1, //여자
+    }
+    /// <summary> 
+    /// ID : 1008
+    /// 스킬 공격 타입
+    /// </summary> 
+    public enum SkillAttackType
+    {
+        NormalAttack1 = 101, //일반 공격 1
+        NormalAttack2 = 102, //일반 공격 2
+        NormalAttack3 = 103, //일반 공격 3
+        Skill1 = 201, //스킬 공격 1
+        Skill2 = 202, //스킬 공격 2
+        Skill3 = 203, //스킬 공격 3
+        Skill4 = 204, //스킬 공격 4
+    }
 }

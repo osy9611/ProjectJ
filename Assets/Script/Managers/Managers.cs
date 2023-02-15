@@ -3,20 +3,35 @@ using Module.Unity.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 public class Managers : MonoBehaviour
 {
     static Managers s_instance = null;
     static Managers Instance { get { Init(); return s_instance; } }
+    #region Module
     PoolManager pool = new PoolManager();
     ResourceManager resource = new ResourceManager();
     SpriteAtlasManager atlas = new SpriteAtlasManager();
+    #endregion
+
+    #region Content
     DataManager data = new DataManager();
     SceneManager scene = new SceneManager();
+    ObjectManager objects = new ObjectManager();
+    InputManager input = new InputManager();
+    AnimationManager ani = new AnimationManager();
+    #endregion
+
+
     public static PoolManager Pool { get => Instance.pool; }
     public static ResourceManager Resource { get => Instance.resource; }
     public static SpriteAtlasManager Atlas { get => Instance.atlas; }
     public static DataManager Data { get => Instance.data; }
     public static SceneManager Scene { get => Instance.scene; }
+    public static ObjectManager Object { get => Instance.objects; }
+    public static InputManager Input { get => Instance.input; }
+    public static AnimationManager Ani { get => Instance.ani; }
 
     private void Awake()
     {
@@ -40,7 +55,7 @@ public class Managers : MonoBehaviour
 
             ComLoader.Create();
             Resource.Init(Pool);
-            Data.Init(); 
+            Data.Init();
         }
     }
 

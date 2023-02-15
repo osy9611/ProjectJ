@@ -4,17 +4,25 @@ using UnityEngine;
 
 public abstract class BaseActor
 {
+    protected FSM fsm;
+    public FSM FSM { get => fsm; }
+
+    protected Controller controller;
+    public Controller Controller { get => controller; }
     protected SkillAgent skillAgent;
     public SkillAgent SkillAgent { get => skillAgent; }
 
     protected ComBaseActor creature;
-    public ComBaseActor Creature { get => creature; }
+    public ComBaseActor Creature { get => creature; set => creature = value; }
 
     protected CharacterController charCon;
     public CharacterController CharCon { get => charCon; set => charCon = value; }
 
-    protected Vector3 dir;
-    public Vector3 Dir { get => dir; set => dir = value; }
+    protected Animator ani;
+    public Animator Ani { get => ani; set => ani = value; }
+
+    protected Vector2 dir;
+    public Vector2 Dir { get => dir; set => dir = value; }
 
     public abstract void Init();
     public abstract void UpdateActor();
