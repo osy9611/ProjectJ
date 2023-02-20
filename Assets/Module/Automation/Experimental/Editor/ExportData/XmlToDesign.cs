@@ -544,7 +544,7 @@ namespace Module.Automation.Generator
                 case "string":
                     return data;
                 case "bool":
-                    return bool.Parse(data);
+                    return data == "Y" ? true : false;
                 case "float":
                     return float.Parse(data);
                 case "double":

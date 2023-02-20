@@ -53,3 +53,5 @@ MonoBehaviour:
     addressable: user_character.bytes
   - tableId: 1012
     addressable: user_character2.bytes
+  - tableId: 1015
+    addressable: skill_effect.bytes

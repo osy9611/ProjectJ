@@ -21,6 +21,7 @@ public class Managers : MonoBehaviour
     ObjectManager objects = new ObjectManager();
     InputManager input = new InputManager();
     AnimationManager ani = new AnimationManager();
+    JudgementManager judge = new JudgementManager();
     #endregion
 
 
@@ -32,6 +33,7 @@ public class Managers : MonoBehaviour
     public static ObjectManager Object { get => Instance.objects; }
     public static InputManager Input { get => Instance.input; }
     public static AnimationManager Ani { get => Instance.ani; }
+    public static JudgementManager Judge { get=> Instance.judge; }
 
     private void Awake()
     {

@@ -4,26 +4,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionManager 
+public class ActionManager
 {
-    int nowSkillId;
-    Dictionary<int,BaseAction> actions;
-    private EventEmmiter skillEvent;
+    private int nowSkillId = -1;
+    public int NowSkillId { get => nowSkillId; }
 
-    public void Init(EventEmmiter skillEvent)
+    private Dictionary<int, BaseAction> actions;
+    private EventEmmiter skillEvent;
+    private BaseActor actor;
+    public BaseActor Actor { get => actor; }
+
+    public void Init(BaseActor actor,EventEmmiter skillEvent)
     {
         this.skillEvent = skillEvent;
+        this.actor = actor;
         actions = new Dictionary<int, BaseAction>();
 
         List<skillInfo> data = Managers.Data.SkillInfos.GetListById((int)DesignEnum.ClassType.Monk);
-        
-        foreach (skillInfo info in data) 
+
+        foreach (skillInfo info in data)
         {
             BaseAction baseAction = SetSkill(info);
             if (baseAction == null)
                 continue;
 
-            actions.Add(info.skill_Id,baseAction);
+            actions.Add(info.skill_Id, baseAction);
         }
     }
 
@@ -33,7 +38,7 @@ public class ActionManager
         if (!actions.ContainsKey(skillId) || nowSkillId == skillId)
             return;
 
-        nowSkillId= skillId;
+        nowSkillId = skillId;
         skillEvent.AddListener(actions[nowSkillId].Execute);
         RegisterCoolTime(skillId);
     }
@@ -56,17 +61,19 @@ public class ActionManager
         if (nowSkillId == -1)
             return;
         skillEvent.RemoveListener(actions[nowSkillId].Execute);
+        actions[nowSkillId].Release();
+        nowSkillId = -1;
     }
 
     public void UnRegisterCoolTime(int skillId)
     {
         skillEvent.RemoveListener(actions[skillId].CalcCoolTime);
     }
-   
+
     private BaseAction SetSkill(skillInfo skillInfo)
     {
         BaseAction baseAction = null;
-        switch((DesignEnum.SkillType)skillInfo.skill_type)
+        switch ((DesignEnum.SkillType)skillInfo.skill_type)
         {
             case DesignEnum.SkillType.Normal:
                 baseAction = new Action_Normal();
@@ -79,7 +86,7 @@ public class ActionManager
                 break;
         }
 
-        baseAction.Init(this,skillInfo);
+        baseAction.Init(this, skillInfo);
         return baseAction;
     }
 
@@ -91,10 +98,34 @@ public class ActionManager
         return (DesignEnum.SkillType)actions[skillId].SkillInfo.skill_type;
     }
 
-    public DesignEnum.SkillAttackType? GetSKillId()
+    public DesignEnum.SkillID? GetSKillId()
     {
         if (nowSkillId == -1)
             return null;
-        return (DesignEnum.SkillAttackType)actions[nowSkillId].SkillInfo.skill_Id;
+        return (DesignEnum.SkillID)actions[nowSkillId].SkillInfo.skill_Id;
+    }
+
+    public BaseAction GetAction(int id)
+    {
+        if (!actions.ContainsKey(id))
+            return null;
+
+        return actions[id];
+    }
+
+    public BaseAction GetNowAction()
+    {
+        if (nowSkillId == -1 || !actions.ContainsKey(nowSkillId))
+            return null;
+
+        return actions[nowSkillId];
+    }
+
+    public void OnJudge()
+    {
+        if (nowSkillId == -1)
+            return;
+
+        actions[nowSkillId].OnJudge();
     }
 }

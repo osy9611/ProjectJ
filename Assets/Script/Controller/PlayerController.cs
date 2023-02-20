@@ -7,8 +7,9 @@ using UnityEngine.InputSystem.XR;
 public class PlayerController : Controller
 {
     private QViewControl qViewController;
+    public QViewControl QViewController { get => qViewController; }
     private bool isMove;
-    public bool IsMove { get => isMove; }
+    public bool IsMove { get => isMove;}
 
     public override void Init(BaseActor actor)
     {
@@ -27,7 +28,7 @@ public class PlayerController : Controller
 
     public override void Execute()
     {
-        Move();
+        //Move();
     }
 
     public override void LateExecute()
@@ -42,32 +43,9 @@ public class PlayerController : Controller
 
     protected override void Move()
     {
-        if (Managers.Input.GetNowContorolScheme() == "PC")
-        {
-            if (!IsMove)
-                return;
-
-            SetDir();
-        }
         qViewController.Execute();
     }
 
-    public void SetDir()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            if (hit.collider == null)
-                return;
-            Vector2 nowPos = new Vector2(actor.Creature.transform.position.x, actor.Creature.transform.position.z);
-            Vector2 hitPoint = new Vector2(hit.point.x, hit.point.z);
-
-            Vector2 dir = hitPoint - nowPos;
-            qViewController.Move(dir.normalized);
-        }
-        actor.FSM.ChangeState(Define.ObjectState.Move);
-    }
 
     public void RegisterFunc()
     {
@@ -87,12 +65,10 @@ public class PlayerController : Controller
         if (context.canceled)
         {
             isMove = false;
-            actor.FSM.ChangeState(Define.ObjectState.Idle);
         }            
         else
         {
             isMove = true;
-            actor.FSM.ChangeState(Define.ObjectState.Move);
         }
 
         if (Managers.Input.GetNowContorolScheme() == "Mobile")
@@ -109,20 +85,20 @@ public class PlayerController : Controller
         switch (context.control.name)
         {
             case "leftButton":
-                actor.SkillAgent.OnSkill((int)DesignEnum.SkillAttackType.NormalAttack1);
+                actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.NormalAttack1);
                 break;
             case "q":
-                actor.SkillAgent.OnSkill((int)DesignEnum.SkillAttackType.Skill1);
+                actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.Skill1);
                 break;
             case "w":
-                actor.SkillAgent.OnSkill((int)DesignEnum.SkillAttackType.Skill2);
+                actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.Skill2);
                 break;
             case "e":
-                actor.SkillAgent.OnSkill((int)DesignEnum.SkillAttackType.Skill3);
+                actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.Skill3);
                 break;
             case "r":
-                actor.SkillAgent.OnSkill((int)DesignEnum.SkillAttackType.Skill4);
+                actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.Skill4);
                 break;
-        }    
+        }
     }
 }

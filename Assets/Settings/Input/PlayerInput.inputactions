@@ -38,7 +38,7 @@
                     "name": "",
                     "id": "f95ec98a-0178-417a-bf6d-4b828e808458",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "PC",
                     "action": "Move",
@@ -62,7 +62,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "PC",
                     "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -6,6 +6,6 @@ public class Action_Normal : BaseAction
 {
     public override void Execute()
     {
-        Debug.Log("스킬 실행 중");
+        base.Execute();
     }
 }

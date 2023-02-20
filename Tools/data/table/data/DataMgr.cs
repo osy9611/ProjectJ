@@ -23,6 +23,7 @@ namespace DesignTable
     {
         buff = 1014,
 skill = 1013,
+skill_effect = 1015,
 user_character = 1011,
 user_character2 = 1012,
 
@@ -40,10 +41,12 @@ user_character2 = 1012,
 
         private buffInfos buffInfos;
 private skillInfos skillInfos;
+private skill_effectInfos skill_effectInfos;
 private user_characterInfos user_characterInfos;
 private user_character2Infos user_character2Infos;
 public buffInfos BuffInfos => buffInfos;
 public skillInfos SkillInfos => skillInfos;
+public skill_effectInfos Skill_effectInfos => skill_effectInfos;
 public user_characterInfos User_characterInfos => user_characterInfos;
 public user_character2Infos User_character2Infos => user_character2Infos;
 
@@ -88,6 +91,7 @@ public user_character2Infos User_character2Infos => user_character2Infos;
         {
             loadHandlerList.Add(1014, new DataMgr.LoadHandler(LoadbuffInfos));
 loadHandlerList.Add(1013, new DataMgr.LoadHandler(LoadskillInfos));
+loadHandlerList.Add(1015, new DataMgr.LoadHandler(Loadskill_effectInfos));
 loadHandlerList.Add(1011, new DataMgr.LoadHandler(Loaduser_characterInfos));
 loadHandlerList.Add(1012, new DataMgr.LoadHandler(Loaduser_character2Infos));
 
@@ -97,6 +101,7 @@ loadHandlerList.Add(1012, new DataMgr.LoadHandler(Loaduser_character2Infos));
         {
             clearHandlerList.Add(1014, ClearDatabuffInfos);
 clearHandlerList.Add(1013, ClearDataskillInfos);
+clearHandlerList.Add(1015, ClearDataskill_effectInfos);
 clearHandlerList.Add(1011, ClearDatauser_characterInfos);
 clearHandlerList.Add(1012, ClearDatauser_character2Infos);
 
@@ -116,6 +121,14 @@ private void LoadskillInfos(byte[] data)
     {
         skillInfos = serializer.Deserialize(1013,data) as skillInfos;
         skillInfos.Initialize();
+    }
+}
+private void Loadskill_effectInfos(byte[] data)
+{
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        skill_effectInfos = serializer.Deserialize(1015,data) as skill_effectInfos;
+        skill_effectInfos.Initialize();
     }
 }
 private void Loaduser_characterInfos(byte[] data)
@@ -146,6 +159,11 @@ private void ClearDataskillInfos()
     if(skillInfos != null)
         skillInfos=null;
 }
+private void ClearDataskill_effectInfos()
+{
+    if(skill_effectInfos != null)
+        skill_effectInfos=null;
+}
 private void ClearDatauser_characterInfos()
 {
     if(user_characterInfos != null)
@@ -161,6 +179,7 @@ private void ClearDatauser_character2Infos()
         public void SetUpRef()
         {
             skillInfos.SetupRef_item_Id(buffInfos);
+skillInfos.SetupRef_item_Id(skill_effectInfos);
 user_character2Infos.SetupRef_item_Id(user_characterInfos);
 
         }

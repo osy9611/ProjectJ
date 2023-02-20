@@ -47,9 +47,7 @@ namespace Module.Unity.Addressables
                 return null;
             }
 
-            poolManager.CreatePool(original, poolCount);
-
-            return null;
+            return poolManager.Pop(original, parent).gameObject;
         }
 
         public void Destory(GameObject go,bool destoryPool = false)

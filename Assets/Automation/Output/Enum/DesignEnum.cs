@@ -74,9 +74,9 @@ namespace DesignEnum
     }
     /// <summary> 
     /// ID : 1008
-    /// 스킬 공격 타입
+    /// 스킬 ID
     /// </summary> 
-    public enum SkillAttackType
+    public enum SkillID
     {
         NormalAttack1 = 101, //일반 공격 1
         NormalAttack2 = 102, //일반 공격 2
@@ -85,5 +85,14 @@ namespace DesignEnum
         Skill2 = 202, //스킬 공격 2
         Skill3 = 203, //스킬 공격 3
         Skill4 = 204, //스킬 공격 4
+    }
+    /// <summary> 
+    /// ID : 1009
+    /// 스킬 공격 타입
+    /// </summary> 
+    public enum SkillAttackType
+    {
+        Circle = 0, //원형
+        Straight = 1, //직선
     }
 }

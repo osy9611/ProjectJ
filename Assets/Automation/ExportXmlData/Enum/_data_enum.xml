@@ -212,10 +212,10 @@
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>SkillAttackType</ENUM_NAME>
+		<ENUM_NAME>SkillID</ENUM_NAME>
 		<ENUM_VALUE>-</ENUM_VALUE>
 		<GROUP_ID>1008</GROUP_ID>
-		<COMMENT>스킬 공격 타입</COMMENT>
+		<COMMENT>스킬 ID</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
@@ -264,5 +264,26 @@
 		<ENUM_NAME>Skill4</ENUM_NAME>
 		<ENUM_VALUE>204</ENUM_VALUE>
 		<COMMENT>스킬 공격 4</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>SkillAttackType</ENUM_NAME>
+		<ENUM_VALUE>-</ENUM_VALUE>
+		<GROUP_ID>1009</GROUP_ID>
+		<COMMENT>스킬 공격 타입</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Circle</ENUM_NAME>
+		<ENUM_VALUE>0</ENUM_VALUE>
+		<GROUP_ID>1009</GROUP_ID>
+		<COMMENT>원형</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Straight</ENUM_NAME>
+		<ENUM_VALUE>1</ENUM_VALUE>
+		<GROUP_ID>1009</GROUP_ID>
+		<COMMENT>직선</COMMENT>
 	</record>
 </Enum>

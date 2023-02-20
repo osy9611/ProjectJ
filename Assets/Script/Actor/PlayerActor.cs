@@ -19,12 +19,15 @@ public class PlayerActor : BaseActor
 
         skillAgent = new SkillAgent();
         skillAgent.Init(this);
+
+        statusAgent = new StatusAgent();
+        statusAgent.Init(this);
     }
     public override void UpdateActor()
     {
         if (skillAgent == null)
             return;
-        controller.Execute();
+        //controller.Execute();
         skillAgent.Execute();
         fsm.Execte();
     }

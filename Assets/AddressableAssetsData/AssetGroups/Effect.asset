@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Effect
+  m_EditorClassIdentifier: 
+  m_GroupName: Effect
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 57f11674baf476f4181751e75c44cd3b
+  m_SerializeEntries:
+  - m_GUID: 6a69c24f54926f14cbc357dd8ae715a2
+    m_Address: Assets/Res/Effect/HovlStudio/Proceduralfire/Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fecbde7f1f982334ca7b0e1e29f7b4ed
+    m_Address: Assets/Res/Effect/Hits/HitFolderB/Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: ec75dbe5bcd55ec49b5c8acea52ce85c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 84db16d4cbe61ac4a88e8faadca1a1e2, type: 2}
+    - {fileID: 11400000, guid: 4a7b59b6af7b7d64fa3b770872428316, type: 2}

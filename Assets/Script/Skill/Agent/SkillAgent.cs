@@ -9,8 +9,10 @@ public class SkillAgent
     protected BaseActor actor;
     private EventEmmiter skillEvent;
     private BuffManager buffManager;
+    private EffectInfo effectInfo;
     private ActionManager actionManager;
     public ActionManager ActionManager { get => actionManager; }
+
 
     public virtual void Init(BaseActor actor)
     {
@@ -19,7 +21,10 @@ public class SkillAgent
         buffManager = new BuffManager();
         buffManager.Init(skillEvent);
         actionManager = new ActionManager();
-        actionManager.Init(skillEvent);
+        actionManager.Init(actor,skillEvent);
+        
+        effectInfo= new EffectInfo();
+        effectInfo.Init(actor.Creature.PivotAget, actionManager);
     }
 
 
@@ -38,10 +43,21 @@ public class SkillAgent
             return;
 
         actionManager.RegisterSkill(skillId);
-        if (actionManager.CheckSkillType(skillId) == DesignEnum.SkillType.Normal)
-            actor.FSM.ChangeState(Define.ObjectState.Attack);
+    }
+
+    public bool? CheckSkillType()
+    {
+        DesignEnum.SkillType? skillType = actionManager.CheckSkillType(actionManager.NowSkillId);
+        if(skillType == null) 
+            return null;
+
+        if (skillType == DesignEnum.SkillType.Normal)
+        {
+            return false;
+        }
         else
-            actor.FSM.ChangeState(Define.ObjectState.Skill);
+            return true;
+
     }
 
     public virtual float GetSkillAttackRange(int skillId) { return 0; }
@@ -56,4 +72,16 @@ public class SkillAgent
 
     }
 
+    public virtual void OnEffect(int id)
+    {
+        effectInfo.SetActiveEffect(id);
+    }
+
+    public virtual void OnJudge()
+    {
+        if (actionManager == null)
+            return;
+
+        actionManager.OnJudge();
+    }
 }

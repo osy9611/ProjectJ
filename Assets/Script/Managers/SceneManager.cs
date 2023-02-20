@@ -65,6 +65,5 @@ public class SceneManager
         {
             yield break;
         }
-
     }
 }

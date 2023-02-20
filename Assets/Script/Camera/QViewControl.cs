@@ -60,6 +60,14 @@ public class QViewControl
         this.dir = dir;
     }
 
+    public void Look(Vector2 dir)
+    {
+        moveDir = Quaternion.Euler(0, comQViewCamera.Camera.transform.eulerAngles.y, 0) * new Vector3(dir.x, 0, dir.y);
+        moveDir.Normalize();
+        target.Actor.Dir = new Vector2(moveDir.x, moveDir.z);
+        target.Actor.Creature.transform.rotation = Quaternion.LookRotation(new Vector3(moveDir.x, 0.0f, moveDir.z), Vector3.up);
+    }
+
 
     private void MoveInternal()
     {
@@ -70,7 +78,7 @@ public class QViewControl
             {
                 isMove = false;
             }
-            moveDir = Vector3.zero;
+            moveDir = Vector3.zero; 
             return;
         }
 

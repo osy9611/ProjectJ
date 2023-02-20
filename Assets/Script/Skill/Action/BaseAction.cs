@@ -1,16 +1,19 @@
 using DesignTable;
+using Module.Core.Systems.Events;
+using Module.Unity.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseAction
+public class BaseAction
 {
-    ActionManager actionManager;
-
+    protected ActionManager actionManager;
+    
     protected skillInfo skillInfo;
     public skillInfo SkillInfo { get => skillInfo; }
 
     private float nowCoolTime = 0;
+    protected float nowjudgeTime = 0;
 
     public bool IsCool = false;
 
@@ -20,11 +23,30 @@ public abstract class BaseAction
         this.skillInfo = skillInfo;
     }
 
-    public abstract void Execute();
+    public virtual void Execute()
+    {
+        if(!skillInfo.skill_judgeAni)
+        {
+            CalcJudgeTime();
+        }
+    }
 
     public virtual void Release()
     {
-        actionManager.UnRegister(skillInfo.skill_Id);
+
+    }
+
+    protected virtual void CalcJudgeTime()
+    {
+        if(nowjudgeTime<=skillInfo.skill_judgeTime)
+        {
+            nowjudgeTime += Time.deltaTime;
+        }
+        else
+        {
+            nowjudgeTime = 0;
+            OnJudge();
+        }
     }
 
     public virtual void CalcCoolTime()
@@ -43,5 +65,9 @@ public abstract class BaseAction
         }
     }
 
-
+    public virtual void OnJudge()
+    {
+        EventArgs<float, float, float> args = new EventArgs<float, float, float>(skillInfo.skill_range, skillInfo.skill_radius, skillInfo.skill_scale);
+        List<BaseActor> objs = Managers.Judge.CheckJudge(actionManager.Actor, (DesignEnum.SkillAttackType)skillInfo.skill_attackType, args);
+    }
 }

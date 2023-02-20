@@ -15,11 +15,19 @@ MonoBehaviour:
   m_GroupName: Duplicate Asset Isolation
   m_Data:
     m_SerializedData: []
-  m_GUID: c5b8c75c21949af4e94b424d0fe7a9b5
-  m_SerializeEntries: []
+  m_GUID: 0b1c89a940a3a2f44be441456c0f18e4
+  m_SerializeEntries:
+  - m_GUID: 36e335017ad71d54fbb10842863188ae
+    m_Address: Packages/com.unity.render-pipelines.core/Runtime/FallbackShader.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e6e9a19c3678ded42a3bc431ebef7dbd
+    m_Address: Packages/com.unity.render-pipelines.universal/Shaders/Utils/FallbackError.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ec75dbe5bcd55ec49b5c8acea52ce85c, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 0901fdc1497a83441b258ae73442821f, type: 2}
-    - {fileID: 11400000, guid: 2ec487c5ef9bae8428b0d091be55ce71, type: 2}
+    - {fileID: 11400000, guid: 17638d2a6f5e02a44af295b471a16e8a, type: 2}
+    - {fileID: 11400000, guid: 2fc1d08aac561824db714bc04c642b66, type: 2}

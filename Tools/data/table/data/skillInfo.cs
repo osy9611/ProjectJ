@@ -16,23 +16,51 @@ namespace DesignTable
         [ProtoMember(4)] 
         public float skill_range;
         [ProtoMember(5)] 
+        public float skill_radius;
+        [ProtoMember(6)] 
+        public float skill_scale;
+        [ProtoMember(7)] 
         public int skill_buffId;
           public buffInfo skill_buffId_ref;        
-        [ProtoMember(6)] 
-        public int skill_type;
+        [ProtoMember(8)] 
+        public sbyte skill_type;
+        [ProtoMember(9)] 
+        public sbyte skill_attackType;
+        [ProtoMember(10)] 
+        public bool skill_contoroll;
+        [ProtoMember(11)] 
+        public bool skill_dash;
+        [ProtoMember(12)] 
+        public float skill_dashSpeed;
+        [ProtoMember(13)] 
+        public bool skill_judgeAni;
+        [ProtoMember(14)] 
+        public float skill_judgeTime;
+        [ProtoMember(15)] 
+        public int effect_Id;
+          public skill_effectInfo effect_Id_ref;        
 
         public skillInfo()
         {
         }
 
-        public skillInfo(int unit_Class,int skill_Id,float skill_coolTime,float skill_range,int skill_buffId,int skill_type)
+        public skillInfo(int unit_Class,int skill_Id,float skill_coolTime,float skill_range,float skill_radius,float skill_scale,int skill_buffId,sbyte skill_type,sbyte skill_attackType,bool skill_contoroll,bool skill_dash,float skill_dashSpeed,bool skill_judgeAni,float skill_judgeTime,int effect_Id)
         {
             this.unit_Class = unit_Class;
             this.skill_Id = skill_Id;
             this.skill_coolTime = skill_coolTime;
             this.skill_range = skill_range;
+            this.skill_radius = skill_radius;
+            this.skill_scale = skill_scale;
             this.skill_buffId = skill_buffId;
             this.skill_type = skill_type;
+            this.skill_attackType = skill_attackType;
+            this.skill_contoroll = skill_contoroll;
+            this.skill_dash = skill_dash;
+            this.skill_dashSpeed = skill_dashSpeed;
+            this.skill_judgeAni = skill_judgeAni;
+            this.skill_judgeTime = skill_judgeTime;
+            this.effect_Id = effect_Id;
 
         }
     }
@@ -44,7 +72,7 @@ namespace DesignTable
         public Dictionary<ArraySegment<byte>, skillInfo> datas = new Dictionary<ArraySegment<byte>, skillInfo>(new DataComparer());
         public Dictionary<ArraySegment<byte>,List<skillInfo>> listData = new Dictionary<ArraySegment<byte>, List<skillInfo>>(new DataComparer());
 
-        public bool Insert(int unit_Class,int skill_Id,float skill_coolTime,float skill_range,int skill_buffId,int skill_type)
+        public bool Insert(int unit_Class,int skill_Id,float skill_coolTime,float skill_range,float skill_radius,float skill_scale,int skill_buffId,sbyte skill_type,sbyte skill_attackType,bool skill_contoroll,bool skill_dash,float skill_dashSpeed,bool skill_judgeAni,float skill_judgeTime,int effect_Id)
         { 
             foreach(skillInfo info in dataInfo)
             {
@@ -54,7 +82,7 @@ namespace DesignTable
                 }
             }
 
-            dataInfo.Add(new skillInfo(unit_Class,skill_Id,skill_coolTime,skill_range,skill_buffId,skill_type));
+            dataInfo.Add(new skillInfo(unit_Class,skill_Id,skill_coolTime,skill_range,skill_radius,skill_scale,skill_buffId,skill_type,skill_attackType,skill_contoroll,skill_dash,skill_dashSpeed,skill_judgeAni,skill_judgeTime,effect_Id));
             return true;
         }
 
@@ -65,7 +93,7 @@ namespace DesignTable
                 ArraySegment<byte> bytes = GetIdRule(data.unit_Class,data.skill_Id);
                 if (datas.ContainsKey(bytes))
                     continue;
-                datas.Add(bytes,new skillInfo(data.unit_Class,data.skill_Id,data.skill_coolTime,data.skill_range,data.skill_buffId,data.skill_type));
+                datas.Add(bytes,new skillInfo(data.unit_Class,data.skill_Id,data.skill_coolTime,data.skill_range,data.skill_radius,data.skill_scale,data.skill_buffId,data.skill_type,data.skill_attackType,data.skill_contoroll,data.skill_dash,data.skill_dashSpeed,data.skill_judgeAni,data.skill_judgeTime,data.effect_Id));
 
                 
 bytes = GetListIdRule(data.unit_Class);
@@ -150,6 +178,16 @@ public ArraySegment<byte> GetListIdRule(int unit_Class)
                 if(data.skill_buffId != -1)
                 {
                     data.skill_buffId_ref = infos.Get((int)data.skill_buffId);
+                }
+            }
+        }
+public void SetupRef_item_Id(skill_effectInfos infos)
+        {
+            foreach(skillInfo data in dataInfo)
+            {
+                if(data.effect_Id != -1)
+                {
+                    data.effect_Id_ref = infos.Get((int)data.effect_Id);
                 }
             }
         }

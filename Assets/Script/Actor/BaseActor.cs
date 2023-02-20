@@ -9,8 +9,13 @@ public abstract class BaseActor
 
     protected Controller controller;
     public Controller Controller { get => controller; }
+
     protected SkillAgent skillAgent;
     public SkillAgent SkillAgent { get => skillAgent; }
+
+    protected StatusAgent statusAgent;
+    public StatusAgent StatusAgent { get => statusAgent; }
+
 
     protected ComBaseActor creature;
     public ComBaseActor Creature { get => creature; set => creature = value; }

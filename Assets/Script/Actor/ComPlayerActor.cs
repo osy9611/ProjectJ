@@ -17,6 +17,8 @@ public class ComPlayerActor : ComBaseActor
         actor.Creature = this;
         Managers.Object.MyActor = actor as PlayerActor;
         actor.Init();
+
+        this.gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
     protected override void UpdateComActor()

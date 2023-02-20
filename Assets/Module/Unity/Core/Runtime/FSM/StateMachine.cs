@@ -23,7 +23,7 @@ namespace Module.Unity.Core
             if(currentState != null)
             {
                 previousState= currentState;
-                currentState.Exit(owner);
+                previousState.Exit(owner);
             }
 
             currentState = state;

@@ -14,7 +14,7 @@ public class AnimationManager
         if (info.Length == 0 || ani.GetCurrentAnimatorStateInfo(0).IsName(name))
             return;
 
-        ani.CrossFade(name, 0.1f);
+        ani.CrossFade(name, 0.03f);
     }
 
     public void SetEnableAni(Animator ani, bool enable)

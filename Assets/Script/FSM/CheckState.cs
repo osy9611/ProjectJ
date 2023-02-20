@@ -15,6 +15,9 @@ public class CheckState : StateMachineBehaviour
         if (actor == null)
             actor = animator.GetComponent<ComBaseActor>().Actor;
 
+        if (!CheckAniEnd)
+            return;
+
         actor.FSM.AniEnd = false;
     }
 
@@ -24,7 +27,7 @@ public class CheckState : StateMachineBehaviour
         if (!CheckAniEnd)
             return;
 
-        if(stateInfo.normalizedTime >= 1.0f && !isEnd)
+        if (stateInfo.normalizedTime >= 1.0f && !isEnd)
         {
             isEnd = true;
             actor.FSM.AniEnd = true;
@@ -34,6 +37,8 @@ public class CheckState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (!CheckAniEnd)
+            return;
         actor.FSM.AniEnd = false;
     }
 
