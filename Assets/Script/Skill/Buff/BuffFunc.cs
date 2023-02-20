@@ -6,27 +6,27 @@ public class AddATK : BaseBuff
 {
     protected override void Active()
     {
-        Debug.Log("공격력 증가");
+        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Str, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
 
     protected override void DeActive()
     {
         base.DeActive();
-        Debug.Log("공격력 증가 끝");
+        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Str, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
 }
-
 public class AddDEF : BaseBuff
 {
     protected override void Active()
     {
-        Debug.Log("방어력 증가");
+        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Dex, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
+
     }
 
     protected override void DeActive()
     {
         base.DeActive();
-        Debug.Log("방어력 증가 끝");
+        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Dex, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
 }
 
@@ -34,39 +34,38 @@ public class LowATK:BaseBuff
 {
     protected override void Active() 
     {
-        Debug.Log("공격력 감소");
+        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Str, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
     protected override void DeActive()
     {
         base.DeActive();
-        Debug.Log("공격력 감소 끝");
+        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Str, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
 }
-
 public class LowDEF : BaseBuff
 {
-    protected override void Active() 
+    protected override void Active()
     {
-        Debug.Log("방어력 감소");
+        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Dex, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
     protected override void DeActive()
     {
         base.DeActive();
-        Debug.Log("방어력 감소 끝");
+        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Dex, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
 }
 
-public class Strun : BaseBuff
+    public class Strun : BaseBuff
 {
     protected override void Active() 
     {
-        Debug.Log("스턴");
+        Managers.Ani.SetEnableAni(actor.Ani, false);
     }
 
     protected override void DeActive()
     {
         base.DeActive();
-        Debug.Log("스턴 끝");
+        Managers.Ani.SetEnableAni(actor.Ani, true);
     }
 }
 
@@ -74,12 +73,11 @@ public class Dot : BaseBuff
 {
     protected override void Active()
     {
-        Debug.Log("도트");
+        actor.StatusAgent.DecreaseHP(StatusDefine.HPType.NowHP, (long)buffInfo.buff_arg1);
     }
 
     protected override void DeActive()
     {
         base.DeActive();
-        Debug.Log("도트 끝");
     }
 }

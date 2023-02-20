@@ -19,7 +19,7 @@ public class SkillAgent
         this.actor = actor;
         skillEvent = new EventEmmiter();
         buffManager = new BuffManager();
-        buffManager.Init(skillEvent);
+        buffManager.Init(skillEvent,actor);
         actionManager = new ActionManager();
         actionManager.Init(actor,skillEvent);
         

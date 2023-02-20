@@ -10,30 +10,33 @@ namespace DesignTable
         [ProtoMember(1)] 
         public int buff_Id;
         [ProtoMember(2)] 
-        public int buff_type;
+        public sbyte buff_type;
         [ProtoMember(3)] 
         public float buff_duration;
         [ProtoMember(4)] 
         public float buff_interval;
         [ProtoMember(5)] 
-        public float buff_arg1;
+        public bool buff_usePercent;
         [ProtoMember(6)] 
-        public float buff_arg2;
+        public float buff_arg1;
         [ProtoMember(7)] 
-        public float buff_arg3;
+        public float buff_arg2;
         [ProtoMember(8)] 
+        public float buff_arg3;
+        [ProtoMember(9)] 
         public string buff_arg4;
 
         public buffInfo()
         {
         }
 
-        public buffInfo(int buff_Id,int buff_type,float buff_duration,float buff_interval,float buff_arg1,float buff_arg2,float buff_arg3,string buff_arg4)
+        public buffInfo(int buff_Id,sbyte buff_type,float buff_duration,float buff_interval,bool buff_usePercent,float buff_arg1,float buff_arg2,float buff_arg3,string buff_arg4)
         {
             this.buff_Id = buff_Id;
             this.buff_type = buff_type;
             this.buff_duration = buff_duration;
             this.buff_interval = buff_interval;
+            this.buff_usePercent = buff_usePercent;
             this.buff_arg1 = buff_arg1;
             this.buff_arg2 = buff_arg2;
             this.buff_arg3 = buff_arg3;
@@ -49,7 +52,7 @@ namespace DesignTable
         public Dictionary<ArraySegment<byte>, buffInfo> datas = new Dictionary<ArraySegment<byte>, buffInfo>(new DataComparer());
         
 
-        public bool Insert(int buff_Id,int buff_type,float buff_duration,float buff_interval,float buff_arg1,float buff_arg2,float buff_arg3,string buff_arg4)
+        public bool Insert(int buff_Id,sbyte buff_type,float buff_duration,float buff_interval,bool buff_usePercent,float buff_arg1,float buff_arg2,float buff_arg3,string buff_arg4)
         { 
             foreach(buffInfo info in dataInfo)
             {
@@ -59,7 +62,7 @@ namespace DesignTable
                 }
             }
 
-            dataInfo.Add(new buffInfo(buff_Id,buff_type,buff_duration,buff_interval,buff_arg1,buff_arg2,buff_arg3,buff_arg4));
+            dataInfo.Add(new buffInfo(buff_Id,buff_type,buff_duration,buff_interval,buff_usePercent,buff_arg1,buff_arg2,buff_arg3,buff_arg4));
             return true;
         }
 
@@ -70,7 +73,7 @@ namespace DesignTable
                 ArraySegment<byte> bytes = GetIdRule(data.buff_Id);
                 if (datas.ContainsKey(bytes))
                     continue;
-                datas.Add(bytes,new buffInfo(data.buff_Id,data.buff_type,data.buff_duration,data.buff_interval,data.buff_arg1,data.buff_arg2,data.buff_arg3,data.buff_arg4));
+                datas.Add(bytes,new buffInfo(data.buff_Id,data.buff_type,data.buff_duration,data.buff_interval,data.buff_usePercent,data.buff_arg1,data.buff_arg2,data.buff_arg3,data.buff_arg4));
 
                 
             }

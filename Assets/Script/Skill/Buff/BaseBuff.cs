@@ -1,3 +1,4 @@
+using DesignTable;
 using Module.Core.Systems.Events;
 using System;
 using System.Collections;
@@ -7,10 +8,10 @@ using UnityEngine;
 abstract public class BaseBuff
 {
     private BuffManager buffManager;
+    protected BaseActor actor;
     private float nowDurationTime = 0;
     private float nowInterval = 0;
-    private float durationTime = 0;
-    private float interval = 0;
+    protected buffInfo buffInfo;
 
     private bool stopInterval = false;
 
@@ -21,12 +22,11 @@ abstract public class BaseBuff
     {
         this.buffManager = buffMangaer;
         //duration, interval
-        EventArgs<float,float>? val = arg as EventArgs<float, float>?;
+        EventArgs<BaseActor, buffInfo>? val = arg as EventArgs<BaseActor, buffInfo>?;
         if (!val.HasValue)
             return;
-
-        durationTime = val.Value.Arg1;
-        interval = val.Value.Arg2;
+        actor = val.Value.Arg1;
+        buffInfo = val.Value.Arg2;
 
         Debug.Log("버프 등록완료!");
     }
@@ -39,7 +39,7 @@ abstract public class BaseBuff
 
     protected virtual void CalcDurationTime()
     {
-        if(nowDurationTime <= durationTime)
+        if(nowDurationTime <= buffInfo.buff_duration)
         {
             nowDurationTime += Time.deltaTime;
             if(!stopInterval)
@@ -54,14 +54,14 @@ abstract public class BaseBuff
 
     protected virtual void CalcIntervalTime()
     {
-        if(interval == 0)
+        if(buffInfo.buff_interval == 0)
         {
             stopInterval = true;
             Active();
             return;
         }
 
-        if(nowInterval<= interval)
+        if(nowInterval<= buffInfo.buff_interval)
         {
             nowInterval += Time.deltaTime;
         }

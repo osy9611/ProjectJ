@@ -8,12 +8,15 @@ using DesignTable;
 public class BuffManager
 {
     UnorderedList<BaseBuff> buffs;
+    private BaseActor actor;
+
     public UnorderedList<BaseBuff> Buffs { get => buffs; }
     private EventEmmiter buffEvent;
 
-    public void Init(EventEmmiter buffEvent)
+    public void Init(EventEmmiter buffEvent, BaseActor actor)
     {
         this.buffEvent = buffEvent;
+        this.actor = actor;
         buffs = new UnorderedList<BaseBuff>();
     }
 
@@ -47,7 +50,7 @@ public class BuffManager
         if (buff == null)
             return;
 
-        buff.Init(this, new EventArgs<float, float>(info.buff_duration, info.buff_interval));
+        buff.Init(this, new EventArgs<BaseActor,buffInfo>(actor,info));
         buffs.Add(buff);
         buffEvent.AddListener(buff.Execute);
     }
