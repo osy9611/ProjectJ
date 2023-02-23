@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<monster_master xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<verify ColumnName="mon_id" Type="Int16" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<verify ColumnName="mon_name" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<verify ColumnName="mon_att" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<verify ColumnName="mon_def" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<verify ColumnName="mon_hp" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<verify ColumnName="mon_speed" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<verify ColumnName="mon_type" Type="Int8" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="1010" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<verify ColumnName="mon_searchAngle" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<verify ColumnName="mon_searchRange" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<verify ColumnName="mon_keppRange" Type="float" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<verify ColumnName="mon_prefab" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1016"/>
+	<record>
+		<mon_id>0</mon_id>
+		<mon_name>Bear</mon_name>
+		<mon_att>100</mon_att>
+		<mon_def>100</mon_def>
+		<mon_hp>100</mon_hp>
+		<mon_speed>2</mon_speed>
+		<mon_type>0</mon_type>
+		<mon_searchAngle>360</mon_searchAngle>
+		<mon_searchRange>5</mon_searchRange>
+		<mon_keppRange>2.5</mon_keppRange>
+		<mon_prefab>Assets/Res/Monster/Bear/Prefab/Bear_4.prefab</mon_prefab>
+	</record>
+	<record>
+		<mon_id>1</mon_id>
+		<mon_name>Golem</mon_name>
+		<mon_att>110</mon_att>
+		<mon_def>110</mon_def>
+		<mon_hp>100</mon_hp>
+		<mon_speed>2</mon_speed>
+		<mon_type>1</mon_type>
+		<mon_searchAngle>360</mon_searchAngle>
+		<mon_searchRange>5</mon_searchRange>
+		<mon_keppRange>3.0</mon_keppRange>
+		<mon_prefab>Assets/Res/Monster/Elemental/Prefabs/EarthElemental.prefab</mon_prefab>
+	</record>
+	<record>
+		<mon_id>2</mon_id>
+		<mon_name>Element</mon_name>
+		<mon_att>200</mon_att>
+		<mon_def>200</mon_def>
+		<mon_hp>200</mon_hp>
+		<mon_speed>2</mon_speed>
+		<mon_type>2</mon_type>
+		<mon_searchAngle>360</mon_searchAngle>
+		<mon_searchRange>6</mon_searchRange>
+		<mon_keppRange>3.0</mon_keppRange>
+		<mon_prefab>Assets/Res/Monster/Elemental/Prefabs/IceElemental.prefab</mon_prefab>
+	</record>
+	<record>
+		<mon_id>3</mon_id>
+		<mon_name>Ice Bear</mon_name>
+		<mon_att>210</mon_att>
+		<mon_def>210</mon_def>
+		<mon_hp>200</mon_hp>
+		<mon_speed>2</mon_speed>
+		<mon_type>3</mon_type>
+		<mon_searchAngle>120</mon_searchAngle>
+		<mon_searchRange>6</mon_searchRange>
+		<mon_keppRange>3.0</mon_keppRange>
+		<mon_prefab>Assets/Res/Monster/Bear/Prefab/Bear_Ice.prefab</mon_prefab>
+	</record>
+	<record>
+		<mon_id>4</mon_id>
+		<mon_name>Skeleton</mon_name>
+		<mon_att>100</mon_att>
+		<mon_def>100</mon_def>
+		<mon_hp>100</mon_hp>
+		<mon_speed>2</mon_speed>
+		<mon_type>0</mon_type>
+		<mon_searchAngle>120</mon_searchAngle>
+		<mon_searchRange>10</mon_searchRange>
+		<mon_keppRange>2.5</mon_keppRange>
+		<mon_prefab>Assets/Res/Monster/mon_skeleton/prefab/mon_skeleton.prefab</mon_prefab>
+	</record>
+	<record>
+		<mon_id>5</mon_id>
+		<mon_name>CursedWizzard</mon_name>
+		<mon_att>100</mon_att>
+		<mon_def>110</mon_def>
+		<mon_hp>100</mon_hp>
+		<mon_speed>2</mon_speed>
+		<mon_type>1</mon_type>
+		<mon_searchAngle>360</mon_searchAngle>
+		<mon_searchRange>10</mon_searchRange>
+		<mon_keppRange>5.0</mon_keppRange>
+		<mon_prefab>Assets/Res/Monster/mon_cursedwizardB/prefab/mon_cursedwizardB.prefab</mon_prefab>
+	</record>
+</monster_master>

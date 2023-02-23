@@ -102,7 +102,7 @@ namespace DesignTable
     public class {0}Infos
     {{
         [ProtoMember(1)]
-        private List<{0}Info> dataInfo = new List<{0}Info>();
+        public List<{0}Info> dataInfo = new List<{0}Info>();
         public Dictionary<ArraySegment<byte>, {0}Info> datas = new Dictionary<ArraySegment<byte>, {0}Info>(new DataComparer());
         {10}
 

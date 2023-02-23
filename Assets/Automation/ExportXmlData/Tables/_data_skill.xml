@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <skill xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<verify ColumnName="unit_Class" Type="Int32" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="1004" IdRule="{&quot;UseListRule&quot;:true,&quot;FindPKId&quot; : [&quot;unit_Class&quot;],&quot;PKIds&quot;:[&quot;unit_Class&quot;,&quot;skill_Id&quot;]}" StringHashIds="-" List="-" TableId="1013"/>
+	<verify ColumnName="unit_Class" Type="Int32" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="1004" IdRule="{&quot;UseListRule&quot;:true,&quot;FindPKId&quot; : [&quot;unit_Class&quot;,&quot;unit_type&quot;],&quot;PKIds&quot;:[&quot;unit_Class&quot;,&quot;unit_type&quot;,&quot;skill_Id&quot;]}" StringHashIds="-" List="-" TableId="1013"/>
+	<verify ColumnName="unit_type" Type="Int32" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="1003" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="skill_Id" Type="Int32" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="skill_coolTime" Type="float" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="skill_range" Type="float" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
@@ -17,11 +18,12 @@
 	<verify ColumnName="effect_Id" Type="Int32" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="1015" List="-" TableId="1013"/>
 	<record>
 		<unit_Class>0</unit_Class>
+		<unit_type>1</unit_type>
 		<skill_Id>101</skill_Id>
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>1</skill_range>
 		<skill_radius>-1</skill_radius>
-		<skill_scale>-1</skill_scale>
+		<skill_scale>1</skill_scale>
 		<skill_buffId>-1</skill_buffId>
 		<skill_type>0</skill_type>
 		<skill_attackType>1</skill_attackType>
@@ -34,11 +36,12 @@
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
+		<unit_type>1</unit_type>
 		<skill_Id>102</skill_Id>
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>1</skill_range>
 		<skill_radius>-1</skill_radius>
-		<skill_scale>-1</skill_scale>
+		<skill_scale>1</skill_scale>
 		<skill_buffId>-1</skill_buffId>
 		<skill_type>0</skill_type>
 		<skill_attackType>1</skill_attackType>
@@ -51,11 +54,12 @@
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
+		<unit_type>1</unit_type>
 		<skill_Id>103</skill_Id>
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>1</skill_range>
 		<skill_radius>-1</skill_radius>
-		<skill_scale>-1</skill_scale>
+		<skill_scale>1</skill_scale>
 		<skill_buffId>-1</skill_buffId>
 		<skill_type>0</skill_type>
 		<skill_attackType>1</skill_attackType>
@@ -68,6 +72,7 @@
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
+		<unit_type>1</unit_type>
 		<skill_Id>201</skill_Id>
 		<skill_coolTime>3</skill_coolTime>
 		<skill_range>3</skill_range>
@@ -85,6 +90,7 @@
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
+		<unit_type>1</unit_type>
 		<skill_Id>202</skill_Id>
 		<skill_coolTime>2</skill_coolTime>
 		<skill_range>5</skill_range>
@@ -102,6 +108,7 @@
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
+		<unit_type>1</unit_type>
 		<skill_Id>203</skill_Id>
 		<skill_coolTime>4</skill_coolTime>
 		<skill_range>5</skill_range>
@@ -119,6 +126,7 @@
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
+		<unit_type>1</unit_type>
 		<skill_Id>204</skill_Id>
 		<skill_coolTime>5</skill_coolTime>
 		<skill_range>5</skill_range>
@@ -133,5 +141,59 @@
 		<skill_judgeAni>Y</skill_judgeAni>
 		<skill_judgeTime>-1</skill_judgeTime>
 		<effect_Id>3</effect_Id>
+	</record>
+	<record>
+		<unit_Class>1001</unit_Class>
+		<unit_type>0</unit_type>
+		<skill_Id>101</skill_Id>
+		<skill_coolTime>2</skill_coolTime>
+		<skill_range>1</skill_range>
+		<skill_radius>-1</skill_radius>
+		<skill_scale>1</skill_scale>
+		<skill_buffId>-1</skill_buffId>
+		<skill_type>0</skill_type>
+		<skill_attackType>1</skill_attackType>
+		<skill_contoroll>N</skill_contoroll>
+		<skill_dash>N</skill_dash>
+		<skill_dashSpeed>-1</skill_dashSpeed>
+		<skill_judgeAni>Y</skill_judgeAni>
+		<skill_judgeTime>-1</skill_judgeTime>
+		<effect_Id>-1</effect_Id>
+	</record>
+	<record>
+		<unit_Class>1001</unit_Class>
+		<unit_type>0</unit_type>
+		<skill_Id>201</skill_Id>
+		<skill_coolTime>5</skill_coolTime>
+		<skill_range>1</skill_range>
+		<skill_radius>120</skill_radius>
+		<skill_scale>-1</skill_scale>
+		<skill_buffId>-1</skill_buffId>
+		<skill_type>1</skill_type>
+		<skill_attackType>0</skill_attackType>
+		<skill_contoroll>N</skill_contoroll>
+		<skill_dash>N</skill_dash>
+		<skill_dashSpeed>-1</skill_dashSpeed>
+		<skill_judgeAni>Y</skill_judgeAni>
+		<skill_judgeTime>-1</skill_judgeTime>
+		<effect_Id>-1</effect_Id>
+	</record>
+	<record>
+		<unit_Class>1001</unit_Class>
+		<unit_type>0</unit_type>
+		<skill_Id>202</skill_Id>
+		<skill_coolTime>5</skill_coolTime>
+		<skill_range>1</skill_range>
+		<skill_radius>360</skill_radius>
+		<skill_scale>-1</skill_scale>
+		<skill_buffId>-1</skill_buffId>
+		<skill_type>1</skill_type>
+		<skill_attackType>0</skill_attackType>
+		<skill_contoroll>N</skill_contoroll>
+		<skill_dash>N</skill_dash>
+		<skill_dashSpeed>-1</skill_dashSpeed>
+		<skill_judgeAni>Y</skill_judgeAni>
+		<skill_judgeTime>-1</skill_judgeTime>
+		<effect_Id>-1</effect_Id>
 	</record>
 </skill>

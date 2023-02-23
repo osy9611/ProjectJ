@@ -19,9 +19,25 @@ public class ActionManager
         this.skillEvent = skillEvent;
         this.actor = actor;
         actions = new Dictionary<int, BaseAction>();
+        List<skillInfo> data = null;
+        if (actor.UnitType== DesignEnum.UnitType.Character)
+        {
+            PlayerActor playerActor = actor as PlayerActor;
+            if (playerActor == null)
+                return;
+            data = Managers.Data.SkillInfos.GetListById(playerActor.ClassID,(int)DesignEnum.UnitType.Character);
+        }
+        else
+        {
+            MonsterActor monsterActor = actor as MonsterActor;
+            if(monsterActor == null) 
+                return;
+            data = Managers.Data.SkillInfos.GetListById(monsterActor.ModelID,(int)DesignEnum.UnitType.Monster);
+        }
 
-        List<skillInfo> data = Managers.Data.SkillInfos.GetListById((int)DesignEnum.ClassType.Monk);
-
+        if (data == null)
+            return;
+        
         foreach (skillInfo info in data)
         {
             BaseAction baseAction = SetSkill(info);

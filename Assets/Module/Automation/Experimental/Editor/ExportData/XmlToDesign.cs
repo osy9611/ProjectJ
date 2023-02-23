@@ -195,6 +195,7 @@ namespace Module.Automation.Generator
 
             info.TableName = xml.DocumentElement.Name;
             info.TableID = int.Parse(verifyNodes[0].Attributes["TableId"].Value);
+            JObject jsondata = null;
             foreach (XmlNode node in verifyNodes)
             {
                 if (node.Attributes["PK"].Value == "Y")
@@ -216,25 +217,29 @@ namespace Module.Automation.Generator
 
                 if (node.Attributes["IdRule"].Value != "-")
                 {
-                    JObject data = JObject.Parse(node.Attributes["IdRule"].Value);
-                    if (bool.Parse(data["UseListRule"].ToString()))
+                    jsondata = JObject.Parse(node.Attributes["IdRule"].Value);
+                    if (bool.Parse(jsondata["UseListRule"].ToString()))
                     {
                         info.UseListRule = true;
-                        JArray array = JArray.Parse(data["PKIds"].ToString());
-                        for (int i = 0, range = array.Count; i < range; ++i)
-                        {
-                            info.AddIsListRule(array[i].ToString());
-                            Debug.Log(array[i].ToString());
-                        }
-
-                        array = JArray.Parse(data["FindPKId"].ToString());
-                        for (int i = 0, range = array.Count; i < range; ++i)
-                        {
-                            info.AddFindPKListRule(array[i].ToString());
-                            Debug.Log(array[i].ToString());
-                        }
                     }
 
+                }
+            }
+
+            if(jsondata != null)
+            {
+                JArray array = JArray.Parse(jsondata["PKIds"].ToString());
+                for (int i = 0, range = array.Count; i < range; ++i)
+                {
+                    info.AddIsListRule(array[i].ToString());
+                    Debug.Log(array[i].ToString());
+                }
+
+                array = JArray.Parse(jsondata["FindPKId"].ToString());
+                for (int i = 0, range = array.Count; i < range; ++i)
+                {
+                    info.AddFindPKListRule(array[i].ToString());
+                    Debug.Log(array[i].ToString());
                 }
             }
 
@@ -349,8 +354,8 @@ namespace Module.Automation.Generator
                 {
                     tableGetListIdRuleFuctionCount += string.Format(AutomationFormat.designTableInfosGetIdRullFuctionCountFormat,
                     data.Type);
-                    getListByIDFuctionParam = data.Type + " " + data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
-                    getListByIDFuctionParmColumnName = data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
+                    getListByIDFuctionParam += data.Type + " " + data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
+                    getListByIDFuctionParmColumnName += data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
                     listDataPartParam += "data." + data.ColumName + (info.PkData[info.PkData.Count - 1] == data ? "" : ",");
                     calcArraySegment2 += string.Format(AutomationFormat.designTableInfoCalcArraySegmentFormat, data.ColumName, data.Type);
                 }

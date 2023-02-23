@@ -19,7 +19,7 @@ public class PlayerFSM : FSM
         stateMachine.Init(actor, states[(int)Define.ObjectState.Idle]);
     }
 
-    public void CheckSkill()
+    public bool CheckSkill()
     {
         bool? checkSkill = actor.SkillAgent.CheckSkillType();
         if (checkSkill != null)
@@ -32,7 +32,11 @@ public class PlayerFSM : FSM
             {
                actor.FSM.ChangeState(Define.ObjectState.Skill);
             }
+
+            return true;
         }
+
+        return false;
     }
 
     public void CheckAndPlay(string name)

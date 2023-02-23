@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class Controller 
+public class Controller 
 {
     protected BaseActor actor;
 
@@ -16,11 +16,7 @@ public abstract class Controller
     {
         this.actor = actor;
     }
-    public abstract void Execute();
-    public abstract void LateExecute();
 
-    protected virtual void Move() { }
-
-    public abstract void Resset();
+    public virtual void Resset() { }
 
 }

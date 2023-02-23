@@ -25,7 +25,7 @@ public class Test2 : MonoBehaviour
     public ComDataAssets tableAsset;
     public bool UseAddressable = false;
     public GameObject Player;
-
+    public GameObject Monster;
     private void Start()
     {
         //for (int i = 0; i < 5; i++)
@@ -51,10 +51,11 @@ public class Test2 : MonoBehaviour
         if (!UseAddressable)
         {
             Player.SetActive(false);
+            Monster.SetActive(false);
             Managers.Data.OnLoadData((result) =>
             {
                 Player.SetActive(true);
-                
+                Monster.SetActive(true);
             });
         }
     }

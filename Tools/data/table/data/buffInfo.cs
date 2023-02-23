@@ -48,7 +48,7 @@ namespace DesignTable
     public class buffInfos
     {
         [ProtoMember(1)]
-        private List<buffInfo> dataInfo = new List<buffInfo>();
+        public List<buffInfo> dataInfo = new List<buffInfo>();
         public Dictionary<ArraySegment<byte>, buffInfo> datas = new Dictionary<ArraySegment<byte>, buffInfo>(new DataComparer());
         
 

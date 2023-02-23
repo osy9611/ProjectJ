@@ -17,6 +17,8 @@ public class BaseAction
 
     public bool IsCool = false;
 
+    protected List<BaseActor> checkActors = new List<BaseActor>();
+
     public virtual void Init(ActionManager actionManager,skillInfo skillInfo)
     {
         this.actionManager = actionManager;
@@ -68,6 +70,6 @@ public class BaseAction
     public virtual void OnJudge()
     {
         EventArgs<float, float, float> args = new EventArgs<float, float, float>(skillInfo.skill_range, skillInfo.skill_radius, skillInfo.skill_scale);
-        List<BaseActor> objs = Managers.Judge.CheckJudge(actionManager.Actor, (DesignEnum.SkillAttackType)skillInfo.skill_attackType, args);
+        checkActors = Managers.Judge.CheckHit(actionManager.Actor, (DesignEnum.SkillAttackType)skillInfo.skill_attackType, args);
     }
 }

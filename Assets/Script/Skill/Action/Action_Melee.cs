@@ -22,6 +22,9 @@ public class Action_Melee : BaseAction
             isFirst = true;
         }
 
+        if (checkActors.Count != 0)
+            return;
+
         Transform nowPos = actionManager.Actor.Creature.transform;
 
         if (Vector3.Distance(prevPos, nowPos.position) < skillInfo.skill_range)

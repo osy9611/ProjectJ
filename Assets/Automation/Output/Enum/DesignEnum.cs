@@ -27,7 +27,7 @@ namespace DesignEnum
     /// ID : 1003
     /// 유닛 타입
     /// </summary> 
-    public enum UnityType
+    public enum UnitType
     {
         Monster = 0, //Monster
         Character = 1, //Character
@@ -94,5 +94,16 @@ namespace DesignEnum
     {
         Circle = 0, //원형
         Straight = 1, //직선
+    }
+    /// <summary> 
+    /// ID : 1010
+    /// 몬스터 타입
+    /// </summary> 
+    public enum MonsterType
+    {
+        FieldNormal = 0, //필드 일반
+        DungeonNormal = 1, //던전 일반
+        FieldBoss = 2, //필드 보스
+        DungeonBoss = 3, //던전 보스
     }
 }

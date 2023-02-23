@@ -22,6 +22,7 @@ namespace DesignTable
     public enum TableId
     {
         buff = 1014,
+monster_master = 1016,
 skill = 1013,
 skill_effect = 1015,
 user_character = 1011,
@@ -40,11 +41,13 @@ user_character2 = 1012,
         DataMessageSerializer serializer = new DataMessageSerializer();
 
         private buffInfos buffInfos;
+private monster_masterInfos monster_masterInfos;
 private skillInfos skillInfos;
 private skill_effectInfos skill_effectInfos;
 private user_characterInfos user_characterInfos;
 private user_character2Infos user_character2Infos;
 public buffInfos BuffInfos => buffInfos;
+public monster_masterInfos Monster_masterInfos => monster_masterInfos;
 public skillInfos SkillInfos => skillInfos;
 public skill_effectInfos Skill_effectInfos => skill_effectInfos;
 public user_characterInfos User_characterInfos => user_characterInfos;
@@ -90,6 +93,7 @@ public user_character2Infos User_character2Infos => user_character2Infos;
         private void RegisterLoadHandler()
         {
             loadHandlerList.Add(1014, new DataMgr.LoadHandler(LoadbuffInfos));
+loadHandlerList.Add(1016, new DataMgr.LoadHandler(Loadmonster_masterInfos));
 loadHandlerList.Add(1013, new DataMgr.LoadHandler(LoadskillInfos));
 loadHandlerList.Add(1015, new DataMgr.LoadHandler(Loadskill_effectInfos));
 loadHandlerList.Add(1011, new DataMgr.LoadHandler(Loaduser_characterInfos));
@@ -100,6 +104,7 @@ loadHandlerList.Add(1012, new DataMgr.LoadHandler(Loaduser_character2Infos));
         private void RegisterClearHandler()
         {
             clearHandlerList.Add(1014, ClearDatabuffInfos);
+clearHandlerList.Add(1016, ClearDatamonster_masterInfos);
 clearHandlerList.Add(1013, ClearDataskillInfos);
 clearHandlerList.Add(1015, ClearDataskill_effectInfos);
 clearHandlerList.Add(1011, ClearDatauser_characterInfos);
@@ -113,6 +118,14 @@ clearHandlerList.Add(1012, ClearDatauser_character2Infos);
     {
         buffInfos = serializer.Deserialize(1014,data) as buffInfos;
         buffInfos.Initialize();
+    }
+}
+private void Loadmonster_masterInfos(byte[] data)
+{
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        monster_masterInfos = serializer.Deserialize(1016,data) as monster_masterInfos;
+        monster_masterInfos.Initialize();
     }
 }
 private void LoadskillInfos(byte[] data)
@@ -153,6 +166,11 @@ private void Loaduser_character2Infos(byte[] data)
 {
     if(buffInfos != null)
         buffInfos=null;
+}
+private void ClearDatamonster_masterInfos()
+{
+    if(monster_masterInfos != null)
+        monster_masterInfos=null;
 }
 private void ClearDataskillInfos()
 {

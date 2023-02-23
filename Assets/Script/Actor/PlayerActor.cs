@@ -7,9 +7,13 @@ public class PlayerActor : BaseActor
     private DesignTable.user_characterInfo userInfo;
     public DesignTable.user_characterInfo UserInfo { get => userInfo; }
 
+    private int classID;
+    public int ClassID { get => classID; set => classID = value; }
+
     public override void Init()
     {
-        userInfo = Managers.Data.User_characterInfos.Get(0);
+        unitType = DesignEnum.UnitType.Character;
+        userInfo = Managers.Data.User_characterInfos.Get(classID);
 
         fsm = new PlayerFSM();
         fsm.Init(this);

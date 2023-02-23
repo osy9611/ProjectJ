@@ -27,7 +27,7 @@ namespace DesignTable
     public class skill_effectInfos
     {
         [ProtoMember(1)]
-        private List<skill_effectInfo> dataInfo = new List<skill_effectInfo>();
+        public List<skill_effectInfo> dataInfo = new List<skill_effectInfo>();
         public Dictionary<ArraySegment<byte>, skill_effectInfo> datas = new Dictionary<ArraySegment<byte>, skill_effectInfo>(new DataComparer());
         
 

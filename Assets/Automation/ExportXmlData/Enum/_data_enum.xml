@@ -79,7 +79,7 @@
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>UnityType</ENUM_NAME>
+		<ENUM_NAME>UnitType</ENUM_NAME>
 		<ENUM_VALUE>-</ENUM_VALUE>
 		<GROUP_ID>1003</GROUP_ID>
 		<COMMENT>유닛 타입</COMMENT>
@@ -285,5 +285,40 @@
 		<ENUM_VALUE>1</ENUM_VALUE>
 		<GROUP_ID>1009</GROUP_ID>
 		<COMMENT>직선</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>MonsterType</ENUM_NAME>
+		<ENUM_VALUE>-</ENUM_VALUE>
+		<GROUP_ID>1010</GROUP_ID>
+		<COMMENT>몬스터 타입</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>FieldNormal</ENUM_NAME>
+		<ENUM_VALUE>0</ENUM_VALUE>
+		<GROUP_ID>1010</GROUP_ID>
+		<COMMENT>필드 일반</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>DungeonNormal</ENUM_NAME>
+		<ENUM_VALUE>1</ENUM_VALUE>
+		<GROUP_ID>1010</GROUP_ID>
+		<COMMENT>던전 일반</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>FieldBoss</ENUM_NAME>
+		<ENUM_VALUE>2</ENUM_VALUE>
+		<GROUP_ID>1010</GROUP_ID>
+		<COMMENT>필드 보스</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>DungeonBoss</ENUM_NAME>
+		<ENUM_VALUE>3</ENUM_VALUE>
+		<GROUP_ID>1010</GROUP_ID>
+		<COMMENT>던전 보스</COMMENT>
 	</record>
 </Enum>

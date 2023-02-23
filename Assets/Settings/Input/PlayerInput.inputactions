@@ -38,7 +38,7 @@
                     "name": "",
                     "id": "f95ec98a-0178-417a-bf6d-4b828e808458",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "PC",
                     "action": "Move",

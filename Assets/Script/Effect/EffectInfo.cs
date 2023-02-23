@@ -15,6 +15,9 @@ public class EffectInfo
         if (effects == null)
             effects = new Dictionary<int, GameObject>();
 
+        if (comPivotAgent.Pivots == null)
+            return;
+
         foreach (var info in comPivotAgent.Pivots)
         {
             if (info.Type == PivotType.Effect)
@@ -23,7 +26,6 @@ public class EffectInfo
                 if (actionManager.GetAction(info.Id) == null)
                     continue;
 
-                Debug.Log(action.SkillInfo.effect_Id_ref.effect_path);
                 if (action.SkillInfo.effect_Id_ref.effect_path != "")
                     Init(info, action.SkillInfo.effect_Id_ref.effect_path);
             }

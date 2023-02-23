@@ -30,6 +30,14 @@ public class AnimationManager
         return false;
     }
 
+    public void CheckAndPlay(Animator ani,string name)
+    {
+        if (CheckPlayAniName(ani, name))
+            return;
+       
+        Managers.Ani.Play(ani, name);
+    }
+
     public bool CheckAniName(Animator ani, string name)
     {
         foreach (AnimationClip clip in ani.runtimeAnimatorController.animationClips)

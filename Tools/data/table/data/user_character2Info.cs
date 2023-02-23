@@ -34,7 +34,7 @@ namespace DesignTable
     public class user_character2Infos
     {
         [ProtoMember(1)]
-        private List<user_character2Info> dataInfo = new List<user_character2Info>();
+        public List<user_character2Info> dataInfo = new List<user_character2Info>();
         public Dictionary<ArraySegment<byte>, user_character2Info> datas = new Dictionary<ArraySegment<byte>, user_character2Info>(new DataComparer());
         
 

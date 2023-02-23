@@ -159,6 +159,7 @@ namespace Module.Unity.DayNight
                     break;
                 case DesignEnum.TimeType.Noon:
                     if (OnNoon != null) OnNoon.Invoke();
+
                     break;
                 case DesignEnum.TimeType.Night:
                     StartNight();

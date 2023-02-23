@@ -88,17 +88,20 @@ namespace CommonState
     {
         public override void Enter(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null)
+                return;
+
+            Managers.Ani.Play(entity.Ani, "Death");
         }
 
         public override void Execute(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+
         }
 
         public override void Exit(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+
         }
     }
 

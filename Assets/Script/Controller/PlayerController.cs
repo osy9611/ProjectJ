@@ -26,26 +26,6 @@ public class PlayerController : Controller
         RegisterFunc();
     }
 
-    public override void Execute()
-    {
-        //Move();
-    }
-
-    public override void LateExecute()
-    {
-
-    }
-
-    public override void Resset()
-    {
-
-    }
-
-    protected override void Move()
-    {
-        qViewController.Execute();
-    }
-
 
     public void RegisterFunc()
     {
@@ -55,25 +35,25 @@ public class PlayerController : Controller
         }
         else
         {
-            Managers.Input.AddEvent("Move", OnMove, Define.InputEvnetType.Start | Define.InputEvnetType.Cancel);
-            Managers.Input.AddEvent("Skill", OnSkill, Define.InputEvnetType.Start | Define.InputEvnetType.Cancel);
+            Managers.Input.AddEvent("Move", OnMove, Define.InputEvnetType.Start | Define.InputEvnetType.Cancel);            
         }
+        Managers.Input.AddEvent("Skill", OnSkill, Define.InputEvnetType.Start | Define.InputEvnetType.Cancel);
     }
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        if (context.canceled)
-        {
-            isMove = false;
-        }            
-        else
-        {
-            isMove = true;
-        }
-
         if (Managers.Input.GetNowContorolScheme() == "Mobile")
         {
             qViewController.Move(context.ReadValue<Vector2>());
+        }
+
+        if (context.canceled)
+        {
+            isMove = false;
+        }
+        else
+        {
+            isMove = true;
         }
     }
 

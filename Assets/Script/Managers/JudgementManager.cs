@@ -7,8 +7,28 @@ using UnityEngine;
 
 public class JudgementManager
 {
+    //args => 1 : search_range, 2 : search_angle
+    public BaseActor CheckTarget(BaseActor actor, IEventArgs args)
+    {
+        EventArgs<float, float>? val = args as EventArgs<float, float>?;
+        if (actor == null || !val.HasValue)
+            return null;
+
+        Transform tr = actor.Creature.transform;
+        var data = Physics.SphereCastAll(tr.position, val.Value.Arg1, tr.up, 0, 1 << LayerMask.NameToLayer("Player"));
+        if (data.Length > 0)
+        {
+            if (Managers.Object.MyActor.Creature.gameObject == data[0].transform.gameObject) 
+            {
+                return Managers.Object.MyActor;
+            }
+        }
+        return null;
+    }
+
+
     //args => 1 : skill_range, 2 : skill_radius, 3 : skill_scale
-    public List<BaseActor> CheckJudge(BaseActor actor, DesignEnum.SkillAttackType attackType, IEventArgs args)
+    public List<BaseActor> CheckHit(BaseActor actor, DesignEnum.SkillAttackType attackType, IEventArgs args)
     {
         EventArgs<float, float, float>? val = args as EventArgs<float, float, float>?;
         if (!val.HasValue)
@@ -53,6 +73,7 @@ public class JudgementManager
         var datas = Physics.BoxCastAll(tr.position, tr.lossyScale, tr.forward, tr.rotation, val.Value.Arg3, 1 << LayerMask.NameToLayer("Monster"));
         foreach (var info in datas)
         {
+            Debug.Log(info);
             BaseActor actor = Managers.Object.FindById(info.transform.gameObject.name);
             if (actor != null)
             {

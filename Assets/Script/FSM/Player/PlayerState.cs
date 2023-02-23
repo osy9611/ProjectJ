@@ -33,8 +33,10 @@ namespace PlayerState
             if (fsm == null)
                 fsm = entity.FSM as PlayerFSM;
 
-            fsm.CheckAndPlay("Idle");
-            fsm.CheckSkill();
+            if (fsm.CheckSkill()) 
+                return;
+
+            Managers.Ani.CheckAndPlay(entity.Ani, "Idle");
 
             if (controller.IsMove)
             {
@@ -62,8 +64,7 @@ namespace PlayerState
                 return;
 
             if (controller == null)
-                controller = entity.Controller as PlayerController; 
-
+                controller = entity.Controller as PlayerController;
             Managers.Ani.Play(entity.Ani, "Move");
         }
 
@@ -75,7 +76,8 @@ namespace PlayerState
             if (fsm == null)
                 fsm = entity.FSM as PlayerFSM;
 
-            fsm.CheckSkill();
+            if(fsm.CheckSkill())
+                return;
 
             if (!controller.IsMove)
             {
@@ -127,6 +129,8 @@ namespace PlayerState
             if (entity == null)
                 return;
 
+            Managers.Ani.CheckAndPlay(entity.Ani, "Attack");
+
             if (entity.FSM.AniEnd)
             {
                 entity.FSM.ChangeState(Define.ObjectState.Idle);
@@ -160,8 +164,13 @@ namespace PlayerState
             if (entity == null)
                 return;
 
+            DesignEnum.SkillID? aniName = entity.SkillAgent.ActionManager.GetSKillId();
+            Debug.Log(aniName);
+            Managers.Ani.CheckAndPlay(entity.Ani, aniName.ToString());
+
             if (entity.FSM.AniEnd)
             {
+                Debug.Log("º¯°æµÊ");
                 entity.FSM.ChangeState(Define.ObjectState.Idle);
             }
         }

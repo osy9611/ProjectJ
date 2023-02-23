@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class BaseActor
 {
+    protected DesignEnum.UnitType unitType;
+    public DesignEnum.UnitType UnitType { get => unitType; set => unitType = value; }
+
     protected FSM fsm;
     public FSM FSM { get => fsm; }
 

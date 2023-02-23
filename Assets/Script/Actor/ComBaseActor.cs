@@ -48,12 +48,4 @@ public abstract class ComBaseActor : MonoBehaviour
     {
         actor.SkillAgent.OnJudge();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-
-        Gizmos.DrawWireCube(transform.position + transform.forward * 2, new Vector3(0.5f+3,0.5f,0.5f + 3));
-    }
-
 }
