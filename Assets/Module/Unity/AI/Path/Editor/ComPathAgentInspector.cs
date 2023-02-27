@@ -12,7 +12,7 @@ namespace Module.Unity.AI
         ComPathAgent script;
         public override void OnInspectorGUI()
         {
-            if (script.Path.Count != 0)
+            if (script.PathInfo.Count != 0)
             {
                 if (GUILayout.Button("Generate Path"))
                 {

@@ -54,10 +54,33 @@ public class ActionManager
         if (!actions.ContainsKey(skillId) || nowSkillId == skillId)
             return;
 
+        if (actions[skillId].IsCool)
+            return;
+
         nowSkillId = skillId;
         skillEvent.AddListener(actions[nowSkillId].Execute);
-        RegisterCoolTime(skillId);
+        RegisterCoolTime(nowSkillId);
     }
+
+    public void RegisterSkillAuto()
+    {
+        if (actions == null)
+            return;
+
+        if (actions.Count == 0)
+            return;
+
+        foreach(var action in actions.Values)
+        {
+            if (action.IsCool)
+                continue;
+
+            int skillId = action.SkillInfo.skill_Id;
+            RegisterSkill(skillId);
+            break;
+        }
+    }
+
 
     public void RegisterCoolTime(int skillid)
     {

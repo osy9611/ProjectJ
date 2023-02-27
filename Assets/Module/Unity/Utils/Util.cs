@@ -67,6 +67,12 @@ namespace Module.Unity.Utils
                 action();
         }
 
+
+        static public void RandomFloat(float min, float max, out float target)
+        {
+            target = Random.Range(min, max);
+        }
+
     }
 
 }

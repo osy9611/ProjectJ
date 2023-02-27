@@ -73,7 +73,6 @@ public class JudgementManager
         var datas = Physics.BoxCastAll(tr.position, tr.lossyScale, tr.forward, tr.rotation, val.Value.Arg3, 1 << LayerMask.NameToLayer("Monster"));
         foreach (var info in datas)
         {
-            Debug.Log(info);
             BaseActor actor = Managers.Object.FindById(info.transform.gameObject.name);
             if (actor != null)
             {

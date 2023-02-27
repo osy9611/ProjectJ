@@ -1,53 +1,49 @@
 namespace Module.Unity.AI
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class ComPathAgent : MonoBehaviour
+    [System.Serializable]
+    public class PathInfo
     {
-        public List<Transform> Path = new List<Transform>();
+        [SerializeField] int id;
+        public int Id => id;
+
+        [SerializeField] List<Transform> path = new List<Transform>();
+        public List<Transform> Path => path;
+
         [SerializeField] List<Vector3> pathData = new List<Vector3>();
         public List<Vector3> PathData => pathData;
 
+        public bool ShowPath = false;
+
         public Vector3? GetPath(int index)
         {
-            if (pathData.Count-1 < index || index == -1)
+            if (pathData.Count - 1 < index || index == -1)
                 return null;
 
             return pathData[index];
         }
+        
 
-        public Vector3? GetNextPath(int index)
-        {
-            Vector3? nextPath = GetPath(index);
-            if(nextPath == null)
-            {
-                return null;
-            }
-
-            return nextPath;
-        }
-
-
-
-#if UNITY_EDITOR
         public void GenerateData()
         {
             pathData.Clear();
-            for (int i=0,range=Path.Count;i<range;++i)
+            for (int i = 0, range = path.Count; i < range; ++i)
             {
-                pathData.Add(Path[i].position);
+                pathData.Add(path[i].position);
             }
         }
 
         public void ClearPath()
         {
-            for (int i = 0, range = Path.Count; i < range; ++i)
+            for (int i = 0, range = path.Count; i < range; ++i)
             {
-                DestroyImmediate(Path[i].gameObject);
+                UnityEngine.Object.DestroyImmediate(path[i].gameObject);
             }
-            Path.Clear();
+            path.Clear();
         }
 
         public void ClearPathData()
@@ -55,12 +51,69 @@ namespace Module.Unity.AI
             pathData.Clear();
         }
 
+    }
+
+    public class ComPathAgent : MonoBehaviour
+    {
+        [SerializeField] List<PathInfo> pathInfo = new List<PathInfo>();
+        public List<PathInfo> PathInfo => pathInfo;
+
+        public PathInfo GetPath(int id)
+        {
+            PathInfo info = pathInfo.Find(x => x.Id == id);
+            return info;
+        }
+
+
+#if UNITY_EDITOR
+        public void GenerateData()
+        {
+            for (int i = 0, range = pathInfo.Count; i < range; ++i)
+            {
+                pathInfo[i].GenerateData();
+            }
+        }
+
+        public void ClearPath()
+        {
+            for (int i = 0, range = pathInfo.Count; i < range; ++i)
+            {
+                pathInfo[i].ClearPath();
+            }
+        }
+
+        public void ClearPathData()
+        {
+            for (int i = 0, range = pathInfo.Count; i < range; ++i)
+            {
+                pathInfo[i].ClearPathData();
+            }
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
-            for (int i = 0, range = pathData.Count-1; i < range; ++i)
+
+            foreach (var info in pathInfo)
             {
-                Gizmos.DrawLine(pathData[i], pathData[i + 1]);
+                if (!info.ShowPath)
+                    continue;
+
+                Debug.Log(info.Path.Count);
+                if(info.Path.Count != 0)
+                {
+                    for (int i = 0, range = info.Path.Count - 1; i < range; ++i)
+                    {
+                        Gizmos.DrawLine(info.Path[i].position, info.Path[i + 1].position);
+                    }
+                }
+                else
+                {
+                    for (int i = 0, range = info.PathData.Count - 1; i < range; ++i)
+                    {
+                        Gizmos.DrawLine(info.PathData[i], info.PathData[i + 1]);
+                    }
+                }
             }
         }
 #endif

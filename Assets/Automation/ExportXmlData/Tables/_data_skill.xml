@@ -143,7 +143,7 @@
 		<effect_Id>3</effect_Id>
 	</record>
 	<record>
-		<unit_Class>1001</unit_Class>
+		<unit_Class>0</unit_Class>
 		<unit_type>0</unit_type>
 		<skill_Id>101</skill_Id>
 		<skill_coolTime>2</skill_coolTime>
@@ -161,10 +161,10 @@
 		<effect_Id>-1</effect_Id>
 	</record>
 	<record>
-		<unit_Class>1001</unit_Class>
+		<unit_Class>0</unit_Class>
 		<unit_type>0</unit_type>
 		<skill_Id>201</skill_Id>
-		<skill_coolTime>5</skill_coolTime>
+		<skill_coolTime>8</skill_coolTime>
 		<skill_range>1</skill_range>
 		<skill_radius>120</skill_radius>
 		<skill_scale>-1</skill_scale>
@@ -179,10 +179,10 @@
 		<effect_Id>-1</effect_Id>
 	</record>
 	<record>
-		<unit_Class>1001</unit_Class>
+		<unit_Class>0</unit_Class>
 		<unit_type>0</unit_type>
 		<skill_Id>202</skill_Id>
-		<skill_coolTime>5</skill_coolTime>
+		<skill_coolTime>10</skill_coolTime>
 		<skill_range>1</skill_range>
 		<skill_radius>360</skill_radius>
 		<skill_scale>-1</skill_scale>

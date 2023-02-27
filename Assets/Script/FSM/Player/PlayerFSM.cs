@@ -19,31 +19,4 @@ public class PlayerFSM : FSM
         stateMachine.Init(actor, states[(int)Define.ObjectState.Idle]);
     }
 
-    public bool CheckSkill()
-    {
-        bool? checkSkill = actor.SkillAgent.CheckSkillType();
-        if (checkSkill != null)
-        {
-            if (checkSkill == false)
-            {
-                actor.FSM.ChangeState(Define.ObjectState.Attack);
-            }
-            else
-            {
-               actor.FSM.ChangeState(Define.ObjectState.Skill);
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public void CheckAndPlay(string name)
-    {
-        if (Managers.Ani.CheckPlayAniName(actor.Ani, name))
-            return;
-        Managers.Ani.Play(actor.Ani, name);
-    }
-
 }

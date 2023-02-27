@@ -13,7 +13,6 @@ public class SkillAgent
     private ActionManager actionManager;
     public ActionManager ActionManager { get => actionManager; }
 
-
     public virtual void Init(BaseActor actor)
     {
         this.actor = actor;
@@ -43,6 +42,11 @@ public class SkillAgent
             return;
 
         actionManager.RegisterSkill(skillId);
+    }
+
+    public virtual void OnSkillAuto()
+    {
+        actionManager.RegisterSkillAuto();
     }
 
     public bool? CheckSkillType()

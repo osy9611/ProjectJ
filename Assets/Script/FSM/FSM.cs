@@ -50,4 +50,24 @@ public class FSM
 
         return false;
     }
+
+    public virtual bool CheckSkill()
+    {
+        bool? checkSkill = actor.SkillAgent.CheckSkillType();
+        if (checkSkill != null)
+        {
+            if (checkSkill == false)
+            {
+                actor.FSM.ChangeState(Define.ObjectState.Attack);
+            }
+            else
+            {
+                actor.FSM.ChangeState(Define.ObjectState.Skill);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
 }

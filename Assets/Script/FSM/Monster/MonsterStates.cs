@@ -1,29 +1,34 @@
 using Module.Unity.Core;
+using Module.Unity.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
+using UnityEngine.InputSystem.XR;
 
 namespace MonsterState
 {
     public class Idle : State<BaseActor>
     {
-        MonsterController contoller;
-        float nowTime;
-        float delayTime;
+        private MonsterFSM fsm;
+        private float nowTime;
+        private float delayTime;
         public override void Enter(BaseActor entity)
         {
             if (entity == null)
                 return;
 
-            if(entity.Controller !=null)
+            if(fsm == null)
             {
-                if(contoller == null)
-                    contoller = entity.Controller as MonsterController;
+                if(entity.FSM !=null)
+                    fsm = entity.FSM as MonsterFSM;
             }
 
             Managers.Ani.Play(entity.Ani, "Idle");
-            delayTime = Random.Range(0f, 5.0f);
+            if (entity.FSM.CheckPrevState(Define.ObjectState.Move))
+            {
+                Util.RandomFloat(0f, 5.0f, out delayTime);
+            }
+           
         }
 
         public override void Execute(BaseActor entity)
@@ -31,18 +36,29 @@ namespace MonsterState
             if(entity == null) 
                 return;
 
-            if (CalcDelayTime())
-                entity.FSM.ChangeState(Define.ObjectState.Move);
+            Managers.Ani.CheckAndPlay(entity.Ani, "Idle");
+            fsm.CheckAttackRangeFSM(true, null, (result) =>
+            {
+                if(!result)
+                {
+                    if (CalcDelayTime())
+                    {
+                        entity.FSM.ChangeState(Define.ObjectState.Move);
+                    }    
+                        
+                }
+            });
         }
 
         public override void Exit(BaseActor entity)
         {
             nowTime = 0;
+            delayTime = 0;
         }
 
         private bool CalcDelayTime()
         {
-            if (contoller.SearchTarget())
+            if (fsm.SearchTarget)
                 return true;
 
             if (nowTime <= delayTime)
@@ -59,17 +75,19 @@ namespace MonsterState
 
     public class Move : State<BaseActor>
     {
-        MonsterController controller;
+        private MonsterFSM fsm;
         public override void Enter(BaseActor entity)
         {
             if (entity == null)
                 return;
 
-            if (entity.Controller == null)
-                return;
-            controller = entity.Controller as MonsterController;
-
-            Managers.Ani.Play(entity.Ani, "Move");
+            if (fsm == null)
+            {
+                if (entity.FSM != null)
+                    fsm = entity.FSM as MonsterFSM;
+            }
+            fsm.CheckAttackRangeFSM(false, Define.ObjectState.Idle);
+            
         }
 
         public override void Execute(BaseActor entity)
@@ -77,21 +95,12 @@ namespace MonsterState
             if (entity == null) 
                 return;
 
-            if (controller.ReachPath)
-                entity.FSM.ChangeState(Define.ObjectState.Idle);
-            else
-            {
-                if(controller.CheckAttackRange())
-                {
-
-                }
-                controller.MovePath();
-            }
+            fsm.MovePathFSM();
+           
         }
 
         public override void Exit(BaseActor entity)
         {
-            controller.ReachPath = false;
         }
     }
 
@@ -99,17 +108,29 @@ namespace MonsterState
     {
         public override void Enter(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null)
+                return;
+
+            Managers.Ani.Play(entity.Ani, "Attack");
         }
 
         public override void Execute(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null)
+                return;
+
+            Managers.Ani.CheckAndPlay(entity.Ani, "Attack");
+
+            if (entity.FSM.AniEnd)
+            {
+                entity.FSM.ChangeState(Define.ObjectState.Idle);
+                return;
+            }
         }
 
         public override void Exit(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+            entity.SkillAgent.ActionManager.UnRegister();
         }
     }
 
@@ -118,17 +139,28 @@ namespace MonsterState
     {
         public override void Enter(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null)
+                return;
+            DesignEnum.SkillID? aniName = entity.SkillAgent.ActionManager.GetSKillId();
+            if (aniName == null)
+                return;
+            Managers.Ani.Play(entity.Ani, aniName.ToString());
         }
 
         public override void Execute(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+            DesignEnum.SkillID? aniName = entity.SkillAgent.ActionManager.GetSKillId();
+            Managers.Ani.CheckAndPlay(entity.Ani, aniName.ToString());
+
+            if (entity.FSM.AniEnd)
+            {
+                entity.FSM.ChangeState(Define.ObjectState.Idle);
+            }
         }
 
         public override void Exit(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+            entity.SkillAgent.ActionManager.UnRegister();
         }
     }
 }

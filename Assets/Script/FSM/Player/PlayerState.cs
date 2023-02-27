@@ -155,7 +155,6 @@ namespace PlayerState
             if (aniName == null)
                 return;
 
-            Debug.Log(aniName.ToString());
             Managers.Ani.Play(entity.Ani, aniName.ToString());
         }
 
@@ -170,7 +169,6 @@ namespace PlayerState
 
             if (entity.FSM.AniEnd)
             {
-                Debug.Log("º¯°æµÊ");
                 entity.FSM.ChangeState(Define.ObjectState.Idle);
             }
         }
