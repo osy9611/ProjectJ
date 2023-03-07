@@ -22,7 +22,12 @@ public class PlayerController : Controller
         speed = playerActor.UserInfo.char_moveSpeed;
         qViewController = new QViewControl();
         qViewController.Init(actor.Creature as ComPlayerActor, 10);
-        Managers.Input.RegisterInput(actor.Creature as ComPlayerActor, "PC");
+#if UNITY_ANDROID || UNITY_IOS
+        Managers.Input.RegisterInput(actor.Creature as ComPlayerActor, "Mobile");
+#else
+    Managers.Input.RegisterInput(actor.Creature as ComPlayerActor, "PC");
+#endif
+
         RegisterFunc();
     }
 

@@ -10,13 +10,11 @@ public class ActionManager
     public int NowSkillId { get => nowSkillId; }
 
     private Dictionary<int, BaseAction> actions;
-    private EventEmmiter skillEvent;
     private BaseActor actor;
     public BaseActor Actor { get => actor; }
 
-    public void Init(BaseActor actor,EventEmmiter skillEvent)
+    public void Init(BaseActor actor)
     {
-        this.skillEvent = skillEvent;
         this.actor = actor;
         actions = new Dictionary<int, BaseAction>();
         List<skillInfo> data = null;
@@ -58,7 +56,7 @@ public class ActionManager
             return;
 
         nowSkillId = skillId;
-        skillEvent.AddListener(actions[nowSkillId].Execute);
+        actor.EventEmmiter.AddListener(actions[nowSkillId].Execute);
         RegisterCoolTime(nowSkillId);
     }
 
@@ -84,7 +82,7 @@ public class ActionManager
 
     public void RegisterCoolTime(int skillid)
     {
-        skillEvent.AddListener(actions[skillid].CalcCoolTime);
+        actor.EventEmmiter.AddListener(actions[skillid].CalcCoolTime);
     }
 
     public void UnRegister(int skillId)
@@ -92,21 +90,21 @@ public class ActionManager
         if (nowSkillId != skillId)
             return;
         nowSkillId = -1;
-        skillEvent.RemoveListener(actions[skillId].Execute);
+        actor.EventEmmiter.RemoveListener(actions[skillId].Execute);
     }
 
     public void UnRegister()
     {
         if (nowSkillId == -1)
             return;
-        skillEvent.RemoveListener(actions[nowSkillId].Execute);
+        actor.EventEmmiter.RemoveListener(actions[nowSkillId].Execute);
         actions[nowSkillId].Release();
         nowSkillId = -1;
     }
 
     public void UnRegisterCoolTime(int skillId)
     {
-        skillEvent.RemoveListener(actions[skillId].CalcCoolTime);
+        actor.EventEmmiter.RemoveListener(actions[skillId].CalcCoolTime);
     }
 
     private BaseAction SetSkill(skillInfo skillInfo)
@@ -152,12 +150,12 @@ public class ActionManager
         return actions[id];
     }
 
-    public BaseAction GetNowAction()
+    public float GetCoolTime(int id)
     {
-        if (nowSkillId == -1 || !actions.ContainsKey(nowSkillId))
-            return null;
+        if (!actions.ContainsKey(id))
+            return -1f;
 
-        return actions[nowSkillId];
+        return actions[id].NowCoolTime;
     }
 
     public void OnJudge()

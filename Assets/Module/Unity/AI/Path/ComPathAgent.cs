@@ -1,12 +1,15 @@
 namespace Module.Unity.AI
 {
+    using Module.Automation;
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
+    using UnityEditor;
     using UnityEngine;
 
     [System.Serializable]
-    public class PathInfo
+    public class PathTransInfo
     {
         [SerializeField] int id;
         public int Id => id;
@@ -14,10 +17,27 @@ namespace Module.Unity.AI
         [SerializeField] List<Transform> path = new List<Transform>();
         public List<Transform> Path => path;
 
+        public bool ShowPath = false;
+
+        public void Clear()
+        {
+            for (int i = 0, range = path.Count; i < range; ++i)
+            {
+                UnityEngine.Object.DestroyImmediate(path[i].gameObject);
+            }
+            path.Clear();
+        }
+    }
+
+    [System.Serializable]
+    public class PathInfo
+    {
+        [SerializeField] int id;
+        public int Id => id;
+
         [SerializeField] List<Vector3> pathData = new List<Vector3>();
         public List<Vector3> PathData => pathData;
 
-        public bool ShowPath = false;
 
         public Vector3? GetPath(int index)
         {
@@ -26,10 +46,11 @@ namespace Module.Unity.AI
 
             return pathData[index];
         }
-        
 
-        public void GenerateData()
+
+        public void GenerateData(List<Transform> path)
         {
+            if (path.Count == 0) return;
             pathData.Clear();
             for (int i = 0, range = path.Count; i < range; ++i)
             {
@@ -37,57 +58,51 @@ namespace Module.Unity.AI
             }
         }
 
-        public void ClearPath()
+        public PathInfo(int id, List<Transform> path)
         {
-            for (int i = 0, range = path.Count; i < range; ++i)
-            {
-                UnityEngine.Object.DestroyImmediate(path[i].gameObject);
-            }
-            path.Clear();
+            this.id = id;
+            GenerateData(path);
         }
-
-        public void ClearPathData()
-        {
-            pathData.Clear();
-        }
-
     }
+
 
     public class ComPathAgent : MonoBehaviour
     {
-        [SerializeField] List<PathInfo> pathInfo = new List<PathInfo>();
-        public List<PathInfo> PathInfo => pathInfo;
 
-        public PathInfo GetPath(int id)
-        {
-            PathInfo info = pathInfo.Find(x => x.Id == id);
-            return info;
-        }
+        [SerializeField] int id = -1;
+        public int Id => id;
+
+        [SerializeField] List<PathTransInfo> pathInfo = new List<PathTransInfo>();
+        public List<PathTransInfo> PathInfo => pathInfo;
 
 
 #if UNITY_EDITOR
         public void GenerateData()
         {
-            for (int i = 0, range = pathInfo.Count; i < range; ++i)
+            List<PathInfo> path = new List<PathInfo>();
+            foreach(var info in pathInfo)
             {
-                pathInfo[i].GenerateData();
+                path.Add(new PathInfo(info.Id, info.Path));
             }
+
+            GameObject go = AssetDatabase.LoadAssetAtPath("Assets/Res/Data/ComPathData.prefab", typeof(UnityEngine.Object)) as GameObject;
+            if (go == null)
+                return;
+            ComPathData data = go.GetComponent<ComPathData>();
+            if (data == null) return;
+            data.Add(id, path);
+            PrefabUtility.SavePrefabAsset(data.gameObject);
         }
 
         public void ClearPath()
         {
             for (int i = 0, range = pathInfo.Count; i < range; ++i)
             {
-                pathInfo[i].ClearPath();
+                pathInfo[i].Clear();
             }
-        }
+            pathInfo.Clear();
 
-        public void ClearPathData()
-        {
-            for (int i = 0, range = pathInfo.Count; i < range; ++i)
-            {
-                pathInfo[i].ClearPathData();
-            }
+            PrefabUtility.SavePrefabAsset(this.gameObject);
         }
 
         private void OnDrawGizmosSelected()
@@ -99,20 +114,9 @@ namespace Module.Unity.AI
                 if (!info.ShowPath)
                     continue;
 
-                Debug.Log(info.Path.Count);
-                if(info.Path.Count != 0)
+                for (int i = 0, range = info.Path.Count - 1; i < range; ++i)
                 {
-                    for (int i = 0, range = info.Path.Count - 1; i < range; ++i)
-                    {
-                        Gizmos.DrawLine(info.Path[i].position, info.Path[i + 1].position);
-                    }
-                }
-                else
-                {
-                    for (int i = 0, range = info.PathData.Count - 1; i < range; ++i)
-                    {
-                        Gizmos.DrawLine(info.PathData[i], info.PathData[i + 1]);
-                    }
+                    Gizmos.DrawLine(info.Path[i].position, info.Path[i + 1].position);
                 }
             }
         }

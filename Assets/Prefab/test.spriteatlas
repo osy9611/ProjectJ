@@ -31,18 +31,13 @@ SpriteAtlas:
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
-    packables:
-    - {fileID: 102900000, guid: 1c8e55804084ffd41a7db3ff45ddaaed, type: 3}
+    packables: []
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites:
-  - {fileID: 21300000, guid: d473e35d9c998d443a00d04000f893e5, type: 3}
-  - {fileID: 21300000, guid: aeb31def086466745b570d082197ee1f, type: 3}
-  m_PackedSpriteNamesToIndex:
-  - Brawler18
-  - Brawler1
+  m_PackedSprites: []
+  m_PackedSpriteNamesToIndex: []
   m_RenderDataMap: {}
   m_Tag: test
   m_IsVariant: 0

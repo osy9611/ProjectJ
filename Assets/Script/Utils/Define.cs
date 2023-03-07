@@ -6,6 +6,8 @@ using UnityEngine;
 public class Define
 {
     public const string tableDataAssetPath = "Assets/Res/Data/ComDataAssets.prefab";
+
+    public const string CommonAtlasPath = "Assets/Res/UI/Prefab/AtlasPrefab/Common.prefab";
     public enum SceneType
     {
         Loading,
@@ -29,6 +31,14 @@ public class Define
         Skill,
         Death,
         Spawn
+    }
+
+    public enum UIEvent
+    {
+        Click,
+        Drag,
+        Up,
+        Down
     }
 
 

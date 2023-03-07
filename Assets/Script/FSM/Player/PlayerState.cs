@@ -84,10 +84,13 @@ namespace PlayerState
                 entity.FSM.ChangeState(Define.ObjectState.Idle);
             }
 
+            Managers.Ani.CheckAndPlay(entity.Ani, "Move");
+
             if (Managers.Input.GetNowContorolScheme() == "PC")
             {
                 SetDir(entity,true);
             }
+
             controller.QViewController.Execute();
         }
         public override void Exit(BaseActor entity)
@@ -164,7 +167,6 @@ namespace PlayerState
                 return;
 
             DesignEnum.SkillID? aniName = entity.SkillAgent.ActionManager.GetSKillId();
-            Debug.Log(aniName);
             Managers.Ani.CheckAndPlay(entity.Ani, aniName.ToString());
 
             if (entity.FSM.AniEnd)

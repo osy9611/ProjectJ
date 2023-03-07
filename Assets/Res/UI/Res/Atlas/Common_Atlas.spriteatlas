@@ -27,7 +27,7 @@ SpriteAtlas:
       blockOffset: 1
       allowAlphaSplitting: 0
       enableRotation: 1
-      enableTightPacking: 1
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
@@ -38,11 +38,53 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: eecb85004343b0e4d8b78fd7f9877b32, type: 3}
+  - {fileID: 21300000, guid: fa2416822d7665445bc33bfbc1540922, type: 3}
+  - {fileID: 21300000, guid: 8c9efb6355add18458a9b2b17beed3ae, type: 3}
+  - {fileID: 21300000, guid: c67fbf9375ad5c34399c2849430ca7f7, type: 3}
+  - {fileID: 21300000, guid: 242533a432db38445a05f4fcab39de7b, type: 3}
   - {fileID: 21300000, guid: 010636c4606f45c448036327554ee230, type: 3}
+  - {fileID: 21300000, guid: 0c39c31525591a44db3f44e321868e7d, type: 3}
+  - {fileID: 21300000, guid: b0ff1455934bfa649a913c7df1a68eea, type: 3}
+  - {fileID: 21300000, guid: 26f8c775a276da347a1cc9a82ec1ac45, type: 3}
+  - {fileID: 21300000, guid: a8032896807b8564e9ef812890570817, type: 3}
+  - {fileID: 21300000, guid: 51948d0811202d444b5b6edff3679df2, type: 3}
+  - {fileID: 21300000, guid: 7be20e2828f3e9e45a897a6f6332e774, type: 3}
+  - {fileID: 21300000, guid: 300abdf8cbdd5c742a05b6506767fd64, type: 3}
   - {fileID: 21300000, guid: 210720c99f73e304bad4d286f0f6c90a, type: 3}
+  - {fileID: 21300000, guid: 3f0defd9ddd8fea4f8512cf591ff2bd8, type: 3}
+  - {fileID: 21300000, guid: f3fe65aae22f4db4081bfad009449109, type: 3}
+  - {fileID: 21300000, guid: 2a5c892bdd014164da633b8c6fd0f246, type: 3}
+  - {fileID: 21300000, guid: a2563f2b8dbc4044b9a50537d3a29962, type: 3}
+  - {fileID: 21300000, guid: 255c050ccda8e5c44b600331e374e2b4, type: 3}
+  - {fileID: 21300000, guid: c181dc8dffc578949a4c37408c51489e, type: 3}
+  - {fileID: 21300000, guid: b2475c7e2489d6e47a14b218979ff0ae, type: 3}
+  - {fileID: 21300000, guid: 249c667fdd6ca9746a08abdb3f9ecbf5, type: 3}
+  - {fileID: 21300000, guid: baed43ef8b87ae94d887a891c229cb31, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Attack
+  - Skill3Mobile
+  - uf_level_simple
+  - Skill3
+  - uf_bg_halfelite
   - Joystick_ball
+  - uf_frame_mask
+  - uf_level_elite
+  - uf_bar_b_health
+  - Skill4Mobile
+  - uf_bar_sm_energy
+  - uf_frame_userpic_mask
+  - Skill1Mobile
   - Joystick
+  - uf_bar_sm_tonus
+  - Skill1
+  - Skill2
+  - Skill4
+  - uf_bar_sm_mana
+  - uf_bg_simple
+  - Skill2Mobile
+  - uf_bg_elite
+  - AttackMobile
   m_RenderDataMap: {}
   m_Tag: Common_Atlas
   m_IsVariant: 0

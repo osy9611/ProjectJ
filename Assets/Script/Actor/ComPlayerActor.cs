@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ComPlayerActor : ComBaseActor
-{
-    
+{    
     protected Vector3 dir;
     public Vector3 Dir { get => dir; set => dir = value; }
 
@@ -16,7 +15,6 @@ public class ComPlayerActor : ComBaseActor
         actor.Ani = GetComponent<Animator>();
         actor.Creature = this;
         Managers.Object.MyActor = actor as PlayerActor;
-        actor.Init();
 
         this.gameObject.layer = LayerMask.NameToLayer("Player");
     }

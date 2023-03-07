@@ -13,7 +13,7 @@ public class ComMonsterActor : ComBaseActor
         actor.CharCon = GetComponent<CharacterController>();
         actor.Ani = GetComponent<Animator>();
         actor.Creature = this;
-        actor.Init();
+        //actor.Init();
 
         this.gameObject.layer = LayerMask.NameToLayer("Monster");
     }

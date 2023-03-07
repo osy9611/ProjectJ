@@ -14,19 +14,28 @@ namespace DesignTable
         [ProtoMember(3)] 
         public sbyte char_gender;
         [ProtoMember(4)] 
-        public float char_moveSpeed;
+        public short char_atk;
         [ProtoMember(5)] 
+        public short char_def;
+        [ProtoMember(6)] 
+        public short char_hp;
+        [ProtoMember(7)] 
+        public float char_moveSpeed;
+        [ProtoMember(8)] 
         public string char_prefab;
 
         public user_characterInfo()
         {
         }
 
-        public user_characterInfo(int char_Id,sbyte char_classId,sbyte char_gender,float char_moveSpeed,string char_prefab)
+        public user_characterInfo(int char_Id,sbyte char_classId,sbyte char_gender,short char_atk,short char_def,short char_hp,float char_moveSpeed,string char_prefab)
         {
             this.char_Id = char_Id;
             this.char_classId = char_classId;
             this.char_gender = char_gender;
+            this.char_atk = char_atk;
+            this.char_def = char_def;
+            this.char_hp = char_hp;
             this.char_moveSpeed = char_moveSpeed;
             this.char_prefab = char_prefab;
 
@@ -40,7 +49,7 @@ namespace DesignTable
         public Dictionary<ArraySegment<byte>, user_characterInfo> datas = new Dictionary<ArraySegment<byte>, user_characterInfo>(new DataComparer());
         
 
-        public bool Insert(int char_Id,sbyte char_classId,sbyte char_gender,float char_moveSpeed,string char_prefab)
+        public bool Insert(int char_Id,sbyte char_classId,sbyte char_gender,short char_atk,short char_def,short char_hp,float char_moveSpeed,string char_prefab)
         { 
             foreach(user_characterInfo info in dataInfo)
             {
@@ -50,7 +59,7 @@ namespace DesignTable
                 }
             }
 
-            dataInfo.Add(new user_characterInfo(char_Id,char_classId,char_gender,char_moveSpeed,char_prefab));
+            dataInfo.Add(new user_characterInfo(char_Id,char_classId,char_gender,char_atk,char_def,char_hp,char_moveSpeed,char_prefab));
             return true;
         }
 
@@ -61,7 +70,7 @@ namespace DesignTable
                 ArraySegment<byte> bytes = GetIdRule(data.char_Id);
                 if (datas.ContainsKey(bytes))
                     continue;
-                datas.Add(bytes,new user_characterInfo(data.char_Id,data.char_classId,data.char_gender,data.char_moveSpeed,data.char_prefab));
+                datas.Add(bytes,new user_characterInfo(data.char_Id,data.char_classId,data.char_gender,data.char_atk,data.char_def,data.char_hp,data.char_moveSpeed,data.char_prefab));
 
                 
             }

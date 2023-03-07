@@ -74,6 +74,10 @@ public class ComHUDFPS : MonoBehaviour
         mStyle.normal.background = null;
         mStyle.fontSize = 25;
         mStyle.normal.textColor = new Color(0f, 1f, 0f, 1.0f);
+
+#if UNITY_ANDROID
+        Application.targetFrameRate = 60;
+#endif
     }
 
     private void Start()

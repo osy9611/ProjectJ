@@ -41,12 +41,16 @@ namespace DesignTable
         [ProtoMember(16)] 
         public int effect_Id;
           public skill_effectInfo effect_Id_ref;        
+        [ProtoMember(17)] 
+        public int hit_effect_Id;
+        [ProtoMember(18)] 
+        public string image_Res;
 
         public skillInfo()
         {
         }
 
-        public skillInfo(int unit_Class,int unit_type,int skill_Id,float skill_coolTime,float skill_range,float skill_radius,float skill_scale,int skill_buffId,sbyte skill_type,sbyte skill_attackType,bool skill_contoroll,bool skill_dash,float skill_dashSpeed,bool skill_judgeAni,float skill_judgeTime,int effect_Id)
+        public skillInfo(int unit_Class,int unit_type,int skill_Id,float skill_coolTime,float skill_range,float skill_radius,float skill_scale,int skill_buffId,sbyte skill_type,sbyte skill_attackType,bool skill_contoroll,bool skill_dash,float skill_dashSpeed,bool skill_judgeAni,float skill_judgeTime,int effect_Id,int hit_effect_Id,string image_Res)
         {
             this.unit_Class = unit_Class;
             this.unit_type = unit_type;
@@ -64,6 +68,8 @@ namespace DesignTable
             this.skill_judgeAni = skill_judgeAni;
             this.skill_judgeTime = skill_judgeTime;
             this.effect_Id = effect_Id;
+            this.hit_effect_Id = hit_effect_Id;
+            this.image_Res = image_Res;
 
         }
     }
@@ -75,7 +81,7 @@ namespace DesignTable
         public Dictionary<ArraySegment<byte>, skillInfo> datas = new Dictionary<ArraySegment<byte>, skillInfo>(new DataComparer());
         public Dictionary<ArraySegment<byte>,List<skillInfo>> listData = new Dictionary<ArraySegment<byte>, List<skillInfo>>(new DataComparer());
 
-        public bool Insert(int unit_Class,int unit_type,int skill_Id,float skill_coolTime,float skill_range,float skill_radius,float skill_scale,int skill_buffId,sbyte skill_type,sbyte skill_attackType,bool skill_contoroll,bool skill_dash,float skill_dashSpeed,bool skill_judgeAni,float skill_judgeTime,int effect_Id)
+        public bool Insert(int unit_Class,int unit_type,int skill_Id,float skill_coolTime,float skill_range,float skill_radius,float skill_scale,int skill_buffId,sbyte skill_type,sbyte skill_attackType,bool skill_contoroll,bool skill_dash,float skill_dashSpeed,bool skill_judgeAni,float skill_judgeTime,int effect_Id,int hit_effect_Id,string image_Res)
         { 
             foreach(skillInfo info in dataInfo)
             {
@@ -85,7 +91,7 @@ namespace DesignTable
                 }
             }
 
-            dataInfo.Add(new skillInfo(unit_Class,unit_type,skill_Id,skill_coolTime,skill_range,skill_radius,skill_scale,skill_buffId,skill_type,skill_attackType,skill_contoroll,skill_dash,skill_dashSpeed,skill_judgeAni,skill_judgeTime,effect_Id));
+            dataInfo.Add(new skillInfo(unit_Class,unit_type,skill_Id,skill_coolTime,skill_range,skill_radius,skill_scale,skill_buffId,skill_type,skill_attackType,skill_contoroll,skill_dash,skill_dashSpeed,skill_judgeAni,skill_judgeTime,effect_Id,hit_effect_Id,image_Res));
             return true;
         }
 
@@ -96,7 +102,7 @@ namespace DesignTable
                 ArraySegment<byte> bytes = GetIdRule(data.unit_Class,data.unit_type,data.skill_Id);
                 if (datas.ContainsKey(bytes))
                     continue;
-                datas.Add(bytes,new skillInfo(data.unit_Class,data.unit_type,data.skill_Id,data.skill_coolTime,data.skill_range,data.skill_radius,data.skill_scale,data.skill_buffId,data.skill_type,data.skill_attackType,data.skill_contoroll,data.skill_dash,data.skill_dashSpeed,data.skill_judgeAni,data.skill_judgeTime,data.effect_Id));
+                datas.Add(bytes,new skillInfo(data.unit_Class,data.unit_type,data.skill_Id,data.skill_coolTime,data.skill_range,data.skill_radius,data.skill_scale,data.skill_buffId,data.skill_type,data.skill_attackType,data.skill_contoroll,data.skill_dash,data.skill_dashSpeed,data.skill_judgeAni,data.skill_judgeTime,data.effect_Id,data.hit_effect_Id,data.image_Res));
 
                 
 bytes = GetListIdRule(data.unit_Class,data.unit_type);

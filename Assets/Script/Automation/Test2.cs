@@ -47,7 +47,6 @@ public class Test2 : MonoBehaviour
 
         //Managers.Atlas.Register();
         //var handle = Addressables.LoadAssetAsync<GameObject>("Assets/Prefab/Cube.prefab");
-       
         if (!UseAddressable)
         {
             Player.SetActive(false);

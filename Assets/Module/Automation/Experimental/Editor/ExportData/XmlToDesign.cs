@@ -1,17 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
-using Module.Automation.Generator;
 using System.IO;
-using System.Net;
 using System.Text;
-using System;
-using System.Xml.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEditor;
-using GluonGui.Dialog;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Module.Automation.Generator

@@ -57,3 +57,9 @@ MonoBehaviour:
     addressable: skill_effect.bytes
   - tableId: 1016
     addressable: monster_master.bytes
+  - tableId: 1018
+    addressable: monster_boss.bytes
+  - tableId: 1017
+    addressable: monster_normal.bytes
+  - tableId: 1019
+    addressable: monster_deploy.bytes

@@ -12,6 +12,7 @@ public class PlayerActor : BaseActor
 
     public override void Init()
     {
+        base.Init();
         unitType = DesignEnum.UnitType.Character;
         userInfo = Managers.Data.User_characterInfos.Get(classID);
 
@@ -26,19 +27,11 @@ public class PlayerActor : BaseActor
 
         statusAgent = new StatusAgent();
         statusAgent.Init(this);
+        statusAgent.SetStatus(userInfo.char_atk, userInfo.char_def, userInfo.char_hp);
     }
     public override void UpdateActor()
     {
-        if (skillAgent == null)
-            return;
-        //controller.Execute();
-        skillAgent.Execute();
-        fsm.Execte();
-    }
-
-    public override void LateUpdateActor()
-    {
-
+        base.UpdateActor();
     }
 
 }

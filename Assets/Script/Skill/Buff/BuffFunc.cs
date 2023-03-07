@@ -6,27 +6,27 @@ public class AddATK : BaseBuff
 {
     protected override void Active()
     {
-        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Str, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
+        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Atk, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
 
     protected override void DeActive()
     {
         base.DeActive();
-        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Str, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
+        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Atk, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
 }
 public class AddDEF : BaseBuff
 {
     protected override void Active()
     {
-        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Dex, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
+        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Def, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
 
     }
 
     protected override void DeActive()
     {
         base.DeActive();
-        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Dex, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
+        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Def, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
 }
 
@@ -34,24 +34,24 @@ public class LowATK:BaseBuff
 {
     protected override void Active() 
     {
-        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Str, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
+        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Atk, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
     protected override void DeActive()
     {
         base.DeActive();
-        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Str, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
+        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Atk, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
 }
 public class LowDEF : BaseBuff
 {
     protected override void Active()
     {
-        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Dex, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
+        actor.StatusAgent.DecreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Def, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
     protected override void DeActive()
     {
         base.DeActive();
-        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Dex, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
+        actor.StatusAgent.IncreaseStatus(StatusDefine.StatusGroupId.Buff, DesignEnum.AttributeId.Def, (long)buffInfo.buff_arg1, buffInfo.buff_usePercent);
     }
 }
 

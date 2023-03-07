@@ -9,38 +9,17 @@
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>Str</ENUM_NAME>
+		<ENUM_NAME>Atk</ENUM_NAME>
 		<ENUM_VALUE>0</ENUM_VALUE>
 		<GROUP_ID>1001</GROUP_ID>
-		<COMMENT>Str</COMMENT>
+		<COMMENT>Atk</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>Vital</ENUM_NAME>
+		<ENUM_NAME>Def</ENUM_NAME>
 		<ENUM_VALUE>1</ENUM_VALUE>
 		<GROUP_ID>1001</GROUP_ID>
-		<COMMENT>Vital</COMMENT>
-	</record>
-	<record>
-		<USE>Y</USE>
-		<ENUM_NAME>Int</ENUM_NAME>
-		<ENUM_VALUE>2</ENUM_VALUE>
-		<GROUP_ID>1001</GROUP_ID>
-		<COMMENT>Int</COMMENT>
-	</record>
-	<record>
-		<USE>Y</USE>
-		<ENUM_NAME>Luck</ENUM_NAME>
-		<ENUM_VALUE>3</ENUM_VALUE>
-		<GROUP_ID>1001</GROUP_ID>
-		<COMMENT>Luck</COMMENT>
-	</record>
-	<record>
-		<USE>Y</USE>
-		<ENUM_NAME>Dex</ENUM_NAME>
-		<ENUM_VALUE>4</ENUM_VALUE>
-		<GROUP_ID>1001</GROUP_ID>
-		<COMMENT>Dex</COMMENT>
+		<COMMENT>Def</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
@@ -51,29 +30,36 @@
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>Morning</ENUM_NAME>
+		<ENUM_NAME>All</ENUM_NAME>
 		<ENUM_VALUE>0</ENUM_VALUE>
+		<GROUP_ID>1002</GROUP_ID>
+		<COMMENT>All</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Morning</ENUM_NAME>
+		<ENUM_VALUE>1</ENUM_VALUE>
 		<GROUP_ID>1002</GROUP_ID>
 		<COMMENT>Morning</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
 		<ENUM_NAME>Noon</ENUM_NAME>
-		<ENUM_VALUE>1</ENUM_VALUE>
+		<ENUM_VALUE>2</ENUM_VALUE>
 		<GROUP_ID>1002</GROUP_ID>
 		<COMMENT>Noon</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
 		<ENUM_NAME>Night</ENUM_NAME>
-		<ENUM_VALUE>2</ENUM_VALUE>
+		<ENUM_VALUE>3</ENUM_VALUE>
 		<GROUP_ID>1002</GROUP_ID>
 		<COMMENT>Night</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
 		<ENUM_NAME>Midnight</ENUM_NAME>
-		<ENUM_VALUE>3</ENUM_VALUE>
+		<ENUM_VALUE>4</ENUM_VALUE>
 		<GROUP_ID>1002</GROUP_ID>
 		<COMMENT>Midnight</COMMENT>
 	</record>
@@ -320,5 +306,26 @@
 		<ENUM_VALUE>3</ENUM_VALUE>
 		<GROUP_ID>1010</GROUP_ID>
 		<COMMENT>던전 보스</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>FieldType</ENUM_NAME>
+		<ENUM_VALUE>-</ENUM_VALUE>
+		<GROUP_ID>1011</GROUP_ID>
+		<COMMENT>필드 타입</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Field</ENUM_NAME>
+		<ENUM_VALUE>0</ENUM_VALUE>
+		<GROUP_ID>1011</GROUP_ID>
+		<COMMENT>필드</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>Dungeon</ENUM_NAME>
+		<ENUM_VALUE>1</ENUM_VALUE>
+		<GROUP_ID>1011</GROUP_ID>
+		<COMMENT>던전</COMMENT>
 	</record>
 </Enum>

@@ -1,6 +1,9 @@
+using DesignTable;
 using Module.Core.Systems;
+using Module.Unity.AI;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectManager
@@ -8,19 +11,16 @@ public class ObjectManager
     private PlayerActor myActor;
     public PlayerActor MyActor { get => myActor; set => myActor = value; }
 
-    Dictionary<string,BaseActor> objects = new Dictionary<string, BaseActor>();
-
-    public void Add(BaseActor actor, bool myPlayer =false)
+    Dictionary<GameObject, BaseActor> objects = new Dictionary<GameObject, BaseActor>();
+    public void Add(BaseActor actor, bool myPlayer = false)
     {
         if (myPlayer)
             this.myActor = actor as PlayerActor;
 
-        Guid128 id = Guid128.Generate();
-        actor.Creature.gameObject.name = id.ToString();
-        objects.Add(id.ToString(), actor);
+        objects.Add(actor.Creature.gameObject, actor);
     }
 
-    public void Remove(string id)
+    public void Remove(GameObject id)
     {
         if (!objects.ContainsKey(id))
             return;
@@ -28,14 +28,24 @@ public class ObjectManager
         objects.Remove(id);
     }
 
-    public BaseActor FindById(string id)
+    public BaseActor FindById(GameObject id,bool checkMyPlayer = false)
     {
-        if(!objects.ContainsKey(id))
+        if(checkMyPlayer)
         {
-            return null;
+            if (myActor.Creature.gameObject == id)
+                return myActor;
         }
+        else
+        {
+            if (!objects.ContainsKey(id))
+            {
+                return null;
+            }
 
-        return objects[id];
+            return objects[id];
+
+        }
+        return null;
     }
 
     public void Clear()
@@ -43,5 +53,79 @@ public class ObjectManager
         objects.Clear();
     }
 
+
+    public void LoadMonster(DesignEnum.FieldType type, bool donDestory = false)
+    {
+        List<monster_deployInfo> deployInfos = Managers.Data.Monster_deployInfos.GetListById((short)type);
+        GameObject root = null;
+
+        if (!donDestory)
+        {
+            root = new GameObject();
+            root.name = "Pools";
+        }
+
+        foreach (var info in deployInfos)
+        {
+            monster_masterInfo monMasterInfo = Managers.Data.Monster_masterInfos.Get(info.mon_id);
+            List<PathInfo> pathInfo = Managers.Data.DataAssets.PathData.Get(info.mon_id);
+
+
+            switch ((DesignEnum.MonsterType)info.mon_type)
+            {
+                case DesignEnum.MonsterType.FieldNormal:
+                case DesignEnum.MonsterType.DungeonNormal:
+                    monster_normalInfo monNormalInfo = Managers.Data.Monster_normalInfos.Get(info.mon_id);
+
+                    foreach (var path in pathInfo)
+                    {
+                        GameObject obj = null;
+                        if (root == null)
+                            obj = Managers.Resource.LoadAndPool(monMasterInfo.mon_prefab, null);
+                        else
+                            obj = Managers.Resource.LoadAndPool(monMasterInfo.mon_prefab, root.transform);
+
+                        ComMonsterActor comActor = obj.GetComponent<ComMonsterActor>();
+                        if (comActor == null)
+                            continue;
+
+                        comActor.Init();
+                        MonsterActor actor = comActor.Actor as MonsterActor;
+                        if (actor == null)
+                            continue;
+                        
+                        actor.ModelID = info.mon_id;
+                        actor.SpawnTime = monNormalInfo.mon_spawnTime;
+                        actor.Init();
+                        (actor.Controller as MonsterController).SetPath(path);
+                        Add(actor);
+                    }
+                    break;
+
+                case DesignEnum.MonsterType.FieldBoss:
+                case DesignEnum.MonsterType.DungeonBoss:
+                    break;
+            }
+        }
+    }
+
+    public void LoadPlayer(int charId, bool myPlayer = false)
+    {
+        user_characterInfo info = Managers.Data.User_characterInfos.Get(charId);
+
+        if (info == null)
+            return;
+
+        GameObject obj = Managers.Resource.LoadAndPool(info.char_prefab, null, 1);
+        ComPlayerActor comActor = obj.GetComponent<ComPlayerActor>();
+        if (comActor == null)
+            return;
+        comActor.Init();
+        PlayerActor actor = comActor.Actor as PlayerActor;
+        actor.ClassID = info.char_classId;
+        actor.Init();
+
+        Add(actor, myPlayer);
+    }
 
 }

@@ -5,7 +5,7 @@ namespace Module.Unity.UGUI
     using UnityEngine.EventSystems;
     using UnityEngine.InputSystem.Layouts;
     using UnityEngine.InputSystem.OnScreen;
-    public class VirtualJoyStick : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
+    public class VirtualJoyStick : UI_Base
     {
         [SerializeField] private RectTransform lever;
         [SerializeField] private RectTransform leverBack;
@@ -14,26 +14,17 @@ namespace Module.Unity.UGUI
         [SerializeField, Range(5f, 50f)]
         private float leverRange;
 
-        [SerializeField, InputControl(layout = "Vector2")]
-        private string controlPath;
 
         private Vector2 pointerDownPos;
         [SerializeField] private Vector2 dir;
 
-        protected override string controlPathInternal 
+        public override void Init()
         {
-            get => controlPath;
-            set => controlPath = value;
+            BindEvent(this.gameObject, OnDrag, Define.UIEvent.Drag);
+            BindEvent(this.gameObject, OnPointerUp, Define.UIEvent.Up);
         }
 
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            if (eventData == null)
-                throw new System.ArgumentException(nameof(eventData));
-        }
-
-
-        public void OnDrag(PointerEventData eventData)
+        public void OnDrag(PointerEventData eventData,System.Action<Vector2> callback)
         {
             if (eventData == null)
                 throw new System.ArgumentException(nameof(eventData));
@@ -45,10 +36,10 @@ namespace Module.Unity.UGUI
 
             Vector2 newPos = new Vector2(delta.x / leverRange, delta.y / leverRange);
             dir = newPos;
-            SendValueToControl(newPos);
+            callback?.Invoke(newPos);
         }
 
-        public void OnPointerUp(PointerEventData eventData)
+        public void OnPointerUp(PointerEventData eventData, System.Action<Vector2> callback)
         {
             if (eventData == null)
                 throw new System.ArgumentException(nameof(eventData));
@@ -56,7 +47,7 @@ namespace Module.Unity.UGUI
             dir = Vector2.zero;
             lever.anchoredPosition = Vector2.zero;
             leverBack.anchoredPosition = Vector2.zero;
-            SendValueToControl(Vector2.zero);
+            callback?.Invoke(Vector2.zero);
         }
     }
 

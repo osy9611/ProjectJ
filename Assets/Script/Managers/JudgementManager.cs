@@ -18,7 +18,7 @@ public class JudgementManager
         var data = Physics.SphereCastAll(tr.position, val.Value.Arg1, tr.up, 0, 1 << LayerMask.NameToLayer("Player"));
         if (data.Length > 0)
         {
-            if (Managers.Object.MyActor.Creature.gameObject == data[0].transform.gameObject) 
+            if (Managers.Object.MyActor.Creature.gameObject == data[0].transform.gameObject)
             {
                 return Managers.Object.MyActor;
             }
@@ -34,29 +34,41 @@ public class JudgementManager
         if (!val.HasValue)
             return null;
 
+        string checkTarget = "";
+
+        if (Managers.Object.MyActor == actor)
+            checkTarget = "Monster";
+        else
+            checkTarget = "Player";
+
+
         switch (attackType)
         {
             case DesignEnum.SkillAttackType.Circle:
-                return CalcCircle(actor.Creature.transform, val);
+                return CalcCircle(checkTarget, actor.Creature.transform, val);
 
             case DesignEnum.SkillAttackType.Straight:
-                return CalcStraight(actor.Creature.transform, val);
+                return CalcStraight(checkTarget, actor.Creature.transform, val);
         }
 
         return null;
     }
 
-    public List<BaseActor> CalcCircle(Transform tr, EventArgs<float, float, float>? val)
+    public List<BaseActor> CalcCircle(string checkTarget, Transform tr, EventArgs<float, float, float>? val)
     {
+        if (string.IsNullOrEmpty(checkTarget))
+            return null;
+
         List<BaseActor> result = new List<BaseActor>();
-        var datas = Physics.SphereCastAll(tr.position, val.Value.Arg1, tr.forward, 0, 1 << LayerMask.NameToLayer("Monster"));
+        var datas = Physics.OverlapSphere(tr.position, val.Value.Arg1, 1 << LayerMask.NameToLayer(checkTarget));
         foreach (var info in datas)
         {
             Vector3 dir = (info.transform.position - tr.position).normalized;
             float dot = Vector3.Dot(tr.forward, dir);
             if (dot > Mathf.Cos(val.Value.Arg2 / 2) * Mathf.Deg2Rad)
             {
-                BaseActor actor = Managers.Object.FindById(info.transform.gameObject.name);
+                BaseActor actor = CheckActor(info, tr, checkTarget);
+
                 if (actor != null)
                 {
                     result.Add(actor);
@@ -67,18 +79,37 @@ public class JudgementManager
         return result;
     }
 
-    public List<BaseActor> CalcStraight(Transform tr, EventArgs<float, float, float>? val)
+    public List<BaseActor> CalcStraight(string checkTarget, Transform tr, EventArgs<float, float, float>? val)
     {
+        if (string.IsNullOrEmpty(checkTarget))
+            return null;
+
         List<BaseActor> result = new List<BaseActor>();
-        var datas = Physics.BoxCastAll(tr.position, tr.lossyScale, tr.forward, tr.rotation, val.Value.Arg3, 1 << LayerMask.NameToLayer("Monster"));
+        var datas = Physics.OverlapBox(tr.position, new Vector3(val.Value.Arg3, val.Value.Arg3, val.Value.Arg3),Quaternion.identity, LayerMask.GetMask(checkTarget));
+        Debug.Log(datas.Length);
         foreach (var info in datas)
         {
-            BaseActor actor = Managers.Object.FindById(info.transform.gameObject.name);
+            BaseActor actor = CheckActor(info, tr, checkTarget);
+
             if (actor != null)
             {
                 result.Add(actor);
             }
         }
         return result;
+    }
+
+    private BaseActor CheckActor(Collider info,Transform tr,string checkTarget)
+    {
+
+        if (checkTarget == "Player")
+        {
+            return Managers.Object.FindById(info.transform.gameObject, true);
+        }
+        else
+        {
+            Managers.Effect.Get(4, info.ClosestPoint(tr.position));
+            return Managers.Object.FindById(info.transform.gameObject, false);
+        }
     }
 }

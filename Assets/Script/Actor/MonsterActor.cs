@@ -12,8 +12,12 @@ public class MonsterActor : BaseActor
     private short modelID;
     public short ModelID { get => modelID; set => modelID = value; }
 
+    private float spawnTime;
+    public float SpawnTime { get => spawnTime; set=> spawnTime = value; }
+
     public override void Init()
     {
+        base.Init();
         UnitType = DesignEnum.UnitType.Monster;
         monsterInfo = Managers.Data.Monster_masterInfos.Get(modelID);
 
@@ -26,17 +30,14 @@ public class MonsterActor : BaseActor
         fsm = new MonsterFSM();
         fsm.Init(this);
 
+        statusAgent = new StatusAgent();
+        statusAgent.Init(this);
+        statusAgent.SetStatus(monsterInfo.mon_atk, monsterInfo.mon_def, monsterInfo.mon_hp);
+
     }
     public override void UpdateActor()
     {
-        if (skillAgent == null)
-            return;
-        skillAgent.Execute();
-        fsm.Execte();
+        base.UpdateActor();
     }
 
-    public override void LateUpdateActor()
-    {
-
-    }
 }

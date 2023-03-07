@@ -7,7 +7,6 @@ using UnityEngine;
 public class SkillAgent
 {
     protected BaseActor actor;
-    private EventEmmiter skillEvent;
     private BuffManager buffManager;
     private EffectInfo effectInfo;
     private ActionManager actionManager;
@@ -16,21 +15,15 @@ public class SkillAgent
     public virtual void Init(BaseActor actor)
     {
         this.actor = actor;
-        skillEvent = new EventEmmiter();
         buffManager = new BuffManager();
-        buffManager.Init(skillEvent,actor);
+        buffManager.Init(actor);
         actionManager = new ActionManager();
-        actionManager.Init(actor,skillEvent);
+        actionManager.Init(actor);
         
         effectInfo= new EffectInfo();
         effectInfo.Init(actor.Creature.PivotAget, actionManager);
     }
 
-
-    public virtual void Execute() 
-    {
-        skillEvent.Invoke();
-    }
 
     public virtual void ResetData() { }
 

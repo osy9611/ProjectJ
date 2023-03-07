@@ -87,7 +87,6 @@ namespace MonsterState
                     fsm = entity.FSM as MonsterFSM;
             }
             fsm.CheckAttackRangeFSM(false, Define.ObjectState.Idle);
-            
         }
 
         public override void Execute(BaseActor entity)
@@ -106,10 +105,17 @@ namespace MonsterState
 
     public class Attack : State<BaseActor>
     {
+        private MonsterFSM fsm;
         public override void Enter(BaseActor entity)
         {
             if (entity == null)
                 return;
+
+            if (fsm == null)
+            {
+                if (entity.FSM != null)
+                    fsm = entity.FSM as MonsterFSM;
+            }
 
             Managers.Ani.Play(entity.Ani, "Attack");
         }
@@ -119,7 +125,10 @@ namespace MonsterState
             if (entity == null)
                 return;
 
+            fsm.LookAtTargetFSM();
             Managers.Ani.CheckAndPlay(entity.Ani, "Attack");
+
+            
 
             if (entity.FSM.AniEnd)
             {
@@ -137,10 +146,18 @@ namespace MonsterState
 
     public class Skill : State<BaseActor>
     {
+        private MonsterFSM fsm;
         public override void Enter(BaseActor entity)
         {
             if (entity == null)
                 return;
+
+            if (fsm == null)
+            {
+                if (entity.FSM != null)
+                    fsm = entity.FSM as MonsterFSM;
+            }
+
             DesignEnum.SkillID? aniName = entity.SkillAgent.ActionManager.GetSKillId();
             if (aniName == null)
                 return;
@@ -149,6 +166,7 @@ namespace MonsterState
 
         public override void Execute(BaseActor entity)
         {
+            fsm.LookAtTargetFSM();
             DesignEnum.SkillID? aniName = entity.SkillAgent.ActionManager.GetSKillId();
             Managers.Ani.CheckAndPlay(entity.Ani, aniName.ToString());
 
@@ -163,5 +181,39 @@ namespace MonsterState
             entity.SkillAgent.ActionManager.UnRegister();
         }
     }
+
+    public class Death : State<BaseActor>
+    {
+        private MonsterFSM fsm;
+        public override void Enter(BaseActor entity)
+        {
+            if (entity == null)
+                return;
+
+            if (fsm == null)
+            {
+                if (entity.FSM != null)
+                    fsm = entity.FSM as MonsterFSM;
+            }
+
+            fsm.ResetMovePathFSM();
+            
+            Managers.Ani.Play(entity.Ani, "Death");
+        }
+
+        public override void Execute(BaseActor entity)
+        {
+            if (entity.FSM.AniEnd)
+            {
+                entity.FSM.ChangeState(Define.ObjectState.Spawn);
+            }
+        }
+
+        public override void Exit(BaseActor entity)
+        {
+
+        }
+    }
+
 }
 

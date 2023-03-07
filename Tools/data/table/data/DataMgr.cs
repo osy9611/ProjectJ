@@ -22,7 +22,10 @@ namespace DesignTable
     public enum TableId
     {
         buff = 1014,
+monster_boss = 1018,
+monster_deploy = 1019,
 monster_master = 1016,
+monster_normal = 1017,
 skill = 1013,
 skill_effect = 1015,
 user_character = 1011,
@@ -41,13 +44,19 @@ user_character2 = 1012,
         DataMessageSerializer serializer = new DataMessageSerializer();
 
         private buffInfos buffInfos;
+private monster_bossInfos monster_bossInfos;
+private monster_deployInfos monster_deployInfos;
 private monster_masterInfos monster_masterInfos;
+private monster_normalInfos monster_normalInfos;
 private skillInfos skillInfos;
 private skill_effectInfos skill_effectInfos;
 private user_characterInfos user_characterInfos;
 private user_character2Infos user_character2Infos;
 public buffInfos BuffInfos => buffInfos;
+public monster_bossInfos Monster_bossInfos => monster_bossInfos;
+public monster_deployInfos Monster_deployInfos => monster_deployInfos;
 public monster_masterInfos Monster_masterInfos => monster_masterInfos;
+public monster_normalInfos Monster_normalInfos => monster_normalInfos;
 public skillInfos SkillInfos => skillInfos;
 public skill_effectInfos Skill_effectInfos => skill_effectInfos;
 public user_characterInfos User_characterInfos => user_characterInfos;
@@ -93,7 +102,10 @@ public user_character2Infos User_character2Infos => user_character2Infos;
         private void RegisterLoadHandler()
         {
             loadHandlerList.Add(1014, new DataMgr.LoadHandler(LoadbuffInfos));
+loadHandlerList.Add(1018, new DataMgr.LoadHandler(Loadmonster_bossInfos));
+loadHandlerList.Add(1019, new DataMgr.LoadHandler(Loadmonster_deployInfos));
 loadHandlerList.Add(1016, new DataMgr.LoadHandler(Loadmonster_masterInfos));
+loadHandlerList.Add(1017, new DataMgr.LoadHandler(Loadmonster_normalInfos));
 loadHandlerList.Add(1013, new DataMgr.LoadHandler(LoadskillInfos));
 loadHandlerList.Add(1015, new DataMgr.LoadHandler(Loadskill_effectInfos));
 loadHandlerList.Add(1011, new DataMgr.LoadHandler(Loaduser_characterInfos));
@@ -104,7 +116,10 @@ loadHandlerList.Add(1012, new DataMgr.LoadHandler(Loaduser_character2Infos));
         private void RegisterClearHandler()
         {
             clearHandlerList.Add(1014, ClearDatabuffInfos);
+clearHandlerList.Add(1018, ClearDatamonster_bossInfos);
+clearHandlerList.Add(1019, ClearDatamonster_deployInfos);
 clearHandlerList.Add(1016, ClearDatamonster_masterInfos);
+clearHandlerList.Add(1017, ClearDatamonster_normalInfos);
 clearHandlerList.Add(1013, ClearDataskillInfos);
 clearHandlerList.Add(1015, ClearDataskill_effectInfos);
 clearHandlerList.Add(1011, ClearDatauser_characterInfos);
@@ -120,12 +135,36 @@ clearHandlerList.Add(1012, ClearDatauser_character2Infos);
         buffInfos.Initialize();
     }
 }
+private void Loadmonster_bossInfos(byte[] data)
+{
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        monster_bossInfos = serializer.Deserialize(1018,data) as monster_bossInfos;
+        monster_bossInfos.Initialize();
+    }
+}
+private void Loadmonster_deployInfos(byte[] data)
+{
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        monster_deployInfos = serializer.Deserialize(1019,data) as monster_deployInfos;
+        monster_deployInfos.Initialize();
+    }
+}
 private void Loadmonster_masterInfos(byte[] data)
 {
     using (MemoryStream memoryStream = new MemoryStream(data))
     {
         monster_masterInfos = serializer.Deserialize(1016,data) as monster_masterInfos;
         monster_masterInfos.Initialize();
+    }
+}
+private void Loadmonster_normalInfos(byte[] data)
+{
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        monster_normalInfos = serializer.Deserialize(1017,data) as monster_normalInfos;
+        monster_normalInfos.Initialize();
     }
 }
 private void LoadskillInfos(byte[] data)
@@ -167,10 +206,25 @@ private void Loaduser_character2Infos(byte[] data)
     if(buffInfos != null)
         buffInfos=null;
 }
+private void ClearDatamonster_bossInfos()
+{
+    if(monster_bossInfos != null)
+        monster_bossInfos=null;
+}
+private void ClearDatamonster_deployInfos()
+{
+    if(monster_deployInfos != null)
+        monster_deployInfos=null;
+}
 private void ClearDatamonster_masterInfos()
 {
     if(monster_masterInfos != null)
         monster_masterInfos=null;
+}
+private void ClearDatamonster_normalInfos()
+{
+    if(monster_normalInfos != null)
+        monster_normalInfos=null;
 }
 private void ClearDataskillInfos()
 {

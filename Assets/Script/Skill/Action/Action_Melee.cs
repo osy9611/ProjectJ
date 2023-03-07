@@ -6,12 +6,32 @@ public class Action_Melee : BaseAction
 {
     bool isFirst = false;
     Vector3 prevPos;
+    bool isHit;
 
     public override void Execute()
     {
         base.Execute();
         if (skillInfo.skill_dash)
             DashExecute();
+    }
+
+    public override void OnJudge()
+    {
+        if (skillInfo.skill_dash)
+        {
+            if (!isHit)
+            {
+                base.OnJudge();
+                if (checkActors.Count > 0)
+                {
+                    isHit = true;
+                }
+            }
+        }
+        else
+        {
+            base.OnJudge();
+        }
     }
 
     private void DashExecute()
@@ -37,6 +57,7 @@ public class Action_Melee : BaseAction
     public override void Release()
     {
         isFirst = false;
+        isHit = false;
     }
 
 }

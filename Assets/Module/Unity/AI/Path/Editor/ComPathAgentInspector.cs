@@ -14,18 +14,13 @@ namespace Module.Unity.AI
         {
             if (script.PathInfo.Count != 0)
             {
-                if (GUILayout.Button("Generate Path"))
+                if (GUILayout.Button("Generate"))
                 {
                     script.GenerateData();
                 }
             }
             
-            if (GUILayout.Button("ClearPath"))
-            {
-                script.ClearPath();
-            }
-
-            if (GUILayout.Button("ClearPathData"))
+            if (GUILayout.Button("Clear"))
             {
                 script.ClearPath();
             }

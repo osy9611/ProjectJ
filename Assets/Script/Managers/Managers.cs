@@ -1,9 +1,7 @@
 using Module.Unity.Addressables;
 using Module.Unity.Core;
-using System.Collections;
-using System.Collections.Generic;
+using Module.Unity.UGUI;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Managers : MonoBehaviour
 {
@@ -13,6 +11,7 @@ public class Managers : MonoBehaviour
     PoolManager pool = new PoolManager();
     ResourceManager resource = new ResourceManager();
     SpriteAtlasManager atlas = new SpriteAtlasManager();
+    UIManager ui = new UIManager();
     #endregion
 
     #region Content
@@ -22,18 +21,24 @@ public class Managers : MonoBehaviour
     InputManager input = new InputManager();
     AnimationManager ani = new AnimationManager();
     JudgementManager judge = new JudgementManager();
+    MapManager map = new MapManager();
+    EffectManager effect = new EffectManager();
     #endregion
 
 
     public static PoolManager Pool { get => Instance.pool; }
     public static ResourceManager Resource { get => Instance.resource; }
     public static SpriteAtlasManager Atlas { get => Instance.atlas; }
+    public static UIManager UI { get => Instance.ui; }
     public static DataManager Data { get => Instance.data; }
     public static SceneManager Scene { get => Instance.scene; }
     public static ObjectManager Object { get => Instance.objects; }
     public static InputManager Input { get => Instance.input; }
     public static AnimationManager Ani { get => Instance.ani; }
-    public static JudgementManager Judge { get=> Instance.judge; }
+    public static JudgementManager Judge { get => Instance.judge; }
+    public static EffectManager Effect { get => Instance.effect; }
+
+    public static MapManager Map { get => Instance.map; }
 
     private void Awake()
     {
@@ -57,13 +62,16 @@ public class Managers : MonoBehaviour
 
             ComLoader.Create();
             Resource.Init(Pool);
+            UI.Init(Resource);
             Data.Init();
+            Effect.Init();
         }
     }
 
     public static void Clear()
     {
+        Resource.Clear();
         Pool.ClearAll();
-        Resource.ReleaseAll();
+        UI.Clear();
     }
 }

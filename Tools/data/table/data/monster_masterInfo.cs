@@ -12,7 +12,7 @@ namespace DesignTable
         [ProtoMember(2)] 
         public string mon_name;
         [ProtoMember(3)] 
-        public short mon_att;
+        public short mon_atk;
         [ProtoMember(4)] 
         public short mon_def;
         [ProtoMember(5)] 
@@ -34,11 +34,11 @@ namespace DesignTable
         {
         }
 
-        public monster_masterInfo(short mon_id,string mon_name,short mon_att,short mon_def,short mon_hp,short mon_speed,sbyte mon_type,short mon_searchAngle,short mon_searchRange,float mon_keppRange,string mon_prefab)
+        public monster_masterInfo(short mon_id,string mon_name,short mon_atk,short mon_def,short mon_hp,short mon_speed,sbyte mon_type,short mon_searchAngle,short mon_searchRange,float mon_keppRange,string mon_prefab)
         {
             this.mon_id = mon_id;
             this.mon_name = mon_name;
-            this.mon_att = mon_att;
+            this.mon_atk = mon_atk;
             this.mon_def = mon_def;
             this.mon_hp = mon_hp;
             this.mon_speed = mon_speed;
@@ -58,7 +58,7 @@ namespace DesignTable
         public Dictionary<ArraySegment<byte>, monster_masterInfo> datas = new Dictionary<ArraySegment<byte>, monster_masterInfo>(new DataComparer());
         
 
-        public bool Insert(short mon_id,string mon_name,short mon_att,short mon_def,short mon_hp,short mon_speed,sbyte mon_type,short mon_searchAngle,short mon_searchRange,float mon_keppRange,string mon_prefab)
+        public bool Insert(short mon_id,string mon_name,short mon_atk,short mon_def,short mon_hp,short mon_speed,sbyte mon_type,short mon_searchAngle,short mon_searchRange,float mon_keppRange,string mon_prefab)
         { 
             foreach(monster_masterInfo info in dataInfo)
             {
@@ -68,7 +68,7 @@ namespace DesignTable
                 }
             }
 
-            dataInfo.Add(new monster_masterInfo(mon_id,mon_name,mon_att,mon_def,mon_hp,mon_speed,mon_type,mon_searchAngle,mon_searchRange,mon_keppRange,mon_prefab));
+            dataInfo.Add(new monster_masterInfo(mon_id,mon_name,mon_atk,mon_def,mon_hp,mon_speed,mon_type,mon_searchAngle,mon_searchRange,mon_keppRange,mon_prefab));
             return true;
         }
 
@@ -79,7 +79,7 @@ namespace DesignTable
                 ArraySegment<byte> bytes = GetIdRule(data.mon_id);
                 if (datas.ContainsKey(bytes))
                     continue;
-                datas.Add(bytes,new monster_masterInfo(data.mon_id,data.mon_name,data.mon_att,data.mon_def,data.mon_hp,data.mon_speed,data.mon_type,data.mon_searchAngle,data.mon_searchRange,data.mon_keppRange,data.mon_prefab));
+                datas.Add(bytes,new monster_masterInfo(data.mon_id,data.mon_name,data.mon_atk,data.mon_def,data.mon_hp,data.mon_speed,data.mon_type,data.mon_searchAngle,data.mon_searchRange,data.mon_keppRange,data.mon_prefab));
 
                 
             }

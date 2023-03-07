@@ -4,27 +4,35 @@ namespace Module.Core.Systems
 {
     public struct Guid128
     {
-        private long id1;
-        private long id2;
-        private string stringId;
+        private long m_Id1;
+        private long m_Id2;
+        private string m_StringId;
 
         public long Id1
         {
-            get => id1;
+            get
+            {
+                return m_Id1;
+            }
+
             set
             {
-                id1 = value;
-                stringId = null;
+                m_Id1 = value;
+                m_StringId = null;
             }
         }
 
         public long Id2
         {
-            get => id2;
+            get
+            {
+                return m_Id2;
+            }
+
             set
             {
-                id2 = value;
-                stringId = null;
+                m_Id2 = value;
+                m_StringId = null;
             }
         }
 
@@ -32,51 +40,52 @@ namespace Module.Core.Systems
         {
             get
             {
-                if(stringId == null)
+                if (m_StringId == null)
                 {
                     CreateStringId();
                 }
 
-                return stringId;
+                return m_StringId;
             }
         }
 
         public Guid128(long id1, long id2)
         {
-            this.id1 = id1;
-            this.id2 = id2;
+            m_Id1 = id1;
+            m_Id2 = id2;
 
-            stringId = null;
+            m_StringId = null;
         }
 
         private void CreateStringId()
         {
-            byte[] byteId1 = BitConverter.GetBytes(id1);
-            byte[] byteId2 = BitConverter.GetBytes(id2);
+            byte[] byteId1 = BitConverter.GetBytes(m_Id1);
+            byte[] byteId2 = BitConverter.GetBytes(m_Id2);
 
-            stringId = ToString(byteId1, 0, byteId1.Length) + ToString(byteId2, 0, byteId2.Length);
+            //m_GuidValue = BitConverter.ToString(byteId1, 0, byteId1.Length) + BitConverter.ToString(byteId2, 0, byteId2.Length);
+            m_StringId = ToString(byteId1, 0, byteId1.Length) + ToString(byteId2, 0, byteId2.Length);
         }
 
         public override string ToString()
         {
-            return stringId;
+            return StringId;
         }
 
         public override bool Equals(object o)
         {
-            if (((Guid128)o).id1 == id1 && ((Guid128)o).Id2 == Id2)
+            if (((Guid128)o).m_Id1 == m_Id1 && ((Guid128)o).Id2 == m_Id2)
                 return true;
             else
                 return false;
         }
 
-        public static bool operator == (Guid128 c1, Guid128 c2)
+        public static bool operator ==(Guid128 c1, Guid128 c2)
         {
             return c1.Equals(c2);
         }
         public static bool operator !=(Guid128 c1, Guid128 c2)
         {
-            return ! c1.Equals(c2);
+            return !c1.Equals(c2);
         }
 
         static public Guid128 Generate()
@@ -87,8 +96,8 @@ namespace Module.Core.Systems
 
             var bytes = guid.ToByteArray();
 
-            value.id1 = BitConverter.ToInt64(bytes, 0);
-            value.id2 = BitConverter.ToInt64(bytes, 0);
+            value.m_Id1 = BitConverter.ToInt64(bytes, 0);
+            value.m_Id2 = BitConverter.ToInt64(bytes, 8);
 
             return value;
         }
@@ -112,11 +121,11 @@ namespace Module.Core.Systems
             char[] chArray = new char[length1];
             int num1 = startIndex;
 
-            for(int index= 0,range = length1;index<range;index+=2)
+            for (int index = 0; index < length1; index += 2)
             {
                 byte num2 = value[num1++];
                 chArray[index] = GetHexValue((int)num2 / 16);
-                chArray[index+1] = GetHexValue((int)num2 % 16);
+                chArray[index + 1] = GetHexValue((int)num2 % 16);
             }
 
             return new string(chArray, 0, chArray.Length);

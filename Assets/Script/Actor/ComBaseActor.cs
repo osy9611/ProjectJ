@@ -19,7 +19,7 @@ public abstract class ComBaseActor : MonoBehaviour
 
     private void Start()
     {
-        Init();
+
     }
 
     // Update is called once per frame

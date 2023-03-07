@@ -8,6 +8,7 @@ public class MonsterFSM : FSM
     private MonsterController controller;
     public bool SearchTarget { get => controller.SearchTarget(); }
     public bool ReachTarget { get => controller.ReachTarget; }
+
     public override void Init(BaseActor actor)
     {
         base.Init(actor);
@@ -16,7 +17,7 @@ public class MonsterFSM : FSM
         states[(int)Define.ObjectState.Move] = new MonsterState.Move();
         states[(int)Define.ObjectState.Attack] = new MonsterState.Attack();
         states[(int)Define.ObjectState.Skill] = new MonsterState.Skill();
-        states[(int)Define.ObjectState.Death] = new CommonState.Death();
+        states[(int)Define.ObjectState.Death] = new MonsterState.Death();
         states[(int)Define.ObjectState.Spawn] = new CommonState.Spawn();
 
         controller = actor.Controller as MonsterController;
@@ -33,6 +34,16 @@ public class MonsterFSM : FSM
             return;
         }
         Managers.Ani.CheckAndPlay(actor.Ani, "Move");
+    }
+
+    public void ResetMovePathFSM()
+    {
+        controller.ResetNavigation();
+    }
+
+    public void LookAtTargetFSM()
+    {
+        controller.LookAtTarget();
     }
 
     public void CheckAttackRangeFSM(bool checkSkill, Define.ObjectState? checkType, System.Action<bool> callback = null)
@@ -75,4 +86,5 @@ public class MonsterFSM : FSM
         return false;
     }
 
+   
 }

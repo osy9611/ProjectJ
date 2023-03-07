@@ -1,4 +1,5 @@
 using Module.Unity.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -96,7 +97,10 @@ namespace CommonState
 
         public override void Execute(BaseActor entity)
         {
-
+            if(entity.FSM.AniEnd)
+            {
+                entity.FSM.ChangeState(Define.ObjectState.Spawn);
+            }
         }
 
         public override void Exit(BaseActor entity)
@@ -107,19 +111,55 @@ namespace CommonState
 
     public class Spawn : State<BaseActor>
     {
+        private float spawnTime = -1;
+        private float nowTime = 0;
         public override void Enter(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null)
+                return;
+
+            if(spawnTime == -1)
+            {
+                if(Managers.Object.FindById(entity.Creature.gameObject, false)==null)
+                {
+                    MonsterActor actor = entity as MonsterActor;
+                    if(actor != null)
+                    {
+                        spawnTime = actor.SpawnTime;
+                    }
+                }
+                else
+                {
+                    spawnTime = 0;
+                }
+            }
         }
 
         public override void Execute(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+            if (CalcSpawnTime())
+            {
+                entity.FSM.ChangeState(Define.ObjectState.Idle);
+            }
         }
 
         public override void Exit(BaseActor entity)
         {
-            throw new System.NotImplementedException();
+
+        }
+
+        private bool CalcSpawnTime()
+        {
+            if (nowTime <= spawnTime)
+            {
+                nowTime += Time.deltaTime;
+                return false;
+            }
+            else
+            {
+                nowTime = 0;
+                return true;
+            }
         }
     }
 }

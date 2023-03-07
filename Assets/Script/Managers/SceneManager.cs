@@ -1,3 +1,4 @@
+using DesignTable;
 using Module.Unity.Core;
 using Module.Unity.Utils;
 using System.Collections;
@@ -14,7 +15,7 @@ public class SceneManager
     {
         if (loadingBar != null)
             return;
-        GameObject go = Managers.Resource.LoadAndInisiate("Assets/Res/UI/LoadingBar.prefab");
+        GameObject go = Managers.Resource.LoadAndInisiate("Assets/Res/UI/Prefab/LoadingBar.prefab");
         loadingBar = Util.FindChild<Image>(go, "LoadingBar");
     }
 
@@ -37,25 +38,22 @@ public class SceneManager
             success = result;
         });
 
-
-
         if (!success)
         {
             yield break;
         }
 
-
         Init();
 
         yield return Managers.Data.CoLoadData();
-        yield return CoLoadGameScene();
+        yield return CoLoadFieldScene();
     }
 
-    public IEnumerator CoLoadGameScene()
+    public IEnumerator CoLoadFieldScene()
     {
         bool success = false;
 
-        yield return Managers.Resource.CoLoadSceneAsync("testTod", LoadSceneMode.Single, (result) =>
+        yield return Managers.Resource.CoLoadSceneAsync("Field", LoadSceneMode.Single, (result) =>
         {
             success = result;
         }, loadingBar);
@@ -65,5 +63,18 @@ public class SceneManager
         {
             yield break;
         }
+
+        //Player Load
+        Managers.Object.LoadPlayer(0,true);
+
+        //Monster Load
+        Managers.Object.LoadMonster(DesignEnum.FieldType.Field);
+
+        //UI Load
+#if UNITY_ANDROID || UNITY_IOS
+        Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/MobileCanvas.prefab");
+#else
+        Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/PCCanvas.prefab");
+#endif
     }
 }

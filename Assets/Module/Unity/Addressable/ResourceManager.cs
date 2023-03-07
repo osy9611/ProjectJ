@@ -1,6 +1,7 @@
 namespace Module.Unity.Addressables
 {
     using Module.Unity.Core;
+    using Module.Unity.Utils;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace Module.Unity.Addressables
             return go;
         }
 
-        public GameObject LoadAndPool(string path,Transform parent = null,int poolCount = 1)
+        public GameObject LoadAndPool(string path,Transform parent = null)
         {
             GameObject original = LoadAndGet<GameObject>(path);
             if(original == null)
@@ -48,6 +49,45 @@ namespace Module.Unity.Addressables
             }
 
             return poolManager.Pop(original, parent).gameObject;
+        }
+
+        public GameObject LoadAndPool(string path, Transform parent = null, int poolCount = 1)
+        {
+            GameObject original = LoadAndGet<GameObject>(path);
+            if (original == null)
+            {
+                Debug.Log($"Fail to load prefab : {path} ");
+                return null;
+            }
+            poolManager.CreatePool(original, poolCount);
+            return poolManager.Pop(original, parent).gameObject;
+        }
+
+        public void LoadAndCreate(string path, Transform parent = null, int poolCount = 1)
+        {
+            GameObject original = LoadAndGet<GameObject>(path);
+            if (original == null)
+            {
+                Debug.Log($"Fail to load prefab : {path} ");
+                return;
+            }
+            if (poolManager.GetOriginal(original.name) != null)
+                return;
+            poolManager.CreatePool(original, poolCount);
+        }
+
+        public void LoadAndCreate<T>(string path, Transform parent = null, int poolCount = 1) where T : UnityEngine.Component
+        {
+            GameObject original = LoadAndGet<GameObject>(path);
+            if (original == null)
+            {
+                Debug.Log($"Fail to load prefab : {path} ");
+                return;
+            }
+            if (poolManager.GetOriginal(original.name) != null)
+                return;
+            original.GetOrAddComponent<T>();
+            poolManager.CreatePool(original, poolCount);
         }
 
         public void Destory(GameObject go,bool destoryPool = false)
@@ -132,7 +172,6 @@ namespace Module.Unity.Addressables
                     }
                 }
             }
-            yield return new WaitForSeconds(10.0f);
 
             yield return handle;
 
@@ -142,7 +181,7 @@ namespace Module.Unity.Addressables
                 resultCallback(false);
         }
 
-        public T LoadAndGet<T>(string addressable)
+        private T LoadAndGet<T>(string addressable)
         {
             if (datas.ContainsKey(addressable))
                 return (T)datas[addressable].Result;
@@ -249,6 +288,12 @@ namespace Module.Unity.Addressables
                 Release(data);
             }
             datas.Clear();
+        }
+
+        public void Clear()
+        {
+            ReleaseAll();
+            poolManager = null;
         }
     }
 }

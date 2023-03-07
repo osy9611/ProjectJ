@@ -1,9 +1,11 @@
+using Module.Unity.AI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectJ.ClientVariable
 {
+
     [System.Serializable]
     public class SystemData
     {

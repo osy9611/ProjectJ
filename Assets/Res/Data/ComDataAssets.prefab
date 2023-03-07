@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clientVariable: {fileID: 5016132399693778713, guid: a46e9ac75d114804696da7c1e29ce071, type: 3}
   tableAsset: {fileID: 176916429799790694, guid: f9fd39c3406b73b448242070a7d90020, type: 3}
+  pathData: {fileID: 7290521985454665406, guid: e14bb95926df6ce478493e322f7670b5, type: 3}

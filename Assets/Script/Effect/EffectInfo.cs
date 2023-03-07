@@ -28,6 +28,7 @@ public class EffectInfo
 
                 if (action.SkillInfo.effect_Id_ref.effect_path != "")
                     Init(info, action.SkillInfo.effect_Id_ref.effect_path);
+                Managers.Effect.Create(action.SkillInfo.hit_effect_Id,true);
             }
         }
     }
@@ -37,7 +38,7 @@ public class EffectInfo
         if (effects.ContainsKey(info.Id))
             return;
 
-        GameObject obj = Managers.Resource.LoadAndPool(path, info.PivotTr);
+        GameObject obj = Managers.Effect.Get(path, info.PivotTr,1);
         if (obj == null)
             return;
         obj.transform.localPosition = info.PositionOffset;

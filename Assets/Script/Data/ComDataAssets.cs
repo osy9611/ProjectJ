@@ -1,7 +1,6 @@
 using Module.Automation;
+using Module.Unity.AI;
 using ProjectJ.ClientVariable;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectJ
@@ -10,9 +9,17 @@ namespace ProjectJ
     {
         [SerializeField] ComClientVarable clientVariable;
         [SerializeField] ComTableAsset tableAsset;
+        [SerializeField] ComPathData pathData;
 
         public ComClientVarable ClientVarable { get => clientVariable; }
         public ComTableAsset TableAsset { get => tableAsset; }
+
+        public ComPathData PathData {get =>pathData; }
+
+        public void Init()
+        {
+            pathData.Init();
+        }
     }
 
 }

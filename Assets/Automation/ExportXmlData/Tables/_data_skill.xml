@@ -16,6 +16,8 @@
 	<verify ColumnName="skill_judgeAni" Type="bool" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="skill_judgeTime" Type="float" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="effect_Id" Type="Int32" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="1015" List="-" TableId="1013"/>
+	<verify ColumnName="hit_effect_Id" Type="Int32" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
+	<verify ColumnName="image_Res" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<record>
 		<unit_Class>0</unit_Class>
 		<unit_type>1</unit_type>
@@ -23,7 +25,7 @@
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>1</skill_range>
 		<skill_radius>-1</skill_radius>
-		<skill_scale>1</skill_scale>
+		<skill_scale>2</skill_scale>
 		<skill_buffId>-1</skill_buffId>
 		<skill_type>0</skill_type>
 		<skill_attackType>1</skill_attackType>
@@ -33,42 +35,8 @@
 		<skill_judgeAni>Y</skill_judgeAni>
 		<skill_judgeTime>1</skill_judgeTime>
 		<effect_Id>-1</effect_Id>
-	</record>
-	<record>
-		<unit_Class>0</unit_Class>
-		<unit_type>1</unit_type>
-		<skill_Id>102</skill_Id>
-		<skill_coolTime>0</skill_coolTime>
-		<skill_range>1</skill_range>
-		<skill_radius>-1</skill_radius>
-		<skill_scale>1</skill_scale>
-		<skill_buffId>-1</skill_buffId>
-		<skill_type>0</skill_type>
-		<skill_attackType>1</skill_attackType>
-		<skill_contoroll>N</skill_contoroll>
-		<skill_dash>N</skill_dash>
-		<skill_dashSpeed>-1</skill_dashSpeed>
-		<skill_judgeAni>Y</skill_judgeAni>
-		<skill_judgeTime>1</skill_judgeTime>
-		<effect_Id>-1</effect_Id>
-	</record>
-	<record>
-		<unit_Class>0</unit_Class>
-		<unit_type>1</unit_type>
-		<skill_Id>103</skill_Id>
-		<skill_coolTime>0</skill_coolTime>
-		<skill_range>1</skill_range>
-		<skill_radius>-1</skill_radius>
-		<skill_scale>1</skill_scale>
-		<skill_buffId>-1</skill_buffId>
-		<skill_type>0</skill_type>
-		<skill_attackType>1</skill_attackType>
-		<skill_contoroll>N</skill_contoroll>
-		<skill_dash>N</skill_dash>
-		<skill_dashSpeed>-1</skill_dashSpeed>
-		<skill_judgeAni>Y</skill_judgeAni>
-		<skill_judgeTime>1</skill_judgeTime>
-		<effect_Id>-1</effect_Id>
+		<hit_effect_Id>4</hit_effect_Id>
+		<image_Res>Attack</image_Res>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -87,6 +55,8 @@
 		<skill_judgeAni>Y</skill_judgeAni>
 		<skill_judgeTime>-1</skill_judgeTime>
 		<effect_Id>0</effect_Id>
+		<hit_effect_Id>4</hit_effect_Id>
+		<image_Res>Skill1</image_Res>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -105,6 +75,8 @@
 		<skill_judgeAni>N</skill_judgeAni>
 		<skill_judgeTime>0.1</skill_judgeTime>
 		<effect_Id>-1</effect_Id>
+		<hit_effect_Id>4</hit_effect_Id>
+		<image_Res>Skill2</image_Res>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -113,7 +85,7 @@
 		<skill_coolTime>4</skill_coolTime>
 		<skill_range>5</skill_range>
 		<skill_radius>-1</skill_radius>
-		<skill_scale>3</skill_scale>
+		<skill_scale>1</skill_scale>
 		<skill_buffId>-1</skill_buffId>
 		<skill_type>1</skill_type>
 		<skill_attackType>1</skill_attackType>
@@ -123,6 +95,8 @@
 		<skill_judgeAni>N</skill_judgeAni>
 		<skill_judgeTime>0</skill_judgeTime>
 		<effect_Id>-1</effect_Id>
+		<hit_effect_Id>4</hit_effect_Id>
+		<image_Res>Skill3</image_Res>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -141,6 +115,8 @@
 		<skill_judgeAni>Y</skill_judgeAni>
 		<skill_judgeTime>-1</skill_judgeTime>
 		<effect_Id>3</effect_Id>
+		<hit_effect_Id>4</hit_effect_Id>
+		<image_Res>Skill4</image_Res>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -149,7 +125,7 @@
 		<skill_coolTime>2</skill_coolTime>
 		<skill_range>1</skill_range>
 		<skill_radius>-1</skill_radius>
-		<skill_scale>1</skill_scale>
+		<skill_scale>2</skill_scale>
 		<skill_buffId>-1</skill_buffId>
 		<skill_type>0</skill_type>
 		<skill_attackType>1</skill_attackType>
@@ -159,6 +135,8 @@
 		<skill_judgeAni>Y</skill_judgeAni>
 		<skill_judgeTime>-1</skill_judgeTime>
 		<effect_Id>-1</effect_Id>
+		<hit_effect_Id>-1</hit_effect_Id>
+		<image_Res>-</image_Res>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -177,6 +155,8 @@
 		<skill_judgeAni>Y</skill_judgeAni>
 		<skill_judgeTime>-1</skill_judgeTime>
 		<effect_Id>-1</effect_Id>
+		<hit_effect_Id>-1</hit_effect_Id>
+		<image_Res>-</image_Res>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -195,5 +175,7 @@
 		<skill_judgeAni>Y</skill_judgeAni>
 		<skill_judgeTime>-1</skill_judgeTime>
 		<effect_Id>-1</effect_Id>
+		<hit_effect_Id>-1</hit_effect_Id>
+		<image_Res>-</image_Res>
 	</record>
 </skill>

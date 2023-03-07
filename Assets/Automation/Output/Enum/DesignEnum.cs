@@ -2,30 +2,28 @@ namespace DesignEnum
 {
     /// <summary> 
     /// ID : 1001
-    /// 속성 ID
+    /// ?�성 ID
     /// </summary> 
     public enum AttributeId
     {
-        Str = 0, //Str
-        Vital = 1, //Vital
-        Int = 2, //Int
-        Luck = 3, //Luck
-        Dex = 4, //Dex
+        Atk = 0, //Atk
+        Def = 1, //Def
     }
     /// <summary> 
     /// ID : 1002
-    /// 시간 타입
+    /// ?�간 ?�??
     /// </summary> 
     public enum TimeType
     {
-        Morning = 0, //Morning
-        Noon = 1, //Noon
-        Night = 2, //Night
-        Midnight = 3, //Midnight
+        All = 0, //All
+        Morning = 1, //Morning
+        Noon = 2, //Noon
+        Night = 3, //Night
+        Midnight = 4, //Midnight
     }
     /// <summary> 
     /// ID : 1003
-    /// 유닛 타입
+    /// ?�닛 ?�??
     /// </summary> 
     public enum UnitType
     {
@@ -34,7 +32,7 @@ namespace DesignEnum
     }
     /// <summary> 
     /// ID : 1004
-    /// 클래스 타입
+    /// ?�래???�??
     /// </summary> 
     public enum ClassType
     {
@@ -42,68 +40,77 @@ namespace DesignEnum
     }
     /// <summary> 
     /// ID : 1005
-    /// 버프 타입
+    /// 버프 ?�??
     /// </summary> 
     public enum BuffType
     {
-        AddATK = 0, //공격력 증가
-        AddDEF = 1, //방어력 증가
-        LowATK = 2, //공격력 감소
-        LowDEF = 3, //방어력 감소
-        Strun = 4, //스턴
-        Dot = 5, //도트
+        AddATK = 0, //공격??증�?
+        AddDEF = 1, //방어??증�?
+        LowATK = 2, //공격??감소
+        LowDEF = 3, //방어??감소
+        Strun = 4, //?�턴
+        Dot = 5, //?�트
     }
     /// <summary> 
     /// ID : 1005
-    /// 스킬 타입
+    /// ?�킬 ?�??
     /// </summary> 
     public enum SkillType
     {
-        Normal = 0, //일반 공격
+        Normal = 0, //?�반 공격
         Melee = 1, //근접 공격
         Range = 2, //범위 공격
     }
     /// <summary> 
     /// ID : 1007
-    /// 성별
+    /// ?�별
     /// </summary> 
     public enum Gender
     {
-        Male = 0, //남자
-        Female = 1, //여자
+        Male = 0, //?�자
+        Female = 1, //?�자
     }
     /// <summary> 
     /// ID : 1008
-    /// 스킬 ID
+    /// ?�킬 ID
     /// </summary> 
     public enum SkillID
     {
-        NormalAttack1 = 101, //일반 공격 1
-        NormalAttack2 = 102, //일반 공격 2
-        NormalAttack3 = 103, //일반 공격 3
-        Skill1 = 201, //스킬 공격 1
-        Skill2 = 202, //스킬 공격 2
-        Skill3 = 203, //스킬 공격 3
-        Skill4 = 204, //스킬 공격 4
+        NormalAttack1 = 101, //?�반 공격 1
+        NormalAttack2 = 102, //?�반 공격 2
+        NormalAttack3 = 103, //?�반 공격 3
+        Skill1 = 201, //?�킬 공격 1
+        Skill2 = 202, //?�킬 공격 2
+        Skill3 = 203, //?�킬 공격 3
+        Skill4 = 204, //?�킬 공격 4
     }
     /// <summary> 
     /// ID : 1009
-    /// 스킬 공격 타입
+    /// ?�킬 공격 ?�??
     /// </summary> 
     public enum SkillAttackType
     {
-        Circle = 0, //원형
+        Circle = 0, //?�형
         Straight = 1, //직선
     }
     /// <summary> 
     /// ID : 1010
-    /// 몬스터 타입
+    /// 몬스???�??
     /// </summary> 
     public enum MonsterType
     {
-        FieldNormal = 0, //필드 일반
-        DungeonNormal = 1, //던전 일반
-        FieldBoss = 2, //필드 보스
-        DungeonBoss = 3, //던전 보스
+        FieldNormal = 0, //?�드 ?�반
+        DungeonNormal = 1, //?�전 ?�반
+        FieldBoss = 2, //?�드 보스
+        DungeonBoss = 3, //?�전 보스
+    }
+    /// <summary> 
+    /// ID : 1011
+    /// ?�드 ?�??
+    /// </summary> 
+    public enum FieldType
+    {
+        Field = 0, //?�드
+        Dungeon = 1, //?�전
     }
 }

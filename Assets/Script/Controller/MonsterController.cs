@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking.Match;
 
 public class MonsterController : Controller
 {
@@ -32,11 +33,10 @@ public class MonsterController : Controller
         MonsterActor monsterActor = actor as MonsterActor;
         if (monsterActor == null)
             return;
-        pathInfo = actor.Creature.GetComponent<ComPathAgent>().GetPath(0);
+        
         navAgent = actor.Creature.GetComponent<NavMeshAgent>();
 
-        pathMove = pathInfo.PathData.Count > 1;
-        actor.Creature.transform.position = pathInfo.PathData[0];
+      
 
 
         if (navAgent != null)
@@ -48,6 +48,13 @@ public class MonsterController : Controller
         maxSearchRange = monsterActor.MonsterInfo.mon_searchRange * 2.0f;
         keepRange = monsterActor.MonsterInfo.mon_keppRange;
         checkSearchArgs = new EventArgs<float, float>(originSearchRange, monsterActor.MonsterInfo.mon_searchAngle);
+    }
+
+    public void SetPath(PathInfo info)
+    {
+        pathInfo = info;
+        pathMove = pathInfo.PathData.Count > 1;
+        actor.Creature.transform.position = pathInfo.PathData[0];
     }
 
     public void MovePath()
@@ -171,5 +178,18 @@ public class MonsterController : Controller
             return true;
         }
         return false;
+    }
+
+    public void LookAtTarget()
+    {
+        if (target == null)
+            return;
+        Vector3 dir = target.Creature.transform.position - actor.Creature.transform.position;
+        actor.Creature.transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
+    }
+
+    public void ResetNavigation()
+    {
+        navAgent.enabled = false;
     }
 }

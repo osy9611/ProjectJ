@@ -1,3 +1,4 @@
+using Module.Core.Systems.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,6 @@ public abstract class BaseActor
     protected StatusAgent statusAgent;
     public StatusAgent StatusAgent { get => statusAgent; }
 
-
     protected ComBaseActor creature;
     public ComBaseActor Creature { get => creature; set => creature = value; }
 
@@ -32,7 +32,20 @@ public abstract class BaseActor
     protected Vector2 dir;
     public Vector2 Dir { get => dir; set => dir = value; }
 
-    public abstract void Init();
-    public abstract void UpdateActor();
-    public abstract void LateUpdateActor();
+    protected EventEmmiter eventEmmiter;
+    public EventEmmiter EventEmmiter { get => eventEmmiter; }
+    public virtual void Init()
+    {
+        eventEmmiter = new EventEmmiter();
+    }
+
+    public virtual void UpdateActor()
+    {
+        if (skillAgent == null)
+            return;
+        eventEmmiter.Invoke();
+        fsm.Execte();
+    }
+    public virtual void LateUpdateActor() { }
+
 }

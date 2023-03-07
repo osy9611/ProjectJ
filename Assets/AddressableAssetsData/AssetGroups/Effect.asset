@@ -25,6 +25,10 @@ MonoBehaviour:
     m_Address: Assets/Res/Effect/Hits/HitFolderB/Prefabs
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 99ea7ca86370ad74b9220eb6de0fa2d0
+    m_Address: Assets/Res/Effect/Hits/HitFolder/Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ec75dbe5bcd55ec49b5c8acea52ce85c, type: 2}
   m_SchemaSet:

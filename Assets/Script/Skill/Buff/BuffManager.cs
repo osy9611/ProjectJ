@@ -11,11 +11,9 @@ public class BuffManager
     private BaseActor actor;
 
     public UnorderedList<BaseBuff> Buffs { get => buffs; }
-    private EventEmmiter buffEvent;
 
-    public void Init(EventEmmiter buffEvent, BaseActor actor)
+    public void Init(BaseActor actor)
     {
-        this.buffEvent = buffEvent;
         this.actor = actor;
         buffs = new UnorderedList<BaseBuff>();
     }
@@ -52,13 +50,13 @@ public class BuffManager
 
         buff.Init(this, new EventArgs<BaseActor,buffInfo>(actor,info));
         buffs.Add(buff);
-        buffEvent.AddListener(buff.Execute);
+        actor.EventEmmiter.AddListener(buff.Execute);
     }
 
 
     public void UnRegister(BaseBuff baseBuff)
     {
-        buffEvent.RemoveListener(baseBuff.Execute);
+        actor.EventEmmiter.RemoveListener(baseBuff.Execute);
         buffs.Remove(baseBuff);
     }
 }
