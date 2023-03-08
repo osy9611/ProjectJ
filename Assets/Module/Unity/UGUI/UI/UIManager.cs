@@ -11,6 +11,7 @@ namespace Module.Unity.UGUI
         private int orderLayer = 10;
 
         private Stack<UI_Popup> popupStack = new Stack<UI_Popup>();
+        private Dictionary<string, UI_Popup> PopupInfos = new Dictionary<string, UI_Popup>();
         private UI_Scene sceneUI;
 
         private ResourceManager resourceManager;
@@ -20,11 +21,11 @@ namespace Module.Unity.UGUI
         public void Init(ResourceManager resourceManager)
         {
             this.resourceManager = resourceManager;
-            if(root == null)
+            if (root == null)
             {
                 root = new GameObject { name = "@UI_Root" }.transform;
                 Object.DontDestroyOnLoad(root);
-            }           
+            }
         }
 
         public void SetCanvas(GameObject go, bool sort = true)
@@ -33,7 +34,7 @@ namespace Module.Unity.UGUI
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.overrideSorting = true;
 
-            if(sort)
+            if (sort)
             {
                 canvas.sortingOrder = orderLayer;
                 orderLayer++;
@@ -49,36 +50,46 @@ namespace Module.Unity.UGUI
             if (string.IsNullOrEmpty(path))
                 return default(T);
 
-            GameObject go = resourceManager.LoadAndInisiate(path);
+            GameObject go = resourceManager.LoadAndPool(path, root.transform, 1);
             T sceneUI = Util.GetOrAddComponent<T>(go);
             sceneUI.OnSetCanvasHandler += SetCanvas;
+            sceneUI.OnAddPopupHandler += AddPopupUI;
             this.sceneUI = sceneUI;
-
-            go.transform.SetParent(root.transform);
             return sceneUI;
         }
 
-        public T ShowPopupUI<T>(string path = null) where T : UI_Popup
+        public void ShowPopupUI<T>(string name = null) where T : UI_Popup
         {
-            if (string.IsNullOrEmpty(path))
-                return default(T);
+            if (string.IsNullOrEmpty(name))
+                return;
 
-            GameObject go = resourceManager.LoadAndInisiate(path);
-            T popup = Util.GetOrAddComponent<T>(go);
-            popup.OnSetCanvasHandler += SetCanvas;
-            popup.OnClosePopupUIHandler += ClosePopupUI;
-            popupStack.Push(popup);
+            if(PopupInfos.TryGetValue(name, out var info))
+            {
+                info.gameObject.SetActive(true);
+                popupStack.Push(info);
+            }
+        }
 
-            go.transform.SetParent(root.transform);
+        public void AddPopupUI(UI_Popup[] popupInfos)
+        {
+            foreach (var popup in popupInfos)
+            {
+                if (popup == null)
+                    continue;
 
-            return popup;
+                popup.gameObject.SetActive(false);
+
+                popup.OnSetCanvasHandler += SetCanvas;
+                popup.OnClosePopupUIHandler += ClosePopupUI;
+                PopupInfos.Add(popupInfos.GetType().Name, popup);
+            }
         }
 
         public void ClosePopupUI(UI_Popup popup)
         {
             if (popupStack.Count == 0)
                 return;
-            if(popupStack.Peek() != popup)
+            if (popupStack.Peek() != popup)
             {
                 Debug.LogError("Close Popup Fail!");
                 return;
@@ -91,9 +102,7 @@ namespace Module.Unity.UGUI
         {
             if (popupStack.Count == 0)
                 return;
-            UI_Popup popup = popupStack.Pop();
-            resourceManager.Destory(popup.transform.gameObject);
-            popup = null;
+            popupStack.Pop();
             orderLayer--;
         }
 

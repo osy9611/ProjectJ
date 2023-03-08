@@ -11,4 +11,8 @@ public class ComUIElement : UI_Base
     {
         actor = Managers.Object.MyActor;
     }
+    protected void RegisterUIAction(System.Action action)
+    {
+        Managers.Object.MyActor.EventEmmiter.AddListener(action.Invoke);
+    }
 }

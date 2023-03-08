@@ -1,5 +1,6 @@
 namespace Module.Unity.Utils
 {
+    using Module.Unity.Core;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -61,7 +62,7 @@ namespace Module.Unity.Utils
 
         static internal IEnumerator WaitCorutine(float time, System.Action action = null)
         {
-            yield return new WaitForSeconds(time);
+            yield return YieldCache.WaitForSeconds(time);
 
             if (action != null)
                 action();

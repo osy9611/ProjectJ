@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ComBattleMode : UI_Scene
 {
-    private ComManagedSpriteAtlas managedSpriteAtlas;
+    private ComManagedSpriteAtlas managedSpriteAtlas;    
 
     public override void Init()
     {

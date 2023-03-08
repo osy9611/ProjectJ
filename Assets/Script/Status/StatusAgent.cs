@@ -20,7 +20,7 @@ public class StatusAgent
     }
 
     protected long[] hp;
-    public long HpPer { get => hp[(int)StatusDefine.HPType.NowHP] / hp[(int)StatusDefine.HPType.MaxHP]; }
+    public float HpPer { get => (float)hp[(int)StatusDefine.HPType.NowHP] / (float)hp[(int)StatusDefine.HPType.MaxHP]; }
 
     public void Init(BaseActor actor)
     {
@@ -110,7 +110,10 @@ public class StatusAgent
 
         Debug.Log(actor + " : " + damage);
         if (damage > 0)
+        {
             DecreaseHP(hpType, damage);
+            actor.Creature.HudUnitInfo.SetDamage(damage);
+        }
     }
 
     public void DecreaseHP(StatusDefine.HPType hpType, long value)
@@ -124,7 +127,7 @@ public class StatusAgent
             if (hp[(int)StatusDefine.HPType.NowHP] - result <= 0)
             {
 
-                result = 0;
+                hp[(int)StatusDefine.HPType.NowHP] = 0;
                 actor.FSM.ChangeState(Define.ObjectState.Death);
             }
 

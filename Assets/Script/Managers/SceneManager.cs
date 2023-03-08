@@ -64,17 +64,25 @@ public class SceneManager
             yield break;
         }
 
+        //UI Load
+        ComBattleMode comBattleMode = null;
+#if UNITY_ANDROID || UNITY_IOS
+        comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/MobileCanvas.prefab");
+
+#else
+        comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/PCCanvas.prefab");
+#endif
+        if (comBattleMode != null)
+        {
+            Managers.Hud.SetHud(comBattleMode);
+        }
+
         //Player Load
         Managers.Object.LoadPlayer(0,true);
 
         //Monster Load
         Managers.Object.LoadMonster(DesignEnum.FieldType.Field);
 
-        //UI Load
-#if UNITY_ANDROID || UNITY_IOS
-        Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/MobileCanvas.prefab");
-#else
-        Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/PCCanvas.prefab");
-#endif
+        
     }
 }

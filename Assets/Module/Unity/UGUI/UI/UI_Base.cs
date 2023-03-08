@@ -93,10 +93,6 @@ namespace Module.Unity.UGUI
             }
         }
 
-        protected void RegisterUIAction(Action action)
-        {
-            Managers.Object.MyActor.EventEmmiter.AddListener(action.Invoke);
-        }
 
     }
 

@@ -17,6 +17,9 @@ public class ComPlayerActor : ComBaseActor
         Managers.Object.MyActor = actor as PlayerActor;
 
         this.gameObject.layer = LayerMask.NameToLayer("Player");
+
+        hudUnitInfo = new ComHudUnitInfo();
+        hudUnitInfo.Init(pivotAgent, actor);
     }
 
     protected override void UpdateComActor()

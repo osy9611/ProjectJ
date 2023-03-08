@@ -8,7 +8,7 @@ public class SkillAgent
 {
     protected BaseActor actor;
     private BuffManager buffManager;
-    private EffectInfo effectInfo;
+    private EffectAgent effectInfo;
     private ActionManager actionManager;
     public ActionManager ActionManager { get => actionManager; }
 
@@ -20,10 +20,9 @@ public class SkillAgent
         actionManager = new ActionManager();
         actionManager.Init(actor);
         
-        effectInfo= new EffectInfo();
+        effectInfo= new EffectAgent();
         effectInfo.Init(actor.Creature.PivotAget, actionManager);
     }
-
 
     public virtual void ResetData() { }
 

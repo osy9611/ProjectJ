@@ -1,6 +1,7 @@
 using Module.Unity.Addressables;
 using Module.Unity.Core;
 using Module.Unity.UGUI;
+using Module.Unity.UGUI.Hud;
 using UnityEngine;
 
 public class Managers : MonoBehaviour
@@ -12,6 +13,7 @@ public class Managers : MonoBehaviour
     ResourceManager resource = new ResourceManager();
     SpriteAtlasManager atlas = new SpriteAtlasManager();
     UIManager ui = new UIManager();
+    HudManager hud = new HudManager();
     #endregion
 
     #region Content
@@ -30,6 +32,7 @@ public class Managers : MonoBehaviour
     public static ResourceManager Resource { get => Instance.resource; }
     public static SpriteAtlasManager Atlas { get => Instance.atlas; }
     public static UIManager UI { get => Instance.ui; }
+    public static HudManager Hud { get => Instance.hud; }
     public static DataManager Data { get => Instance.data; }
     public static SceneManager Scene { get => Instance.scene; }
     public static ObjectManager Object { get => Instance.objects; }
@@ -63,6 +66,7 @@ public class Managers : MonoBehaviour
             ComLoader.Create();
             Resource.Init(Pool);
             UI.Init(Resource);
+            Hud.Init(Resource);
             Data.Init();
             Effect.Init();
         }

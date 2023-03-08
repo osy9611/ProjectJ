@@ -12,6 +12,11 @@ public abstract class ComBaseActor : MonoBehaviour
 
     public ComPivotAgent PivotAget=>pivotAgent;
 
+    protected ComHudUnitInfo hudUnitInfo;
+
+    public ComHudUnitInfo HudUnitInfo=>hudUnitInfo;
+
+
     private void Awake()
     {
         pivotAgent = GetComponent<ComPivotAgent>();

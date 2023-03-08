@@ -1,5 +1,6 @@
 using Module.Unity.AI;
 using Module.Unity.Pivot;
+using Module.Unity.UGUI.Hud;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,9 @@ public class ComMonsterActor : ComBaseActor
         //actor.Init();
 
         this.gameObject.layer = LayerMask.NameToLayer("Monster");
+        hudUnitInfo = new ComHudUnitInfo();
+        hudUnitInfo.Init(pivotAgent,actor);
+
     }
     protected override void UpdateComActor()
     {
@@ -31,5 +35,6 @@ public class ComMonsterActor : ComBaseActor
             return;
 
         actor.LateUpdateActor();
+        hudUnitInfo.Execute();
     }
 }

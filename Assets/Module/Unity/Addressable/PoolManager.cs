@@ -37,7 +37,7 @@ namespace Module.Unity.Addressables
                 if (poolable == null)
                     return;
 
-                poolable.transform.parent = Root;
+                poolable.transform.SetParent(Root);
                 poolable.gameObject.SetActive(false);
                 poolable.IsUsing = false;
 
@@ -54,8 +54,7 @@ namespace Module.Unity.Addressables
                     poolable = Create();
 
                 poolable.gameObject.SetActive(true);
-
-                poolable.transform.parent = parent;
+                poolable.transform.SetParent(parent);
                 poolable.IsUsing = true;
 
                 return poolable;

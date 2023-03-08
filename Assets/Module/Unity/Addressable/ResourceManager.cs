@@ -181,7 +181,7 @@ namespace Module.Unity.Addressables
                 resultCallback(false);
         }
 
-        private T LoadAndGet<T>(string addressable)
+        public T LoadAndGet<T>(string addressable)
         {
             if (datas.ContainsKey(addressable))
                 return (T)datas[addressable].Result;
