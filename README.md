@@ -11,7 +11,7 @@
       + Path Agent를 구현해 에디터 상에서 이동 경로를 설정할 수 있도록 구현
       + Pivot Agent를 구현해 에디터 상에서 UI, 파티클 피봇을 설정할 수 있도록 구현
       + 기획 Table, Enum Generator 구현
-         + Table,Enum 데이터를 xml로 저장 후 에디터 상에서 코드 자동 Generator를 구현
+         + Table, Enum 데이터를 xml로 저장 후 에디터 상에서 코드 자동 Generator를 구현
          + Protobuf-net을 이용해 Table 데이터를 직렬화 후 .byte 파일로 저장
       + SpriteAtlas에 들어있는 Sprite를 관리하는 SpriteAtlasManager 구현 
       + Addressable을 이용한 ResourceManager 구현
@@ -20,14 +20,15 @@
     + 콘텐츠
       + DayNight 모듈 구현
          + 시간에 따른 UnityEvent 호출 구현
-         + URP Shader를 이용한 SkyBox 및 태양,달 구현
+         + URP Shader를 이용한 SkyBox 및 태양, 달 구현
       + FMS을 이용한 Player,Monster 구현
       + InputSystem을 이용한 PC/Mobile 크로스 플랫폼 Controller 구현
-      + UIManager, HUDManager를 구현해 UIPop, UIScene, UI Sprite 데이터 로딩
       + Monster, Player Skill,Buff System 구현
       + Monster, Player Status System 구현
     + CD/CI
-       + Jenkins Unity3d 플러그인을 위한 빌드 배포 구축
+       + Jenkins용 docker yml 파일 제작
+       + Jenkins Unity3D 플러그인을 설치해 Unity용 빌드 구축
+       + PreBuild.bat 파일을 작성해 GitHub에서 미리 프로젝트를 pull 받은 후 빌드를 진행할 수 있도록 구현
 
      
  
