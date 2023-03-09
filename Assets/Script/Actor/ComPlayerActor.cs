@@ -24,16 +24,11 @@ public class ComPlayerActor : ComBaseActor
 
     protected override void UpdateComActor()
     {
-        if (actor == null)
-            return;
-        actor.UpdateActor();
+        base.UpdateComActor();
     }
 
     protected override void LateUpdateComActor()
     {
-        if (actor == null)
-            return;
-
-        actor.LateUpdateActor();
+        base.LateUpdateComActor();
     }
 }

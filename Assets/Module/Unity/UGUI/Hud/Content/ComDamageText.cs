@@ -9,37 +9,29 @@ using UnityEngine;
 
 public class ComDamageText : ComHudAgent
 {
-    [SerializeField] float moveSpeed;
-    [SerializeField] float alphaSpeed;
-    [SerializeField] float destroyTime;
     [SerializeField] TextMeshProUGUI text;
-    [SerializeField] Color alpha;
+
+    public string DamageText { set => text.text = value; }
 
     public override void Init(PivotInfo pivotInfo)
     {
         base.Init(pivotInfo);
 
-        Invoke("Destroy",destroyTime);
+        ani.Play();
+
+        AniShowByIndex();
+
+        Invoke("Destroy", ani.clip.length);
     }
 
     public override void Execute()
     {
         base.Execute();
-        UpdateText();
-        
-    }
-
-    public void UpdateText()
-    {
-        text.transform.Translate(new Vector3(0, Time.deltaTime * moveSpeed, 0));
-        alpha.a = Mathf.Lerp(text.color.a, 0, Time.deltaTime * alphaSpeed);
-        text.color = alpha;
-
     }
 
     protected override void Destroy()
     {
-        alpha.a = 1;
+        transform.position = Vector3.zero;
         base.Destroy();
     }
 

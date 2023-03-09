@@ -1,3 +1,4 @@
+using Module.Unity.Pivot;
 using Module.Unity.UGUI.Hud;
 using System.Collections;
 using System.Collections.Generic;

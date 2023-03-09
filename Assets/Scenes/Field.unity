@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 866849026}
-  m_IndirectSpecularColor: {r: 0.12459484, g: 0.12522343, b: 0.1292234, a: 1}
+  m_IndirectSpecularColor: {r: 0.08277332, g: 0.08823077, b: 0.10796292, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,305 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 4354280165638d84d953fe2f2ad51ba5, type: 2}
---- !u!1 &125180850 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5281354488822983047, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-  m_PrefabInstance: {fileID: 1340118460}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &125180853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125180850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cfa59414b003a6428861831729a9530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimeOfDay: 0.00370708
-  OrbitSpeed: 0.1
-  Sun: {fileID: 866849026}
-  sunColor:
-    serializedVersion: 2
-    key0: {r: 0.5193134, g: 0.3276793, b: 0.17055517, a: 1}
-    key1: {r: 0.5176471, g: 0.3254902, b: 0.16862746, a: 1}
-    key2: {r: 0.9176471, g: 0.85098046, b: 0.6313726, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 5783
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
-  Moon: {fileID: 1879800528}
-  moonColor:
-    serializedVersion: 2
-    key0: {r: 0.1254902, g: 0.1254902, b: 0.1254902, a: 1}
-    key1: {r: 0.24230152, g: 0.34353858, b: 0.4245283, a: 1}
-    key2: {r: 0.40557137, g: 0.5055282, b: 0.5849056, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 6707
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
-  skyColor:
-    serializedVersion: 2
-    key0: {r: 0.1254902, g: 0.1254902, b: 0.2901961, a: 1}
-    key1: {r: 0.24705882, g: 0.38039216, b: 0.5058824, a: 1}
-    key2: {r: 0.5286579, g: 0.7828897, b: 0.8301887, a: 0}
-    key3: {r: 0.2503712, g: 0.38563985, b: 0.5105346, a: 0}
-    key4: {r: 0.1254902, g: 0.1254902, b: 0.2901961, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 6564
-    ctime2: 32750
-    ctime3: 43998
-    ctime4: 50455
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 5
-    m_NumAlphaKeys: 2
-  middleColor:
-    serializedVersion: 2
-    key0: {r: 0.023529414, g: 0.019607844, b: 0.023529414, a: 1}
-    key1: {r: 0.5176471, g: 0.3254902, b: 0.16862746, a: 1}
-    key2: {r: 0.9176471, g: 0.85098046, b: 0.6313726, a: 0}
-    key3: {r: 0.34301606, g: 0.49561647, b: 0.6011288, a: 0}
-    key4: {r: 0.41924304, g: 0.5333836, b: 0.57369953, a: 0}
-    key5: {r: 0.90196085, g: 0.7725491, b: 0.40000004, a: 0}
-    key6: {r: 0.6415094, g: 0.29888505, b: 0, a: 0}
-    key7: {r: 0.044365667, g: 0.032506473, b: 0.029647995, a: 0}
-    ctime0: 0
-    ctime1: 5890
-    ctime2: 19692
-    ctime3: 32785
-    ctime4: 38888
-    ctime5: 44459
-    ctime6: 48717
-    ctime7: 50349
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 8
-    m_NumAlphaKeys: 2
-  groundColor:
-    serializedVersion: 2
-    key0: {r: 0.42352942, g: 0.43529412, b: 0.42352942, a: 1}
-    key1: {r: 0.4392157, g: 0.44313726, b: 0.4392157, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  SunBrightness:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.01
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.15
-      value: 0.01
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.35
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.65
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.85
-      value: 0.01
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0.01
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  MoonBrightness:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.15
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.35
-      value: 0.01
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.65
-      value: 0.01
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.85
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnMorning:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNoon:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNight:
-    m_PersistentCalls:
-      m_Calls: []
-  OnMidnight:
-    m_PersistentCalls:
-      m_Calls: []
-  isStop: 1
 --- !u!4 &134641792 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1719944286722975203, guid: 694ba31ee6bbf28438b1cbf22d4a088c, type: 3}
@@ -1242,90 +943,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Color.b
-      value: 0.5849056
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Color.g
-      value: 0.5055282
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Color.r
-      value: 0.40557134
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Intensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Lightmapping
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487370979769, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.18292391
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487370979769, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.1831015
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487370979769, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.6826812
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487370979769, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.683344
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928340, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Color.b
-      value: 0.17055517
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Color.g
-      value: 0.3276793
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Color.r
-      value: 0.5193134
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Intensity
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Lightmapping
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928341, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928343, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.1831015
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928343, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.18292391
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928343, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.683344
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354487821928343, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.6826812
-      objectReference: {fileID: 0}
     - target: {fileID: 5281354488822983041, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1373,10 +990,6 @@ PrefabInstance:
     - target: {fileID: 5281354488822983047, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
       propertyPath: m_Name
       value: Day Night Cycle
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281354488822983047, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
@@ -1487,8 +1100,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1525300783}
   - component: {fileID: 1525300782}
+  - component: {fileID: 1525300784}
   m_Layer: 0
-  m_Name: Test
+  m_Name: Battle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1523,6 +1137,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1525300784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525300781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c7b8be613faed4ea02c6f08303461d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BgmSound:
+    m_AssetGUID: 6d775d5fc491b7b4cb0a11d9bff0b6ea
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1 &1539163329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,11 +1434,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &1879800528 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 5281354487370979768, guid: ebcf1db88b918554cb60ab75bc824243, type: 3}
-  m_PrefabInstance: {fileID: 1340118460}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2093966490
 GameObject:
   m_ObjectHideFlags: 0

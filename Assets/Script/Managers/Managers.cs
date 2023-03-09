@@ -1,5 +1,6 @@
 using Module.Unity.Addressables;
 using Module.Unity.Core;
+using Module.Unity.Sound;
 using Module.Unity.UGUI;
 using Module.Unity.UGUI.Hud;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class Managers : MonoBehaviour
     SpriteAtlasManager atlas = new SpriteAtlasManager();
     UIManager ui = new UIManager();
     HudManager hud = new HudManager();
+    SoundManager sound = new SoundManager();
     #endregion
 
     #region Content
@@ -33,6 +35,7 @@ public class Managers : MonoBehaviour
     public static SpriteAtlasManager Atlas { get => Instance.atlas; }
     public static UIManager UI { get => Instance.ui; }
     public static HudManager Hud { get => Instance.hud; }
+    public static SoundManager Sound { get => Instance.sound; }
     public static DataManager Data { get => Instance.data; }
     public static SceneManager Scene { get => Instance.scene; }
     public static ObjectManager Object { get => Instance.objects; }
@@ -67,6 +70,7 @@ public class Managers : MonoBehaviour
             Resource.Init(Pool);
             UI.Init(Resource);
             Hud.Init(Resource);
+            Sound.Init(Resource);
             Data.Init();
             Effect.Init();
         }

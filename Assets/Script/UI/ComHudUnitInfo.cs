@@ -62,6 +62,7 @@ public class ComHudUnitInfo
         if(damageText.onDestoy ==null)
             damageText.onDestoy = Managers.Resource.Destory;
 
+        damageText.DamageText = damage <= 0? "Miss" : damage.ToString();
         comDamageTexts.Add(damageText);
     }
 

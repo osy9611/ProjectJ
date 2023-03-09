@@ -25,7 +25,7 @@ namespace Module.Unity.Addressables
             }
         }
 
-        public GameObject LoadAndInisiate(string path,Transform parent = null)
+        public GameObject LoadAndInisiate(string path, Transform parent = null)
         {
             GameObject original = LoadAndGet<GameObject>(path);
             if (original == null)
@@ -39,10 +39,10 @@ namespace Module.Unity.Addressables
             return go;
         }
 
-        public GameObject LoadAndPool(string path,Transform parent = null)
+        public GameObject LoadAndPool(string path, Transform parent = null)
         {
             GameObject original = LoadAndGet<GameObject>(path);
-            if(original == null)
+            if (original == null)
             {
                 Debug.Log($"Fail to load prefab : {path} ");
                 return null;
@@ -90,7 +90,7 @@ namespace Module.Unity.Addressables
             poolManager.CreatePool(original, poolCount);
         }
 
-        public void Destory(GameObject go,bool destoryPool = false)
+        public void Destory(GameObject go, bool destoryPool = false)
         {
             Poolable poolable = go.GetComponent<Poolable>();
             if (poolable != null)
@@ -99,10 +99,10 @@ namespace Module.Unity.Addressables
                 return;
             }
             else
-            {                
-                foreach(var handle in datas.Keys)
+            {
+                foreach (var handle in datas.Keys)
                 {
-                    if(handle.Contains(go.gameObject.name))
+                    if (handle.Contains(go.gameObject.name))
                     {
                         if (datas[handle].IsValid())
                         {
@@ -129,12 +129,12 @@ namespace Module.Unity.Addressables
         public IEnumerator CoLoadSceneAsync(string key, UnityEngine.SceneManagement.LoadSceneMode loadMode, System.Action<bool> resultCallback)
         {
             var handle = Addressables.LoadSceneAsync(key, loadMode);
-            while(!handle.IsDone)
+            while (!handle.IsDone)
             {
                 yield return null;
                 Debug.Log(handle.GetDownloadStatus().Percent);
             }
-           
+
 
             yield return handle;
 
@@ -148,7 +148,7 @@ namespace Module.Unity.Addressables
         {
             float timer = 0.0f;
             var handle = Addressables.LoadSceneAsync(key, loadMode);
-            
+
             while (!handle.IsDone)
             {
                 yield return null;
@@ -198,6 +198,47 @@ namespace Module.Unity.Addressables
             return handle.Result;
         }
 
+        public T LoadAndGet<T>(AssetReference assetRef)
+        {
+            string addressable = GetAddressable(assetRef);
+            if (string.IsNullOrEmpty(addressable))
+                return default(T);
+
+            if (datas.ContainsKey(addressable))
+                return (T)datas[addressable].Result;
+
+            var handle = assetRef.LoadAssetAsync<T>();
+
+            handle.WaitForCompletion();
+            if (handle.Status != AsyncOperationStatus.Succeeded)
+                return default(T);
+
+            datas.Add(addressable, handle);
+
+            return handle.Result;
+        }
+
+        public string GetAddressable(AssetReference assetRef)
+        {
+            if (assetRef == null)
+                return null;
+
+            var handle = Addressables.LoadResourceLocationsAsync(assetRef);
+            handle.WaitForCompletion();
+
+            if (handle.Status == AsyncOperationStatus.Succeeded && handle.Result != null
+                && handle.Result.Count > 0)
+            {
+                return handle.Result[0].InternalId;
+            }
+            else
+            {
+                Debug.Log("Fail To Load LoadResourceLocationsAsync");
+            }
+            return null;
+        }
+
+
         public void LoadAsset<T>(AssetReference assetRef, System.Action<T> callback, bool autoReleaseOnFail = true)
         {
             ComLoader.s_Root.StartCoroutine(CoLoadAsset<T>(assetRef, callback, autoReleaseOnFail));
@@ -205,10 +246,14 @@ namespace Module.Unity.Addressables
 
         public IEnumerator CoLoadAsset<T>(AssetReference assetRef, System.Action<T> callback, bool autoReleaseOnFail = true)
         {
+            string addressable = GetAddressable(assetRef);
+            if (string.IsNullOrEmpty(addressable))
+                callback?.Invoke(default(T));
+
             AsyncOperationHandle handle;
-            if(datas.ContainsKey(assetRef.AssetGUID))
+            if (datas.ContainsKey(addressable))
             {
-                handle = datas[assetRef.AssetGUID];
+                handle = datas[addressable];
                 callback?.Invoke((T)handle.Result);
             }
             else
@@ -219,6 +264,8 @@ namespace Module.Unity.Addressables
 
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
+                    if (!datas.ContainsKey(addressable))
+                        datas.Add(addressable, handle);
                     callback?.Invoke((T)handle.Result);
                 }
                 else
@@ -248,12 +295,12 @@ namespace Module.Unity.Addressables
             else
             {
                 var handle = Addressables.LoadAssetAsync<T>(addressable);
-               
+
                 yield return handle;
 
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
-                    if(!datas.ContainsKey(addressable))
+                    if (!datas.ContainsKey(addressable))
                         datas.Add(addressable, handle);
                     callback?.Invoke(handle.Result);
                 }
@@ -279,11 +326,18 @@ namespace Module.Unity.Addressables
         public void Release(string addressable)
         {
             Addressables.Release(datas[addressable]);
+            datas.Remove(addressable);
         }
-
+        
+        public void Release(AssetReference assetRef)
+        {
+            string addressable = GetAddressable(assetRef);
+            Addressables.Release(datas[addressable]);
+            datas.Remove(addressable);
+        }
         public void ReleaseAll()
         {
-            foreach(var data in datas.Values)
+            foreach (var data in datas.Values)
             {
                 Release(data);
             }

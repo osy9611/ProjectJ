@@ -109,10 +109,10 @@ public class StatusAgent
         long damage = checkActor.StatusAgent.TotalStatus[(int)DesignEnum.AttributeId.Atk] - totalStatus[(int)DesignEnum.AttributeId.Def];
 
         Debug.Log(actor + " : " + damage);
+        actor.Creature.HudUnitInfo.SetDamage(damage);
         if (damage > 0)
         {
             DecreaseHP(hpType, damage);
-            actor.Creature.HudUnitInfo.SetDamage(damage);
         }
     }
 

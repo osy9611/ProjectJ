@@ -7,8 +7,21 @@ namespace Module.Unity.UGUI.Hud
 
     public class ComHudAgent : MonoBehaviour
     {
-        private PivotInfo pivotInfo;
-        public Action<GameObject,bool> onDestoy;
+        protected PivotInfo pivotInfo;
+
+        [SerializeField]
+        protected Animation ani;
+        public Animation Ani => ani;
+        protected AnimationClip[] animationClips;
+
+        public Action<GameObject, bool> onDestoy;
+
+
+        protected virtual void Awake()
+        {
+            LoadAni();
+        }
+
         public virtual void Init(PivotInfo pivotInfo)
         {
             this.pivotInfo = pivotInfo;
@@ -29,8 +42,30 @@ namespace Module.Unity.UGUI.Hud
 
         protected virtual void Destroy()
         {
-            if(onDestoy != null)
+            if (onDestoy != null)
                 onDestoy.Invoke(this.gameObject, false);
+        }
+        
+        protected virtual void LoadAni()
+        {
+            if (ani != null)
+            {
+                animationClips = new AnimationClip[ani.GetClipCount()];
+
+                int i = 0;
+                foreach (AnimationState state in ani)
+                {
+                    animationClips[i] = state.clip;
+                    i++;
+                }
+            }
+        }
+
+        protected virtual void AniShowByIndex()
+        {
+            int aniIdx = UnityEngine.Random.Range(0, animationClips.Length);
+            ani.clip = animationClips[aniIdx];
+            ani.Play();
         }
     }
 

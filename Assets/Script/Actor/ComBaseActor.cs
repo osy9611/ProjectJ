@@ -40,9 +40,22 @@ public abstract class ComBaseActor : MonoBehaviour
 
     public abstract void Init();
 
-    protected abstract void UpdateComActor();
+    protected virtual void UpdateComActor()
+    {
+        if (actor == null)
+            return;
 
-    protected abstract void LateUpdateComActor();
+        actor.UpdateActor();
+    }
+
+    protected virtual void LateUpdateComActor()
+    {
+        if (actor == null)
+            return;
+
+        actor.LateUpdateActor();
+        hudUnitInfo.Execute();
+    }
 
     public virtual void OnEffect(int id)
     {

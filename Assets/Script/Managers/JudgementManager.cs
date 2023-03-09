@@ -61,6 +61,8 @@ public class JudgementManager
 
         List<BaseActor> result = new List<BaseActor>();
         var datas = Physics.OverlapSphere(tr.position, val.Value.Arg1, 1 << LayerMask.NameToLayer(checkTarget));
+
+        Debug.Log(val.Value.Arg1);
         foreach (var info in datas)
         {
             Vector3 dir = (info.transform.position - tr.position).normalized;
@@ -86,7 +88,7 @@ public class JudgementManager
 
         List<BaseActor> result = new List<BaseActor>();
         var datas = Physics.OverlapBox(tr.position, new Vector3(val.Value.Arg3, val.Value.Arg3, val.Value.Arg3),Quaternion.identity, LayerMask.GetMask(checkTarget));
-        Debug.Log(datas.Length);
+
         foreach (var info in datas)
         {
             BaseActor actor = CheckActor(info, tr, checkTarget);

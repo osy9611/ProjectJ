@@ -16,7 +16,7 @@ namespace Module.Unity.UGUI
 
         private ResourceManager resourceManager;
 
-        public Transform root;
+        private Transform root;
 
         public void Init(ResourceManager resourceManager)
         {

@@ -2013,6 +2013,13 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
     rotationOffset: {x: 0, y: 0, z: 0}
     scaleOffset: {x: 0, y: 0, z: 0}
+  - type: 1
+    id: 1002
+    pivotTr: {fileID: 4166677391678968493}
+    setParent: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
+    scaleOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1963091223
 MonoBehaviour:
   m_ObjectHideFlags: 0
