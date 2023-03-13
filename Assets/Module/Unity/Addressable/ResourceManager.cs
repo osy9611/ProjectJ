@@ -132,7 +132,6 @@ namespace Module.Unity.Addressables
             while (!handle.IsDone)
             {
                 yield return null;
-                Debug.Log(handle.GetDownloadStatus().Percent);
             }
 
 
@@ -325,15 +324,25 @@ namespace Module.Unity.Addressables
 
         public void Release(string addressable)
         {
-            Addressables.Release(datas[addressable]);
-            datas.Remove(addressable);
+            if(datas.TryGetValue(addressable, out var handle))
+            {
+                Addressables.Release(handle);
+                datas.Remove(addressable);
+            }
+           
         }
         
         public void Release(AssetReference assetRef)
         {
+            if (assetRef.Asset == null)
+                return;
+
             string addressable = GetAddressable(assetRef);
-            Addressables.Release(datas[addressable]);
-            datas.Remove(addressable);
+            if(datas.TryGetValue(addressable, out var handle))
+            {
+                Addressables.Release(handle);
+                datas.Remove(addressable);
+            }
         }
         public void ReleaseAll()
         {

@@ -18,6 +18,9 @@
 	<verify ColumnName="effect_Id" Type="Int32" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="1015" List="-" TableId="1013"/>
 	<verify ColumnName="hit_effect_Id" Type="Int32" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<verify ColumnName="image_Res" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
+	<verify ColumnName="sound_Res" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
+	<verify ColumnName="hitSound_Res" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
+	<verify ColumnName="sound_Ani" Type="bool" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1013"/>
 	<record>
 		<unit_Class>0</unit_Class>
 		<unit_type>1</unit_type>
@@ -37,6 +40,9 @@
 		<effect_Id>-1</effect_Id>
 		<hit_effect_Id>4</hit_effect_Id>
 		<image_Res>Attack</image_Res>
+		<sound_Res>Assets/Res/Sound/Character/Skill.wav</sound_Res>
+		<hitSound_Res>Assets/Res/Sound/Character/SkillHit.ogg</hitSound_Res>
+		<sound_Ani>Y</sound_Ani>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -57,6 +63,9 @@
 		<effect_Id>0</effect_Id>
 		<hit_effect_Id>4</hit_effect_Id>
 		<image_Res>Skill1</image_Res>
+		<sound_Res>Assets/Res/Sound/Character/Skill.wav</sound_Res>
+		<hitSound_Res>Assets/Res/Sound/Character/SkillHit.ogg</hitSound_Res>
+		<sound_Ani>Y</sound_Ani>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -77,6 +86,9 @@
 		<effect_Id>-1</effect_Id>
 		<hit_effect_Id>4</hit_effect_Id>
 		<image_Res>Skill2</image_Res>
+		<sound_Res>Assets/Res/Sound/Character/Skill.wav</sound_Res>
+		<hitSound_Res>Assets/Res/Sound/Character/SkillHit.ogg</hitSound_Res>
+		<sound_Ani>N</sound_Ani>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -97,6 +109,9 @@
 		<effect_Id>-1</effect_Id>
 		<hit_effect_Id>4</hit_effect_Id>
 		<image_Res>Skill3</image_Res>
+		<sound_Res>Assets/Res/Sound/Character/Skill.wav</sound_Res>
+		<hitSound_Res>Assets/Res/Sound/Character/SkillHit.ogg</hitSound_Res>
+		<sound_Ani>Y</sound_Ani>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -117,6 +132,9 @@
 		<effect_Id>3</effect_Id>
 		<hit_effect_Id>4</hit_effect_Id>
 		<image_Res>Skill4</image_Res>
+		<sound_Res>Assets/Res/Sound/Character/Skill.wav</sound_Res>
+		<hitSound_Res>Assets/Res/Sound/Character/SkillHit.ogg</hitSound_Res>
+		<sound_Ani>Y</sound_Ani>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -137,6 +155,9 @@
 		<effect_Id>-1</effect_Id>
 		<hit_effect_Id>-1</hit_effect_Id>
 		<image_Res>-</image_Res>
+		<sound_Res>Assets/Res/Sound/Monster/MonsterAttack.ogg</sound_Res>
+		<hitSound_Res>Assets/Res/Sound/Character/SkillHit.ogg</hitSound_Res>
+		<sound_Ani>Y</sound_Ani>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -157,6 +178,9 @@
 		<effect_Id>-1</effect_Id>
 		<hit_effect_Id>-1</hit_effect_Id>
 		<image_Res>-</image_Res>
+		<sound_Res>Assets/Res/Sound/Monster/MonsterAttack.ogg</sound_Res>
+		<hitSound_Res>Assets/Res/Sound/Character/SkillHit.ogg</hitSound_Res>
+		<sound_Ani>Y</sound_Ani>
 	</record>
 	<record>
 		<unit_Class>0</unit_Class>
@@ -177,5 +201,8 @@
 		<effect_Id>-1</effect_Id>
 		<hit_effect_Id>-1</hit_effect_Id>
 		<image_Res>-</image_Res>
+		<sound_Res>Assets/Res/Sound/Monster/MonsterAttack.ogg</sound_Res>
+		<hitSound_Res>Assets/Res/Sound/Character/SkillHit.ogg</hitSound_Res>
+		<sound_Ani>Y</sound_Ani>
 	</record>
 </skill>

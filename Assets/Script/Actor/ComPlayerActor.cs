@@ -1,8 +1,11 @@
+using Module.Unity.Custermization;
+using Module.Unity.Pivot;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(ComCostumeAgent))]
 public class ComPlayerActor : ComBaseActor
 {    
     protected Vector3 dir;

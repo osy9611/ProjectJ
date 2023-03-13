@@ -1,5 +1,6 @@
 using Module.Unity.Addressables;
 using Module.Unity.Core;
+using Module.Unity.Custermization;
 using Module.Unity.Sound;
 using Module.Unity.UGUI;
 using Module.Unity.UGUI.Hud;
@@ -13,6 +14,7 @@ public class Managers : MonoBehaviour
     PoolManager pool = new PoolManager();
     ResourceManager resource = new ResourceManager();
     SpriteAtlasManager atlas = new SpriteAtlasManager();
+    CostumeManager costume = new CostumeManager();
     UIManager ui = new UIManager();
     HudManager hud = new HudManager();
     SoundManager sound = new SoundManager();
@@ -33,6 +35,7 @@ public class Managers : MonoBehaviour
     public static PoolManager Pool { get => Instance.pool; }
     public static ResourceManager Resource { get => Instance.resource; }
     public static SpriteAtlasManager Atlas { get => Instance.atlas; }
+    public static CostumeManager Costume { get => Instance.costume; }
     public static UIManager UI { get => Instance.ui; }
     public static HudManager Hud { get => Instance.hud; }
     public static SoundManager Sound { get => Instance.sound; }
@@ -82,4 +85,5 @@ public class Managers : MonoBehaviour
         Pool.ClearAll();
         UI.Clear();
     }
+
 }

@@ -66,4 +66,10 @@ public abstract class ComBaseActor : MonoBehaviour
     {
         actor.SkillAgent.OnJudge();
     }
+
+    public virtual void OnSound()
+    {
+        actor.SkillAgent.OnSound();
+    }
+
 }

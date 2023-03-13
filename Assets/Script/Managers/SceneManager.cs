@@ -1,5 +1,6 @@
 using DesignTable;
 using Module.Unity.Core;
+using Module.Unity.Custermization;
 using Module.Unity.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,13 +22,11 @@ public class SceneManager
 
     public void LoadScene(Define.SceneType type)
     {
+        Managers.UI.CloseSceneUI();
+        if(Managers.Object.MyActor != null)
+                Managers.Object.MyActor.Creature.gameObject.SetActive(false);
+
         ComLoader.s_Root.StartCoroutine(CoLoadingScene(type));
-        switch(type)
-        {
-            case Define.SceneType.Game:
-                //ComLoader.s_Root.StartCoroutine(CoLoadGameScene());
-                break;
-        }    
     }
 
     IEnumerator CoLoadingScene(Define.SceneType type)
@@ -44,9 +43,17 @@ public class SceneManager
         }
 
         Init();
-
         yield return Managers.Data.CoLoadData();
-        yield return CoLoadFieldScene();
+
+        switch (type)
+        {
+            case Define.SceneType.CharacterSelect:
+                yield return CoLoadCharectorSelectScene();
+                break;
+            case Define.SceneType.Game:
+                yield return CoLoadFieldScene();
+                break;
+        }      
     }
 
     public IEnumerator CoLoadFieldScene()
@@ -66,6 +73,7 @@ public class SceneManager
 
         //UI Load
         ComBattleMode comBattleMode = null;
+        ComCostumeMode costumeMode = Managers.UI.Get<ComCostumeMode>();
 #if UNITY_ANDROID || UNITY_IOS
         comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/MobileCanvas.prefab");
 
@@ -78,11 +86,38 @@ public class SceneManager
         }
 
         //Player Load
-        Managers.Object.LoadPlayer(0,true);
+        Managers.Object.InitPlayer();
 
         //Monster Load
         Managers.Object.LoadMonster(DesignEnum.FieldType.Field);
 
         
+    }
+
+    public IEnumerator CoLoadCharectorSelectScene()
+    {
+        bool success = false;
+
+        yield return Managers.Resource.CoLoadSceneAsync("CharacterSelection", LoadSceneMode.Single, (result) =>
+        {
+            success = result;
+        }, loadingBar);
+
+
+        if (!success)
+        {
+            yield break;
+        }
+
+        //Player Load
+        Managers.Object.LoadPlayer(0, true);
+
+        //UI Load
+        ComCostumeMode comCostumeMode = null;
+        comCostumeMode = Managers.UI.ShowSceneUI<ComCostumeMode>("Assets/Res/UI/Prefab/DynamicLoading/CostumeCanvas.prefab");
+
+
+        Managers.Object.MyActor.Creature.transform.position = comCostumeMode.StartPoint;
+        Managers.Object.MyActor.Creature.transform.rotation = Quaternion.Euler(0, comCostumeMode.RotationzY,0);
     }
 }

@@ -6,11 +6,11 @@ using UnityEngine;
 public class Define
 {
     public const string tableDataAssetPath = "Assets/Res/Data/ComDataAssets.prefab";
-
     public const string CommonAtlasPath = "Assets/Res/UI/Prefab/AtlasPrefab/Common.prefab";
     public enum SceneType
     {
         Loading,
+        CharacterSelect,
         Game
     }
 
@@ -41,5 +41,17 @@ public class Define
         Down
     }
 
+    public enum CostumePart
+    {
+        Head,
+        Cloth,
+        Foot
+    }
+
+    [Serializable]
+    public struct PartDataColor
+    {
+        public Color color;
+    }
 
 }

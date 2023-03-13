@@ -103,15 +103,19 @@ public class JudgementManager
 
     private BaseActor CheckActor(Collider info,Transform tr,string checkTarget)
     {
-
+        BaseActor actor = null;
         if (checkTarget == "Player")
         {
-            return Managers.Object.FindById(info.transform.gameObject, true);
+            actor = Managers.Object.FindById(info.transform.gameObject, true);
         }
         else
         {
-            Managers.Effect.Get(4, info.ClosestPoint(tr.position));
-            return Managers.Object.FindById(info.transform.gameObject, false);
+            actor = Managers.Object.FindById(info.transform.gameObject, false);
         }
+
+        if(!actor.FSM.CheckCurrentState(Define.ObjectState.Death))
+            Managers.Effect.Get(4, info.ClosestPoint(tr.position));
+
+        return actor;
     }
 }

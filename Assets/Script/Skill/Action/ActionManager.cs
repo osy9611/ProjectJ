@@ -165,4 +165,12 @@ public class ActionManager
 
         actions[nowSkillId].OnJudge();
     }
+
+    public void OnSound()
+    {
+        if (nowSkillId == -1)
+            return;
+
+        actions[nowSkillId].OnSound();
+    }
 }

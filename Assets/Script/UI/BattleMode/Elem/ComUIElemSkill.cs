@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ComUIElemSkill : ComUIElement
+public class ComUIElemSkill : ComUIBattleElement
 {
     enum Images
     {

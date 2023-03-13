@@ -12,7 +12,7 @@ using ProtoBuf;
 using Unity.VisualScripting;
 using System.Data;
 using System.IO;
-using System;
+using Module.Core.Systems.Events;
 using Module.Unity.Custermization;
 using ProjectJ;
 using Module.Unity.Core;
@@ -22,6 +22,7 @@ using Module.Automation;
 [DefaultExecutionOrder(-1000)]
 public class Test2 : MonoBehaviour
 {
+    public ComCostumeAgent agent;
     public ComDataAssets tableAsset;
     public bool UseAddressable = false;
     public GameObject Player;
@@ -47,16 +48,21 @@ public class Test2 : MonoBehaviour
 
         //Managers.Atlas.Register();
         //var handle = Addressables.LoadAssetAsync<GameObject>("Assets/Prefab/Cube.prefab");
-        if (!UseAddressable)
-        {
-            Player.SetActive(false);
-            Monster.SetActive(false);
-            Managers.Data.OnLoadData((result) =>
-            {
-                Player.SetActive(true);
-                Monster.SetActive(true);
-            });
-        }
+        //if (!UseAddressable)
+        //{
+        //    Player.SetActive(false);
+        //    Monster.SetActive(false);
+        //    Managers.Data.OnLoadData((result) =>
+        //    {
+        //        Player.SetActive(true);
+        //        Monster.SetActive(true);
+        //    });
+        //}
+
+        PartAssetData? d;
+        agent.ChangeOrAttach(PartAssetData.Create(0, Color.white, new EventArgs<int>(0)), out d);
+        agent.ChangeOrAttach(PartAssetData.Create(0, Color.red, new EventArgs<int>(2)), out d);
+      
     }
 
     public void StartScene()

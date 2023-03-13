@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f82e10e8cef014847b532e67cb0930c3, type: 3}
+  m_Name: CostumeData
+  m_EditorClassIdentifier: 
+  headData:
+  - color: {r: 0.7411765, g: 0.65882355, b: 0.38431376, a: 1}
+  - color: {r: 0.7169812, g: 0.010145942, b: 0.010145942, a: 1}
+  - color: {r: 1, g: 0.9312867, b: 0, a: 1}
+  - color: {r: 0.26127347, g: 0.7735849, b: 0, a: 1}
+  - color: {r: 0.011881431, g: 0.8396226, b: 0.8315175, a: 1}
+  - color: {r: 1, g: 1, b: 1, a: 1}
+  - color: {r: 0, g: 0, b: 0, a: 1}
+  clothData:
+  - color: {r: 1, g: 0.86274517, b: 0.11764707, a: 1}
+  - color: {r: 0.7176471, g: 0.011764707, b: 0.011764707, a: 1}
+  - color: {r: 1, g: 0.9294118, b: 0, a: 1}
+  - color: {r: 0.2627451, g: 0.7725491, b: 0, a: 1}
+  - color: {r: 0.011764707, g: 0.83921576, b: 0.8313726, a: 1}
+  - color: {r: 1, g: 1, b: 1, a: 1}
+  - color: {r: 0, g: 0, b: 0, a: 1}
+  footData:
+  - color: {r: 0.23137257, g: 0.20392159, b: 0.10588236, a: 1}
+  - color: {r: 0.7176471, g: 0.011764707, b: 0.011764707, a: 1}
+  - color: {r: 1, g: 0.9294118, b: 0, a: 1}
+  - color: {r: 0.2627451, g: 0.7725491, b: 0, a: 1}
+  - color: {r: 0.011764707, g: 0.83921576, b: 0.8313726, a: 1}
+  - color: {r: 1, g: 1, b: 1, a: 1}
+  - color: {r: 0, g: 0, b: 0, a: 1}

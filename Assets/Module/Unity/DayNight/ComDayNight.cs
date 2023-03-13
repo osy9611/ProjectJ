@@ -21,7 +21,6 @@ namespace Module.Unity.DayNight
                 base.Execute();
             }
         }
-
 #endif
     }
 }

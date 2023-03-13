@@ -52,10 +52,10 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7409454466802266342, guid: a81c643b36245af4fa5494de5dc37b23, type: 3}
+  - {fileID: 2100000, guid: f41a583dbec8eed40ad44561e8ec6c7e, type: 2}
   - {fileID: 8368722655750445499, guid: a81c643b36245af4fa5494de5dc37b23, type: 3}
-  - {fileID: 4564843287338978409, guid: a81c643b36245af4fa5494de5dc37b23, type: 3}
-  - {fileID: 9018354580108171104, guid: a81c643b36245af4fa5494de5dc37b23, type: 3}
+  - {fileID: 2100000, guid: 796d7f76c29b4ce46ab68c5962b31745, type: 2}
+  - {fileID: 2100000, guid: bef271a8f89594c48bf75218666bc72b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 4318416996711795915}
   - component: {fileID: 3339309309702368338}
   - component: {fileID: 8064192388926930794}
+  - component: {fileID: 2183634473991904375}
   m_Layer: 6
   m_Name: Monk
   m_TagString: Untagged
@@ -517,6 +518,24 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
     rotationOffset: {x: 0, y: 0, z: 0}
     scaleOffset: {x: 0.5, y: 0.5, z: 0.5}
+--- !u!114 &2183634473991904375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788639497261067700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15041737b10057b4a8d4ee0b80bf4708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  slots:
+  - Index: 0
+    Slot: {fileID: 8648965729697393221}
+    Renderer: {fileID: 2297099593053826462}
+    IsSkinnedMesh: 1
 --- !u!1 &1908823710564858256
 GameObject:
   m_ObjectHideFlags: 0

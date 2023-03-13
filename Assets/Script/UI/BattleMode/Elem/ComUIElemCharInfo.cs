@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ComUIElemCharInfo : ComUIElement
+public class ComUIElemCharInfo : ComUIBattleElement
 {
     [SerializeField] Image hpSprite;
     public Image HpSprite => hpSprite;

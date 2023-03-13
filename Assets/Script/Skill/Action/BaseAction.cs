@@ -1,6 +1,7 @@
 using DesignTable;
 using Module.Core.Systems.Events;
 using Module.Unity.Core;
+using Module.Unity.Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,6 +50,8 @@ public class BaseAction
         {
             nowjudgeTime = 0;
             OnJudge();
+            if (!skillInfo.sound_Ani)
+                OnSound();
         }
     }
 
@@ -78,10 +81,23 @@ public class BaseAction
             return;
 
         BaseActor actor = actionManager.Actor;
-
         foreach (var checkActor in checkActors)
         {
+            if (checkActor.FSM.CheckPrevState(Define.ObjectState.Death))
+                continue;
+
+            OnHitSound();
             checkActor.StatusAgent.CalcDecreaseHP(StatusDefine.HPType.NowHP, actor);
         }
+    }
+
+    public virtual void OnSound()
+    {
+        Managers.Sound.Play(skillInfo.sound_Res, Sound.FX, 1);
+    }
+
+    public virtual void OnHitSound()
+    {
+        Managers.Sound.Play(skillInfo.hitSound_Res, Sound.FX, 1);
     }
 }

@@ -1,6 +1,7 @@
 using DesignTable;
 using Module.Core.Systems;
 using Module.Unity.AI;
+using Module.Unity.Custermization;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -123,9 +124,17 @@ public class ObjectManager
         comActor.Init();
         PlayerActor actor = comActor.Actor as PlayerActor;
         actor.ClassID = info.char_classId;
-        actor.Init();
+        //actor.Init();
 
         Add(actor, myPlayer);
     }
 
+
+    public void InitPlayer()
+    {
+        myActor.Creature.transform.position = Vector3.zero;
+        myActor.Creature.transform.rotation = Quaternion.identity;
+        myActor.Creature.gameObject.SetActive(true);
+        myActor.Init();        
+    }
 }

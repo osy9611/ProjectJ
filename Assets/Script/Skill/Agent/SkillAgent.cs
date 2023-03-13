@@ -80,4 +80,12 @@ public class SkillAgent
 
         actionManager.OnJudge();
     }
+
+    public virtual void OnSound()
+    {
+        if(actionManager == null) 
+            return;
+
+        actionManager.OnSound();
+    }
 }

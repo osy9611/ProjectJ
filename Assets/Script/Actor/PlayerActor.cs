@@ -1,9 +1,13 @@
+using Module.Unity.Custermization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerActor : BaseActor
 {
+    private ComCostumeAgent comCostuemAgent;
+    public ComCostumeAgent ComCostumeAgent => comCostuemAgent;
+
     private DesignTable.user_characterInfo userInfo;
     public DesignTable.user_characterInfo UserInfo { get => userInfo; }
 
@@ -13,6 +17,9 @@ public class PlayerActor : BaseActor
     public override void Init()
     {
         base.Init();
+
+        comCostuemAgent = creature.GetComponent<ComCostumeAgent>();
+
         unitType = DesignEnum.UnitType.Character;
         userInfo = Managers.Data.User_characterInfos.Get(classID);
 

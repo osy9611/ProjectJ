@@ -28,6 +28,14 @@ namespace Module.Unity.UGUI
             }
         }
 
+        public T Get<T>() where T : UI_Scene
+        {
+            if (sceneUI == null)
+                return default(T);
+
+            return sceneUI as T;
+        }
+
         public void SetCanvas(GameObject go, bool sort = true)
         {
             Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
@@ -83,6 +91,14 @@ namespace Module.Unity.UGUI
                 popup.OnClosePopupUIHandler += ClosePopupUI;
                 PopupInfos.Add(popupInfos.GetType().Name, popup);
             }
+        }
+
+        public void CloseSceneUI()
+        {
+            if (this.sceneUI == null)
+                return;
+
+            resourceManager.Destory(this.sceneUI.gameObject);
         }
 
         public void ClosePopupUI(UI_Popup popup)

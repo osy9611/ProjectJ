@@ -1,9 +1,9 @@
 namespace Module.Unity.Custermization
 {
+    using Module.Core.Systems.Events;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
-    using System;
     public enum PartAssetType
     {
         Renderer_MeshOrSkin,
@@ -21,7 +21,7 @@ namespace Module.Unity.Custermization
         private GameObject gameObject;
         private Color? color;
         private Material material;
-        private System.EventArgs args;
+        private IEventArgs args;
 
         public int PartIndex => partIndex;
         public bool SameBoneOrder => sameBoneOrder;
@@ -30,9 +30,9 @@ namespace Module.Unity.Custermization
         public GameObject GameObject => gameObject;
         public Color? Color => color;
         public Material Material => material;
-        public System.EventArgs Args => args;
+        public IEventArgs Args => args;
 
-        internal PartAssetData(int partIndex, MeshRenderer renderer, bool sameBoneOrder, EventArgs args = null)
+        internal PartAssetData(int partIndex, MeshRenderer renderer, bool sameBoneOrder, IEventArgs args = null)
         {
             this.partIndex = partIndex;
             this.renderer = renderer;
@@ -46,7 +46,7 @@ namespace Module.Unity.Custermization
             this.args = args;
         }
 
-        internal PartAssetData(int partIndex, SkinnedMeshRenderer renderer, bool sameBoneOrder, EventArgs args = null)
+        internal PartAssetData(int partIndex, SkinnedMeshRenderer renderer, bool sameBoneOrder, IEventArgs args = null)
         {
             this.partIndex = partIndex;
             this.renderer = renderer;
@@ -60,7 +60,7 @@ namespace Module.Unity.Custermization
             this.args = args;
         }
 
-        internal PartAssetData(int partIndex, GameObject gameObject, EventArgs args = null)
+        internal PartAssetData(int partIndex, GameObject gameObject, IEventArgs args = null)
         {
             this.partIndex = partIndex;
 
@@ -75,7 +75,7 @@ namespace Module.Unity.Custermization
             this.args = args;
         }
 
-        internal PartAssetData(int partIndex, Color color, EventArgs args = null)
+        internal PartAssetData(int partIndex, Color color, IEventArgs args = null)
         {
             this.partIndex = partIndex;
 
@@ -91,7 +91,7 @@ namespace Module.Unity.Custermization
         }
 
 
-        internal PartAssetData(int partIndex, Material material, EventArgs args = null)
+        internal PartAssetData(int partIndex, Material material, IEventArgs args = null)
         {
             this.partIndex = partIndex;
 
@@ -106,36 +106,36 @@ namespace Module.Unity.Custermization
             this.args = args;
         }
 
-        public static PartAssetData Create(int partIdx, MeshRenderer renderer, EventArgs args = null)
+        public static PartAssetData Create(int partIdx, MeshRenderer renderer, IEventArgs args = null)
         {
             return new PartAssetData(partIdx, renderer, true, args);
         }
 
-        public static PartAssetData Create(int partIdx, MeshRenderer renderer, bool sameBoneOrder, EventArgs args = null)
+        public static PartAssetData Create(int partIdx, MeshRenderer renderer, bool sameBoneOrder, IEventArgs args = null)
         {
             return new PartAssetData(partIdx, renderer, sameBoneOrder, args);
         }
 
-        public static PartAssetData Create(int partIdx, SkinnedMeshRenderer renderer, EventArgs args = null)
+        public static PartAssetData Create(int partIdx, SkinnedMeshRenderer renderer, IEventArgs args = null)
         {
             return new PartAssetData(partIdx, renderer, true, args);
         }
 
-        public static PartAssetData Create(int partIdx, SkinnedMeshRenderer renderer, bool sameBoneOrder, EventArgs args = null)
+        public static PartAssetData Create(int partIdx, SkinnedMeshRenderer renderer, bool sameBoneOrder, IEventArgs args = null)
         {
             return new PartAssetData(partIdx, renderer, sameBoneOrder, args);
         }
 
-        public static PartAssetData Create(int partIdx, GameObject gameobject, EventArgs args = null)
+        public static PartAssetData Create(int partIdx, GameObject gameobject, IEventArgs args = null)
         {
             return new PartAssetData(partIdx, gameobject, args);
         }
-        public static PartAssetData Create(int partIdx, Color color, EventArgs args = null)
+        public static PartAssetData Create(int partIdx, Color color, IEventArgs args = null)
         {
             return new PartAssetData(partIdx, color, args);
         }
 
-        public static PartAssetData Create(int partIdx, Material material, EventArgs args = null)
+        public static PartAssetData Create(int partIdx, Material material, IEventArgs args = null)
         {
             return new PartAssetData(partIdx, material, args);
         }
