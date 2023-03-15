@@ -54,6 +54,11 @@ public class Managers : MonoBehaviour
         Init();
     }
 
+    private void Update()
+    {
+        Object.Execute();
+    }
+
     static void Init()
     {
         if (s_instance == null)

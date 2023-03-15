@@ -18,7 +18,7 @@ public class MonsterFSM : FSM
         states[(int)Define.ObjectState.Attack] = new MonsterState.Attack();
         states[(int)Define.ObjectState.Skill] = new MonsterState.Skill();
         states[(int)Define.ObjectState.Death] = new MonsterState.Death();
-        states[(int)Define.ObjectState.Spawn] = new CommonState.Spawn();
+        states[(int)Define.ObjectState.Spawn] = new MonsterState.Spawn();
 
         controller = actor.Controller as MonsterController;
 
@@ -36,9 +36,10 @@ public class MonsterFSM : FSM
         Managers.Ani.CheckAndPlay(actor.Ani, "Move");
     }
 
-    public void ResetMovePathFSM()
+
+    public void ResetMovePathFSM(bool onlyNavMeshAgent)
     {
-        controller.ResetNavigation();
+        controller.ResetMovePath(onlyNavMeshAgent);
     }
 
     public void LookAtTargetFSM()

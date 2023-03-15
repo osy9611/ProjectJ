@@ -1,5 +1,6 @@
 using DesignTable;
 using Module.Core.Systems;
+using Module.Core.Systems.Events;
 using Module.Unity.AI;
 using Module.Unity.Custermization;
 using System.Collections;
@@ -13,8 +14,27 @@ public class ObjectManager
     public PlayerActor MyActor { get => myActor; set => myActor = value; }
 
     Dictionary<GameObject, BaseActor> objects = new Dictionary<GameObject, BaseActor>();
+
+    Dictionary<BaseActor, EventEmmiter> eventEmmiters = new Dictionary<BaseActor, EventEmmiter>();
+
+
+    public void Execute()
+    {
+        foreach (var events in eventEmmiters.Values)
+        {
+            if (events != null)
+                events.Invoke();
+        }
+    }
+
     public void Add(BaseActor actor, bool myPlayer = false)
     {
+        if (actor == null)
+            Debug.LogError("Null Actor");
+
+        EventEmmiter eventEmmiter = new EventEmmiter();
+        eventEmmiters.Add(actor, eventEmmiter);
+
         if (myPlayer)
             this.myActor = actor as PlayerActor;
 
@@ -29,9 +49,9 @@ public class ObjectManager
         objects.Remove(id);
     }
 
-    public BaseActor FindById(GameObject id,bool checkMyPlayer = false)
+    public BaseActor FindById(GameObject id, bool checkMyPlayer = false)
     {
-        if(checkMyPlayer)
+        if (checkMyPlayer)
         {
             if (myActor.Creature.gameObject == id)
                 return myActor;
@@ -94,7 +114,7 @@ public class ObjectManager
                         MonsterActor actor = comActor.Actor as MonsterActor;
                         if (actor == null)
                             continue;
-                        
+
                         actor.ModelID = info.mon_id;
                         actor.SpawnTime = monNormalInfo.mon_spawnTime;
                         actor.Init();
@@ -129,12 +149,22 @@ public class ObjectManager
         Add(actor, myPlayer);
     }
 
-
     public void InitPlayer()
     {
         myActor.Creature.transform.position = Vector3.zero;
         myActor.Creature.transform.rotation = Quaternion.identity;
         myActor.Creature.gameObject.SetActive(true);
-        myActor.Init();        
+        myActor.Init();
     }
+
+    public EventEmmiter GetEventEmmiter(BaseActor actor)
+    {
+        if(eventEmmiters.TryGetValue(actor, out EventEmmiter result))
+        {
+            return result;
+        }
+
+        return null;
+    }
+
 }

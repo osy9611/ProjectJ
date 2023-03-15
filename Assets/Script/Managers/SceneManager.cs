@@ -26,7 +26,7 @@ public class SceneManager
         if(Managers.Object.MyActor != null)
                 Managers.Object.MyActor.Creature.gameObject.SetActive(false);
 
-        ComLoader.s_Root.StartCoroutine(CoLoadingScene(type));
+        ComLoader.Root.StartCoroutine(CoLoadingScene(type));
     }
 
     IEnumerator CoLoadingScene(Define.SceneType type)

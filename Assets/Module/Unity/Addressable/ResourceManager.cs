@@ -118,12 +118,12 @@ namespace Module.Unity.Addressables
 
         public void LoadScene(string key, UnityEngine.SceneManagement.LoadSceneMode loadMode, System.Action<bool> resultCallback)
         {
-            ComLoader.s_Root.StartCoroutine(CoLoadSceneAsync(key, loadMode, resultCallback));
+            ComLoader.Root.StartCoroutine(CoLoadSceneAsync(key, loadMode, resultCallback));
         }
 
         public void LoadSceneUI(string key, UnityEngine.SceneManagement.LoadSceneMode loadMode, System.Action<bool> resultCallback, Image progressbar)
         {
-            ComLoader.s_Root.StartCoroutine(CoLoadSceneAsync(key, loadMode, resultCallback, progressbar));
+            ComLoader.Root.StartCoroutine(CoLoadSceneAsync(key, loadMode, resultCallback, progressbar));
         }
 
         public IEnumerator CoLoadSceneAsync(string key, UnityEngine.SceneManagement.LoadSceneMode loadMode, System.Action<bool> resultCallback)
@@ -240,7 +240,7 @@ namespace Module.Unity.Addressables
 
         public void LoadAsset<T>(AssetReference assetRef, System.Action<T> callback, bool autoReleaseOnFail = true)
         {
-            ComLoader.s_Root.StartCoroutine(CoLoadAsset<T>(assetRef, callback, autoReleaseOnFail));
+            ComLoader.Root.StartCoroutine(CoLoadAsset<T>(assetRef, callback, autoReleaseOnFail));
         }
 
         public IEnumerator CoLoadAsset<T>(AssetReference assetRef, System.Action<T> callback, bool autoReleaseOnFail = true)
@@ -281,7 +281,7 @@ namespace Module.Unity.Addressables
 
         public void LoadAsset<T>(string addessable, System.Action<T> callback, bool autoRelease = true)
         {
-            ComLoader.s_Root.StartCoroutine(CoLoadAsset<T>(addessable, callback, autoRelease));
+            ComLoader.Root.StartCoroutine(CoLoadAsset<T>(addessable, callback, autoRelease));
         }
 
         public IEnumerator CoLoadAsset<T>(string addressable, System.Action<T> callback, bool autoRelease = true)

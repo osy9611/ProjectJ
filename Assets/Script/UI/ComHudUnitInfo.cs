@@ -34,7 +34,6 @@ public class ComHudUnitInfo
 
             }
         }
-
     }
 
     public void Execute()
@@ -66,5 +65,8 @@ public class ComHudUnitInfo
         comDamageTexts.Add(damageText);
     }
 
-
+    public void ShowHP(bool isShow)
+    {
+        comHealthBar.gameObject.SetActive(isShow);
+    }
 }

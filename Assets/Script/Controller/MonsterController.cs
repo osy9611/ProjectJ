@@ -36,9 +36,6 @@ public class MonsterController : Controller
         
         navAgent = actor.Creature.GetComponent<NavMeshAgent>();
 
-      
-
-
         if (navAgent != null)
         {
             navAgent.speed = monsterActor.MonsterInfo.mon_speed;
@@ -61,7 +58,7 @@ public class MonsterController : Controller
     {
         if (navAgent == null)
             return;
-
+        navAgent.enabled = true;
         SearchTarget();
         Vector3? nextPos = null;
         if (target == null)
@@ -188,8 +185,16 @@ public class MonsterController : Controller
         actor.Creature.transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
     }
 
-    public void ResetNavigation()
+    
+    public void ResetMovePath(bool onlyNavmeshAgent)
     {
         navAgent.enabled = false;
+        if (!onlyNavmeshAgent)
+        {
+            target = null;
+            pathIndex = 0;
+            actor.Creature.transform.position = pathInfo.PathData[0];
+        }
     }
+
 }

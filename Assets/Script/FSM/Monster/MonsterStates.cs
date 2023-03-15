@@ -195,14 +195,14 @@ namespace MonsterState
                 if (entity.FSM != null)
                     fsm = entity.FSM as MonsterFSM;
             }
-
-            fsm.ResetMovePathFSM();
-            
+            entity.Creature.HudUnitInfo.ShowHP(false);
+            fsm.ResetMovePathFSM(true);
             Managers.Ani.Play(entity.Ani, "Death");
         }
 
         public override void Execute(BaseActor entity)
         {
+            Managers.Ani.CheckAndPlay(entity.Ani, "Death");
             if (entity.FSM.AniEnd)
             {
                 entity.FSM.ChangeState(Define.ObjectState.Spawn);
@@ -211,7 +211,73 @@ namespace MonsterState
 
         public override void Exit(BaseActor entity)
         {
+        }
+    }
 
+    public class Spawn : State<BaseActor>
+    {
+        private MonsterFSM fsm;
+        private float spawnTime = -1;
+        private float nowTime = 0;
+        private bool spawnComplete = false;
+        private System.Action<Define.ObjectState> action;
+        public override void Enter(BaseActor entity)
+        {
+            if (entity == null)
+                return;
+
+            if (fsm == null)
+            {
+                if (entity.FSM != null)
+                    fsm = entity.FSM as MonsterFSM;
+            }
+
+            fsm.ResetMovePathFSM(false);
+
+            entity.Creature.gameObject.SetActive(false);
+
+            if(spawnTime == -1)
+            {
+                MonsterActor actor = entity as MonsterActor;
+                if (actor != null)
+                {
+                    spawnTime = 10;
+                }
+            }
+
+            if (spawnTime > 0)
+            {
+                if (action == null)
+                    action += entity.FSM.ChangeState;
+                entity.EventEmmiter.AddListener(CalcSpawnTime);
+            }
+        }
+
+        public override void Execute(BaseActor entity)
+        {
+        }
+
+        public override void Exit(BaseActor entity)
+        {
+            entity.Creature.HudUnitInfo.ShowHP(true);
+            entity.Creature.gameObject.SetActive(true);
+            entity.StatusAgent.ResetHP();
+            entity.EventEmmiter.RemoveListener(CalcSpawnTime);
+        }
+
+        private void CalcSpawnTime()
+        {
+            if (nowTime <= spawnTime)
+            {
+                nowTime += Time.deltaTime;
+                spawnComplete = false;
+            }
+            else
+            {
+                nowTime = 0;
+                spawnComplete = true;
+                action.Invoke(Define.ObjectState.Idle);
+            }
         }
     }
 

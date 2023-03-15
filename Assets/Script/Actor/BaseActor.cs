@@ -32,18 +32,16 @@ public abstract class BaseActor
     protected Vector2 dir;
     public Vector2 Dir { get => dir; set => dir = value; }
 
-    protected EventEmmiter eventEmmiter;
-    public EventEmmiter EventEmmiter { get => eventEmmiter; }
+    public EventEmmiter EventEmmiter { get => Managers.Object.GetEventEmmiter(this); }
     public virtual void Init()
     {
-        eventEmmiter = new EventEmmiter();
     }
 
     public virtual void UpdateActor()
     {
         if (skillAgent == null)
             return;
-        eventEmmiter.Invoke();
+
         fsm.Execte();
     }
     public virtual void LateUpdateActor() { }

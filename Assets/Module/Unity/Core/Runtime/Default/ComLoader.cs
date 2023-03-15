@@ -4,21 +4,21 @@ namespace Module.Unity.Core
 
     public class ComLoader : MonoBehaviour
     {
-        static public ComLoader s_Root;
+        static public ComLoader Root;
 
         private void Awake()
         {
-            s_Root = this;
+            Root = this;
         }
 
         private void OnDestroy()
         {
-            s_Root = null;
+            Root = null;
         }
 
         static public ComLoader Create()
         {
-            if (ComLoader.s_Root) return ComLoader.s_Root;
+            if (ComLoader.Root) return ComLoader.Root;
 
             GameObject go = new GameObject("[Lojr]");
             DontDestroyOnLoad(go);

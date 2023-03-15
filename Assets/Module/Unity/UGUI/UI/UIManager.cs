@@ -1,6 +1,8 @@
 namespace Module.Unity.UGUI
 {
+    using Module.Core.Systems.Events;
     using Module.Unity.Addressables;
+    using Module.Unity.UGUI.Notification;
     using Module.Unity.Utils;
     using System.Collections;
     using System.Collections.Generic;
@@ -91,6 +93,16 @@ namespace Module.Unity.UGUI
                 popup.OnClosePopupUIHandler += ClosePopupUI;
                 PopupInfos.Add(popupInfos.GetType().Name, popup);
             }
+        }
+
+        public void ShowNotification(int index, IEventArgs args)
+        {
+            if (sceneUI == null)
+                return;
+            if (sceneUI.NotificationInfos == null)
+                return;
+
+            sceneUI.NotificationInfos[index].OnSetData(args);
         }
 
         public void CloseSceneUI()

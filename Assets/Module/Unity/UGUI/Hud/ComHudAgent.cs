@@ -36,7 +36,6 @@ namespace Module.Unity.UGUI.Hud
         {
             if (pivotInfo == null)
                 return;
-
             transform.position = Camera.main.WorldToScreenPoint(pivotInfo.PivotTr.position);
         }
 

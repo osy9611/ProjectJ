@@ -139,4 +139,9 @@ public class StatusAgent
         }
     }
 
+    public void ResetHP()
+    {
+        hp[(int)StatusDefine.HPType.NowHP] = hp[(int)StatusDefine.HPType.MaxHP];
+    }
+
 }

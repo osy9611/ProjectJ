@@ -19,7 +19,7 @@ public class DataManager : DesignTable.DataMgr
 
     public void OnLoadData(System.Action<bool> callback = null)
     {
-        ComLoader.s_Root.StartCoroutine(CoLoadData(callback));
+        ComLoader.Root.StartCoroutine(CoLoadData(callback));
     }
 
     public IEnumerator CoLoadData(System.Action<bool> callback = null)
