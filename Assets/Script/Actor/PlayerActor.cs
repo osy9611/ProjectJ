@@ -1,3 +1,4 @@
+using Module.Core.Systems.Collections.Generic;
 using Module.Unity.Custermization;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,10 @@ public class PlayerActor : BaseActor
 
     private int classID;
     public int ClassID { get => classID; set => classID = value; }
+
+
+    private UnorderedList<ComInteractionActor> interactiveActors = new UnorderedList<ComInteractionActor>();
+    public UnorderedList<ComInteractionActor> InteractiveActors => interactiveActors;
 
     public override void Init()
     {

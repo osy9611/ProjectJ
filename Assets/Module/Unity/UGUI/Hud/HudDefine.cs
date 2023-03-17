@@ -9,7 +9,8 @@ namespace Module.Unity.UGUI.Hud
         public enum HudType
         {
             HPBar = 1001,
-            Damage = 1002
+            Damage = 1002,
+            Interaction = 1003
         }
     }
 

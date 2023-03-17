@@ -205,4 +205,27 @@
 		<hitSound_Res>Assets/Res/Sound/Character/SkillHit.ogg</hitSound_Res>
 		<sound_Ani>Y</sound_Ani>
 	</record>
+	<record>
+		<unit_Class>2</unit_Class>
+		<unit_type>0</unit_type>
+		<skill_Id>101</skill_Id>
+		<skill_coolTime>2</skill_coolTime>
+		<skill_range>5</skill_range>
+		<skill_radius>-1</skill_radius>
+		<skill_scale>10</skill_scale>
+		<skill_buffId>-1</skill_buffId>
+		<skill_type>0</skill_type>
+		<skill_attackType>1</skill_attackType>
+		<skill_contoroll>N</skill_contoroll>
+		<skill_dash>N</skill_dash>
+		<skill_dashSpeed>-1</skill_dashSpeed>
+		<skill_judgeAni>Y</skill_judgeAni>
+		<skill_judgeTime>-1</skill_judgeTime>
+		<effect_Id>-1</effect_Id>
+		<hit_effect_Id>-1</hit_effect_Id>
+		<image_Res>-</image_Res>
+		<sound_Res>Assets/Res/Sound/Monster/BossElementAttack.wav</sound_Res>
+		<hitSound_Res>Assets/Res/Sound/Character/SkillHit.ogg</hitSound_Res>
+		<sound_Ani>Y</sound_Ani>
+	</record>
 </skill>

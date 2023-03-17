@@ -88,7 +88,7 @@ public class JudgementManager
 
         List<BaseActor> result = new List<BaseActor>();
         var datas = Physics.OverlapBox(tr.position, new Vector3(val.Value.Arg3, val.Value.Arg3, val.Value.Arg3),Quaternion.identity, LayerMask.GetMask(checkTarget));
-
+        Debug.Log(val.Value.Arg3);
         foreach (var info in datas)
         {
             BaseActor actor = CheckActor(info, tr, checkTarget);

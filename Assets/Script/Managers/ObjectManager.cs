@@ -75,16 +75,14 @@ public class ObjectManager
     }
 
 
-    public void LoadMonster(DesignEnum.FieldType type, bool donDestory = false)
+    public void LoadMonster(DesignEnum.FieldType type)
     {
         List<monster_deployInfo> deployInfos = Managers.Data.Monster_deployInfos.GetListById((short)type);
-        GameObject root = null;
 
-        if (!donDestory)
-        {
-            root = new GameObject();
-            root.name = "Pools";
-        }
+        GameObject root = null;
+        root = new GameObject();
+        root.name = "Monsters";
+        GameObject.DontDestroyOnLoad(root);
 
         foreach (var info in deployInfos)
         {
@@ -100,35 +98,49 @@ public class ObjectManager
 
                     foreach (var path in pathInfo)
                     {
-                        GameObject obj = null;
-                        if (root == null)
-                            obj = Managers.Resource.LoadAndPool(monMasterInfo.mon_prefab, null);
-                        else
-                            obj = Managers.Resource.LoadAndPool(monMasterInfo.mon_prefab, root.transform);
-
-                        ComMonsterActor comActor = obj.GetComponent<ComMonsterActor>();
-                        if (comActor == null)
-                            continue;
-
-                        comActor.Init();
-                        MonsterActor actor = comActor.Actor as MonsterActor;
-                        if (actor == null)
-                            continue;
-
-                        actor.ModelID = info.mon_id;
-                        actor.SpawnTime = monNormalInfo.mon_spawnTime;
-                        actor.Init();
-                        (actor.Controller as MonsterController).SetPath(path);
-                        Add(actor);
+                        CreateMonster(root.transform, path, monMasterInfo.mon_prefab, info.mon_id, monNormalInfo.mon_spawnTime);
                     }
                     break;
 
                 case DesignEnum.MonsterType.FieldBoss:
                 case DesignEnum.MonsterType.DungeonBoss:
+                    monster_bossInfo monBossInfo = Managers.Data.Monster_bossInfos.Get(info.mon_id);
+
+                    foreach (var path in pathInfo)
+                    {
+                        CreateMonster(root.transform, path, monMasterInfo.mon_prefab, info.mon_id, monBossInfo.mon_spawnTime,
+                            monBossInfo.mon_spawnDayNight != -1 ? (DesignEnum.TimeType)monBossInfo.mon_spawnDayNight : null);
+                    }
+
                     break;
             }
         }
     }
+
+    private void CreateMonster(Transform root, PathInfo path, string prefabPath, short monId, float spawnTime, DesignEnum.TimeType? timeType = null)
+    {
+        GameObject obj = null;
+        obj = Managers.Resource.LoadAndPool(prefabPath, root.transform);
+
+        ComMonsterActor comActor = obj.GetComponent<ComMonsterActor>();
+        if (comActor == null)
+            return;
+
+        comActor.Init();
+        MonsterActor actor = comActor.Actor as MonsterActor;
+        if (actor == null)
+            return;
+
+        actor.ModelID = monId;
+        actor.SpawnTime = spawnTime;
+        Debug.Log(timeType);
+        actor.TimeType = timeType;
+        actor.Init();
+        (actor.Controller as MonsterController).SetPath(path);
+        Add(actor);
+    }
+
+
 
     public void LoadPlayer(int charId, bool myPlayer = false)
     {
@@ -159,7 +171,7 @@ public class ObjectManager
 
     public EventEmmiter GetEventEmmiter(BaseActor actor)
     {
-        if(eventEmmiters.TryGetValue(actor, out EventEmmiter result))
+        if (eventEmmiters.TryGetValue(actor, out EventEmmiter result))
         {
             return result;
         }

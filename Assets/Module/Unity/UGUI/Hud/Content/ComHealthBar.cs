@@ -1,21 +1,21 @@
-using Module.Unity.Pivot;
-using Module.Unity.UGUI.Hud;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class ComHealthBar : ComHudAgent
+namespace Module.Unity.UGUI.Hud
 {
-    [SerializeField] Image HpBar;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-    public override void Execute()
+    public class ComHealthBar : ComHudAgent
     {
-        base.Execute();
+        [SerializeField] Image HpBar;
+
+        public override void Execute()
+        {
+            base.Execute();
+        }
+
+        public void SetHP(float hp)
+        {
+            HpBar.fillAmount = hp;
+        }
     }
 
-    public void SetHP(float hp)
-    {
-        HpBar.fillAmount = hp;
-    }
 }

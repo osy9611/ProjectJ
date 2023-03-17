@@ -7,22 +7,22 @@ using UnityEngine;
 public abstract class ComBaseActor : MonoBehaviour
 {
     protected BaseActor actor;
-    public BaseActor Actor { get => actor; set=>actor=value; }
+    public BaseActor Actor { get => actor; set => actor = value; }
     protected ComPivotAgent pivotAgent;
 
-    public ComPivotAgent PivotAget=>pivotAgent;
+    public ComPivotAgent PivotAget => pivotAgent;
 
     protected ComHudUnitInfo hudUnitInfo;
 
-    public ComHudUnitInfo HudUnitInfo=>hudUnitInfo;
+    public ComHudUnitInfo HudUnitInfo => hudUnitInfo;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         pivotAgent = GetComponent<ComPivotAgent>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
 
     }
@@ -42,19 +42,17 @@ public abstract class ComBaseActor : MonoBehaviour
 
     protected virtual void UpdateComActor()
     {
-        if (actor == null)
-            return;
-
-        actor.UpdateActor();
+        if (actor != null)
+            actor.UpdateActor();
     }
 
     protected virtual void LateUpdateComActor()
     {
-        if (actor == null)
-            return;
+        if (actor != null)
+            actor.LateUpdateActor();
 
-        actor.LateUpdateActor();
-        hudUnitInfo.Execute();
+        if (hudUnitInfo != null)
+            hudUnitInfo.Execute();
     }
 
     public virtual void OnEffect(int id)

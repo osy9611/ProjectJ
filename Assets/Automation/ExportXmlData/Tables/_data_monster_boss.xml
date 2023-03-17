@@ -6,4 +6,12 @@
 	<verify ColumnName="mon_spawnId" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1018"/>
 	<verify ColumnName="mon_spawnTime" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1018"/>
 	<verify ColumnName="mon_spawnDayNight" Type="Int8" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="1002" IdRule="-" StringHashIds="-" List="-" TableId="1018"/>
+	<record>
+		<mon_id>2</mon_id>
+		<mon_pathId>0</mon_pathId>
+		<mon_type>2</mon_type>
+		<mon_spawnId>0</mon_spawnId>
+		<mon_spawnTime>60</mon_spawnTime>
+		<mon_spawnDayNight>3</mon_spawnDayNight>
+	</record>
 </monster_boss>

@@ -1,4 +1,5 @@
 using Module.Unity.AI;
+using Module.Unity.DayNight;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,11 @@ public class MonsterActor : BaseActor
     public short ModelID { get => modelID; set => modelID = value; }
 
     private float spawnTime;
-    public float SpawnTime { get => spawnTime; set=> spawnTime = value; }
+    public float SpawnTime { get => spawnTime; set => spawnTime = value; }
+
+    private DesignEnum.TimeType? timeType;
+    public DesignEnum.TimeType? TimeType { get => timeType; set => timeType = value; }
+
 
     public override void Init()
     {
@@ -34,7 +39,26 @@ public class MonsterActor : BaseActor
         statusAgent.Init(this);
         statusAgent.SetStatus(monsterInfo.mon_atk, monsterInfo.mon_def, monsterInfo.mon_hp);
 
+        if (timeType != null)
+        {
+            ComDayNight comDayNight = GameObject.FindObjectOfType<ComDayNight>();
+            if (comDayNight != null)
+            {
+                comDayNight.GetEvent((DesignEnum.TimeType)timeType, SpawnObject);
+                creature.gameObject.SetActive(false);
+            }
+        }
     }
+
+    private void SpawnObject()
+    {
+        if (fsm.CheckCurrentState(Define.ObjectState.Death) || fsm.CheckCurrentState(Define.ObjectState.Spawn))
+            return;
+        if(creature.gameObject.activeSelf == false)
+            creature.gameObject.SetActive(true);
+    }
+
+
     public override void UpdateActor()
     {
         base.UpdateActor();

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace MonsterState
 {
@@ -17,9 +18,9 @@ namespace MonsterState
             if (entity == null)
                 return;
 
-            if(fsm == null)
+            if (fsm == null)
             {
-                if(entity.FSM !=null)
+                if (entity.FSM != null)
                     fsm = entity.FSM as MonsterFSM;
             }
 
@@ -28,24 +29,24 @@ namespace MonsterState
             {
                 Util.RandomFloat(0f, 5.0f, out delayTime);
             }
-           
+
         }
 
         public override void Execute(BaseActor entity)
         {
-            if(entity == null) 
+            if (entity == null)
                 return;
 
             Managers.Ani.CheckAndPlay(entity.Ani, "Idle");
             fsm.CheckAttackRangeFSM(true, null, (result) =>
             {
-                if(!result)
+                if (!result)
                 {
                     if (CalcDelayTime())
                     {
                         entity.FSM.ChangeState(Define.ObjectState.Move);
-                    }    
-                        
+                    }
+
                 }
             });
         }
@@ -91,11 +92,11 @@ namespace MonsterState
 
         public override void Execute(BaseActor entity)
         {
-            if (entity == null) 
+            if (entity == null)
                 return;
 
             fsm.MovePathFSM();
-           
+
         }
 
         public override void Exit(BaseActor entity)
@@ -128,7 +129,7 @@ namespace MonsterState
             fsm.LookAtTargetFSM();
             Managers.Ani.CheckAndPlay(entity.Ani, "Attack");
 
-            
+
 
             if (entity.FSM.AniEnd)
             {
@@ -218,8 +219,9 @@ namespace MonsterState
     {
         private MonsterFSM fsm;
         private float spawnTime = -1;
-        private float nowTime = 0;
-        private bool spawnComplete = false;
+        private float nowSpawnTime = 0;
+        private float nowActiveTime = 0;
+        private float activeTime = 5;
         private System.Action<Define.ObjectState> action;
         public override void Enter(BaseActor entity)
         {
@@ -232,11 +234,7 @@ namespace MonsterState
                     fsm = entity.FSM as MonsterFSM;
             }
 
-            fsm.ResetMovePathFSM(false);
-
-            entity.Creature.gameObject.SetActive(false);
-
-            if(spawnTime == -1)
+            if (spawnTime == -1)
             {
                 MonsterActor actor = entity as MonsterActor;
                 if (actor != null)
@@ -244,38 +242,60 @@ namespace MonsterState
                     spawnTime = 10;
                 }
             }
-
-            if (spawnTime > 0)
-            {
-                if (action == null)
-                    action += entity.FSM.ChangeState;
-                entity.EventEmmiter.AddListener(CalcSpawnTime);
-            }
         }
 
         public override void Execute(BaseActor entity)
         {
+            CalcDeActiveTime(entity);
         }
 
         public override void Exit(BaseActor entity)
         {
+            MonsterActor monsterActor = entity as MonsterActor;
+            if (monsterActor != null)
+            {
+                if (monsterActor.TimeType == null)
+                {
+                    entity.Creature.gameObject.SetActive(true);
+                }
+            }
+
             entity.Creature.HudUnitInfo.ShowHP(true);
-            entity.Creature.gameObject.SetActive(true);
             entity.StatusAgent.ResetHP();
             entity.EventEmmiter.RemoveListener(CalcSpawnTime);
+            nowActiveTime = 0;
+        }
+
+        private void CalcDeActiveTime(BaseActor actor)
+        {
+            if (nowActiveTime <= activeTime)
+            {
+                nowActiveTime += Time.deltaTime;
+            }
+            else
+            {
+                fsm.ResetMovePathFSM(false);
+                if (spawnTime > 0)
+                {
+                    if (action == null)
+                        action += actor.FSM.ChangeState;
+                    actor.EventEmmiter.AddListener(CalcSpawnTime);
+                }
+                nowActiveTime = 0;
+
+                actor.Creature.gameObject.SetActive(false);
+            }
         }
 
         private void CalcSpawnTime()
         {
-            if (nowTime <= spawnTime)
+            if (nowSpawnTime <= spawnTime)
             {
-                nowTime += Time.deltaTime;
-                spawnComplete = false;
+                nowSpawnTime += Time.deltaTime;
             }
             else
             {
-                nowTime = 0;
-                spawnComplete = true;
+                nowSpawnTime = 0;
                 action.Invoke(Define.ObjectState.Idle);
             }
         }

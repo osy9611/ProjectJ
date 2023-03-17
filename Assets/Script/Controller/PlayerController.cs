@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -43,6 +44,7 @@ public class PlayerController : Controller
             Managers.Input.AddEvent("Move", OnMove, Define.InputEvnetType.Start | Define.InputEvnetType.Cancel);            
         }
         Managers.Input.AddEvent("Skill", OnSkill, Define.InputEvnetType.Start | Define.InputEvnetType.Cancel);
+        Managers.Input.AddEvent("Interaction", OnInteractive, Define.InputEvnetType.Start | Define.InputEvnetType.Cancel);
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -83,6 +85,28 @@ public class PlayerController : Controller
                 break;
             case "r":
                 actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.Skill4);
+                break;
+        }
+    }
+
+    private void OnInteractive(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+            return;
+
+        PlayerActor playerActor =  actor as PlayerActor;
+        if (playerActor == null)
+            return;
+
+        if (playerActor.InteractiveActors.Count == 0)
+            return;
+
+        playerActor.InteractiveActors.OrderBy(v => v.gameObject.transform);
+
+        switch (context.control.name)
+        {
+            case "f":
+                playerActor.InteractiveActors[0].Interactive();
                 break;
         }
     }

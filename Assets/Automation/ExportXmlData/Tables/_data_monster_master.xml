@@ -35,7 +35,7 @@
 		<mon_searchAngle>360</mon_searchAngle>
 		<mon_searchRange>5</mon_searchRange>
 		<mon_keppRange>3.0</mon_keppRange>
-		<mon_prefab>Assets/Res/Monster/Elemental/Prefabs/EarthElemental.prefab</mon_prefab>
+		<mon_prefab>Assets/Res/Monster/Elemental/Prefabs/HP_Golem.prefab</mon_prefab>
 	</record>
 	<record>
 		<mon_id>2</mon_id>
@@ -48,7 +48,7 @@
 		<mon_searchAngle>360</mon_searchAngle>
 		<mon_searchRange>6</mon_searchRange>
 		<mon_keppRange>3.0</mon_keppRange>
-		<mon_prefab>Assets/Res/Monster/Elemental/Prefabs/IceElemental.prefab</mon_prefab>
+		<mon_prefab>Assets/Res/Monster/Elemental/Prefabs/PBR_Golem.prefab</mon_prefab>
 	</record>
 	<record>
 		<mon_id>3</mon_id>

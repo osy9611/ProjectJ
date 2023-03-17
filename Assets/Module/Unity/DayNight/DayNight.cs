@@ -91,8 +91,8 @@ namespace Module.Unity.DayNight
             Sun.intensity = SunBrightness.Evaluate(alpha);
             Moon.intensity = MoonBrightness.Evaluate(alpha);
 
-            Sun.color =sunColor.Evaluate(sunIntensity);
-            Moon.color =moonColor.Evaluate(moonIntensity);
+            Sun.color = sunColor.Evaluate(sunIntensity);
+            Moon.color = moonColor.Evaluate(moonIntensity);
 
             RenderSettings.skybox.SetVector("_SunDir", -Sun.transform.forward);
             RenderSettings.skybox.SetVector("_MoonDir", -Moon.transform.forward);
@@ -149,6 +149,27 @@ namespace Module.Unity.DayNight
             }
         }
 
+        public virtual UnityEvent GetEvent(DesignEnum.TimeType timeType,System.Action action)
+        {
+            switch (timeType)
+            {
+                case DesignEnum.TimeType.Morning:
+                    OnMorning.AddListener(action.Invoke);
+                    return OnMorning;
+                case DesignEnum.TimeType.Noon:
+                    OnNoon.AddListener(action.Invoke);
+                    return OnNoon;
+                case DesignEnum.TimeType.Night:
+                    OnNight.AddListener(action.Invoke);
+                    return OnNight;
+                case DesignEnum.TimeType.Midnight:
+                    OnMidnight.AddListener(action.Invoke);
+                    return OnMidnight;
+                default:
+                    return null;
+            }
+        }
+
         private void InvokeTimeEvent()
         {
             switch (timeType)
@@ -159,7 +180,6 @@ namespace Module.Unity.DayNight
                     break;
                 case DesignEnum.TimeType.Noon:
                     if (OnNoon != null) OnNoon.Invoke();
-
                     break;
                 case DesignEnum.TimeType.Night:
                     StartNight();

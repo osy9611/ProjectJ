@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1219876280917500602}
   - component: {fileID: 8607624329223148092}
-  - component: {fileID: 7802026982491722152}
   m_Layer: 5
   m_Name: Hud_HP
   m_TagString: Untagged
@@ -52,20 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957617f74675e6444a292ef59323ee2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ani: {fileID: 0}
   HpBar: {fileID: 1219876281616836220}
---- !u!114 &7802026982491722152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219876280917500605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 496e15592aa3b274eb93d8b9a6655e6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsUsing: 0
 --- !u!1 &1219876281519102986
 GameObject:
   m_ObjectHideFlags: 0

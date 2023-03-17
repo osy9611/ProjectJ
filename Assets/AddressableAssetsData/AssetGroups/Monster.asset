@@ -21,7 +21,7 @@ MonoBehaviour:
     m_Address: Assets/Res/Monster/Bear/Prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 3cc27f55eb0c69840b32817558a83d55
+  - m_GUID: 12411cabe7e49bf418c82f42f2f9f75a
     m_Address: Assets/Res/Monster/Elemental/Prefabs
     m_ReadOnly: 0
     m_SerializedLabels: []
