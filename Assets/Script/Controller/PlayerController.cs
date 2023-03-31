@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
+using Module.Unity.Input;
 
 public class PlayerController : Controller
 {
@@ -37,14 +37,14 @@ public class PlayerController : Controller
     {
         if (Managers.Input.GetNowContorolScheme() == "Mobile")
         {
-            Managers.Input.AddEvent("MoveAxis", OnMove, Define.InputEvnetType.Performed | Define.InputEvnetType.Cancel);
+            Managers.Input.AddEvent("MoveAxis", OnMove, InputEvnetType.Performed | InputEvnetType.Cancel);
         }
         else
         {
-            Managers.Input.AddEvent("Move", OnMove, Define.InputEvnetType.Start | Define.InputEvnetType.Cancel);            
+            Managers.Input.AddEvent("Move", OnMove, InputEvnetType.Start | InputEvnetType.Cancel);            
         }
-        Managers.Input.AddEvent("Skill", OnSkill, Define.InputEvnetType.Start | Define.InputEvnetType.Cancel);
-        Managers.Input.AddEvent("Interaction", OnInteractive, Define.InputEvnetType.Start | Define.InputEvnetType.Cancel);
+        Managers.Input.AddEvent("Skill", OnSkill, InputEvnetType.Start | InputEvnetType.Cancel);
+        Managers.Input.AddEvent("Interaction", OnInteractive, InputEvnetType.Start | InputEvnetType.Cancel);
     }
 
     private void OnMove(InputAction.CallbackContext context)

@@ -1,6 +1,7 @@
 using Module.Unity.Addressables;
 using Module.Unity.Core;
 using Module.Unity.Custermization;
+using Module.Unity.Input;
 using Module.Unity.Sound;
 using Module.Unity.UGUI;
 using Module.Unity.UGUI.Hud;
@@ -18,13 +19,13 @@ public class Managers : MonoBehaviour
     UIManager ui = new UIManager();
     HudManager hud = new HudManager();
     SoundManager sound = new SoundManager();
+    InputManager input = new InputManager();
     #endregion
 
     #region Content
     DataManager data = new DataManager();
     SceneManager scene = new SceneManager();
     ObjectManager objects = new ObjectManager();
-    InputManager input = new InputManager();
     AnimationManager ani = new AnimationManager();
     JudgementManager judge = new JudgementManager();
     MapManager map = new MapManager();

@@ -14,15 +14,6 @@ public class Define
         Game
     }
 
-    [Flags]
-    public enum InputEvnetType
-    {
-        None = 0,
-        Start = 1<<0,
-        Performed = 1<<1,
-        Cancel = 1<<2
-    }
-
     public enum ObjectState
     {
         Idle,
