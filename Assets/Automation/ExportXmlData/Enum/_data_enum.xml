@@ -205,24 +205,10 @@
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>NormalAttack1</ENUM_NAME>
+		<ENUM_NAME>Attack1</ENUM_NAME>
 		<ENUM_VALUE>101</ENUM_VALUE>
 		<GROUP_ID>1008</GROUP_ID>
 		<COMMENT>일반 공격 1</COMMENT>
-	</record>
-	<record>
-		<USE>Y</USE>
-		<ENUM_NAME>NormalAttack2</ENUM_NAME>
-		<ENUM_VALUE>102</ENUM_VALUE>
-		<GROUP_ID>1008</GROUP_ID>
-		<COMMENT>일반 공격 2</COMMENT>
-	</record>
-	<record>
-		<USE>Y</USE>
-		<ENUM_NAME>NormalAttack3</ENUM_NAME>
-		<ENUM_VALUE>103</ENUM_VALUE>
-		<GROUP_ID>1008</GROUP_ID>
-		<COMMENT>일반 공격 3</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
@@ -327,5 +313,19 @@
 		<ENUM_VALUE>1</ENUM_VALUE>
 		<GROUP_ID>1011</GROUP_ID>
 		<COMMENT>던전</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>QuestType</ENUM_NAME>
+		<ENUM_VALUE>-</ENUM_VALUE>
+		<GROUP_ID>1011</GROUP_ID>
+		<COMMENT>필드 타입</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>MonsterHunt</ENUM_NAME>
+		<ENUM_VALUE>0</ENUM_VALUE>
+		<GROUP_ID>1012</GROUP_ID>
+		<COMMENT>몬스터 사냥</COMMENT>
 	</record>
 </Enum>

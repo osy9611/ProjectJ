@@ -27,7 +27,7 @@
 		<skill_Id>101</skill_Id>
 		<skill_coolTime>0</skill_coolTime>
 		<skill_range>1</skill_range>
-		<skill_radius>-1</skill_radius>
+		<skill_radius>180</skill_radius>
 		<skill_scale>2</skill_scale>
 		<skill_buffId>-1</skill_buffId>
 		<skill_type>0</skill_type>
@@ -96,7 +96,7 @@
 		<skill_Id>203</skill_Id>
 		<skill_coolTime>4</skill_coolTime>
 		<skill_range>5</skill_range>
-		<skill_radius>-1</skill_radius>
+		<skill_radius>180</skill_radius>
 		<skill_scale>1</skill_scale>
 		<skill_buffId>-1</skill_buffId>
 		<skill_type>1</skill_type>
@@ -142,7 +142,7 @@
 		<skill_Id>101</skill_Id>
 		<skill_coolTime>2</skill_coolTime>
 		<skill_range>1</skill_range>
-		<skill_radius>-1</skill_radius>
+		<skill_radius>180</skill_radius>
 		<skill_scale>2</skill_scale>
 		<skill_buffId>-1</skill_buffId>
 		<skill_type>0</skill_type>
@@ -210,9 +210,9 @@
 		<unit_type>0</unit_type>
 		<skill_Id>101</skill_Id>
 		<skill_coolTime>2</skill_coolTime>
-		<skill_range>5</skill_range>
-		<skill_radius>-1</skill_radius>
-		<skill_scale>10</skill_scale>
+		<skill_range>8</skill_range>
+		<skill_radius>180</skill_radius>
+		<skill_scale>2</skill_scale>
 		<skill_buffId>-1</skill_buffId>
 		<skill_type>0</skill_type>
 		<skill_attackType>1</skill_attackType>

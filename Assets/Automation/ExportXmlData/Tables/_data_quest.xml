@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<verify ColumnName="quest_Id" Type="Int16" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1020"/>
+	<verify ColumnName="quest_type" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1020"/>
+	<verify ColumnName="reward" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1020"/>
+	<verify ColumnName="quest_target" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1020"/>
+	<verify ColumnName="quest_description" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1020"/>
+	<record>
+		<quest_Id>0</quest_Id>
+		<quest_type>0</quest_type>
+		<reward>{}</reward>
+		<quest_target>{"Monster" : [{ "ID" : 0, "Count" : 2} ,{"ID" : 1, "Count" : 1}]}</quest_target>
+		<quest_description>몬스터 사냥</quest_description>
+	</record>
+</quest>

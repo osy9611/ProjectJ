@@ -1,3 +1,4 @@
+using Module.Core.Systems.Events;
 using Module.Unity.Custermization;
 using Module.Unity.UGUI;
 using System.Collections;
@@ -27,7 +28,21 @@ public class ComCostumeMode : UI_Scene
         int index = System.Enum.GetNames(typeof(Define.CostumePart)).Length;
         partCount = new int[index];
 
-        agent = FindObjectOfType<ComCostumeAgent>();
+        Debug.Log(Managers.Object.MyActor);
+
+        if(Managers.Object.MyActor == null)
+        {
+            agent = FindObjectOfType<ComCostumeAgent>();
+        }
+        else
+        {
+            agent = Managers.Object.MyActor.Creature.GetComponent<ComCostumeAgent>();
+        }        
+    }
+
+    public bool ChangeCostumeColor(int partIdx,Color color,IEventArgs args)
+    {
+        return Managers.Costume.ChangeColor(agent, partIdx, color, args);
     }
 
     public Color? GetColr(Define.CostumePart part, int index)

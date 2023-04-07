@@ -59,12 +59,12 @@ public class ComUIElemCostume : UI_Base
         if (costumeMode.Agent == null)
             return;
 
-        PartAssetData? result;
         if(id != 0)
         {
             id += 1;
         }
-        costumeMode.Agent.ChangeOrAttach(PartAssetData.Create(0, (Color)color, new EventArgs<int>(id)), out result);
+
+        costumeMode.ChangeCostumeColor(0, (Color)color, new EventArgs<int>(id));
     }
 
 }

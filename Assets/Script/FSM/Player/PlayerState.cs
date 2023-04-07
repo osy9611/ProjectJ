@@ -86,7 +86,7 @@ namespace PlayerState
 
             Managers.Ani.CheckAndPlay(entity.Ani, "Move");
 
-            if (Managers.Input.GetNowContorolScheme() == "PC")
+            if (Managers.Input.NowControllScheme == "PC")
             {
                 SetDir(entity,true);
             }

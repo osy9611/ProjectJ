@@ -26,6 +26,7 @@ monster_boss = 1018,
 monster_deploy = 1019,
 monster_master = 1016,
 monster_normal = 1017,
+quest = 1020,
 skill = 1013,
 skill_effect = 1015,
 user_character = 1011,
@@ -48,6 +49,7 @@ private monster_bossInfos monster_bossInfos;
 private monster_deployInfos monster_deployInfos;
 private monster_masterInfos monster_masterInfos;
 private monster_normalInfos monster_normalInfos;
+private questInfos questInfos;
 private skillInfos skillInfos;
 private skill_effectInfos skill_effectInfos;
 private user_characterInfos user_characterInfos;
@@ -57,6 +59,7 @@ public monster_bossInfos Monster_bossInfos => monster_bossInfos;
 public monster_deployInfos Monster_deployInfos => monster_deployInfos;
 public monster_masterInfos Monster_masterInfos => monster_masterInfos;
 public monster_normalInfos Monster_normalInfos => monster_normalInfos;
+public questInfos QuestInfos => questInfos;
 public skillInfos SkillInfos => skillInfos;
 public skill_effectInfos Skill_effectInfos => skill_effectInfos;
 public user_characterInfos User_characterInfos => user_characterInfos;
@@ -106,6 +109,7 @@ loadHandlerList.Add(1018, new DataMgr.LoadHandler(Loadmonster_bossInfos));
 loadHandlerList.Add(1019, new DataMgr.LoadHandler(Loadmonster_deployInfos));
 loadHandlerList.Add(1016, new DataMgr.LoadHandler(Loadmonster_masterInfos));
 loadHandlerList.Add(1017, new DataMgr.LoadHandler(Loadmonster_normalInfos));
+loadHandlerList.Add(1020, new DataMgr.LoadHandler(LoadquestInfos));
 loadHandlerList.Add(1013, new DataMgr.LoadHandler(LoadskillInfos));
 loadHandlerList.Add(1015, new DataMgr.LoadHandler(Loadskill_effectInfos));
 loadHandlerList.Add(1011, new DataMgr.LoadHandler(Loaduser_characterInfos));
@@ -120,6 +124,7 @@ clearHandlerList.Add(1018, ClearDatamonster_bossInfos);
 clearHandlerList.Add(1019, ClearDatamonster_deployInfos);
 clearHandlerList.Add(1016, ClearDatamonster_masterInfos);
 clearHandlerList.Add(1017, ClearDatamonster_normalInfos);
+clearHandlerList.Add(1020, ClearDataquestInfos);
 clearHandlerList.Add(1013, ClearDataskillInfos);
 clearHandlerList.Add(1015, ClearDataskill_effectInfos);
 clearHandlerList.Add(1011, ClearDatauser_characterInfos);
@@ -165,6 +170,14 @@ private void Loadmonster_normalInfos(byte[] data)
     {
         monster_normalInfos = serializer.Deserialize(1017,data) as monster_normalInfos;
         monster_normalInfos.Initialize();
+    }
+}
+private void LoadquestInfos(byte[] data)
+{
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        questInfos = serializer.Deserialize(1020,data) as questInfos;
+        questInfos.Initialize();
     }
 }
 private void LoadskillInfos(byte[] data)
@@ -225,6 +238,11 @@ private void ClearDatamonster_normalInfos()
 {
     if(monster_normalInfos != null)
         monster_normalInfos=null;
+}
+private void ClearDataquestInfos()
+{
+    if(questInfos != null)
+        questInfos=null;
 }
 private void ClearDataskillInfos()
 {

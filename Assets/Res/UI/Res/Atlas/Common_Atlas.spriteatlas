@@ -41,6 +41,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: eecb85004343b0e4d8b78fd7f9877b32, type: 3}
   - {fileID: 21300000, guid: 5797bc328d69758418aa43e10b15d469, type: 3}
   - {fileID: 21300000, guid: fa2416822d7665445bc33bfbc1540922, type: 3}
+  - {fileID: 21300000, guid: 1d8eb823581d4954494fd2df630ea066, type: 3}
   - {fileID: 21300000, guid: 8c9efb6355add18458a9b2b17beed3ae, type: 3}
   - {fileID: 21300000, guid: c67fbf9375ad5c34399c2849430ca7f7, type: 3}
   - {fileID: 21300000, guid: 242533a432db38445a05f4fcab39de7b, type: 3}
@@ -61,6 +62,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2a5c892bdd014164da633b8c6fd0f246, type: 3}
   - {fileID: 21300000, guid: a2563f2b8dbc4044b9a50537d3a29962, type: 3}
   - {fileID: 21300000, guid: 255c050ccda8e5c44b600331e374e2b4, type: 3}
+  - {fileID: 21300000, guid: af39205dd7172f745bbdbb67c373e1bb, type: 3}
   - {fileID: 21300000, guid: c181dc8dffc578949a4c37408c51489e, type: 3}
   - {fileID: 21300000, guid: b2475c7e2489d6e47a14b218979ff0ae, type: 3}
   - {fileID: 21300000, guid: 249c667fdd6ca9746a08abdb3f9ecbf5, type: 3}
@@ -69,6 +71,7 @@ SpriteAtlas:
   - Attack
   - Arrow10 (128 x 128)
   - Skill3Mobile
+  - Arrow12 (128 x 128)
   - uf_level_simple
   - Skill3
   - uf_bg_halfelite
@@ -89,6 +92,7 @@ SpriteAtlas:
   - Skill2
   - Skill4
   - uf_bar_sm_mana
+  - Arrow13 (128 x 128)
   - uf_bg_simple
   - Skill2Mobile
   - uf_bg_elite

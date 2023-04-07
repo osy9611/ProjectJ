@@ -133,7 +133,6 @@ public class ObjectManager
 
         actor.ModelID = monId;
         actor.SpawnTime = spawnTime;
-        Debug.Log(timeType);
         actor.TimeType = timeType;
         actor.Init();
         (actor.Controller as MonsterController).SetPath(path);

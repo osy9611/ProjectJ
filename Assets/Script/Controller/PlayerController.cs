@@ -4,13 +4,17 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Module.Unity.Input;
+using UnityEngine.EventSystems;
+using Module.Core.Systems.Events;
 
 public class PlayerController : Controller
 {
     private QViewControl qViewController;
     public QViewControl QViewController { get => qViewController; }
     private bool isMove;
-    public bool IsMove { get => isMove;}
+    public bool IsMove { get => isMove; }
+
+    private bool isOverUI = false;
 
     public override void Init(BaseActor actor)
     {
@@ -26,22 +30,24 @@ public class PlayerController : Controller
 #if UNITY_ANDROID || UNITY_IOS
         Managers.Input.RegisterInput(actor.Creature as ComPlayerActor, "Mobile");
 #else
-    Managers.Input.RegisterInput(actor.Creature as ComPlayerActor, "PC");
+        Managers.Input.RegisterInput(actor.Creature as ComPlayerActor, "PC");
 #endif
 
         RegisterFunc();
+
+        actor.EventEmmiter.AddListener(checkPointerOverGameObject);
     }
 
 
     public void RegisterFunc()
     {
-        if (Managers.Input.GetNowContorolScheme() == "Mobile")
+        if (Managers.Input.NowControllScheme == "Mobile")
         {
             Managers.Input.AddEvent("MoveAxis", OnMove, InputEvnetType.Performed | InputEvnetType.Cancel);
         }
         else
         {
-            Managers.Input.AddEvent("Move", OnMove, InputEvnetType.Start | InputEvnetType.Cancel);            
+            Managers.Input.AddEvent("Move", OnMove, InputEvnetType.Start | InputEvnetType.Cancel);
         }
         Managers.Input.AddEvent("Skill", OnSkill, InputEvnetType.Start | InputEvnetType.Cancel);
         Managers.Input.AddEvent("Interaction", OnInteractive, InputEvnetType.Start | InputEvnetType.Cancel);
@@ -49,7 +55,7 @@ public class PlayerController : Controller
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        if (Managers.Input.GetNowContorolScheme() == "Mobile")
+        if (Managers.Input.NowControllScheme == "Mobile")
         {
             qViewController.Move(context.ReadValue<Vector2>());
         }
@@ -64,15 +70,26 @@ public class PlayerController : Controller
         }
     }
 
+    private void checkPointerOverGameObject()
+    {
+        isOverUI = EventSystem.current.IsPointerOverGameObject();
+    }
+
     private void OnSkill(InputAction.CallbackContext context)
     {
         if (context.canceled)
             return;
 
+        if (Managers.Input.NowControllScheme == "PC")
+        {
+            if (isOverUI)
+                return;
+        }
+
         switch (context.control.name)
         {
             case "leftButton":
-                actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.NormalAttack1);
+                actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.Attack1);
                 break;
             case "q":
                 actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.Skill1);
@@ -94,7 +111,7 @@ public class PlayerController : Controller
         if (context.canceled)
             return;
 
-        PlayerActor playerActor =  actor as PlayerActor;
+        PlayerActor playerActor = actor as PlayerActor;
         if (playerActor == null)
             return;
 

@@ -26,7 +26,8 @@ public sealed class DataMessageSerializer
     return ProtoBuf.Serializer.Deserialize<monster_bossInfos>(stream);case 1019:
     return ProtoBuf.Serializer.Deserialize<monster_deployInfos>(stream);case 1016:
     return ProtoBuf.Serializer.Deserialize<monster_masterInfos>(stream);case 1017:
-    return ProtoBuf.Serializer.Deserialize<monster_normalInfos>(stream);case 1013:
+    return ProtoBuf.Serializer.Deserialize<monster_normalInfos>(stream);case 1020:
+    return ProtoBuf.Serializer.Deserialize<questInfos>(stream);case 1013:
     return ProtoBuf.Serializer.Deserialize<skillInfos>(stream);case 1015:
     return ProtoBuf.Serializer.Deserialize<skill_effectInfos>(stream);case 1011:
     return ProtoBuf.Serializer.Deserialize<user_characterInfos>(stream);case 1012:

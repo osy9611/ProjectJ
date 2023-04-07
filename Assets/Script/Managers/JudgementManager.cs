@@ -59,25 +59,9 @@ public class JudgementManager
         if (string.IsNullOrEmpty(checkTarget))
             return null;
 
-        List<BaseActor> result = new List<BaseActor>();
+
         var datas = Physics.OverlapSphere(tr.position, val.Value.Arg1, 1 << LayerMask.NameToLayer(checkTarget));
-
-        Debug.Log(val.Value.Arg1);
-        foreach (var info in datas)
-        {
-            Vector3 dir = (info.transform.position - tr.position).normalized;
-            float dot = Vector3.Dot(tr.forward, dir);
-            if (dot > Mathf.Cos(val.Value.Arg2 / 2) * Mathf.Deg2Rad)
-            {
-                BaseActor actor = CheckActor(info, tr, checkTarget);
-
-                if (actor != null)
-                {
-                    result.Add(actor);
-                }
-            }
-        }
-
+        List<BaseActor> result = CheckAngle(checkTarget, tr, datas, val.Value.Arg2);
         return result;
     }
 
@@ -86,22 +70,12 @@ public class JudgementManager
         if (string.IsNullOrEmpty(checkTarget))
             return null;
 
-        List<BaseActor> result = new List<BaseActor>();
-        var datas = Physics.OverlapBox(tr.position, new Vector3(val.Value.Arg3, val.Value.Arg3, val.Value.Arg3),Quaternion.identity, LayerMask.GetMask(checkTarget));
-        Debug.Log(val.Value.Arg3);
-        foreach (var info in datas)
-        {
-            BaseActor actor = CheckActor(info, tr, checkTarget);
-
-            if (actor != null)
-            {
-                result.Add(actor);
-            }
-        }
+        var datas = Physics.OverlapBox(tr.position, new Vector3(val.Value.Arg3, val.Value.Arg3, val.Value.Arg3), Quaternion.identity, LayerMask.GetMask(checkTarget));
+        List<BaseActor> result = CheckAngle(checkTarget, tr, datas, val.Value.Arg2);
         return result;
     }
 
-    private BaseActor CheckActor(Collider info,Transform tr,string checkTarget)
+    private BaseActor CheckActor(Collider info, Transform tr, string checkTarget)
     {
         BaseActor actor = null;
         if (checkTarget == "Player")
@@ -113,9 +87,30 @@ public class JudgementManager
             actor = Managers.Object.FindById(info.transform.gameObject, false);
         }
 
-        if(!actor.FSM.CheckCurrentState(Define.ObjectState.Death))
+        if (!actor.FSM.CheckCurrentState(Define.ObjectState.Death))
             Managers.Effect.Get(4, info.ClosestPoint(tr.position));
 
         return actor;
+    }
+
+    private List<BaseActor> CheckAngle(string checkTarget, Transform myTransform, Collider[] datas, float radius)
+    {
+        List<BaseActor> result = new List<BaseActor>();
+        foreach (var info in datas)
+        {
+            Vector3 dir = (info.transform.position - myTransform.position).normalized;
+            float dot = Vector3.Dot(myTransform.forward, dir);
+            if (dot > Mathf.Cos(radius / 2) * Mathf.Deg2Rad)
+            {
+                BaseActor actor = CheckActor(info, myTransform, checkTarget);
+
+                if (actor != null)
+                {
+                    result.Add(actor);
+                }
+            }
+        }
+
+        return result;
     }
 }

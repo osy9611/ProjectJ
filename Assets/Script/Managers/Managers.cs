@@ -2,6 +2,7 @@ using Module.Unity.Addressables;
 using Module.Unity.Core;
 using Module.Unity.Custermization;
 using Module.Unity.Input;
+using Module.Unity.Quest;
 using Module.Unity.Sound;
 using Module.Unity.UGUI;
 using Module.Unity.UGUI.Hud;
@@ -20,6 +21,7 @@ public class Managers : MonoBehaviour
     HudManager hud = new HudManager();
     SoundManager sound = new SoundManager();
     InputManager input = new InputManager();
+    QuestManager quest = new QuestManager();
     #endregion
 
     #region Content
@@ -44,6 +46,7 @@ public class Managers : MonoBehaviour
     public static SceneManager Scene { get => Instance.scene; }
     public static ObjectManager Object { get => Instance.objects; }
     public static InputManager Input { get => Instance.input; }
+    public static QuestManager Quest { get => Instance.quest; }
     public static AnimationManager Ani { get => Instance.ani; }
     public static JudgementManager Judge { get => Instance.judge; }
     public static EffectManager Effect { get => Instance.effect; }

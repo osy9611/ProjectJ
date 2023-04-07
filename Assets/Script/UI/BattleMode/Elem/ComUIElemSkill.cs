@@ -25,7 +25,7 @@ public class ComUIElemSkill : ComUIBattleElement
         Bind<Image>(typeof(Images));
 
         List<string> resources = new List<string>();
-        for (int i = (int)DesignEnum.SkillID.NormalAttack1; i < (int)DesignEnum.SkillID.Skill4 + 1; ++i)
+        for (int i = (int)DesignEnum.SkillID.Attack1; i < (int)DesignEnum.SkillID.Skill4 + 1; ++i)
         {
             BaseAction action = Managers.Object.MyActor.SkillAgent.ActionManager.GetAction(i);
             if (action == null)
