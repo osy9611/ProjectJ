@@ -61,7 +61,9 @@ public class ComUIElemQuestInfo : ComUIBattleElement
 
             this.gameObject.SetActive(false);
 
-            Managers.UI.GetElem<ComUIElemReward>().ActiveRewardButton(true);
+            ComUIElemReward comUIElemReward = Managers.UI.GetElem<ComUIElemReward>();
+            if(comUIElemReward !=null)
+                comUIElemReward.ActiveRewardButton(true);
 
         }
         else
