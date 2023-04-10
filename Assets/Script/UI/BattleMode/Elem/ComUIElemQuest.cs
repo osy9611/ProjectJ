@@ -9,25 +9,34 @@ public class ComUIElemQuest : ComUIBattleElement
 {
     public ComUIElemQuestInfo QuestInfoUI;
 
-    private List<ComUIElemQuestInfo> questInfoUIs = new List<ComUIElemQuestInfo>();
+    [SerializeField] private List<ComUIElemQuestInfo> questInfoUIs = new List<ComUIElemQuestInfo>();
+
+    public GameObject rewardUI;
 
     public override void Init()
     {
         base.Init();
 
-        if(!questInfoUIs.Contains(QuestInfoUI))
+        if (!questInfoUIs.Contains(QuestInfoUI))
             questInfoUIs.Add(QuestInfoUI);
-        Managers.Quest.AddQuest<QuestData_Monster>(0);
+       
         AddQuestUI();
+
+        Managers.Quest.EventEmmiter.AddListener(UpdateQuest);
     }
 
     public void AddQuestUI()
     {
         UnorderedList<IQuest> quests = Managers.Quest.GetQuestList(0);
+        QuestInfoUI.SetData(quests[0] as QuestData);
+    }
 
-        QuestData questData = quests[0] as QuestData;
-
-        QuestInfoUI.SetData(questData.Name, questData.ReachQuest);
+    public void UpdateQuest()
+    {
+        for (int i = questInfoUIs.Count - 1; i >= 0; --i)
+        {
+            questInfoUIs[i].UpdateData();
+        }
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ComUIBattleElement : UI_Base
+public class ComUIBattleElement : UI_Element
 {
     protected BaseActor actor;
 

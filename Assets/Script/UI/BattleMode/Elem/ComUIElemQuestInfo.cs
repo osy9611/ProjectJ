@@ -1,6 +1,7 @@
 using DesignTable;
 using Module.Core.Systems.Events;
 using Module.Unity.Addressables;
+using Module.Unity.Quest;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,8 @@ using UnityEngine;
 
 public class ComUIElemQuestInfo : ComUIBattleElement
 {
+    private QuestData questData;
+
     [SerializeField] TextMeshProUGUI questName;
 
     public TextMeshProUGUI QuestName => questName;
@@ -19,43 +22,85 @@ public class ComUIElemQuestInfo : ComUIBattleElement
     private List<TextMeshProUGUI> questInfos = new List<TextMeshProUGUI>();
 
     bool isFirst = true;
+
     public override void Init()
     {
     }
 
-    public void SetData(string questName, Dictionary<string, IEventArgs> reachQuest)
+    public void SetData(QuestData questData)
     {
-        this.questName.text = questName;
+        if (questData == null)
+        {
+            Debug.LogError("Null QuestData");
+            return;
+        }
+        this.gameObject.SetActive(true);
 
-        foreach (var data in reachQuest.Values)
+        this.questData = questData;
+        this.questName.text = questData.Name;
+        UpdateData(true);
+    }
+
+
+    public void UpdateData()
+    {
+        if (questData == null)
+        {
+            Debug.LogError("Null QuestData");
+            return;
+        }
+
+        if(questData.Clear)
+        {
+            for (int i = 0, range = questInfos.Count; i < range; ++i)
+            {
+                Managers.Pool.Push(questInfos[i].gameObject.GetComponent<Poolable>());
+            }
+
+            questInfos.Clear();
+
+            this.gameObject.SetActive(false);
+
+            Managers.UI.GetElem<ComUIElemReward>().ActiveRewardButton(true);
+
+        }
+        else
+        {
+            UpdateData(false);
+        }
+    }
+
+    private void UpdateData(bool isCreate = false)
+    {
+        foreach(var data in questData.ReachQuest.Values)
         {
             TextMeshProUGUI text = null;
-            if (isFirst)
+            EventArgs<int, int, string> val = (EventArgs<int, int, string>)data;
+            if (isCreate)
             {
-                text = questInfo;
-                isFirst = false;
+                if (isFirst)
+                {
+                    text = questInfo;
+                    isFirst = false;
+                }
+                else
+                {
+                    Poolable poolObject = Managers.Pool.Pop(questInfo.gameObject, this.questName.transform);
+                    poolObject.gameObject.transform.localScale = Vector3.one;
+                    text = poolObject.GetComponent<TextMeshProUGUI>();
+                }
+                questInfos.Add(text);
             }
             else
             {
-                Poolable poolObject = Managers.Pool.Pop(questInfo.gameObject, this.questName.transform);
-                poolObject.gameObject.transform.localScale = Vector3.one;
-                text = poolObject.GetComponent<TextMeshProUGUI>();
+                text = questInfos.Find(x => x.text.Contains(val.Arg3));
             }
-            questInfos.Add(text);
-            StringBuilder questString = new StringBuilder();
-            EventArgs<int, int> val = (EventArgs<int, int>)data;
-            text.text = string.Format("- {0}/{1}", val.Arg1.ToString(), val.Arg2.ToString());
+
+            if (text == null)
+                continue;
+
+            text.text = string.Format("- {2} {0}/{1}", val.Arg1.ToString(), val.Arg2.ToString(), val.Arg3);
         }
     }
 
-
-    private void OnDisable()
-    {
-        for (int i = 0, range = questInfos.Count; i < range; ++i)
-        {
-            Managers.Pool.Push(questInfos[i].gameObject.GetComponent<Poolable>());
-        }
-
-        questInfos.Clear();
-    }
 }

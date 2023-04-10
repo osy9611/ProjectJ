@@ -13,17 +13,19 @@ public class QuestData_Monster : QuestData
 
         if (reachQuest.TryGetValue(data, out var arg))
         {
-            EventArgs<int, int> val = (EventArgs<int, int>)arg;
+            EventArgs<int, int, string> val = (EventArgs<int, int, string>)arg;
 
             if (val.Arg1 < val.Arg2)
                 val.Arg1++;
 
             reachQuest[data] = val;
         }
+        else
+            return;
 
-        foreach(var quest in reachQuest.Values)
+        foreach (var quest in reachQuest.Values)
         {
-            EventArgs<int, int> val = (EventArgs<int, int>)quest;
+            EventArgs<int, int, string> val = (EventArgs<int, int, string>)quest;
 
             if (val.Arg1 < val.Arg2)
                 return;
@@ -44,7 +46,8 @@ public class QuestData_Monster : QuestData
             {
                 string monsterID = info["ID"].ToString();
                 int monsterCount = int.Parse(info["Count"].ToString());
-                reachQuest.Add(monsterID, new EventArgs<int, int>(0, monsterCount));
+                string monsterName = Managers.Data.Monster_masterInfos.Get(short.Parse(info["ID"].ToString())).mon_name;
+                reachQuest.Add(monsterID, new EventArgs<int, int, string>(0, monsterCount, monsterName));
             }
         }
     }
@@ -52,7 +55,7 @@ public class QuestData_Monster : QuestData
     public override void GetReward()
     {
         Debug.Log("클리어 보상");
-     
+
         base.GetReward();
 
     }

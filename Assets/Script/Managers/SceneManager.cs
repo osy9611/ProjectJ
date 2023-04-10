@@ -73,7 +73,7 @@ public class SceneManager
 
         //UI Load
         ComBattleMode comBattleMode = null;
-        ComCostumeMode costumeMode = Managers.UI.Get<ComCostumeMode>();
+        ComCostumeMode costumeMode = Managers.UI.GetScene<ComCostumeMode>();
 #if UNITY_ANDROID || UNITY_IOS
         comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/MobileCanvas.prefab");
 
@@ -91,7 +91,8 @@ public class SceneManager
         //Monster Load
         Managers.Object.LoadMonster(DesignEnum.FieldType.Field);
 
-        
+        //Quest Init
+        Managers.Quest.AddQuest<QuestData_Monster>(0);
     }
 
     public IEnumerator CoLoadCharectorSelectScene()

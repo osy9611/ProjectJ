@@ -105,10 +105,8 @@ public class StatusAgent
     {
         CalcTotalStatus();
 
-        Debug.Log(actor + " : " + hp[(int)StatusDefine.HPType.NowHP]);
         long damage = checkActor.StatusAgent.TotalStatus[(int)DesignEnum.AttributeId.Atk] - totalStatus[(int)DesignEnum.AttributeId.Def];
 
-        Debug.Log(actor + " : " + damage);
         actor.Creature.HudUnitInfo.SetDamage(damage);
         if (damage > 0)
         {
@@ -129,6 +127,12 @@ public class StatusAgent
 
                 hp[(int)StatusDefine.HPType.NowHP] = 0;
                 actor.FSM.ChangeState(Define.ObjectState.Death);
+                
+                if (actor.UnitType == DesignEnum.UnitType.Monster)
+                {
+                    short modelId = (actor as MonsterActor).ModelID;
+                    Managers.Quest.CheckQuest((int)DesignEnum.QuestType.MonsterHunt, modelId.ToString());
+                }
             }
 
             hp[(int)StatusDefine.HPType.NowHP] -= result;

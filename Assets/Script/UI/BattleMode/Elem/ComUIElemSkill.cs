@@ -20,7 +20,7 @@ public class ComUIElemSkill : ComUIBattleElement
 
     public override void Init()
     {
-        actor = Managers.Object.MyActor;
+        base.Init();
 
         Bind<Image>(typeof(Images));
 

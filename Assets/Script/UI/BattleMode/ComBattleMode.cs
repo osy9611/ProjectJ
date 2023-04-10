@@ -12,6 +12,9 @@ public class ComBattleMode : UI_Scene
         base.Init();
         GameObject spriteAtlas = Managers.Resource.LoadAndPool(Define.CommonAtlasPath, null, 1);
         managedSpriteAtlas = spriteAtlas.GetComponent<ComManagedSpriteAtlas>();
+        GetElem<ComUIElemCharInfo>();
     }
+
+
 
 }

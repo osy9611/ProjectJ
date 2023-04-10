@@ -19,7 +19,7 @@ public class ComUIElemCostume : UI_Base
     public override void Init()
     {
         Bind<Image>(typeof(PartColors));
-        costumeMode = Managers.UI.Get<ComCostumeMode>();
+        costumeMode = Managers.UI.GetScene<ComCostumeMode>();
 
         if (costumeMode == null)
             return;

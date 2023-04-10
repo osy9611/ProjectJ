@@ -19,6 +19,7 @@ public class QuestData : Quest<DesignTable.questInfo>
         name = questInfo.quest_description;
         this.id = questInfo.quest_Id;
         type = questInfo.quest_type;
+        getAutoReward = questInfo.reward_auto;
 
         if (questInfo.reward != "-")
             rewardData = JObject.Parse(questInfo.reward);

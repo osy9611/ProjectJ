@@ -17,18 +17,21 @@ namespace DesignTable
         public string quest_target;
         [ProtoMember(5)] 
         public string quest_description;
+        [ProtoMember(6)] 
+        public bool reward_auto;
 
         public questInfo()
         {
         }
 
-        public questInfo(short quest_Id,short quest_type,string reward,string quest_target,string quest_description)
+        public questInfo(short quest_Id,short quest_type,string reward,string quest_target,string quest_description,bool reward_auto)
         {
             this.quest_Id = quest_Id;
             this.quest_type = quest_type;
             this.reward = reward;
             this.quest_target = quest_target;
             this.quest_description = quest_description;
+            this.reward_auto = reward_auto;
 
         }
     }
@@ -40,7 +43,7 @@ namespace DesignTable
         public Dictionary<ArraySegment<byte>, questInfo> datas = new Dictionary<ArraySegment<byte>, questInfo>(new DataComparer());
         
 
-        public bool Insert(short quest_Id,short quest_type,string reward,string quest_target,string quest_description)
+        public bool Insert(short quest_Id,short quest_type,string reward,string quest_target,string quest_description,bool reward_auto)
         { 
             foreach(questInfo info in dataInfo)
             {
@@ -50,7 +53,7 @@ namespace DesignTable
                 }
             }
 
-            dataInfo.Add(new questInfo(quest_Id,quest_type,reward,quest_target,quest_description));
+            dataInfo.Add(new questInfo(quest_Id,quest_type,reward,quest_target,quest_description,reward_auto));
             return true;
         }
 
@@ -61,7 +64,7 @@ namespace DesignTable
                 ArraySegment<byte> bytes = GetIdRule(data.quest_Id);
                 if (datas.ContainsKey(bytes))
                     continue;
-                datas.Add(bytes,new questInfo(data.quest_Id,data.quest_type,data.reward,data.quest_target,data.quest_description));
+                datas.Add(bytes,new questInfo(data.quest_Id,data.quest_type,data.reward,data.quest_target,data.quest_description,data.reward_auto));
 
                 
             }
