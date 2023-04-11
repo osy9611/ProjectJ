@@ -1,31 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ComUIElemReward : ComUIBattleElement
 {
-    private enum Buttons
+    private enum RewardButtons
     {
         RewardButton
     }
+
     public override void Init()
     {
-        Bind<Button>(typeof(Buttons));
+        Bind<Button>(typeof(RewardButtons));
         ActvieAllButton(false);
     }
 
     public void ActiveRewardButton(bool isActive)
     {
-        Get<Button>((int)Buttons.RewardButton).gameObject.SetActive(isActive);
+        Get<Button>((int)RewardButtons.RewardButton).gameObject.SetActive(isActive);
     }
 
     private void ActvieAllButton(bool isActive)
     {
-        for (int i = 0, range = System.Enum.GetNames(typeof(Buttons)).Length; i < range; ++i)
+        Button[] buttons = Get<Button>();
+        for (int i = 0, range = buttons.Length; i < range; ++i)
         {
-            Get<Button>(i).gameObject.SetActive(isActive);
+            buttons[i].gameObject.SetActive(isActive);
         }
     }
-
 }
