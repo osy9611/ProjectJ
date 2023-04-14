@@ -25,7 +25,7 @@ public class ComBattleScene : ComScene
 
     public void ShowText()
     {
-        Managers.UI.ShowNotification(0, new EventArgs<string>("Æ÷Å» ¿­¸²"));
+        Managers.UI.ShowNotification(0, new Args<string>("Æ÷Å» ¿­¸²"));
     }
 
 }

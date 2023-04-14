@@ -40,7 +40,7 @@ public class ComCostumeMode : UI_Scene
         }        
     }
 
-    public bool ChangeCostumeColor(int partIdx,Color color,IEventArgs args)
+    public bool ChangeCostumeColor(int partIdx,Color color,IArgs args)
     {
         return Managers.Costume.ChangeColor(agent, partIdx, color, args);
     }

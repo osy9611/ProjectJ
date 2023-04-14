@@ -17,7 +17,7 @@ public class SceneManager
         if (loadingBar != null)
             return;
         GameObject go = Managers.Resource.LoadAndInisiate("Assets/Res/UI/Prefab/LoadingBar.prefab");
-        loadingBar = Util.FindChild<Image>(go, "LoadingBar");
+        loadingBar = ComponentUtil.FindChild<Image>(go, "LoadingBar");
     }
 
     public void LoadScene(Define.SceneType type)

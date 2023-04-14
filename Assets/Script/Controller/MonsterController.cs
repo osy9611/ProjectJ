@@ -19,7 +19,7 @@ public class MonsterController : Controller
     private float maxSearchRange;
 
     private BaseActor target;
-    private EventArgs<float, float> checkSearchArgs;
+    private Args<float, float> checkSearchArgs;
 
     public bool ReachTarget { get => reachTarget; }
 
@@ -44,7 +44,7 @@ public class MonsterController : Controller
         originSearchRange = monsterActor.MonsterInfo.mon_searchRange;
         maxSearchRange = monsterActor.MonsterInfo.mon_searchRange * 2.0f;
         keepRange = monsterActor.MonsterInfo.mon_keppRange;
-        checkSearchArgs = new EventArgs<float, float>(originSearchRange, monsterActor.MonsterInfo.mon_searchAngle);
+        checkSearchArgs = new Args<float, float>(originSearchRange, monsterActor.MonsterInfo.mon_searchAngle);
     }
 
     public void SetPath(PathInfo info)

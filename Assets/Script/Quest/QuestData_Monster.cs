@@ -1,4 +1,6 @@
 using Module.Core.Systems.Events;
+using Module.Unity.Quest;
+using Module.Unity.Utils;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
@@ -13,7 +15,7 @@ public class QuestData_Monster : QuestData
 
         if (reachQuest.TryGetValue(data, out var arg))
         {
-            EventArgs<int, int, string> val = (EventArgs<int, int, string>)arg;
+            Args<int, int, string> val = (Args<int, int, string>)arg;
 
             if (val.Arg1 < val.Arg2)
                 val.Arg1++;
@@ -25,7 +27,7 @@ public class QuestData_Monster : QuestData
 
         foreach (var quest in reachQuest.Values)
         {
-            EventArgs<int, int, string> val = (EventArgs<int, int, string>)quest;
+            Args<int, int, string> val = (Args<int, int, string>)quest;
 
             if (val.Arg1 < val.Arg2)
                 return;
@@ -38,25 +40,44 @@ public class QuestData_Monster : QuestData
     {
         base.GetQuestData(id);
 
-        if (questTarget.TryGetValue("Monster", out var value))
+        JsonUtil.ParseJsonArray(questTarget, "Monster", (array) =>
         {
-            JArray array = JArray.Parse(value.ToString());
-
-            foreach (var info in array)
+            if (array != null)
             {
-                string monsterID = info["ID"].ToString();
-                int monsterCount = int.Parse(info["Count"].ToString());
-                string monsterName = Managers.Data.Monster_masterInfos.Get(short.Parse(info["ID"].ToString())).mon_name;
-                reachQuest.Add(monsterID, new EventArgs<int, int, string>(0, monsterCount, monsterName));
+                foreach (var info in array)
+                {
+                    string monsterID = info["ID"].ToString();
+                    int monsterCount = int.Parse(info["Count"].ToString());
+                    string monsterName = Managers.Data.Monster_masterInfos.Get(short.Parse(info["ID"].ToString())).mon_name;
+                    reachQuest.Add(monsterID, new Args<int, int, string>(0, monsterCount, monsterName));
+                }
             }
-        }
+
+        });
+
+        JsonUtil.ParseJsonArray(rewardData, "passive", (array) =>
+        {
+            if (array != null)
+            {
+                RewardData reward = new RewardData();
+                foreach (var info in array)
+                {
+                    if (short.TryParse(info["ID"].ToString(), out short result))
+                    {
+                        reward.rewardInfos.Add(Managers.Data.PassiveInfos.Get(result));
+                    }
+                }
+                rewardInfos.Add(typeof(DesignTable.passiveInfo), reward);
+            }
+        });
     }
 
     public override void GetReward()
     {
-        Debug.Log("클리어 보상");
-
+        if (rewardInfos.TryGetValue(typeof(DesignTable.passiveInfo), out var value))
+        {
+            value.SetData();
+        }
         base.GetReward();
-
     }
 }

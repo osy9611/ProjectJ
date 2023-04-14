@@ -16,7 +16,6 @@ public class StatusDefine
     public enum StatusGroupId
     {
         Default,
-        Equip,
         Buff,
         Passive
     }

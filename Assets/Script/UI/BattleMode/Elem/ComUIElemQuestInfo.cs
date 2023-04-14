@@ -66,6 +66,8 @@ public class ComUIElemQuestInfo : ComUIBattleElement
             {
                 result.ActiveRewardButton(true);
             });
+
+            questData = null;
         }
         else
         {
@@ -78,7 +80,7 @@ public class ComUIElemQuestInfo : ComUIBattleElement
         foreach(var data in questData.ReachQuest.Values)
         {
             TextMeshProUGUI text = null;
-            EventArgs<int, int, string> val = (EventArgs<int, int, string>)data;
+            Args<int, int, string> val = (Args<int, int, string>)data;
             if (isCreate)
             {
                 if (isFirst)

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<passive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<verify ColumnName="passive_Id" Type="Int16" Min="-" Max="-" PK="Y" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1021"/>
+	<verify ColumnName="status_Type" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="1013" IdRule="-" StringHashIds="-" List="-" TableId="1021"/>
+	<verify ColumnName="status_Arg" Type="Int16" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1021"/>
+	<verify ColumnName="passive_name" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1021"/>
+	<verify ColumnName="image_Res" Type="string" Min="-" Max="-" PK="N" Ref="-" ColumnList="-" DistFile="N" EnumIds="-" IdRule="-" StringHashIds="-" List="-" TableId="1021"/>
+	<record>
+		<passive_Id>0</passive_Id>
+		<status_Type>0</status_Type>
+		<status_Arg>30</status_Arg>
+		<passive_name>공격력 증가</passive_name>
+		<image_Res>AtkPassive</image_Res>
+	</record>
+	<record>
+		<passive_Id>1</passive_Id>
+		<status_Type>1</status_Type>
+		<status_Arg>30</status_Arg>
+		<passive_name>방어력 증가</passive_name>
+		<image_Res>DefPassive</image_Res>
+	</record>
+	<record>
+		<passive_Id>2</passive_Id>
+		<status_Type>2</status_Type>
+		<status_Arg>30</status_Arg>
+		<passive_name>최대 생명력 증가</passive_name>
+		<image_Res>HpPassive</image_Res>
+	</record>
+</passive>

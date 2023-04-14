@@ -74,7 +74,7 @@ public class BaseAction
     public virtual void OnJudge()
     {
         checkActors.Clear();
-        EventArgs<float, float, float> args = new EventArgs<float, float, float>(skillInfo.skill_range, skillInfo.skill_radius, skillInfo.skill_scale);
+        Args<float, float, float> args = new Args<float, float, float>(skillInfo.skill_range, skillInfo.skill_radius, skillInfo.skill_scale);
         checkActors = Managers.Judge.CheckHit(actionManager.Actor, (DesignEnum.SkillAttackType)skillInfo.skill_attackType, args);
 
         if (checkActors == null)

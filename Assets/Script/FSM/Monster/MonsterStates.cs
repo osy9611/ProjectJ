@@ -27,7 +27,7 @@ namespace MonsterState
             Managers.Ani.Play(entity.Ani, "Idle");
             if (entity.FSM.CheckPrevState(Define.ObjectState.Move))
             {
-                Util.RandomFloat(0f, 5.0f, out delayTime);
+                Util.Random(0f, 5.0f, out delayTime);
             }
 
         }

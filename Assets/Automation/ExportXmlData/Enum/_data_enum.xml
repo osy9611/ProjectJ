@@ -318,8 +318,8 @@
 		<USE>Y</USE>
 		<ENUM_NAME>QuestType</ENUM_NAME>
 		<ENUM_VALUE>-</ENUM_VALUE>
-		<GROUP_ID>1011</GROUP_ID>
-		<COMMENT>필드 타입</COMMENT>
+		<GROUP_ID>1012</GROUP_ID>
+		<COMMENT>퀘스트 타입</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>
@@ -327,5 +327,33 @@
 		<ENUM_VALUE>0</ENUM_VALUE>
 		<GROUP_ID>1012</GROUP_ID>
 		<COMMENT>몬스터 사냥</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>PassiveType</ENUM_NAME>
+		<ENUM_VALUE>-</ENUM_VALUE>
+		<GROUP_ID>1013</GROUP_ID>
+		<COMMENT>패시브 타입</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>ATK</ENUM_NAME>
+		<ENUM_VALUE>0</ENUM_VALUE>
+		<GROUP_ID>1013</GROUP_ID>
+		<COMMENT>공격력</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>DEF</ENUM_NAME>
+		<ENUM_VALUE>1</ENUM_VALUE>
+		<GROUP_ID>1013</GROUP_ID>
+		<COMMENT>방어력</COMMENT>
+	</record>
+	<record>
+		<USE>Y</USE>
+		<ENUM_NAME>HP</ENUM_NAME>
+		<ENUM_VALUE>2</ENUM_VALUE>
+		<GROUP_ID>1013</GROUP_ID>
+		<COMMENT>체력</COMMENT>
 	</record>
 </Enum>

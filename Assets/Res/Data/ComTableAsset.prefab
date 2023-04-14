@@ -65,3 +65,5 @@ MonoBehaviour:
     addressable: monster_deploy.bytes
   - tableId: 1020
     addressable: quest.bytes
+  - tableId: 1021
+    addressable: passive.bytes

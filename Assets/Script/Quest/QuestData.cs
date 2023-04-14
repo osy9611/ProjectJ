@@ -1,6 +1,8 @@
 using DesignTable;
+using Module.Core.Systems.Collections.Generic;
 using Module.Unity.Quest;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestData : Quest<DesignTable.questInfo>
@@ -30,4 +32,5 @@ public class QuestData : Quest<DesignTable.questInfo>
     {
         Managers.Quest.RemoveQuest((short)type, this);
     }
+
 }

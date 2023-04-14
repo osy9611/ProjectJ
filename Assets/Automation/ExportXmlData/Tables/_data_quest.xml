@@ -9,7 +9,7 @@
 	<record>
 		<quest_Id>0</quest_Id>
 		<quest_type>0</quest_type>
-		<reward>{}</reward>
+		<reward>{"passive" : [{"ID" : "0"},{"ID" : "1"},{"ID" : "2"}]}</reward>
 		<quest_target>{"Monster" : [{ "ID" : 0, "Count" : 2} ,{"ID" : 2, "Count" : 1}]}</quest_target>
 		<quest_description>몬스터 사냥</quest_description>
 		<reward_auto>Y</reward_auto>

@@ -8,9 +8,9 @@ using UnityEngine;
 public class JudgementManager
 {
     //args => 1 : search_range, 2 : search_angle
-    public BaseActor CheckTarget(BaseActor actor, IEventArgs args)
+    public BaseActor CheckTarget(BaseActor actor, IArgs args)
     {
-        EventArgs<float, float>? val = args as EventArgs<float, float>?;
+        Args<float, float>? val = args as Args<float, float>?;
         if (actor == null || !val.HasValue)
             return null;
 
@@ -28,9 +28,9 @@ public class JudgementManager
 
 
     //args => 1 : skill_range, 2 : skill_radius, 3 : skill_scale
-    public List<BaseActor> CheckHit(BaseActor actor, DesignEnum.SkillAttackType attackType, IEventArgs args)
+    public List<BaseActor> CheckHit(BaseActor actor, DesignEnum.SkillAttackType attackType, IArgs args)
     {
-        EventArgs<float, float, float>? val = args as EventArgs<float, float, float>?;
+        Args<float, float, float>? val = args as Args<float, float, float>?;
         if (!val.HasValue)
             return null;
 
@@ -54,7 +54,7 @@ public class JudgementManager
         return null;
     }
 
-    public List<BaseActor> CalcCircle(string checkTarget, Transform tr, EventArgs<float, float, float>? val)
+    public List<BaseActor> CalcCircle(string checkTarget, Transform tr, Args<float, float, float>? val)
     {
         if (string.IsNullOrEmpty(checkTarget))
             return null;
@@ -65,7 +65,7 @@ public class JudgementManager
         return result;
     }
 
-    public List<BaseActor> CalcStraight(string checkTarget, Transform tr, EventArgs<float, float, float>? val)
+    public List<BaseActor> CalcStraight(string checkTarget, Transform tr, Args<float, float, float>? val)
     {
         if (string.IsNullOrEmpty(checkTarget))
             return null;

@@ -112,11 +112,21 @@ namespace DesignEnum
         Dungeon = 1, //던전
     }
     /// <summary> 
-    /// ID : 1011
-    /// 필드 타입
+    /// ID : 1012
+    /// 퀘스트 타입
     /// </summary> 
     public enum QuestType
     {
         MonsterHunt = 0, //몬스터 사냥
+    }
+    /// <summary> 
+    /// ID : 1013
+    /// 패시브 타입
+    /// </summary> 
+    public enum PassiveType
+    {
+        ATK = 0, //공격력
+        DEF = 1, //방어력
+        HP = 2, //체력
     }
 }

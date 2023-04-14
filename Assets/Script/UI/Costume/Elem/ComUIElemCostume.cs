@@ -16,6 +16,7 @@ public class ComUIElemCostume : UI_Base
     }
 
     private ComCostumeMode costumeMode;
+
     public override void Init()
     {
         Bind<Image>(typeof(PartColors));
@@ -64,7 +65,7 @@ public class ComUIElemCostume : UI_Base
             id += 1;
         }
 
-        costumeMode.ChangeCostumeColor(0, (Color)color, new EventArgs<int>(id));
+        costumeMode.ChangeCostumeColor(0, (Color)color, new Args<int>(id));
     }
 
 }

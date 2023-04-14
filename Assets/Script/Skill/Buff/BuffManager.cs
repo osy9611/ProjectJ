@@ -48,7 +48,7 @@ public class BuffManager
         if (buff == null)
             return;
 
-        buff.Init(this, new EventArgs<BaseActor,buffInfo>(actor,info));
+        buff.Init(this, new Args<BaseActor,buffInfo>(actor,info));
         buffs.Add(buff);
         actor.EventEmmiter.AddListener(buff.Execute);
     }

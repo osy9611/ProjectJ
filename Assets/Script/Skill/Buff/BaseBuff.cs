@@ -18,11 +18,11 @@ abstract public class BaseBuff
     private bool isEnd = false;
     public bool IsEnd { get => isEnd; }
 
-    public virtual void Init(BuffManager buffMangaer,IEventArgs arg)
+    public virtual void Init(BuffManager buffMangaer,IArgs arg)
     {
         this.buffManager = buffMangaer;
         //duration, interval
-        EventArgs<BaseActor, buffInfo>? val = arg as EventArgs<BaseActor, buffInfo>?;
+        Args<BaseActor, buffInfo>? val = arg as Args<BaseActor, buffInfo>?;
         if (!val.HasValue)
             return;
         actor = val.Value.Arg1;

@@ -64,11 +64,14 @@ public class StatusAgent
     public void IncreaseStatus(StatusDefine.StatusGroupId statusGroupID, DesignEnum.AttributeId attributeId, long value = 0, bool calcPercent = false)
     {
         long result = value;
+
+        Debug.Log(result);
         if (calcPercent)
         {
             result = StatusDefine.FloatToLong(status[(int)StatusDefine.StatusGroupId.Default][(int)attributeId] * StatusDefine.IntToPercent((int)value));
         }
         status[(int)statusGroupID][(int)attributeId] += result;
+        Debug.Log(status[(int)statusGroupID][(int)attributeId]);
     }
 
     public void DecreaseStatus(StatusDefine.StatusGroupId statusGroupID, DesignEnum.AttributeId attributeId, long value = 0, bool calcPercent = false)

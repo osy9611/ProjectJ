@@ -41,6 +41,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: eecb85004343b0e4d8b78fd7f9877b32, type: 3}
   - {fileID: 21300000, guid: 5797bc328d69758418aa43e10b15d469, type: 3}
   - {fileID: 21300000, guid: fa2416822d7665445bc33bfbc1540922, type: 3}
+  - {fileID: 21300000, guid: c46d83f2b73aaa141bd5015819342d81, type: 3}
+  - {fileID: 21300000, guid: c3aab7237df394c4890e647a4ae580ea, type: 3}
   - {fileID: 21300000, guid: 1d8eb823581d4954494fd2df630ea066, type: 3}
   - {fileID: 21300000, guid: 8c9efb6355add18458a9b2b17beed3ae, type: 3}
   - {fileID: 21300000, guid: c67fbf9375ad5c34399c2849430ca7f7, type: 3}
@@ -68,10 +70,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b2475c7e2489d6e47a14b218979ff0ae, type: 3}
   - {fileID: 21300000, guid: 249c667fdd6ca9746a08abdb3f9ecbf5, type: 3}
   - {fileID: 21300000, guid: baed43ef8b87ae94d887a891c229cb31, type: 3}
+  - {fileID: 21300000, guid: aeb31def086466745b570d082197ee1f, type: 3}
   m_PackedSpriteNamesToIndex:
   - Attack
   - Arrow10 (128 x 128)
   - Skill3Mobile
+  - DefPassive
+  - HpPassive
   - Arrow12 (128 x 128)
   - uf_level_simple
   - Skill3
@@ -99,6 +104,7 @@ SpriteAtlas:
   - Skill2Mobile
   - uf_bg_elite
   - AttackMobile
+  - AtkPassive
   m_RenderDataMap: {}
   m_Tag: Common_Atlas
   m_IsVariant: 0
