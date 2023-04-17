@@ -1,9 +1,11 @@
 using Module.Unity.Sound;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Profiling;
 
 public class ComScene : MonoBehaviour
 {
@@ -11,17 +13,30 @@ public class ComScene : MonoBehaviour
 
     protected virtual void Start()
     {
-        if (BgmSound.ToString() == "[]")
-            return;
-        Managers.Resource.LoadAsset<AudioClip>(BgmSound,
-           (result) =>
-           {
-               if (result != null)
+        try
+        {
+            if (BgmSound.ToString() == "[]")
+                return;
+
+            Managers.Resource.LoadAsset<AudioClip>(BgmSound,
+               (result) =>
                {
-                   Managers.Sound.Play(result, Sound.Bgm, 1);
-               }
-           });
+                   if (result != null)
+                   {
+                       Managers.Sound.Play(result, Sound.Bgm, 1);
+                   }
+                   else
+                   {
+                       Debug.Log("Load Fail");
+                   }
+               });
+        }
+        catch (Exception ex)
+        {   
+           Debug.LogError(ex);
+        }
     }
+
 
     protected virtual void OnDestroy()
     {

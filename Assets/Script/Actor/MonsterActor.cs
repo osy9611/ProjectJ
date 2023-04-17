@@ -44,7 +44,7 @@ public class MonsterActor : BaseActor
             ComDayNight comDayNight = GameObject.FindObjectOfType<ComDayNight>();
             if (comDayNight != null)
             {
-                comDayNight.GetEvent((DesignEnum.TimeType)timeType, SpawnObject);
+                comDayNight.AddEvent((DesignEnum.TimeType)timeType, SpawnObject);
                 creature.gameObject.SetActive(false);
             }
         }

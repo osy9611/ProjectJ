@@ -33,7 +33,7 @@ public class ComQViewCamera : MonoBehaviour
         transform.rotation = rotation;
     }
 
-    private void FollowPlayer()
+    private void FollowTarget()
     {
         if (target == null || !isFollowPlayer)
             return;
@@ -52,7 +52,7 @@ public class ComQViewCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        FollowPlayer();
+        FollowTarget();
     }
 
 #if UNITY_EDITOR
