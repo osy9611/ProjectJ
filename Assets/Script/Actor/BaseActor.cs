@@ -42,8 +42,12 @@ public abstract class BaseActor
         if (skillAgent == null)
             return;
 
-        fsm.Execte();
+        if (fsm != null)
+            fsm.Execte();
     }
     public virtual void LateUpdateActor() { }
+
+    public virtual void Enable() { }
+    public virtual void Disable() { }
 
 }

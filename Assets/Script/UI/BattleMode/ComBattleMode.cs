@@ -10,7 +10,7 @@ public class ComBattleMode : UI_Scene
     public override void Init()
     {
         base.Init();
-        GameObject spriteAtlas = Managers.Resource.LoadAndPool(Define.CommonAtlasPath, null, 1);
+        GameObject spriteAtlas = Managers.Resource.LoadAndPop(Define.CommonAtlasPath, null, 1);
         managedSpriteAtlas = spriteAtlas.GetComponent<ComManagedSpriteAtlas>();
         GetElem<ComUIElemCharInfo>();
     }

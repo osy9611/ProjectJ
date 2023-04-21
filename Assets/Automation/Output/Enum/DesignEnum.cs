@@ -76,7 +76,7 @@ namespace DesignEnum
     /// </summary> 
     public enum SkillID
     {
-        Attack1 = 101, //일반 공격 1
+        Attack = 101, //일반 공격
         Skill1 = 201, //스킬 공격 1
         Skill2 = 202, //스킬 공격 2
         Skill3 = 203, //스킬 공격 3

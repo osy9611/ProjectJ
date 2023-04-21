@@ -51,12 +51,15 @@ namespace DesignTable
         public string hitSound_Res;
         [ProtoMember(21)] 
         public bool sound_Ani;
+        [ProtoMember(22)] 
+        public int projectile_Id;
+          public projectileInfo projectile_Id_ref;        
 
         public skillInfo()
         {
         }
 
-        public skillInfo(int unit_Class,int unit_type,int skill_Id,float skill_coolTime,float skill_range,float skill_radius,float skill_scale,int skill_buffId,sbyte skill_type,sbyte skill_attackType,bool skill_contoroll,bool skill_dash,float skill_dashSpeed,bool skill_judgeAni,float skill_judgeTime,int effect_Id,int hit_effect_Id,string image_Res,string sound_Res,string hitSound_Res,bool sound_Ani)
+        public skillInfo(int unit_Class,int unit_type,int skill_Id,float skill_coolTime,float skill_range,float skill_radius,float skill_scale,int skill_buffId,sbyte skill_type,sbyte skill_attackType,bool skill_contoroll,bool skill_dash,float skill_dashSpeed,bool skill_judgeAni,float skill_judgeTime,int effect_Id,int hit_effect_Id,string image_Res,string sound_Res,string hitSound_Res,bool sound_Ani,int projectile_Id)
         {
             this.unit_Class = unit_Class;
             this.unit_type = unit_type;
@@ -79,6 +82,7 @@ namespace DesignTable
             this.sound_Res = sound_Res;
             this.hitSound_Res = hitSound_Res;
             this.sound_Ani = sound_Ani;
+            this.projectile_Id = projectile_Id;
 
         }
     }
@@ -90,7 +94,7 @@ namespace DesignTable
         public Dictionary<ArraySegment<byte>, skillInfo> datas = new Dictionary<ArraySegment<byte>, skillInfo>(new DataComparer());
         public Dictionary<ArraySegment<byte>,List<skillInfo>> listData = new Dictionary<ArraySegment<byte>, List<skillInfo>>(new DataComparer());
 
-        public bool Insert(int unit_Class,int unit_type,int skill_Id,float skill_coolTime,float skill_range,float skill_radius,float skill_scale,int skill_buffId,sbyte skill_type,sbyte skill_attackType,bool skill_contoroll,bool skill_dash,float skill_dashSpeed,bool skill_judgeAni,float skill_judgeTime,int effect_Id,int hit_effect_Id,string image_Res,string sound_Res,string hitSound_Res,bool sound_Ani)
+        public bool Insert(int unit_Class,int unit_type,int skill_Id,float skill_coolTime,float skill_range,float skill_radius,float skill_scale,int skill_buffId,sbyte skill_type,sbyte skill_attackType,bool skill_contoroll,bool skill_dash,float skill_dashSpeed,bool skill_judgeAni,float skill_judgeTime,int effect_Id,int hit_effect_Id,string image_Res,string sound_Res,string hitSound_Res,bool sound_Ani,int projectile_Id)
         { 
             foreach(skillInfo info in dataInfo)
             {
@@ -100,7 +104,7 @@ namespace DesignTable
                 }
             }
 
-            dataInfo.Add(new skillInfo(unit_Class,unit_type,skill_Id,skill_coolTime,skill_range,skill_radius,skill_scale,skill_buffId,skill_type,skill_attackType,skill_contoroll,skill_dash,skill_dashSpeed,skill_judgeAni,skill_judgeTime,effect_Id,hit_effect_Id,image_Res,sound_Res,hitSound_Res,sound_Ani));
+            dataInfo.Add(new skillInfo(unit_Class,unit_type,skill_Id,skill_coolTime,skill_range,skill_radius,skill_scale,skill_buffId,skill_type,skill_attackType,skill_contoroll,skill_dash,skill_dashSpeed,skill_judgeAni,skill_judgeTime,effect_Id,hit_effect_Id,image_Res,sound_Res,hitSound_Res,sound_Ani,projectile_Id));
             return true;
         }
 
@@ -111,7 +115,7 @@ namespace DesignTable
                 ArraySegment<byte> bytes = GetIdRule(data.unit_Class,data.unit_type,data.skill_Id);
                 if (datas.ContainsKey(bytes))
                     continue;
-                datas.Add(bytes,new skillInfo(data.unit_Class,data.unit_type,data.skill_Id,data.skill_coolTime,data.skill_range,data.skill_radius,data.skill_scale,data.skill_buffId,data.skill_type,data.skill_attackType,data.skill_contoroll,data.skill_dash,data.skill_dashSpeed,data.skill_judgeAni,data.skill_judgeTime,data.effect_Id,data.hit_effect_Id,data.image_Res,data.sound_Res,data.hitSound_Res,data.sound_Ani));
+                datas.Add(bytes,new skillInfo(data.unit_Class,data.unit_type,data.skill_Id,data.skill_coolTime,data.skill_range,data.skill_radius,data.skill_scale,data.skill_buffId,data.skill_type,data.skill_attackType,data.skill_contoroll,data.skill_dash,data.skill_dashSpeed,data.skill_judgeAni,data.skill_judgeTime,data.effect_Id,data.hit_effect_Id,data.image_Res,data.sound_Res,data.hitSound_Res,data.sound_Ani,data.projectile_Id));
 
                 
 bytes = GetListIdRule(data.unit_Class,data.unit_type);
@@ -212,6 +216,16 @@ public void SetupRef_item_Id(skill_effectInfos infos)
                 if(data.effect_Id != -1)
                 {
                     data.effect_Id_ref = infos.Get((int)data.effect_Id);
+                }
+            }
+        }
+public void SetupRef_item_Id(projectileInfos infos)
+        {
+            foreach(skillInfo data in dataInfo)
+            {
+                if(data.projectile_Id != -1)
+                {
+                    data.projectile_Id_ref = infos.Get((int)data.projectile_Id);
                 }
             }
         }

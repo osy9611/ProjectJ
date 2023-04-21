@@ -14,4 +14,20 @@
 		<mon_spawnTime>50</mon_spawnTime>
 		<mon_spawnDayNight>0</mon_spawnDayNight>
 	</record>
+	<record>
+		<mon_id>4</mon_id>
+		<mon_pathId>4</mon_pathId>
+		<mon_type>1</mon_type>
+		<mon_spawnId>4</mon_spawnId>
+		<mon_spawnTime>50</mon_spawnTime>
+		<mon_spawnDayNight>0</mon_spawnDayNight>
+	</record>
+	<record>
+		<mon_id>5</mon_id>
+		<mon_pathId>5</mon_pathId>
+		<mon_type>1</mon_type>
+		<mon_spawnId>5</mon_spawnId>
+		<mon_spawnTime>50</mon_spawnTime>
+		<mon_spawnDayNight>0</mon_spawnDayNight>
+	</record>
 </monster_normal>

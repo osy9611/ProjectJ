@@ -27,6 +27,7 @@ monster_deploy = 1019,
 monster_master = 1016,
 monster_normal = 1017,
 passive = 1021,
+projectile = 1022,
 quest = 1020,
 skill = 1013,
 skill_effect = 1015,
@@ -51,6 +52,7 @@ private monster_deployInfos monster_deployInfos;
 private monster_masterInfos monster_masterInfos;
 private monster_normalInfos monster_normalInfos;
 private passiveInfos passiveInfos;
+private projectileInfos projectileInfos;
 private questInfos questInfos;
 private skillInfos skillInfos;
 private skill_effectInfos skill_effectInfos;
@@ -62,6 +64,7 @@ public monster_deployInfos Monster_deployInfos => monster_deployInfos;
 public monster_masterInfos Monster_masterInfos => monster_masterInfos;
 public monster_normalInfos Monster_normalInfos => monster_normalInfos;
 public passiveInfos PassiveInfos => passiveInfos;
+public projectileInfos ProjectileInfos => projectileInfos;
 public questInfos QuestInfos => questInfos;
 public skillInfos SkillInfos => skillInfos;
 public skill_effectInfos Skill_effectInfos => skill_effectInfos;
@@ -113,6 +116,7 @@ loadHandlerList.Add(1019, new DataMgr.LoadHandler(Loadmonster_deployInfos));
 loadHandlerList.Add(1016, new DataMgr.LoadHandler(Loadmonster_masterInfos));
 loadHandlerList.Add(1017, new DataMgr.LoadHandler(Loadmonster_normalInfos));
 loadHandlerList.Add(1021, new DataMgr.LoadHandler(LoadpassiveInfos));
+loadHandlerList.Add(1022, new DataMgr.LoadHandler(LoadprojectileInfos));
 loadHandlerList.Add(1020, new DataMgr.LoadHandler(LoadquestInfos));
 loadHandlerList.Add(1013, new DataMgr.LoadHandler(LoadskillInfos));
 loadHandlerList.Add(1015, new DataMgr.LoadHandler(Loadskill_effectInfos));
@@ -129,6 +133,7 @@ clearHandlerList.Add(1019, ClearDatamonster_deployInfos);
 clearHandlerList.Add(1016, ClearDatamonster_masterInfos);
 clearHandlerList.Add(1017, ClearDatamonster_normalInfos);
 clearHandlerList.Add(1021, ClearDatapassiveInfos);
+clearHandlerList.Add(1022, ClearDataprojectileInfos);
 clearHandlerList.Add(1020, ClearDataquestInfos);
 clearHandlerList.Add(1013, ClearDataskillInfos);
 clearHandlerList.Add(1015, ClearDataskill_effectInfos);
@@ -183,6 +188,14 @@ private void LoadpassiveInfos(byte[] data)
     {
         passiveInfos = serializer.Deserialize(1021,data) as passiveInfos;
         passiveInfos.Initialize();
+    }
+}
+private void LoadprojectileInfos(byte[] data)
+{
+    using (MemoryStream memoryStream = new MemoryStream(data))
+    {
+        projectileInfos = serializer.Deserialize(1022,data) as projectileInfos;
+        projectileInfos.Initialize();
     }
 }
 private void LoadquestInfos(byte[] data)
@@ -257,6 +270,11 @@ private void ClearDatapassiveInfos()
     if(passiveInfos != null)
         passiveInfos=null;
 }
+private void ClearDataprojectileInfos()
+{
+    if(projectileInfos != null)
+        projectileInfos=null;
+}
 private void ClearDataquestInfos()
 {
     if(questInfos != null)
@@ -288,6 +306,7 @@ private void ClearDatauser_character2Infos()
         {
             skillInfos.SetupRef_item_Id(buffInfos);
 skillInfos.SetupRef_item_Id(skill_effectInfos);
+skillInfos.SetupRef_item_Id(projectileInfos);
 user_character2Infos.SetupRef_item_Id(user_characterInfos);
 
         }

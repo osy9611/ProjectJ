@@ -64,15 +64,23 @@ public class Test2 : MonoBehaviour
         //agent.ChangeOrAttach(PartAssetData.Create(0, Color.red, new EventArgs<int>(2)), out d);
 
 
-        Managers.Quest.AddQuest<QuestData_Monster>(0);
-        Managers.Quest.CheckQuest(0, "0");
-        Managers.Quest.CheckQuest(0, "0");
-        Managers.Quest.CheckQuest(0, "1");
+        //Managers.Quest.AddQuest<QuestData_Monster>(0);
+        //Managers.Quest.CheckQuest(0, "0");
+        //Managers.Quest.CheckQuest(0, "0");
+        //Managers.Quest.CheckQuest(0, "1");
+
+        Managers.Data.OnLoadData((result) =>
+        {
+            Managers.Object.LoadMonster(DesignEnum.FieldType.Dungeon);
+        });
+
+      
+
     }
 
     public void StartScene()
     {
-        Managers.Scene.LoadScene(Define.SceneType.Game);
+        Managers.Scene.LoadScene(Define.SceneType.Field);
     }
 
     private void DoMainProcess()

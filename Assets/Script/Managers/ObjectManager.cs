@@ -1,10 +1,12 @@
 using DesignTable;
 using Module.Core.Systems;
 using Module.Core.Systems.Events;
+using Module.Unity.Addressables;
 using Module.Unity.AI;
 using Module.Unity.Custermization;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,7 +18,6 @@ public class ObjectManager
     Dictionary<GameObject, BaseActor> objects = new Dictionary<GameObject, BaseActor>();
 
     Dictionary<BaseActor, EventEmmiter> eventEmmiters = new Dictionary<BaseActor, EventEmmiter>();
-
 
     public void Execute()
     {
@@ -46,6 +47,11 @@ public class ObjectManager
         if (!objects.ContainsKey(id))
             return;
 
+        if(objects.TryGetValue(id,out var value))
+        {
+            eventEmmiters.Remove(value);
+        }
+
         objects.Remove(id);
     }
 
@@ -72,17 +78,25 @@ public class ObjectManager
     public void Clear()
     {
         objects.Clear();
+        eventEmmiters.Clear();
     }
-
 
     public void LoadMonster(DesignEnum.FieldType type)
     {
         List<monster_deployInfo> deployInfos = Managers.Data.Monster_deployInfos.GetListById((short)type);
 
-        GameObject root = null;
-        root = new GameObject();
-        root.name = "Monsters";
-        GameObject.DontDestroyOnLoad(root);
+        GameObject root = GameObject.Find("Monster");
+        if (GameObject.Find("Monster") == null)
+        {
+            root = new GameObject();
+            root.name = "Monsters";
+            GameObject.DontDestroyOnLoad(root);
+        }
+
+        if (objects != null)
+        {
+            RemoveMonsters();
+        }
 
         foreach (var info in deployInfos)
         {
@@ -120,7 +134,7 @@ public class ObjectManager
     private void CreateMonster(Transform root, PathInfo path, string prefabPath, short monId, float spawnTime, DesignEnum.TimeType? timeType = null)
     {
         GameObject obj = null;
-        obj = Managers.Resource.LoadAndPool(prefabPath, root.transform);
+        obj = Managers.Resource.LoadAndPop(prefabPath, root.transform);
 
         ComMonsterActor comActor = obj.GetComponent<ComMonsterActor>();
         if (comActor == null)
@@ -137,8 +151,25 @@ public class ObjectManager
         actor.Init();
         (actor.Controller as MonsterController).SetPath(path);
         Add(actor);
+
     }
 
+    public void RemoveMonsters()
+    {
+        List<GameObject> keys = objects.Keys.ToList();
+        for (int i = objects.Count - 1, range = 0; i > range; --i)
+        {
+            BaseActor actor = FindById(keys[i]);
+            if (actor == null)
+                continue;
+
+            if (actor.UnitType == DesignEnum.UnitType.Character)
+                continue;
+            Managers.Resource.Destory(actor.Creature.gameObject);
+
+            Remove(actor.Creature.gameObject);
+        }
+    }
 
 
     public void LoadPlayer(int charId, bool myPlayer = false)
@@ -148,7 +179,7 @@ public class ObjectManager
         if (info == null)
             return;
 
-        GameObject obj = Managers.Resource.LoadAndPool(info.char_prefab, null, 1);
+        GameObject obj = Managers.Resource.LoadAndPop(info.char_prefab, null, 1);
         ComPlayerActor comActor = obj.GetComponent<ComPlayerActor>();
         if (comActor == null)
             return;
@@ -160,12 +191,20 @@ public class ObjectManager
         Add(actor, myPlayer);
     }
 
-    public void InitPlayer()
+    public void InitPlayer(bool isInit = false)
     {
         myActor.Creature.transform.position = Vector3.zero;
         myActor.Creature.transform.rotation = Quaternion.identity;
         myActor.Creature.gameObject.SetActive(true);
-        myActor.Init();
+        if (isInit)
+            myActor.Init();
+        else
+        {
+            PlayerController controller = myActor.Controller as PlayerController;
+            if (controller == null)
+                return;
+            controller.QViewController.Init(myActor.Creature as ComPlayerActor, 10);
+        }
     }
 
     public EventEmmiter GetEventEmmiter(BaseActor actor)

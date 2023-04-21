@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CharacterSelection.unity
     guid: 4a7a651b5b8149e4e95b191eb705652b
+  - enabled: 1
+    path: Assets/Scenes/Dungeon.unity
+    guid: 6121371ee5e49ba4b94976094f280b7f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: b5a61bfe29e8c574b8d6cb8db3ea8d05, type: 2}

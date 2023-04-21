@@ -11,7 +11,8 @@ public class Define
     {
         Loading,
         CharacterSelect,
-        Game
+        Field,
+        Dugeon
     }
 
     public enum ObjectState

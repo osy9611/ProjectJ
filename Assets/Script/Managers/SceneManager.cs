@@ -50,8 +50,11 @@ public class SceneManager
             case Define.SceneType.CharacterSelect:
                 yield return CoLoadCharectorSelectScene();
                 break;
-            case Define.SceneType.Game:
+            case Define.SceneType.Field:
                 yield return CoLoadFieldScene();
+                break;
+            case Define.SceneType.Dugeon:
+                yield return CoLoadDungeon();
                 break;
         }      
     }
@@ -73,7 +76,6 @@ public class SceneManager
 
         //UI Load
         ComBattleMode comBattleMode = null;
-        ComCostumeMode costumeMode = Managers.UI.GetScene<ComCostumeMode>();
 #if UNITY_ANDROID || UNITY_IOS
         comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/MobileCanvas.prefab");
 
@@ -86,7 +88,7 @@ public class SceneManager
         }
 
         //Player Load
-        Managers.Object.InitPlayer();
+        Managers.Object.InitPlayer(true);
 
         //Monster Load
         Managers.Object.LoadMonster(DesignEnum.FieldType.Field);
@@ -120,5 +122,41 @@ public class SceneManager
 
         Managers.Object.MyActor.Creature.transform.position = comCostumeMode.StartPoint;
         Managers.Object.MyActor.Creature.transform.rotation = Quaternion.Euler(0, comCostumeMode.RotationzY,0);
+    }
+
+    public IEnumerator CoLoadDungeon()
+    {
+        bool success = false;
+
+        yield return Managers.Resource.CoLoadSceneAsync("Dungeon", LoadSceneMode.Single, (result) =>
+        {
+            success = result;
+        }, loadingBar);
+
+
+        if (!success)
+        {
+            yield break;
+        }
+
+        ComBattleMode comBattleMode = null;
+#if UNITY_ANDROID || UNITY_IOS
+        comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/MobileCanvas.prefab",false);
+
+#else
+        comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/PCCanvas.prefab",false);
+#endif
+        if (comBattleMode != null)
+        {
+            Managers.Hud.SetHud(comBattleMode);
+        }
+
+        //Player Load
+        Managers.Object.InitPlayer();
+
+        //Monster Load
+        Managers.Object.LoadMonster(DesignEnum.FieldType.Dungeon);
+
+
     }
 }

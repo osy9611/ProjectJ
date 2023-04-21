@@ -67,3 +67,5 @@ MonoBehaviour:
     addressable: quest.bytes
   - tableId: 1021
     addressable: passive.bytes
+  - tableId: 1022
+    addressable: projectile.bytes

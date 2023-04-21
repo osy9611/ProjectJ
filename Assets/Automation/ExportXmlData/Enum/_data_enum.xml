@@ -205,10 +205,10 @@
 	</record>
 	<record>
 		<USE>Y</USE>
-		<ENUM_NAME>Attack1</ENUM_NAME>
+		<ENUM_NAME>Attack</ENUM_NAME>
 		<ENUM_VALUE>101</ENUM_VALUE>
 		<GROUP_ID>1008</GROUP_ID>
-		<COMMENT>일반 공격 1</COMMENT>
+		<COMMENT>일반 공격</COMMENT>
 	</record>
 	<record>
 		<USE>Y</USE>

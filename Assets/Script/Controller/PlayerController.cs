@@ -89,7 +89,7 @@ public class PlayerController : Controller
         switch (context.control.name)
         {
             case "leftButton":
-                actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.Attack1);
+                actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.Attack);
                 break;
             case "q":
                 actor.SkillAgent.OnSkill((int)DesignEnum.SkillID.Skill1);

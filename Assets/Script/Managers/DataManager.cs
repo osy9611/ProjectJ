@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class DataManager : DesignTable.DataMgr
 {
+    bool isDone = false;
     ComDataAssets dataAssets = null;
     public ComDataAssets DataAssets { get => dataAssets; }
 
@@ -24,6 +25,13 @@ public class DataManager : DesignTable.DataMgr
 
     public IEnumerator CoLoadData(System.Action<bool> callback = null)
     {
+        if(isDone)
+        {
+            callback?.Invoke(true);
+            yield break;
+        }
+
+
         yield return Managers.Resource.CoLoadAsset<GameObject>(Define.tableDataAssetPath,
            (resAsset) =>
            {
@@ -55,5 +63,7 @@ public class DataManager : DesignTable.DataMgr
         base.SetUpRef();
         Managers.Resource.Release(Define.tableDataAssetPath);
         callback?.Invoke(true);
+
+        isDone = true;
     }
 }

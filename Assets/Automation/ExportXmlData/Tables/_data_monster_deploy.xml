@@ -13,4 +13,14 @@
 		<mon_id>2</mon_id>
 		<mon_type>2</mon_type>
 	</record>
+	<record>
+		<mon_fieldType>1</mon_fieldType>
+		<mon_id>4</mon_id>
+		<mon_type>1</mon_type>
+	</record>
+	<record>
+		<mon_fieldType>1</mon_fieldType>
+		<mon_id>5</mon_id>
+		<mon_type>1</mon_type>
+	</record>
 </monster_deploy>

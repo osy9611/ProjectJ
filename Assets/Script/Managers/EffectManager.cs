@@ -17,11 +17,11 @@ public class EffectManager
             return;       
         if(addComEffect)
         {
-            Managers.Resource.LoadAndCreate<ComEffect>(info.effect_path, null, 5);
+            Managers.Resource.LoadAndPool<ComEffect>(info.effect_path, null, 5);
         }
         else
         {
-            Managers.Resource.LoadAndCreate(info.effect_path, null, 5);
+            Managers.Resource.LoadAndPool(info.effect_path, null, 5);
         }
     }
 
@@ -31,14 +31,14 @@ public class EffectManager
 
         if (info == null)
             return;
-        GameObject obj = Managers.Resource.LoadAndPool(info.effect_path,null);
+        GameObject obj = Managers.Resource.LoadAndPop(info.effect_path,null);
         obj.transform.position = pos;
         
     }
 
     public GameObject Get(string path, Transform tr, int count)
     {
-        return Managers.Resource.LoadAndPool(path, tr, count);
+        return Managers.Resource.LoadAndPop(path, tr, count);
     }
 
     public void Destroy(GameObject go, bool destroyPool = false)

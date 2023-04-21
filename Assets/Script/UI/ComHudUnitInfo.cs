@@ -70,6 +70,16 @@ public class ComHudUnitInfo
             comInteraction.Execute();
     }
 
+    public void Release()
+    {
+        if (comHealthBar != null)
+            Managers.Hud.Release<ComHudAgent>(comHealthBar);
+        if (comInteraction != null)
+            Managers.Hud.Release<ComHudAgent>(comInteraction);
+        if (comDamageTexts.Count >= 0)
+            Managers.Hud.Release<ComHudAgent>(comDamageTexts.ToArray());
+    }
+
     public void SetDamage(float damage)
     {
         ComDamageText damageText = Managers.Hud.GetAndPool<ComDamageText>("Assets/Res/UI/Prefab/SubItem/DamgeText.prefab", damagePivotInfo);

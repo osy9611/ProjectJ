@@ -16,7 +16,7 @@ public class Controller
     {
         this.actor = actor;
     }
-
+    
     public virtual void Resset() { }
 
 }

@@ -3,19 +3,25 @@
     <type fullname="CheckState" preserve="all" />
     <type fullname="ComBattleMode" preserve="all" />
     <type fullname="ComCostumeMode" preserve="all" />
-    <type fullname="ComDamageText" preserve="all" />
     <type fullname="ComEffect" preserve="all" />
-    <type fullname="ComHealthBar" preserve="all" />
     <type fullname="ComManagedSpriteAtlas" preserve="all" />
     <type fullname="ComMonsterActor" preserve="all" />
     <type fullname="ComPlayerActor" preserve="all" />
+    <type fullname="ComProjectileActor" preserve="all" />
     <type fullname="ComUIElemCharInfo" preserve="all" />
     <type fullname="ComUIElemCostume" preserve="all" />
+    <type fullname="ComUIElemQuest" preserve="all" />
+    <type fullname="ComUIElemQuestInfo" preserve="all" />
+    <type fullname="ComUIElemReward" preserve="all" />
     <type fullname="ComUIElemSkill" preserve="all" />
+    <type fullname="ComUIPopupReward" preserve="all" />
     <type fullname="Module.Unity.AI.ComPathAgent" preserve="all" />
     <type fullname="Module.Unity.AI.ComPathData" preserve="all" />
     <type fullname="Module.Unity.Pivot.ComPivotAgent" preserve="all" />
     <type fullname="Module.Unity.UGUI.ComAutoScale" preserve="all" />
+    <type fullname="Module.Unity.UGUI.Hud.ComDamageText" preserve="all" />
+    <type fullname="Module.Unity.UGUI.Hud.ComHealthBar" preserve="all" />
+    <type fullname="Module.Unity.UGUI.Hud.ComInteraction" preserve="all" />
     <type fullname="Module.Unity.UGUI.Notification.ComNotificationTMP" preserve="all" />
     <type fullname="Module.Unity.UGUI.UI_Popup" preserve="all" />
     <type fullname="Module.Unity.UGUI.VirtualJoyStick" preserve="all" />
@@ -122,6 +128,7 @@
   <assembly fullname="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.BoxCollider" preserve="all" />
     <type fullname="UnityEngine.CharacterController" preserve="all" />
+    <type fullname="UnityEngine.SphereCollider" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.Font" preserve="all" />
@@ -129,11 +136,14 @@
   <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.UI.Button" preserve="all" />
     <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
+    <type fullname="UnityEngine.UI.ContentSizeFitter" preserve="all" />
     <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
     <type fullname="UnityEngine.UI.GridLayoutGroup" preserve="all" />
+    <type fullname="UnityEngine.UI.HorizontalLayoutGroup" preserve="all" />
     <type fullname="UnityEngine.UI.Image" preserve="all" />
     <type fullname="UnityEngine.UI.Mask" preserve="all" />
     <type fullname="UnityEngine.UI.Text" preserve="all" />
+    <type fullname="UnityEngine.UI.VerticalLayoutGroup" preserve="all" />
     <type fullname="UnityEngine.UI.AnimationTriggers" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.UI.Button/ButtonClickedEvent" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.UI.ColorBlock" preserve="nothing" serialized="true" />

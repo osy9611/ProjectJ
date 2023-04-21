@@ -38,6 +38,16 @@ public abstract class ComBaseActor : MonoBehaviour
         LateUpdateComActor();
     }
 
+    private void OnEnable()
+    {
+        Enable();   
+    }
+
+    private void OnDisable()
+    {
+        Disable();
+    }
+
     public abstract void Init();
 
     protected virtual void UpdateComActor()
@@ -53,6 +63,23 @@ public abstract class ComBaseActor : MonoBehaviour
 
         if (hudUnitInfo != null)
             hudUnitInfo.Execute();
+    }
+
+    protected virtual void Enable()
+    {
+        if (actor != null)
+            actor.Enable();
+
+        if(hudUnitInfo !=null)
+            hudUnitInfo.Init(pivotAgent, actor);
+    }
+
+    protected virtual void Disable()
+    {
+        if(actor != null)
+            actor.Disable();
+        if(hudUnitInfo != null)
+            hudUnitInfo.Release();
     }
 
     public virtual void OnEffect(int id)

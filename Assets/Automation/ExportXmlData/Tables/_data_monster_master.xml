@@ -70,7 +70,7 @@
 		<mon_def>100</mon_def>
 		<mon_hp>200</mon_hp>
 		<mon_speed>2</mon_speed>
-		<mon_type>0</mon_type>
+		<mon_type>1</mon_type>
 		<mon_searchAngle>120</mon_searchAngle>
 		<mon_searchRange>10</mon_searchRange>
 		<mon_keppRange>2.5</mon_keppRange>
@@ -86,7 +86,7 @@
 		<mon_type>1</mon_type>
 		<mon_searchAngle>360</mon_searchAngle>
 		<mon_searchRange>10</mon_searchRange>
-		<mon_keppRange>5.0</mon_keppRange>
+		<mon_keppRange>8.0</mon_keppRange>
 		<mon_prefab>Assets/Res/Monster/mon_cursedwizardB/prefab/mon_cursedwizardB.prefab</mon_prefab>
 	</record>
 </monster_master>
