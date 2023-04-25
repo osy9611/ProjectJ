@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3927915823444589593}
   - component: {fileID: 5599131543782485702}
   - component: {fileID: 8921563824150262941}
+  - component: {fileID: 2016285332312739615}
   m_Layer: 5
   m_Name: QuestInfo
   m_TagString: Untagged
@@ -36,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 55, y: 31}
+  m_AnchoredPosition: {x: 52.595, y: 0}
+  m_SizeDelta: {x: 105.19, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3927915823444589593
 CanvasRenderer:
@@ -94,8 +95,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -130,7 +131,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -54.825294, w: 9.408344}
+  m_margin: {x: 0, y: 0, z: -4.941498, w: 9.408344}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -149,6 +150,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsUsing: 1
+--- !u!114 &2016285332312739615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470043850316747804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &1038666144440436858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,7 +1132,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7026508636155594464}
-  - {fileID: 7711407500648411432}
+  - {fileID: 5028989163462091043}
   m_Father: {fileID: 2356825277953548739}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1199,7 +1214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cbf85282b3f25641a05fad6b74a3b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuestInfoUI: {fileID: 1394768336519803415}
+  QuestInfoUI: {fileID: 5765090644032153091}
+  rootQuests: {fileID: 7711407500648411432}
   questInfoUIs: []
   rewardUI: {fileID: 0}
 --- !u!1 &2325760092077358723
@@ -1212,6 +1228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 277988976752148668}
   - component: {fileID: 8361499526500713312}
+  - component: {fileID: 5765090644032153091}
   - component: {fileID: 8486114481567485580}
   - component: {fileID: 8760311132992789470}
   - component: {fileID: 7141183401068159542}
@@ -1253,6 +1270,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2325760092077358723}
   m_CullTransparentMesh: 1
+--- !u!114 &5765090644032153091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325760092077358723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7572d1706f8a4124b9f151164fc49c78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questName: {fileID: 8486114481567485580}
+  questInfo: {fileID: 5599131543782485702}
 --- !u!114 &8486114481567485580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1300,8 +1331,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1566,7 +1597,7 @@ MonoBehaviour:
   - {fileID: 1158518040363627918}
   - {fileID: 3394271185426999370}
   - {fileID: 969414052002633458}
-  - {fileID: 1394768336519803415}
+  - {fileID: 5765090644032153091}
   - {fileID: 3037517817633574643}
   notificationInfos:
   - {fileID: 7031436203580511705}
@@ -1793,7 +1824,6 @@ GameObject:
   - component: {fileID: 628983461321600544}
   - component: {fileID: 7891846562518377227}
   - component: {fileID: 1793647800588760697}
-  - component: {fileID: 1394768336519803415}
   m_Layer: 5
   m_Name: Quest (1)
   m_TagString: Untagged
@@ -1814,13 +1844,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 277988976752148668}
-  m_Father: {fileID: 988129035006592365}
-  m_RootOrder: 1
+  m_Father: {fileID: 5028989163462091043}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -70.79994, y: 72.00003}
-  m_SizeDelta: {x: 110, y: 75.450005}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 55, y: 0}
+  m_SizeDelta: {x: 110, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &628983461321600544
 CanvasRenderer:
@@ -1869,21 +1899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
-  m_VerticalFit: 0
---- !u!114 &1394768336519803415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3256090645813408333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7572d1706f8a4124b9f151164fc49c78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questName: {fileID: 8486114481567485580}
-  questInfo: {fileID: 5599131543782485702}
+  m_VerticalFit: 2
 --- !u!1 &3394271184683731075
 GameObject:
   m_ObjectHideFlags: 0
@@ -2978,6 +2994,85 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6848236151551794901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5028989163462091043}
+  - component: {fileID: 9097825379754673739}
+  - component: {fileID: 7901020242812310086}
+  m_Layer: 5
+  m_Name: Quests
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5028989163462091043
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6848236151551794901}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7711407500648411432}
+  m_Father: {fileID: 988129035006592365}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -70.80002, y: 72.60013}
+  m_SizeDelta: {x: 110, y: 53.3975}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9097825379754673739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6848236151551794901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 6
+  m_Spacing: 2.6
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &7901020242812310086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6848236151551794901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 0
 --- !u!1 &7068113339304941401
 GameObject:
   m_ObjectHideFlags: 0

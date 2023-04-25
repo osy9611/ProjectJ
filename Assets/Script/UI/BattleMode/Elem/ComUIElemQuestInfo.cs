@@ -34,6 +34,10 @@ public class ComUIElemQuestInfo : ComUIBattleElement
             Debug.LogError("Null QuestData");
             return;
         }
+
+        if (questData == this.questData)
+            return;
+
         this.gameObject.SetActive(true);
 
         this.questData = questData;

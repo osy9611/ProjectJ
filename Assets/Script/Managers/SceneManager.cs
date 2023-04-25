@@ -157,6 +157,10 @@ public class SceneManager
         //Monster Load
         Managers.Object.LoadMonster(DesignEnum.FieldType.Dungeon);
 
+        //Quest Init
+        Managers.Quest.AddQuest<QuestData_Monster>(1);
+
+        Managers.UI.GetElem<ComUIElemQuest>().AddQuestUI();
 
     }
 }

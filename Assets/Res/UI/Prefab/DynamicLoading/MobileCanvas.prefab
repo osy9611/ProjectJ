@@ -1302,6 +1302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuestInfoUI: {fileID: 1278821881437650058}
+  rootQuests: {fileID: 0}
   questInfoUIs: []
   rewardUI: {fileID: 0}
 --- !u!1 &2158035167334603284
