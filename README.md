@@ -1,5 +1,5 @@
 # Project-J
-> 2020 ~ 2022 년 까지 프로젝트를 진행하며 배웠던 것을 만들어보는 프로젝트입니다.
+> KoyocoGames에서 작업했던 코드 및 모듈을 개량하여 만든 프로젝트 입니다. 
  + 사용기술
     + Unity3D(Addressable,SpriteAtlas,URP)
     + C#
@@ -8,15 +8,16 @@
        +Jenkins
  + 작업 내용
     + Editor/Module
-      + Path Agent를 구현해 에디터 상에서 이동 경로를 설정할 수 있도록 구현
-      + Pivot Agent를 구현해 에디터 상에서 UI, 파티클 피봇을 설정할 수 있도록 구현
+      + 에디터 상에서 이동 경로를 설정할 수 있는 PathAgent 구현
+      + 에디터 상에서 UI, 파티클, 발사 피봇을 설정할 수 있는 Pivot Agent 구현
       + 기획 Table, Enum Generator 구현
-         + Table, Enum 데이터를 xml로 저장 후 에디터 상에서 코드 자동 Generator를 구현
+         + Table, Enum 데이터를 xml로 저장 후 에디터 상에서 자동으로 코드를 만드는 Generator를 구현
          + Protobuf-net을 이용해 Table 데이터를 직렬화 후 .byte 파일로 저장
       + SpriteAtlas에 들어있는 Sprite를 관리하는 SpriteAtlasManager 구현 
       + Addressable을 이용한 ResourceManager 구현
          + Adderssable로 로딩한 데이터를 PoolManager를 이용한 풀링기능 구현 
          + Addressable을 이용한 씬로딩 구현
+         + Addressable의 AsyncOperationHandle 관리를 통해 ReferenceCount 증가를 관리
     + 콘텐츠
       + DayNight 모듈 구현
          + 시간에 따른 UnityEvent 호출 구현
