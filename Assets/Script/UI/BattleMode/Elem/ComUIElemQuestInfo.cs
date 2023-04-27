@@ -43,6 +43,11 @@ public class ComUIElemQuestInfo : ComUIBattleElement
         this.questData = questData;
         this.questName.text = questData.Name;
         UpdateData(true);
+
+        if(!Managers.Quest.EventEmmiter.CheckListener(UpdateData))
+        {
+            Managers.Quest.EventEmmiter.AddListener(UpdateData);
+        }
     }
 
 

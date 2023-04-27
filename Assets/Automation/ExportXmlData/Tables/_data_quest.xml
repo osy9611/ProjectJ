@@ -17,8 +17,8 @@
 	<record>
 		<quest_Id>1</quest_Id>
 		<quest_type>0</quest_type>
-		<reward>{"passive" : [{"ID" : "0"},{"ID" : "1"},{"ID" : "2"}], "gatePoint" : 0}</reward>
-		<quest_target>{"Monster" : [{ "ID" : 4, "Count" : 2} ,{"ID" : 5, "Count" : 1}]}</quest_target>
+		<reward>{"passive" : [{"ID" : "0"},{"ID" : "1"},{"ID" : "2"}], "gatePoint" : "FieldGate"}</reward>
+		<quest_target>{"Monster" : [{ "ID" : 4, "Count" : 6} ,{"ID" : 5, "Count" : 4}]}</quest_target>
 		<quest_description>몬스터 사냥</quest_description>
 		<reward_auto>Y</reward_auto>
 	</record>

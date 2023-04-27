@@ -55,11 +55,12 @@ public class QuestData_Monster : QuestData
 
         });
 
+        RewardData reward = new RewardData();
         JsonUtil.ParseJsonArray(rewardData, "passive", (array) =>
         {
             if (array != null)
             {
-                RewardData reward = new RewardData();
+                
                 foreach (var info in array)
                 {
                     if (short.TryParse(info["ID"].ToString(), out short result))
@@ -70,6 +71,17 @@ public class QuestData_Monster : QuestData
                 rewardInfos.Add(typeof(DesignTable.passiveInfo), reward);
             }
         });
+
+        if(rewardData.ContainsKey("gatePoint"))
+        {
+            string gateID = JsonUtil.Parse<string>(rewardData,"gatePoint");
+            GameObject gateObject = GameObject.Find(gateID);
+            if (gateObject != null) 
+            {
+                gateObject.SetActive(false);
+                reward.GatePoint = gateObject;
+            }
+        }
     }
 
     public override void GetReward()

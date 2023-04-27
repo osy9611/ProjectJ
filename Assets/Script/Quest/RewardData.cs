@@ -6,26 +6,27 @@ using UnityEngine;
 
 public class RewardData : Reward<DesignTable.passiveInfo>
 {
+    private GameObject gatePoint;
+    public GameObject GatePoint { get=>gatePoint; set => gatePoint = value; }
+
     public override void SetData()
     {
         base.SetData();
         List<int> indexs = new List<int>() { 0, 1, 2 };
         if (rewardInfos.Count > 3)
             indexs = Util.RandomDupilcate(0, rewardInfos.Count, 3);
-
         for (int i = 0, range = indexs.Count; i < range; ++i)
         {
             int rate = Random.Range(0, rewardInfos[i].status_Arg);
             string info = string.Format("{0} + {1}", rewardInfos[i].passive_name, rate);
-            Debug.Log(info + " " + rate);
             string imagePath = rewardInfos[i].image_Res;
             Args<int, int> args = new Args<int, int>(i, rate);
             Managers.UI.ActivePopup<ComUIPopupReward>((result) =>
                 {
                     result.SetUIData(i, info, imagePath, GetReward, args);
-
                 });
         }
+        gatePoint.SetActive(true);
     }
 
     //Arg1 : index, Arg2 : rate

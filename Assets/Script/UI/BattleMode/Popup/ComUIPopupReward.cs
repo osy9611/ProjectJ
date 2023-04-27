@@ -56,7 +56,6 @@ public class ComUIPopupReward : UI_Popup
         button.onClick.AddListener(() => callback(args));
         button.onClick.AddListener(() => Managers.UI.GetElem<ComUIElemReward>().gameObject.SetActive(false));
         button.onClick.AddListener(() => this.gameObject.SetActive(false));
-
     }
 
     private void OnDisable()

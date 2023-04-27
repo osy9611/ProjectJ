@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class ComInteractionActor : ComBaseActor
 {
+    [SerializeField]
+    private Define.SceneType changeSceneType;
+
     protected override void Awake()
     {
         base.Awake();
@@ -41,7 +46,7 @@ public class ComInteractionActor : ComBaseActor
     {
         Debug.Log("상호 작용");
 
-        Managers.Scene.LoadScene(Define.SceneType.Dugeon);
+        Managers.Scene.LoadScene(changeSceneType);
     }
 
     private void SetHud(bool isShow)

@@ -33,8 +33,6 @@ public class ComUIElemQuest : ComUIBattleElement
         }
 
         AddQuestUI();
-
-        Managers.Quest.EventEmmiter.AddListener(UpdateQuest);
     }
 
     public void AddQuestUI()
@@ -52,13 +50,4 @@ public class ComUIElemQuest : ComUIBattleElement
             questInfoUIs[i].SetData(quests[i] as QuestData);
         }
     }
-
-    public void UpdateQuest()
-    {
-        for (int i = questInfoUIs.Count - 1; i >= 0; --i)
-        {
-            questInfoUIs[i].UpdateData();
-        }
-    }
-
 }

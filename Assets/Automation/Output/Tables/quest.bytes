@@ -1,3 +1,3 @@
 
 �6{"passive" : [{"ID" : "0"},{"ID" : "1"},{"ID" : "2"}]}"A{"Monster" : [{ "ID" : 0, "Count" : 2} ,{"ID" : 2, "Count" : 1}]}*몬스터 사냥0
-�G{"passive" : [{"ID" : "0"},{"ID" : "1"},{"ID" : "2"}], "gatePoint" : 0}"A{"Monster" : [{ "ID" : 4, "Count" : 2} ,{"ID" : 5, "Count" : 1}]}*몬스터 사냥0
+�Q{"passive" : [{"ID" : "0"},{"ID" : "1"},{"ID" : "2"}], "gatePoint" : "FieldGate"}"A{"Monster" : [{ "ID" : 4, "Count" : 6} ,{"ID" : 5, "Count" : 4}]}*몬스터 사냥0

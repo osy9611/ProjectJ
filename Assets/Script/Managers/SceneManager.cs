@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class SceneManager
 {
     Image loadingBar;
+    bool firstInit = true;
     public void Init()
     {
         if (loadingBar != null)
@@ -23,8 +24,8 @@ public class SceneManager
     public void LoadScene(Define.SceneType type)
     {
         Managers.UI.CloseSceneUI();
-        if(Managers.Object.MyActor != null)
-                Managers.Object.MyActor.Creature.gameObject.SetActive(false);
+        if (Managers.Object.MyActor != null)
+            Managers.Object.MyActor.Creature.gameObject.SetActive(false);
 
         ComLoader.Root.StartCoroutine(CoLoadingScene(type));
     }
@@ -56,7 +57,7 @@ public class SceneManager
             case Define.SceneType.Dugeon:
                 yield return CoLoadDungeon();
                 break;
-        }      
+        }
     }
 
     public IEnumerator CoLoadFieldScene()
@@ -68,7 +69,7 @@ public class SceneManager
             success = result;
         }, loadingBar);
 
-      
+
         if (!success)
         {
             yield break;
@@ -76,25 +77,40 @@ public class SceneManager
 
         //UI Load
         ComBattleMode comBattleMode = null;
+        if (firstInit)
+        {
 #if UNITY_ANDROID || UNITY_IOS
         comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/MobileCanvas.prefab");
 
 #else
-        comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/PCCanvas.prefab");
+            comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/PCCanvas.prefab");
 #endif
+            //Player Load
+            Managers.Object.InitPlayer(true);
+            //Quest Init
+            Managers.Quest.AddQuest<QuestData_Monster>(0);
+            firstInit = false;
+        }
+        else
+        {
+#if UNITY_ANDROID || UNITY_IOS
+        comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/MobileCanvas.prefab",false);
+
+#else
+            comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/PCCanvas.prefab", false);
+#endif
+            //Player Load
+            Managers.Object.InitPlayer(false);
+        }
+
         if (comBattleMode != null)
         {
             Managers.Hud.SetHud(comBattleMode);
         }
 
-        //Player Load
-        Managers.Object.InitPlayer(true);
-
         //Monster Load
         Managers.Object.LoadMonster(DesignEnum.FieldType.Field);
 
-        //Quest Init
-        Managers.Quest.AddQuest<QuestData_Monster>(0);
     }
 
     public IEnumerator CoLoadCharectorSelectScene()
@@ -121,7 +137,7 @@ public class SceneManager
 
 
         Managers.Object.MyActor.Creature.transform.position = comCostumeMode.StartPoint;
-        Managers.Object.MyActor.Creature.transform.rotation = Quaternion.Euler(0, comCostumeMode.RotationzY,0);
+        Managers.Object.MyActor.Creature.transform.rotation = Quaternion.Euler(0, comCostumeMode.RotationzY, 0);
     }
 
     public IEnumerator CoLoadDungeon()
@@ -144,7 +160,7 @@ public class SceneManager
         comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/MobileCanvas.prefab",false);
 
 #else
-        comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/PCCanvas.prefab",false);
+        comBattleMode = Managers.UI.ShowSceneUI<ComBattleMode>("Assets/Res/UI/Prefab/DynamicLoading/PCCanvas.prefab", false);
 #endif
         if (comBattleMode != null)
         {
