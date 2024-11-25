@@ -1,5 +1,4 @@
 # Project-J
-> KoyocoGames에서 작업했던 코드 및 모듈을 개량하여 만든 프로젝트 입니다. 
  + 사용기술
     + Unity3D(Addressable,SpriteAtlas,URP)
     + C#
