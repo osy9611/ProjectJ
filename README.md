@@ -16,7 +16,7 @@
 
 ---
 
-## **📌 Project J vs Project T 비교**
+## **Project J vs Project T 비교**
 |   | **Project J** | **Project T (개선 프로젝트)** |
 |---|--------------|----------------|
 | **데이터 처리** | XML 기반 테이블 관리 & 코드 생성 | **CodeDom 기반 자동화** |
