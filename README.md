@@ -1,39 +1,72 @@
-# ProjectJ - Unity Project
+# **ProjectJ - Unity Project**
 
-**Project J**는 KoyocoGames의 Project R.O.A.D 개발에 참여할 때 작업했던 코드를 정리하기 위해서 만든 프로젝트입니다.
+**Project J**는 KoyocoGames의 **Project R.O.A.D** 개발 참여 후, 사용했던 주요 기술을 정리하고,  
+데이터 관리, 리소스 최적화, UI 시스템 등을 구현한 프로젝트입니다. 
 
-**프로젝트 주요 내용**
-- Project R.O.A.D 에서 사용했던 기술 정리
----
-
-## 주요 시스템 개요
-
-###  Editor/Module
-+ 에디터 상에서 이동 경로를 설정할 수 있는 PathAgent 구현
-  + 에디터 상에서 UI, 파티클, 발사 피봇을 설정할 수 있는 Pivot Agent 구현
-+ 기획 Table, Enum Generator 구현
-  + Table, Enum 데이터를 xml로 저장 후 에디터 상에서 자동으로 코드를 만드는 Generator를 구현
-  + Protobuf-net을 이용해 Table 데이터를 직렬화 후 .byte 파일로 저장
-+ SpriteAtlas에 들어있는 Sprite를 관리하는 SpriteAtlasManager 구현 
-+ Addressable을 이용한 ResourceManager 구현
-  + Adderssable로 로딩한 데이터를 PoolManager를 이용한 풀링기능 구현 
-  + Addressable을 이용한 씬로딩 구현
-  + Addressable의 AsyncOperationHandle 관리를 통해 ReferenceCount 증가를 관리
-
-### 콘텐츠
-+ DayNight 모듈 구현
-  + 시간에 따른 UnityEvent 호출 구현
-  + URP Shader를 이용한 SkyBox 및 태양, 달 구현
-+ FMS을 이용한 Player,Monster 구현
-+ InputSystem을 이용한 PC/Mobile 크로스 플랫폼 Controller 구현
-+ Monster, Player Skill,Buff System 구현
-+ Monster, Player Status System 구현
-
-### CD/CI
-+ CD/CI
-  + Jenkins용 docker yml 파일 제작
-  + Jenkins Unity3D 플러그인을 설치해 Unity용 빌드 구축
-  + PreBuild.bat 파일을 작성해 GitHub에서 미리 프로젝트를 pull 받은 후 빌드를 진행할 수 있도록 구현
+> **참고**  
+> Project J 작업 이후 다양한 프로젝트 경험을 바탕으로 **더 효율적인 시스템을 구축**하기 위해  
+> **Project T**라는 개선 프로젝트를 진행하고있습니다.
 
 ---
 
+## **🔗 관련 문서**
+- [**GitHub Wiki**](https://github.com/osy9611/ProjectJ/wiki)
+- [**Project R.O.A.D 데모 영상**](https://www.youtube.com/watch?v=eXGDh9YU4eA&t=3s)
+- [**Project T (개선 프로젝트)**](https://github.com/osy9611/ProjectT)
+
+---
+
+## **📌 Project J vs Project T 비교**
+|   | **Project J** | **Project T (개선 프로젝트)** |
+|---|--------------|----------------|
+| **데이터 처리** | XML 기반 테이블 관리 & 코드 생성 | **CodeDom 기반 자동화** |
+| **리소스 관리** | Addressable 사용 및 기본 풀링 | **UniTask 적용, 비동기 로딩 개선** |
+| **UI 시스템** | Scene / Popup / Element UI 구조 | **Static / Dynamic / System UI 구조로 변경** |
+| **빌드 자동화** | Jenkins 기반 빌드 자동화 | **Firebase 연동, 세분화된 빌드 프로세스** |
+| **씬 관리** | Addressable 기반 씬 로딩 | **데이터 유지 및 상태 관리 추가** |
+
+---
+
+## **주요 시스템 개요**  
+
+### **Design Automation Generator (데이터 자동화 시스템)**
+- **XML 기반 데이터 관리 및 자동 코드 생성**  
+- **Protobuf-net을 이용한 데이터 직렬화 및 .byte 파일 저장**  
+- **클래스 자동 생성으로 유지보수성 향상**  
+
+🔗 **[ 자세히 보기](https://github.com/osy9611/ProjectJ/wiki/TableGenerator)**  
+
+---
+
+### **Resource Manager**
+- **Addressable을 활용한 리소스 로딩**  
+- **풀링 시스템을 통한 리소스 재사용 기능 추가**  
+- **비동기 처리 개선 (코루틴 → UniTask 전환)**  
+
+🔗 **[자세히 보기](https://github.com/osy9611/ProjectJ/wiki/ResourceManager)**  
+
+---
+
+### **UI System**
+- **UI 계층 구조화 (Scene UI, Popup UI, Element UI)**  
+- **Stack 기반 UI 추적 시스템 도입**  
+- **UIManagerSystem을 통한 UI 최적화**  
+
+🔗 **[ 자세히 보기](https://github.com/osy9611/ProjectJ/wiki/UI-System)**  
+
+---
+
+### **Skill & Status 시스템**
+- **ActionManager → 스킬 등록 및 실행 관리**  
+- **BuffManager → 버프 시스템 관리 (공격력 증가/감소 등)**  
+- **StatusAgent → 능력치 계산 및 HP 관리**  
+
+🔗 **[ 자세히 보기](https://github.com/osy9611/ProjectJ/wiki/Skill&Status-System)**  
+
+---
+
+## ** Project T로의 확장**
+Proejct T는 **Project J에서 사용한 기술을 더욱 개선하여, 확장성과 유지보수성을 고려한 시스템을 구축한 프로젝트입니다.**  
+자세한 내용은 아래 링크에서 확인할 수 있습니다.  
+
+🔗 **[ Project T 보러가기](https://github.com/osy9611/ProjectT)**
